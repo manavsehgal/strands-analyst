@@ -14,9 +14,10 @@ Classifier: Programming Language :: Python :: 3.12
 Classifier: Programming Language :: Python :: 3.13
 Requires-Python: >=3.8
 Requires-Dist: strands-agents>=1.0.0
-Requires-Dist: strands-agents-tools[rss]>=0.2.0
+Requires-Dist: feedparser>=6.0.10
 Requires-Dist: requests>=2.31.0
 Requires-Dist: beautifulsoup4>=4.12.0
+Requires-Dist: pyyaml>=6.0
 Dynamic: author
 Dynamic: classifier
 Dynamic: requires-dist

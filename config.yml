@@ -1,0 +1,28 @@
+# Strands Analyst Configuration
+
+# RSS feed configuration
+rss:
+  # Default number of news items to fetch from RSS feeds
+  max_items: 10
+  
+  # Default timeout for RSS feed requests (seconds)
+  timeout: 30
+  
+  # Whether to include full content in RSS items (vs just summaries)
+  include_full_content: true
+
+# News agent configuration  
+news:
+  # Default number of news items to display
+  default_items: 10
+  
+  # Maximum number of items allowed in a single request
+  max_items: 50
+
+# General application settings
+app:
+  # Application name
+  name: "Strands Analyst"
+  
+  # Version
+  version: "0.1.0"

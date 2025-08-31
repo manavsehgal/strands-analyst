@@ -2,17 +2,28 @@
 import argparse
 import sys
 from ..agents import create_news_agent, news, print_result_stats
+from ..config import get_config
 
 
 def main():
     """Main CLI entry point for the news command."""
+    config = get_config()
+    default_items = config.get_news_default_items()
+    max_items = config.get_news_max_items()
+    
     parser = argparse.ArgumentParser(
-        description="Fetch and analyze RSS feed to get the latest 5 news items.",
+        description=f"Fetch and analyze RSS feed to get the latest news items (default: {default_items}).",
         prog="news"
     )
     parser.add_argument(
         "rss_url",
         help="The RSS feed URL to process (e.g., http://feeds.bbci.co.uk/news/rss.xml)"
+    )
+    parser.add_argument(
+        "--count", "-c",
+        type=int,
+        default=None,
+        help=f"Number of news items to fetch (default: {default_items}, max: {max_items})"
     )
     parser.add_argument(
         "--verbose", "-v",
@@ -34,7 +45,7 @@ def main():
     try:
         # Create agent and analyze RSS feed
         agent = create_news_agent()
-        result = news(rss_url, agent)
+        result = news(rss_url, max_items=args.count, agent=agent)
         
         # The result is printed by the agent, but we can add stats
         if args.verbose:

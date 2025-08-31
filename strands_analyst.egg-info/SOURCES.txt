@@ -1,6 +1,7 @@
 README.md
 setup.py
 analyst/__init__.py
+analyst/config.py
 analyst/agents/__init__.py
 analyst/agents/about_site.py
 analyst/agents/news.py
@@ -8,6 +9,7 @@ analyst/cli/__init__.py
 analyst/cli/about_site.py
 analyst/cli/news.py
 analyst/tools/__init__.py
+analyst/tools/fetch_rss_content.py
 analyst/tools/fetch_url_metadata.py
 strands_analyst.egg-info/PKG-INFO
 strands_analyst.egg-info/SOURCES.txt

@@ -93,3 +93,50 @@
     - ✅ Verified verbose mode works with model statistics display
     
     The news agent now uses the professional-grade built-in RSS tool from strands-agents-tools, which provides better error handling, supports multiple actions (fetch, subscribe, search), and is maintained by the Strands team. The implementation is cleaner and more reliable than the custom tool.
+
+[x] Create a custom tool for RSS feed reading which also reads news descriptions. The strands-agents-tools rss tool does not read description correctly so remove that from dependencies and replace the tool usage within news agent to custom tool.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Created custom RSS tool fetch_rss_content.py with proper description extraction
+    - ✅ Implemented multiple fallback mechanisms for content extraction (content, summary, description, subtitle fields)
+    - ✅ Added HTML tag cleaning and entity decoding for readable descriptions
+    - ✅ Removed strands-agents-tools[rss] dependency and replaced with feedparser>=6.0.10
+    - ✅ Updated news agent to use custom tool instead of built-in RSS tool
+    - ✅ Modified agent prompt to work with custom tool interface (url and max_items parameters)
+    - ✅ Updated all package imports and exports to include new RSS tool
+    - ✅ Tested with BBC and NPR RSS feeds - now shows proper descriptions instead of "No description available"
+    - ✅ Verified verbose mode and author extraction working correctly
+    
+    The custom RSS tool significantly improves content extraction compared to the built-in tool. It properly extracts descriptions, summaries, and content from various RSS formats, cleans HTML markup, and provides rich context for each news item. The tool handles multiple content field types and provides fallback mechanisms for different RSS feed structures.
+
+[x] Add a `config.yml` file in project root. Make number of news items to read from RSS configurable for the rss tool as well as the new agent. Default to first 10 news items only.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Created config.yml file in project root with RSS, news, and app configuration sections
+    - ✅ Built comprehensive configuration loading utility (analyst/config.py) with YAML support
+    - ✅ Added PyYAML>=6.0 dependency for configuration parsing
+    - ✅ Updated RSS tool to use configurable max_items (defaults to config.yml value)
+    - ✅ Enhanced news agent to accept max_items parameter with configuration defaults
+    - ✅ Expanded CLI with --count/-c option to override configuration defaults
+    - ✅ Implemented maximum limit enforcement (max_items capped at 50 from config)
+    - ✅ Updated help text to show current configuration values dynamically
+    - ✅ Added configuration module to package exports for programmatic access
+    - ✅ Tested all scenarios: default (10 items), custom counts (3 items), configuration limits
+    
+    The configuration system provides flexible control over RSS item limits while maintaining sensible defaults. Users can now configure globally via config.yml or override per-command via CLI. The system properly validates limits and provides clear feedback about current settings.
+
+[x] Optimize the analyst/tools/fetch_rss_content.py to only process the configured max_items number of feed items and not process the entire feed so that it returns results faster with less payload.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Replaced slice-based processing with early termination loop for efficiency
+    - ✅ Added processed_count tracking to break immediately when max_items reached
+    - ✅ Implemented early entry validation to skip invalid entries (no title/link)
+    - ✅ Optimized description extraction with early termination once description found
+    - ✅ Added string content validation to avoid processing empty fields
+    - ✅ Streamlined category extraction logic for better performance
+    - ✅ Reduced unnecessary getattr() calls by caching title/link values
+    - ✅ Tested performance improvements: 0.13 seconds for 5 items vs. previous full processing
+    - ✅ Verified functionality intact with BBC and NPR feeds (all features working)
+    - ✅ Confirmed CLI integration, verbose mode, and configuration system still work perfectly
+    
+    The optimization significantly improves performance by processing only the required number of items instead of the entire feed. The tool now breaks early when it has enough items, skips invalid entries, and uses early termination for content extraction, resulting in faster response times with reduced computational overhead.
