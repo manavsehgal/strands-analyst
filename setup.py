@@ -13,6 +13,7 @@ setup(
     entry_points={
         "console_scripts": [
             "about=analyst.cli.about_site:main",
+            "news=analyst.cli.news:main",
         ],
     },
     python_requires=">=3.8",

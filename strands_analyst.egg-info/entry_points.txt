@@ -1,2 +1,3 @@
 [console_scripts]
 about = analyst.cli.about_site:main
+news = analyst.cli.news:main

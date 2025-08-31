@@ -1,10 +1,10 @@
 import logging
 from strands import Agent
-from ..tools import fetch_url_metadata
+from strands_tools import rss
 
 
-def create_about_site_agent():
-    """Create and return an agent configured for site analysis."""
+def create_news_agent():
+    """Create and return an agent configured for RSS news analysis."""
     # Enables Strands debug log level
     logging.getLogger("strands").setLevel(logging.INFO)
     
@@ -14,29 +14,39 @@ def create_about_site_agent():
         handlers=[logging.StreamHandler()]
     )
     
-    # Create an agent with custom tool
-    return Agent(tools=[fetch_url_metadata])
+    # Create an agent with built-in RSS tool
+    return Agent(tools=[rss])
 
 
-def about_site(url: str, agent=None):
+def news(rss_url: str, agent=None):
     """
-    Analyze a website and return insights about what the company does.
+    Fetch and analyze RSS feed to return the latest 5 news items.
     
     Args:
-        url: The URL to analyze
+        rss_url: The RSS feed URL to process
         agent: Optional pre-configured agent. If None, creates a new one.
     
     Returns:
-        Result object from the agent
+        Result object from the agent containing latest news items
     """
     if agent is None:
-        agent = create_about_site_agent()
+        agent = create_news_agent()
     
     message = f"""
-Visit {url} and answer the following questions:
+Use the RSS tool to fetch the latest 5 news items from {rss_url}.
 
-1. What does this company do?
-2. What are the topics important for this company?
+Call the rss tool with:
+- action: "fetch"
+- url: "{rss_url}"
+- max_entries: 5
+
+For each news item in the results, please provide:
+1. Title
+2. Brief summary/description (if available)
+3. Publication date
+4. Link to the full article
+
+Format the response in a clear, readable manner with each news item clearly separated.
 """
     
     return agent(message)
@@ -52,6 +62,7 @@ def print_result_stats(result, agent):
 
 # Example usage when run directly
 if __name__ == "__main__":
-    agent = create_about_site_agent()
-    result = about_site("https://decagon.ai/", agent)
+    agent = create_news_agent()
+    # Example with BBC News RSS feed
+    result = news("http://feeds.bbci.co.uk/news/rss.xml", agent)
     print_result_stats(result, agent)

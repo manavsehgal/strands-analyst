@@ -65,3 +65,31 @@
     - ✅ Package maintains full functionality while achieving consistent naming across all components
     
     The naming conventions now ensure consistency: agent functions match their file names, CLI commands match their purpose, and the entire package follows a coherent pattern that will guide future development.
+
+[x] Create an agent called `news` which should take an RSS feed url as input and process the RSS using `rss` tool. The agent should then respond with latest 5 news items.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Created RSS tool in analyst/tools/fetch_rss_feed.py using feedparser for reliable RSS parsing
+    - ✅ Implemented news agent in analyst/agents/news.py following established naming conventions
+    - ✅ Created news CLI in analyst/cli/news.py with URL validation and verbose mode support
+    - ✅ Updated setup.py to add 'news' console script entry point
+    - ✅ Updated all __init__.py files to properly export new modules and functions
+    - ✅ Successfully tested both BBC and CNN RSS feeds with proper error handling
+    - ✅ Verified CLI works: `news http://feeds.bbci.co.uk/news/rss.xml` and `news <rss_url> --verbose`
+    - ✅ Package installation updated and working correctly
+    
+    The news agent successfully fetches RSS feeds, parses them using feedparser, and presents the latest 5 news items in a well-formatted, readable manner. The tool handles SSL errors gracefully, provides proper error messages, and follows the established modular architecture pattern.
+
+[x] Use strands-agents-tools rss tool instead of creating a custom tool
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Researched built-in RSS tool from strands_tools package (strands-agents-tools)
+    - ✅ Updated analyst/agents/news.py to import and use `rss` from strands_tools instead of custom tool
+    - ✅ Modified news agent prompt to work with built-in tool's action-based interface (action="fetch")
+    - ✅ Removed custom analyst/tools/fetch_rss_feed.py file completely
+    - ✅ Updated all package imports and exports in __init__.py files to remove custom tool references  
+    - ✅ Reinstalled package successfully with updated structure
+    - ✅ Tested with BBC and NPR RSS feeds - both work correctly with proper formatting
+    - ✅ Verified verbose mode works with model statistics display
+    
+    The news agent now uses the professional-grade built-in RSS tool from strands-agents-tools, which provides better error handling, supports multiple actions (fetch, subscribe, search), and is maintained by the Strands team. The implementation is cleaner and more reliable than the custom tool.

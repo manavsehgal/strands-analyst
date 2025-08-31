@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+import argparse
+import sys
+from ..agents import create_news_agent, news, print_result_stats
+
+
+def main():
+    """Main CLI entry point for the news command."""
+    parser = argparse.ArgumentParser(
+        description="Fetch and analyze RSS feed to get the latest 5 news items.",
+        prog="news"
+    )
+    parser.add_argument(
+        "rss_url",
+        help="The RSS feed URL to process (e.g., http://feeds.bbci.co.uk/news/rss.xml)"
+    )
+    parser.add_argument(
+        "--verbose", "-v",
+        action="store_true",
+        help="Show detailed statistics about the analysis"
+    )
+    
+    args = parser.parse_args()
+    
+    # Basic URL validation for RSS feeds
+    rss_url = args.rss_url
+    if not rss_url.startswith(("http://", "https://")):
+        # Be more permissive for RSS feeds - they might not always be https
+        if rss_url.startswith(("feeds.", "rss.")):
+            rss_url = f"http://{rss_url}"
+        else:
+            rss_url = f"https://{rss_url}"
+    
+    try:
+        # Create agent and analyze RSS feed
+        agent = create_news_agent()
+        result = news(rss_url, agent)
+        
+        # The result is printed by the agent, but we can add stats
+        if args.verbose:
+            print_result_stats(result, agent)
+            
+    except Exception as e:
+        print(f"Error processing RSS feed {rss_url}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
