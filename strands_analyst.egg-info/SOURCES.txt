@@ -1,8 +1,4 @@
 setup.py
-about_site/__init__.py
-about_site/agent.py
-about_site/cli.py
-about_site/tools.py
 analyst/__init__.py
 analyst/agents/__init__.py
 analyst/agents/about_site.py

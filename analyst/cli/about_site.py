@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from ..agents import create_about_site_agent, analyze_site, print_result_stats
+from ..agents import create_about_site_agent, about_site, print_result_stats
 
 
 def main():
@@ -30,11 +30,8 @@ def main():
     try:
         # Create agent and analyze
         agent = create_about_site_agent()
-        result = analyze_site(url, agent)
-        
-        # Print the analysis result
-        print(result)
-        
+        result = about_site(url, agent)
+                
         # Print stats if verbose
         if args.verbose:
             print_result_stats(result, agent)

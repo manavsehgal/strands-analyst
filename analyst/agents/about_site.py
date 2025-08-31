@@ -18,7 +18,7 @@ def create_about_site_agent():
     return Agent(tools=[fetch_url_metadata])
 
 
-def analyze_site(url: str, agent=None):
+def about_site(url: str, agent=None):
     """
     Analyze a website and return insights about what the company does.
     
@@ -53,5 +53,5 @@ def print_result_stats(result, agent):
 # Example usage when run directly
 if __name__ == "__main__":
     agent = create_about_site_agent()
-    result = analyze_site("https://decagon.ai/", agent)
+    result = about_site("https://decagon.ai/", agent)
     print_result_stats(result, agent)

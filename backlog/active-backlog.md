@@ -33,3 +33,35 @@
     - analyst/cli/ - CLI interfaces for agents
     
     This modular architecture enables easy addition of new agents and tools while maintaining consistency.
+
+[x] Cleanup the redundant older code structure about_site/ safely.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Reviewed about_site/ folder contents (agent.py, cli.py, tools.py, requirements.txt, __pycache__)
+    - ✅ Verified all functionality properly migrated to analyst/ package structure
+    - ✅ Tested CLI functionality before cleanup to ensure new structure works
+    - ✅ Safely removed redundant about_site/ folder with `rm -rf about_site/`
+    - ✅ Reinstalled package to clean up egg-info files and remove stale references
+    - ✅ Verified egg-info files now correctly reference only analyst/ package
+    - ✅ Tested CLI after cleanup: `about tesla.com` works correctly with graceful error handling
+    
+    The cleanup successfully removed all redundant code while maintaining full functionality.
+    Package now exclusively uses the clean analyst/ structure with no legacy references.
+
+[x] Remain consistent in naming and rename function analyze_site to about_site in the analyst/agents/about_site.py. Review the prior and this backlog item to create a naming conventions section in CLAUDE.md so that new agents, CLI, and tools follow same conventions.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Renamed `analyze_site()` function to `about_site()` in analyst/agents/about_site.py for consistency
+    - ✅ Updated all imports and references throughout the codebase (agents, CLI, main package)
+    - ✅ Updated all documentation files (agents-guide.md, examples.md, developer-guide.md)
+    - ✅ Reviewed prior backlog items to identify established naming patterns
+    - ✅ Created comprehensive naming conventions section in CLAUDE.md covering:
+      - Agent naming patterns (files, functions, creators)
+      - Tool naming conventions (verb_noun pattern)
+      - CLI naming consistency (commands match purpose)
+      - Module structure guidelines
+    - ✅ Updated CLAUDE.md with current package architecture and development commands
+    - ✅ Tested both CLI (`about github.com`) and direct API usage - all functionality works correctly
+    - ✅ Package maintains full functionality while achieving consistent naming across all components
+    
+    The naming conventions now ensure consistency: agent functions match their file names, CLI commands match their purpose, and the entire package follows a coherent pattern that will guide future development.
