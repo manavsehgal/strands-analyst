@@ -2,6 +2,7 @@ import logging
 from strands import Agent
 from ..tools import fetch_rss_content
 from ..config import get_config
+from ..prompts import format_prompt_cached
 
 
 def create_news_agent():
@@ -43,22 +44,7 @@ def news(rss_url: str, max_items: int = None, agent=None):
     max_allowed = config.get_news_max_items()
     max_items = min(max_items, max_allowed)
     
-    message = f"""
-Use the fetch_rss_content tool to fetch the latest {max_items} news items from {rss_url}.
-
-Call fetch_rss_content with:
-- url: "{rss_url}" 
-- max_items: {max_items}
-
-The tool will return properly extracted descriptions and content. For each news item, please provide:
-1. Title
-2. Description (now properly extracted from the RSS feed)
-3. Publication date
-4. Link to the full article
-5. Author (if available)
-
-Format the response in a clear, readable manner with each news item clearly separated and numbered.
-"""
+    message = format_prompt_cached("news", max_items=max_items, rss_url=rss_url)
     
     return agent(message)
 

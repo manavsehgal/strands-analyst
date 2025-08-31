@@ -25,7 +25,8 @@ A powerful AI agent framework for **website analysis** and **RSS news processing
 - **AI-Powered Analysis** - Claude Sonnet 4 via AWS Bedrock for intelligent insights
 
 ### 🛠️ Developer Experience
-- **Modular Architecture** - Clean separation of agents, tools, and CLI interfaces
+- **Modular Architecture** - Clean separation of agents, tools, CLI interfaces, and prompts
+- **External Prompt Management** - Template-based prompts with caching and variable substitution
 - **Simple CLI** - Intuitive command-line interface with verbose statistics
 - **Python API** - Programmatic access to all functionality
 - **Extensible Framework** - Easy to add new agents and tools
@@ -141,12 +142,16 @@ strands-analyst/
 ├── config.yml           # Configuration file (YAML)
 ├── analyst/
 │   ├── config.py        # Configuration management
+│   ├── prompts.py       # Prompt management utilities
 │   ├── agents/          # AI agent implementations
 │   │   ├── about_site.py    # Website analysis agent
 │   │   └── news.py          # RSS news processing agent
 │   ├── tools/           # Reusable tools for agents
 │   │   ├── fetch_url_metadata.py    # Website metadata extraction
-│   │   └── fetch_rss_content.py     # Optimized RSS processing  
+│   │   └── fetch_rss_content.py     # Optimized RSS processing
+│   ├── prompts/         # External prompt templates
+│   │   ├── about_site.md    # Website analysis prompts
+│   │   └── news.md          # RSS news processing prompts  
 │   └── cli/             # Command-line interfaces
 │       ├── about_site.py    # 'about' command implementation
 │       └── news.py          # 'news' command implementation
@@ -161,7 +166,8 @@ strands-analyst/
 
 - **🤖 Agents**: AI-powered analysis components that coordinate tools to perform complex tasks
 - **🛠️ Tools**: Reusable utilities for data extraction, processing, and analysis
-- **💻 CLI**: Command-line interfaces providing easy access to all functionality  
+- **💻 CLI**: Command-line interfaces providing easy access to all functionality
+- **📝 Prompts**: External template system with caching and variable substitution  
 - **⚙️ Configuration**: YAML-based settings for customizing behavior and limits
 - **📚 Documentation**: Comprehensive guides for users and developers
 
@@ -219,6 +225,24 @@ print(f"RSS timeout: {config.get_rss_timeout()}s")
 
 # Use generic config access
 custom_value = config.get('custom.setting', 'default_value')
+```
+
+### Prompt Management API
+
+```python
+from analyst.prompts import load_prompt, format_prompt_cached
+
+# Load prompt templates
+template = load_prompt("about_site")  # Loads analyst/prompts/about_site.md
+news_template = load_prompt("news")
+
+# Format prompts with variables (with caching)
+message = format_prompt_cached("about_site", url="https://stripe.com")
+news_message = format_prompt_cached("news", max_items=5, rss_url="http://feeds.bbci.co.uk/news/rss.xml")
+
+# Use formatted prompts with agents directly
+agent = create_about_site_agent()
+result = agent(message)
 ```
 
 ## 📋 Requirements
@@ -387,9 +411,18 @@ def my_custom_tool(input_data: str) -> dict:
     # Process input_data
     return {"result": "processed", "metadata": {...}}
 
-# 2. Create agent (analyst/agents/my_agent.py)
+# 2. Create prompt template (analyst/prompts/my_agent.md)
+# Analyze the following data: {data}
+# 
+# Please provide:
+# 1. Key insights
+# 2. Important patterns
+# 3. Recommendations
+
+# 3. Create agent (analyst/agents/my_agent.py)
 from strands import Agent
 from ..tools import my_custom_tool
+from ..prompts import format_prompt_cached
 
 def create_my_agent():
     """Create and configure custom agent."""
@@ -399,9 +432,10 @@ def my_analysis(data: str, agent=None):
     """Perform custom analysis."""
     if agent is None:
         agent = create_my_agent()
-    return agent(f"Analyze this data: {data}")
+    message = format_prompt_cached("my_agent", data=data)
+    return agent(message)
 
-# 3. Create CLI (analyst/cli/my_agent.py)  
+# 4. Create CLI (analyst/cli/my_agent.py)  
 import argparse
 from ..agents import create_my_agent, my_analysis
 
@@ -415,10 +449,11 @@ def main():
 ```
 
 **Next Steps:**
-1. Update `setup.py` entry points for new CLI command
-2. Add imports to `__init__.py` files  
-3. Create documentation in `docs/`
-4. Add examples and tests
+1. Create prompt template in `analyst/prompts/my_agent.md`
+2. Update `setup.py` entry points for new CLI command
+3. Add imports to `__init__.py` files  
+4. Create documentation in `docs/`
+5. Add examples and tests
 
 See the [Developer Guide](docs/developer-guide.md) for complete instructions.
 
@@ -447,9 +482,10 @@ We welcome contributions! Here's how you can help:
 - ✅ **RSS News Processing** - Multi-source news aggregation with rich content
 - ✅ **CLI Commands** - `about` and `news` commands with verbose statistics  
 - ✅ **Configuration System** - YAML-based settings with validation
-- ✅ **Performance Optimization** - Early termination and smart processing
+- ✅ **Performance Optimization** - Early termination and smart processing (~0.13s for 5 RSS items)
+- ✅ **External Prompt Management** - Template-based prompts with caching and variable substitution
 - ✅ **Comprehensive Documentation** - User guides, API docs, and examples
-- ✅ **Modular Architecture** - Clean separation of agents, tools, and CLI
+- ✅ **Modular Architecture** - Clean separation of agents, tools, CLI, and prompts
 
 ### 🚧 In Development
 

@@ -1,6 +1,7 @@
 import logging
 from strands import Agent
 from ..tools import fetch_url_metadata
+from ..prompts import format_prompt_cached
 
 
 def create_about_site_agent():
@@ -32,12 +33,7 @@ def about_site(url: str, agent=None):
     if agent is None:
         agent = create_about_site_agent()
     
-    message = f"""
-Visit {url} and answer the following questions:
-
-1. What does this company do?
-2. What are the topics important for this company?
-"""
+    message = format_prompt_cached("about_site", url=url)
     
     return agent(message)
 

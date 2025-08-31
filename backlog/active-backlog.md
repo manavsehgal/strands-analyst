@@ -140,3 +140,19 @@
     - ✅ Confirmed CLI integration, verbose mode, and configuration system still work perfectly
     
     The optimization significantly improves performance by processing only the required number of items instead of the entire feed. The tool now breaks early when it has enough items, skips invalid entries, and uses early termination for content extraction, resulting in faster response times with reduced computational overhead.
+
+[x] Use the analyst/prompts/ folder which will have about_site.md and news.md files with the string for hydrating the message variable in respective agents/ files.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Created comprehensive prompt management utility (analyst/prompts.py) with loading, caching, and formatting functions
+    - ✅ Verified existing prompt files (analyst/prompts/about_site.md and news.md) contained correct prompt templates
+    - ✅ Updated about_site agent to use format_prompt_cached() instead of hardcoded prompt strings
+    - ✅ Updated news agent to use format_prompt_cached() with variable substitution (max_items, rss_url)
+    - ✅ Added prompt utility functions to package exports in __init__.py
+    - ✅ Reinstalled package to ensure all imports work correctly
+    - ✅ Tested both CLI commands: `about github.com` and `news <url> --count 3` - both work perfectly
+    - ✅ Verified prompt templates are properly loaded, cached for performance, and formatted with variables
+    
+    The agent architecture now uses external prompt files for better maintainability and flexibility. Prompts are cached for performance and can be easily modified without touching agent code. The system supports variable substitution (like {url}, {max_items}, {rss_url}) for dynamic prompt generation.
+
+[ ] Simplify the agents/ code by extracting the logging and priting stats code into reusable decorators. Make them both configurable and comprehensive modules after reading logging docs https://strandsagents.com/latest/documentation/docs/user-guide/observability-evaluation/logs/ and metrics docs https://strandsagents.com/latest/documentation/docs/user-guide/observability-evaluation/metrics/. Rename stats as metrics.

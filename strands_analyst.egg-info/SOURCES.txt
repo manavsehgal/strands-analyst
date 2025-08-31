@@ -2,6 +2,7 @@ README.md
 setup.py
 analyst/__init__.py
 analyst/config.py
+analyst/prompts.py
 analyst/agents/__init__.py
 analyst/agents/about_site.py
 analyst/agents/news.py
