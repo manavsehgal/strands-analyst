@@ -2,10 +2,9 @@ from strands import Agent
 from ..tools import fetch_rss_content
 from ..config import get_config
 from ..prompts import format_prompt_cached
-from ..utils import with_logging, print_metrics
+from ..utils import print_metrics
 
 
-@with_logging()
 def create_news_agent():
     """Create and return an agent configured for RSS news analysis."""
     # Create an agent with custom RSS tool

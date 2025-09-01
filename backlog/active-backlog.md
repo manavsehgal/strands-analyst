@@ -222,4 +222,17 @@
     
     The configuration is now simplified with a single rss section handling all RSS-related settings. This reduces redundancy and makes the configuration more intuitive since both the RSS tool and news agent work with RSS feeds.
 
-[ ] When --verbose flag is provided both about and news commands do not render logs.
+[x] When --verbose flag is provided both about and news commands do not render logs.
+
+    **Completion Summary (2025-09-01):**
+    - ✅ Identified the root cause: @with_logging() decorator was overriding verbose flag settings
+    - ✅ The decorator in agent creation functions was resetting verbose=False after CLI had set it correctly
+    - ✅ Removed @with_logging() decorator from create_about_site_agent() in about_site.py
+    - ✅ Removed @with_logging() decorator from create_news_agent() in news.py
+    - ✅ Updated imports to remove unused with_logging import in both agent files
+    - ✅ Tested about command with --verbose flag: logs now show correctly in gray color
+    - ✅ Tested news command with --verbose flag: logs now show correctly in gray color
+    - ✅ Verified normal mode (without verbose) doesn't show logs
+    - ✅ Reinstalled package and confirmed all functionality works as expected
+    
+    The fix ensures that the CLI's verbose flag properly controls logging visibility. The decorator was causing a configuration conflict by resetting the logging after the CLI had already configured it. Removing the decorator allows the CLI's configuration to persist correctly.
