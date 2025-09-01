@@ -9,8 +9,8 @@ from ..utils import configure_logging, print_metrics
 def main():
     """Main CLI entry point for the news command."""
     config = get_config()
-    default_items = config.get_news_default_items()
-    max_items = config.get_news_max_items()
+    default_items = config.get_rss_default_items()
+    max_items = config.get_rss_max_items()
     
     parser = argparse.ArgumentParser(
         description=f"Fetch and analyze RSS feed to get the latest news items (default: {default_items}).",

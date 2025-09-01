@@ -35,13 +35,10 @@ class Config:
         # Default configuration
         self._config = {
             "rss": {
-                "max_items": 10,
+                "default_items": 10,
+                "max_items": 50,
                 "timeout": 30,
                 "include_full_content": True
-            },
-            "news": {
-                "default_items": 10,
-                "max_items": 50
             },
             "app": {
                 "name": "Strands Analyst",
@@ -113,21 +110,17 @@ class Config:
         except (KeyError, TypeError):
             return default
     
+    def get_rss_default_items(self) -> int:
+        """Get the default number of RSS items to fetch and display."""
+        return self.get('rss.default_items', 10)
+    
     def get_rss_max_items(self) -> int:
-        """Get the default maximum number of RSS items to fetch."""
-        return self.get('rss.max_items', 10)
+        """Get the maximum number of RSS items allowed."""
+        return self.get('rss.max_items', 50)
     
     def get_rss_timeout(self) -> int:
         """Get the RSS request timeout in seconds."""
         return self.get('rss.timeout', 30)
-    
-    def get_news_default_items(self) -> int:
-        """Get the default number of news items to display."""
-        return self.get('news.default_items', 10)
-    
-    def get_news_max_items(self) -> int:
-        """Get the maximum number of news items allowed."""
-        return self.get('news.max_items', 50)
     
     # Logging configuration getters
     def get_logging_enabled(self) -> bool:

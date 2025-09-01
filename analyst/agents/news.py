@@ -30,10 +30,10 @@ def news(rss_url: str, max_items: int = None, agent=None):
     # Get configuration and set default max_items if not specified
     config = get_config()
     if max_items is None:
-        max_items = config.get_news_default_items()
+        max_items = config.get_rss_default_items()
     
     # Ensure max_items doesn't exceed configured maximum
-    max_allowed = config.get_news_max_items()
+    max_allowed = config.get_rss_max_items()
     max_items = min(max_items, max_allowed)
     
     message = format_prompt_cached("news", max_items=max_items, rss_url=rss_url)

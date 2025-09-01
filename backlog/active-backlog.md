@@ -190,3 +190,36 @@
     - ✅ Verified proper spacing: logs → newline → agent response → newline → metrics
     
     The system now provides complete control over logging and metrics display. In default configuration, non-verbose mode shows only clean agent responses. Verbose mode adds colorful, informative metrics. Logging can be independently controlled and appears in subtle gray when enabled. All aspects are configurable via config.yml, allowing users to customize the experience to their preferences while maintaining professional, readable output.
+
+[x] Just like the @with_logging() decorator on create agent function, is it a good design and fewer lines of code to use @with_metrics() decorator for agent function? If so then make the change otherwise leave as is.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Analyzed the existing `@with_metrics_display()` decorator in metrics_utils.py
+    - ✅ Compared current explicit approach vs decorator-based approach for metrics display
+    - ✅ Evaluated design trade-offs: runtime vs compile-time, coupling, complexity, maintainability
+    - ✅ Determined that current design is superior for the following reasons:
+      - **Runtime flexibility**: verbose flag is only known at CLI runtime, decorators applied at definition time
+      - **Explicit control**: `print_metrics(result, agent, verbose=args.verbose)` is clear and direct
+      - **Separation of concerns**: agent functions focus on analysis, CLI handles display
+      - **Simplicity**: current approach is just 1 line, decorator would require wrappers or complexity
+      - **Maintainability**: explicit calls are easier to understand and modify than hidden decorator behavior
+    - ✅ Decision: Keep current explicit approach as it's cleaner, more flexible, and more maintainable
+    
+    The current design with explicit `print_metrics()` calls in CLI components is the better architecture. Unlike logging (which is configured once at agent creation), metrics display depends on runtime CLI arguments and should remain explicit for clarity and flexibility.
+
+[x] In the `config.yml` the merge the configurations for rss and news into rss as both relate to rss processing. Make changes in code accordingly.
+
+    **Completion Summary (2025-09-01):**
+    - ✅ Merged rss and news configurations in config.yml into single unified rss section
+    - ✅ Combined settings: default_items (10), max_items (50), timeout (30), include_full_content (true)
+    - ✅ Updated config.py with new methods: get_rss_default_items() and updated get_rss_max_items()
+    - ✅ Removed deprecated methods: get_news_default_items() and get_news_max_items()
+    - ✅ Updated news agent to use config.get_rss_default_items() and config.get_rss_max_items()
+    - ✅ Updated RSS tool fetch_rss_content to use merged configuration methods
+    - ✅ Updated news CLI to use config.get_rss_default_items() and config.get_rss_max_items()
+    - ✅ Reinstalled package and tested configuration access - all methods work correctly
+    - ✅ Verified about CLI still functions properly after changes
+    
+    The configuration is now simplified with a single rss section handling all RSS-related settings. This reduces redundancy and makes the configuration more intuitive since both the RSS tool and news agent work with RSS feeds.
+
+[ ] When --verbose flag is provided both about and news commands do not render logs.

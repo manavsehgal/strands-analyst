@@ -25,10 +25,10 @@ def fetch_rss_content(url: str, max_items: int = None) -> Dict[str, Any]:
     # Get configuration and set default max_items if not specified
     config = get_config()
     if max_items is None:
-        max_items = config.get_rss_max_items()
+        max_items = config.get_rss_default_items()
     
     # Ensure max_items doesn't exceed configured maximum
-    max_allowed = config.get_news_max_items()
+    max_allowed = config.get_rss_max_items()
     max_items = min(max_items, max_allowed)
     try:
         # Parse the RSS feed
