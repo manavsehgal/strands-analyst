@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "ed7c6e2af278427e",
+        "id": "99c96fe5bf2105c5",
         "type": "tabs",
         "children": [
           {
-            "id": "6aca006e2a1616f0",
+            "id": "9df6b2d10d08aeb0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "refer/articles/building-effective-ai-agents-anthropic/article.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "article"
+              "title": "New tab"
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "refer/articles/building-effective-ai-agents-anthropic/article.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for article"
+              "title": "Backlinks"
             }
           },
           {
@@ -113,12 +108,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "refer/articles/building-effective-ai-agents-anthropic/article.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from article"
+              "title": "Outgoing links"
             }
           },
           {
@@ -142,13 +136,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "refer/articles/building-effective-ai-agents-anthropic/article.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of article"
+              "title": "Outline"
             }
           }
         ]
@@ -169,6 +162,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "6aca006e2a1616f0",
-  "lastOpenFiles": []
+  "active": "9df6b2d10d08aeb0",
+  "lastOpenFiles": [
+    "README.md.tmp.72324.1756747076704",
+    "refer/transcripts/ai-trillion-dollar-opportunity-sequoia-ai-ascent-2025-keynote.md",
+    "docs/README.md.tmp.72324.1756746605268",
+    "docs/htmlmd-agent-guide.md",
+    "docs/article-agent-guide.md",
+    "refer/articles/building-effective-ai-agents-anthropic/article.md"
+  ]
 }

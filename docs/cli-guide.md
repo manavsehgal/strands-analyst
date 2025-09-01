@@ -6,6 +6,8 @@ The Strands Analyst package provides command-line interfaces for various analysi
 
 - [About Command](#about-command) - Analyze websites to understand companies
 - [News Command](#news-command) - Fetch and analyze RSS news feeds
+- [Article Command](#article-command) - Download and analyze web articles with images
+- [HTMLmd Command](#htmlmd-command) - Convert HTML files to markdown format
 
 ## About Command
 
@@ -407,3 +409,132 @@ done
    - Ensure `config.yml` exists in project root
    - Check YAML syntax
    - Verify configuration values are within limits
+
+## Article Command
+
+The `article` command downloads and analyzes web articles with comprehensive metadata extraction and optional image preservation.
+
+### Basic Usage
+
+```bash
+article <url> [options]
+```
+
+### Examples
+
+```bash
+# Download and analyze an article
+article https://anthropic.com/news/building-effective-agents
+
+# Download without images for faster processing
+article https://techcrunch.com/article --no-images
+
+# Use custom output directory with verbose analysis
+article https://example.com/blog-post --output-dir ./research --verbose
+```
+
+### Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--no-images` | Skip downloading images | Images downloaded |
+| `--output-dir DIR` | Custom output directory | `refer/articles` |
+| `--verbose`, `-v` | Show detailed analysis | Disabled |
+
+### Features
+
+- **Content Extraction**: Clean article content with readability processing
+- **Metadata Analysis**: Title, author, date, description extraction
+- **Image Handling**: Smart image downloading with proper organization
+- **HTML Generation**: Professional styling with metadata headers
+- **AI Analysis**: Comprehensive content analysis and insights
+
+For detailed usage, see the [Article Agent Guide](article-agent-guide.md).
+
+## HTMLmd Command
+
+The `htmlmd` command converts local HTML files to well-formatted markdown with metadata preservation and image reference handling.
+
+### Basic Usage
+
+```bash
+htmlmd <html_file> [options]
+```
+
+### Examples
+
+```bash
+# Convert HTML to markdown with default settings
+htmlmd refer/articles/my-post/index.html
+
+# Custom output filename without metadata
+htmlmd saved-article.html --output clean-post.md --no-metadata
+
+# Verbose conversion with detailed analysis
+htmlmd complex-article.html --verbose
+```
+
+### Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--output FILE` | Output filename for markdown | `article.md` |
+| `--no-metadata` | Skip frontmatter metadata | Include metadata |
+| `--verbose`, `-v` | Show detailed conversion report | Disabled |
+
+### Features
+
+- **Clean Conversion**: Professional markdown with proper formatting
+- **Metadata Preservation**: YAML frontmatter with comprehensive information
+- **Image Handling**: Perfect relative reference preservation
+- **Content Processing**: Smart content extraction and unwanted element removal
+- **Quality Analysis**: Detailed conversion reporting and recommendations
+
+For detailed usage, see the [HTML to Markdown Guide](htmlmd-agent-guide.md).
+
+## Command Integration
+
+### Workflow Examples
+
+Download article and convert to markdown:
+```bash
+# Download article with images
+article https://example.com/post --output-dir ./research
+
+# Convert HTML to markdown
+htmlmd ./research/post-title/index.html --verbose
+```
+
+Batch processing:
+```bash
+# Process multiple articles
+for url in "https://site1.com/post1" "https://site2.com/post2"; do
+    article "$url" --output-dir ./batch
+done
+
+# Convert all to markdown
+find ./batch -name "index.html" -exec htmlmd {} \;
+```
+
+### Configuration
+
+All commands respect the global configuration in `config.yml`:
+
+```yaml
+article:
+  output_dir: "refer/articles"
+  download_images: true
+  max_images: 20
+
+markdown:
+  heading_style: "ATX"
+  include_metadata: true
+```
+
+### Global Options
+
+Available across all commands:
+- **Verbose mode**: Detailed metrics and analysis
+- **Configuration**: YAML-based settings
+- **Error handling**: Graceful failure with informative messages
+- **Integration**: Designed for scripting and automation
