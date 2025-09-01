@@ -6,12 +6,15 @@ analyst/prompts.py
 analyst/agents/__init__.py
 analyst/agents/about_site.py
 analyst/agents/get_article.py
+analyst/agents/html_to_markdown.py
 analyst/agents/news.py
 analyst/cli/__init__.py
 analyst/cli/about_site.py
 analyst/cli/get_article.py
+analyst/cli/html_to_markdown.py
 analyst/cli/news.py
 analyst/tools/__init__.py
+analyst/tools/convert_html_to_markdown.py
 analyst/tools/download_article_content.py
 analyst/tools/fetch_rss_content.py
 analyst/tools/fetch_url_metadata.py

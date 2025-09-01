@@ -28,6 +28,17 @@ article:
   # Maximum number of images to download per article
   max_images: 20
 
+# Markdown conversion configuration
+markdown:
+  # Output format for markdown files
+  output_format: "markdown"
+  
+  # Heading style (ATX or SETEXT)
+  heading_style: "ATX"
+  
+  # Whether to include frontmatter metadata by default
+  include_metadata: true
+
 # General application settings
 app:
   # Application name

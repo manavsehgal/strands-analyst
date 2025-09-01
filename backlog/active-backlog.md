@@ -274,3 +274,27 @@
     - HTML file: 32KB well-formatted document with correct `images/` relative references throughout content
     
     All reported issues have been completely resolved. The article agent now provides comprehensive article downloading with proper folder structure, clean HTML generation, and correct image handling.
+
+[x] Review `refer/code/article_to_md.py` and create a tool within analyst/tools/ on the same lines as other tools within the folder. Use same destination folder as parent of source html. Create an agent called `html_to_markdown` with a CLI command `htmlmd` and associated prompts/ instructions to convert to valid well-formatted markdown file from a local html path as argument to the CLI command. Ensure the markdown file refers the same images/ folder images as relative references correctly as does the html source.
+
+    **Completion Summary (2025-09-01):**
+    - ✅ **Reviewed reference implementation**: Analyzed `refer/code/article_to_md.py` to understand HTML to Markdown conversion patterns and requirements
+    - ✅ **Created convert_html_to_markdown tool**: Full-featured tool in `analyst/tools/` with metadata extraction, content processing, and image reference handling
+    - ✅ **Added markdown configuration**: Extended `config.yml` and `config.py` with markdown conversion options (heading style, metadata inclusion, output format)
+    - ✅ **Built html_to_markdown agent**: Created agent in `analyst/agents/` following established naming conventions and patterns
+    - ✅ **Implemented htmlmd CLI**: Complete CLI interface in `analyst/cli/` with `--output`, `--no-metadata`, and `--verbose` options
+    - ✅ **Created comprehensive prompt**: Structured prompt template in `analyst/prompts/html_to_markdown.md` for detailed conversion reporting
+    - ✅ **Updated all package exports**: Modified all `__init__.py` files and `setup.py` to include new htmlmd console script
+    - ✅ **Added markdownify dependency**: Updated `requirements.txt` with markdownify>=0.11.6 for HTML to Markdown conversion
+    - ✅ **Fixed configuration conflicts**: Resolved markdownify parameter conflicts between strip and convert options
+    - ✅ **Tested complete functionality**: Successfully converted Anthropic article HTML to markdown with perfect results
+    
+    **Test Results:**
+    - **Source**: `refer/articles/building-effective-ai-agents-anthropic/index.html` (32KB)
+    - **Output**: `refer/articles/building-effective-ai-agents-anthropic/article.md` (20KB) 
+    - **Images**: 8 images correctly preserved with relative references (`images/filename.png`)
+    - **Metadata**: Complete YAML frontmatter with title, source URL, word count (2,551), image count, conversion timestamp
+    - **Structure**: Clean markdown with proper heading hierarchy, links, lists, and formatting
+    - **Folder structure**: Uses same destination folder as HTML parent, preserves existing images folder
+    
+    The htmlmd command now provides comprehensive HTML to Markdown conversion with metadata preservation, image handling, and perfect relative reference management. All requirements met successfully.

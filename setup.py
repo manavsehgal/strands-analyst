@@ -15,6 +15,7 @@ setup(
             "about=analyst.cli.about_site:main",
             "news=analyst.cli.news:main",
             "article=analyst.cli.get_article:main",
+            "htmlmd=analyst.cli.html_to_markdown:main",
         ],
     },
     python_requires=">=3.8",

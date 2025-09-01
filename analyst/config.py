@@ -46,6 +46,11 @@ class Config:
                 "download_images": True,
                 "max_images": 20
             },
+            "markdown": {
+                "output_format": "markdown",
+                "heading_style": "ATX",
+                "include_metadata": True
+            },
             "app": {
                 "name": "Strands Analyst",
                 "version": "0.1.0"
@@ -144,6 +149,19 @@ class Config:
     def get_article_max_images(self) -> int:
         """Get the maximum number of images to download per article."""
         return self.get('article.max_images', 20)
+    
+    # Markdown configuration getters
+    def get_markdown_output_format(self) -> str:
+        """Get the output format for markdown files."""
+        return self.get('markdown.output_format', 'markdown')
+    
+    def get_markdown_heading_style(self) -> str:
+        """Get the heading style for markdown conversion (ATX or SETEXT)."""
+        return self.get('markdown.heading_style', 'ATX')
+    
+    def get_markdown_include_metadata(self) -> bool:
+        """Get whether to include frontmatter metadata by default."""
+        return self.get('markdown.include_metadata', True)
     
     # Logging configuration getters
     def get_logging_enabled(self) -> bool:
@@ -255,3 +273,18 @@ def get_article_download_images() -> bool:
 def get_article_max_images() -> int:
     """Get the maximum number of images to download per article."""
     return config.get_article_max_images()
+
+
+def get_markdown_output_format() -> str:
+    """Get the output format for markdown files."""
+    return config.get_markdown_output_format()
+
+
+def get_markdown_heading_style() -> str:
+    """Get the heading style for markdown conversion (ATX or SETEXT)."""
+    return config.get_markdown_heading_style()
+
+
+def get_markdown_include_metadata() -> bool:
+    """Get whether to include frontmatter metadata by default."""
+    return config.get_markdown_include_metadata()
