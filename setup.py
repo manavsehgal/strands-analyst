@@ -12,7 +12,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "about=analyst.cli.about_site:main",
+            "sitemeta=analyst.cli.sitemeta:main",
             "news=analyst.cli.news:main",
             "article=analyst.cli.get_article:main",
             "htmlmd=analyst.cli.html_to_markdown:main",

@@ -298,3 +298,33 @@
     - **Folder structure**: Uses same destination folder as HTML parent, preserves existing images folder
     
     The htmlmd command now provides comprehensive HTML to Markdown conversion with metadata preservation, image handling, and perfect relative reference management. All requirements met successfully.
+
+[x] Update the `about_site` agent, tool, prompt, and cli to have the capability to save the response as a well formatted markdown in destination folder configured in `config.yml` default to `refer/sitemeta/` and create unique file name like `domain-tld-meta-yyyy-mm-dd.md` file. Rename the agent, tool, prompt, cli to `sitemeta` instead of `about` everywhere including code, docs, readme, and CLAUDE.md files.
+
+    **Completion Summary (2025-09-01):**
+    - ✅ **Added sitemeta configuration** to `config.yml` with `output_dir`, `save_markdown`, and `timeout` settings
+    - ✅ **Extended config.py** with getter methods for all sitemeta configuration options
+    - ✅ **Implemented comprehensive markdown saving** with well-formatted output including YAML frontmatter, structured content, and proper metadata
+    - ✅ **Created markdown utility function** `_save_response_to_markdown()` with domain parsing and unique filename generation (`domain-tld-meta-yyyy-mm-dd.md`)
+    - ✅ **Updated sitemeta agent** to support markdown saving with configurable output directory and save options
+    - ✅ **Enhanced CLI interface** with `--save-markdown`, `--no-markdown`, and `--output-dir` options for full user control
+    - ✅ **Comprehensive renaming** of all files: `about_site.py` → `sitemeta.py` in agents, CLI, and prompts directories
+    - ✅ **Updated all function names**: `create_about_site_agent()` → `create_sitemeta_agent()`, `about_site()` → `sitemeta()`
+    - ✅ **Updated all imports and exports** in `__init__.py` files throughout the package hierarchy
+    - ✅ **Updated setup.py console script**: `about=analyst.cli.about_site:main` → `sitemeta=analyst.cli.sitemeta:main`
+    - ✅ **Comprehensive CLAUDE.md updates** reflecting all naming changes, new CLI options, and updated examples
+    - ✅ **Successful testing**: Commands `sitemeta google.com --verbose --save-markdown` and `sitemeta stripe.com --verbose --save-markdown --output-dir refer/test` both work perfectly
+    - ✅ **Verified markdown file generation**: Proper YAML frontmatter, structured content, domain parsing, and unique naming (e.g., `google-com-meta-2025-09-01.md`)
+    
+    **Key Features Implemented:**
+    - **Configurable markdown saving** with default enabled setting in config.yml
+    - **Smart filename generation** using domain-tld-meta-yyyy-mm-dd.md pattern
+    - **Rich markdown formatting** with frontmatter metadata including URL, domain, timestamp, and analysis type
+    - **CLI flexibility** allowing users to override defaults with command-line flags
+    - **Seamless integration** with existing verbose mode and metrics display
+    - **Proper directory creation** ensuring output directories exist before saving
+    
+    The package now provides a complete site metadata analysis solution with the `sitemeta` command, offering both immediate console output and persistent markdown file storage for future reference.
+
+[ ] Update the `news` agent, tool, prompt, and cli to have the capability to save the response as a well formatted markdown in destination folder configured in `config.yml` default to `refer/news/` and create unique file name like `domain-tld-news-yyyy-mm-dd.md` file.
+

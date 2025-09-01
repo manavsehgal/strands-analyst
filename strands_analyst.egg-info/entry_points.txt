@@ -1,5 +1,5 @@
 [console_scripts]
-about = analyst.cli.about_site:main
 article = analyst.cli.get_article:main
 htmlmd = analyst.cli.html_to_markdown:main
 news = analyst.cli.news:main
+sitemeta = analyst.cli.sitemeta:main

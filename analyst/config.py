@@ -51,6 +51,11 @@ class Config:
                 "heading_style": "ATX",
                 "include_metadata": True
             },
+            "sitemeta": {
+                "output_dir": "refer/sitemeta",
+                "save_markdown": True,
+                "timeout": 30
+            },
             "app": {
                 "name": "Strands Analyst",
                 "version": "0.1.0"
@@ -162,6 +167,19 @@ class Config:
     def get_markdown_include_metadata(self) -> bool:
         """Get whether to include frontmatter metadata by default."""
         return self.get('markdown.include_metadata', True)
+    
+    # Sitemeta configuration getters
+    def get_sitemeta_output_dir(self) -> str:
+        """Get the default output directory for site metadata reports."""
+        return self.get('sitemeta.output_dir', 'refer/sitemeta')
+    
+    def get_sitemeta_save_markdown(self) -> bool:
+        """Get whether to save response as markdown file by default."""
+        return self.get('sitemeta.save_markdown', True)
+    
+    def get_sitemeta_timeout(self) -> int:
+        """Get the sitemeta request timeout in seconds."""
+        return self.get('sitemeta.timeout', 30)
     
     # Logging configuration getters
     def get_logging_enabled(self) -> bool:
@@ -288,3 +306,18 @@ def get_markdown_heading_style() -> str:
 def get_markdown_include_metadata() -> bool:
     """Get whether to include frontmatter metadata by default."""
     return config.get_markdown_include_metadata()
+
+
+def get_sitemeta_output_dir() -> str:
+    """Get the default output directory for site metadata reports."""
+    return config.get_sitemeta_output_dir()
+
+
+def get_sitemeta_save_markdown() -> bool:
+    """Get whether to save response as markdown file by default."""
+    return config.get_sitemeta_save_markdown()
+
+
+def get_sitemeta_timeout() -> int:
+    """Get the sitemeta request timeout in seconds."""
+    return config.get_sitemeta_timeout()

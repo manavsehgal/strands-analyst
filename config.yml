@@ -39,6 +39,17 @@ markdown:
   # Whether to include frontmatter metadata by default
   include_metadata: true
 
+# Site metadata analysis configuration
+sitemeta:
+  # Default output directory for site metadata reports
+  output_dir: "refer/sitemeta"
+  
+  # Whether to save response as markdown file by default
+  save_markdown: true
+  
+  # Timeout for metadata requests (seconds)
+  timeout: 30
+
 # General application settings
 app:
   # Application name
