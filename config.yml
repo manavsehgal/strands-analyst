@@ -50,6 +50,17 @@ sitemeta:
   # Timeout for metadata requests (seconds)
   timeout: 30
 
+# News analysis configuration
+news:
+  # Default output directory for news analysis reports
+  output_dir: "refer/news"
+  
+  # Whether to save response as markdown file by default
+  save_markdown: true
+  
+  # Timeout for news requests (seconds)
+  timeout: 30
+
 # General application settings
 app:
   # Application name

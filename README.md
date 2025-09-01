@@ -13,10 +13,10 @@ A comprehensive AI agent framework for **website analysis**, **news monitoring**
 # Install the package
 pip install -e .
 
-# Analyze any website  
-about stripe.com
+# Analyze website metadata with auto-save  
+sitemeta stripe.com
 
-# Get latest news from RSS feeds
+# Get latest news from RSS feeds with markdown reports
 news https://feeds.npr.org/1001/rss.xml
 
 # Download articles with images
@@ -31,11 +31,13 @@ htmlmd refer/articles/my-post/index.html
 ### 🌐 Website Intelligence
 - **Company Analysis** - Understand what any company does from their website
 - **Smart Metadata Extraction** - Titles, descriptions, OpenGraph tags, and more
+- **Automatic Markdown Reports** - Save analysis with YAML frontmatter and structured content
 - **Performance Optimized** - Only downloads HTML head sections for speed
 
 ### 📰 News & RSS Processing  
 - **Multi-Source Aggregation** - Process RSS feeds from major news outlets
 - **Rich Content Extraction** - Advanced description parsing with multiple fallbacks
+- **Automatic Markdown Reports** - Save news analysis with intelligent domain-based naming
 - **Configurable Limits** - Control item counts and processing parameters
 - **Early Termination** - Process only what you need for faster results (~0.13s for 5 items)
 
@@ -77,14 +79,15 @@ pip install -e .
 
 ### Website Analysis
 ```bash
-# Analyze a company
-about google.com
+# Analyze a website with auto-save to markdown
+sitemeta google.com
 
-# Get detailed analysis with statistics
-about stripe.com --verbose
+# Get detailed analysis with statistics and custom output
+sitemeta stripe.com --verbose --output-dir ./reports
 
-# Works with full URLs
-about https://openai.com
+# Force save or prevent saving markdown
+sitemeta openai.com --save-markdown
+sitemeta anthropic.com --no-markdown
 ```
 
 **Example Output:**
@@ -106,19 +109,22 @@ for online businesses**. They offer:
 - **E-commerce Tools** - Online business operations
 - **Revenue Operations** - AI-powered business scaling
 
+📄 Analysis saved to: refer/sitemeta/stripe-com-meta-2025-09-01.md
+
 Model: Claude Sonnet 4 | Tokens: 1,456 | Duration: 2.87s
 ```
 
 ### News Processing
 ```bash
-# Get latest news (default: 10 items)
+# Get latest news with auto-save to markdown (default: 10 items)
 news http://feeds.bbci.co.uk/news/rss.xml
 
-# Specific number of items
-news https://feeds.npr.org/1001/rss.xml --count 5
+# Specific number of items with custom output directory
+news https://feeds.npr.org/1001/rss.xml --count 5 --output-dir ./news-archive
 
-# With detailed statistics
-news https://techcrunch.com/feed/ --count 3 --verbose
+# With detailed statistics and markdown control
+news https://techcrunch.com/feed/ --count 3 --verbose --save-markdown
+news https://rss.cnn.com/rss/edition.rss --no-markdown
 ```
 
 **Example Output:**
@@ -135,6 +141,8 @@ news https://techcrunch.com/feed/ --count 3 --verbose
 **Description:** Researchers achieve 99.9% fidelity in quantum error correction...
 **Published:** January 15, 2025, 12:15 GMT
 **Link:** https://techcrunch.com/2025/01/15/quantum-breakthrough
+
+📄 News analysis saved to: refer/news/techcrunch-com-news-2025-09-01.md
 
 Model: Claude Sonnet 4 | Tokens: 2,102 | Duration: 4.21s
 ```
@@ -198,8 +206,8 @@ strands-analyst/
 ├── config.yml              # YAML configuration
 ├── analyst/
 │   ├── agents/              # AI agent implementations
-│   │   ├── about_site.py        # Website analysis
-│   │   ├── news.py              # RSS processing  
+│   │   ├── sitemeta.py          # Website metadata analysis
+│   │   ├── news.py              # RSS processing with markdown reports
 │   │   ├── get_article.py       # Article downloading
 │   │   └── html_to_markdown.py  # HTML conversion
 │   ├── tools/               # Reusable utilities
@@ -208,18 +216,22 @@ strands-analyst/
 │   │   ├── download_article_content.py  # Article downloads
 │   │   └── convert_html_to_markdown.py  # HTML conversion
 │   ├── prompts/             # External prompt templates
-│   │   ├── about_site.md         # Website analysis prompts
+│   │   ├── sitemeta.md           # Website analysis prompts
 │   │   ├── news.md               # News processing prompts
 │   │   ├── get_article.md        # Article analysis prompts
 │   │   └── html_to_markdown.md   # Conversion prompts
 │   ├── cli/                 # Command-line interfaces
-│   │   ├── about_site.py         # 'about' command
-│   │   ├── news.py               # 'news' command
+│   │   ├── sitemeta.py           # 'sitemeta' command
+│   │   ├── news.py               # 'news' command with markdown saving
 │   │   ├── get_article.py        # 'article' command
 │   │   └── html_to_markdown.py   # 'htmlmd' command
 │   └── utils/               # Shared utilities
 │       ├── logging_utils.py      # Configurable logging
 │       └── metrics_utils.py      # Performance metrics
+├── refer/                   # Generated content and reports
+│   ├── sitemeta/            # Website analysis markdown reports
+│   ├── news/                # RSS news analysis reports
+│   └── articles/            # Downloaded articles with images
 └── docs/                    # Comprehensive documentation
 ```
 
@@ -237,11 +249,23 @@ strands-analyst/
 Customize behavior via `config.yml`:
 
 ```yaml
+# Site metadata analysis with auto-save
+sitemeta:
+  output_dir: "refer/sitemeta"  # Analysis reports directory
+  save_markdown: true           # Auto-save to markdown
+  timeout: 30                   # Request timeout (seconds)
+
+# News analysis with intelligent naming
+news:
+  output_dir: "refer/news"      # News reports directory
+  save_markdown: true           # Auto-save to markdown
+  timeout: 30                   # Request timeout
+
 # RSS and news processing
 rss:
-  default_items: 10          # Default news items to fetch
-  max_items: 50              # Maximum allowed items
-  timeout: 30                # Request timeout (seconds)
+  default_items: 10             # Default news items to fetch
+  max_items: 50                 # Maximum allowed items
+  timeout: 30                   # Request timeout (seconds)
 
 # Article downloading  
 article:
@@ -270,22 +294,30 @@ metrics:
 
 ## 🛠️ Python API
 
-### Website Analysis
+### Website Analysis with Markdown Saving
 ```python
-from analyst.agents import create_about_site_agent, about_site
+from analyst.agents import create_sitemeta_agent, sitemeta
 
-agent = create_about_site_agent()
-result = about_site("https://stripe.com", agent)
+agent = create_sitemeta_agent()
+result = sitemeta("https://stripe.com", agent, save_markdown=True, output_dir="./reports")
 print(result)
+print(f"Saved to: {result.metadata.get('saved_to')}")
 ```
 
-### News Processing
+### News Processing with Auto-Save
 ```python
 from analyst.agents import create_news_agent, news
 
 agent = create_news_agent()
-result = news("http://feeds.bbci.co.uk/news/rss.xml", max_items=5, agent=agent)
+result = news(
+    rss_url="http://feeds.bbci.co.uk/news/rss.xml", 
+    max_items=5, 
+    agent=agent,
+    save_markdown=True,
+    output_dir="./news-reports"
+)
 print(result)
+print(f"News report saved to: {result.metadata.get('saved_to')}")
 ```
 
 ### Article Download
@@ -318,11 +350,20 @@ print(f"Word count: {result.content['word_count']}")
 
 ### Configuration Access
 ```python
-from analyst.config import get_config
+from analyst.config import (
+    get_config, 
+    get_sitemeta_output_dir, 
+    get_news_output_dir,
+    get_sitemeta_save_markdown,
+    get_news_save_markdown
+)
 
 config = get_config()
 print(f"Default RSS items: {config.get_rss_default_items()}")
-print(f"Article output dir: {config.get_article_output_dir()}")
+print(f"Sitemeta output dir: {get_sitemeta_output_dir()}")
+print(f"News output dir: {get_news_output_dir()}")
+print(f"Auto-save sitemeta: {get_sitemeta_save_markdown()}")
+print(f"Auto-save news: {get_news_save_markdown()}")
 ```
 
 ### Direct Tool Usage
@@ -447,15 +488,16 @@ See the [Developer Guide](docs/developer-guide.md) for complete instructions.
 ## 🗺️ Roadmap
 
 ### ✅ Completed Features
-- ✅ Website analysis with company intelligence
-- ✅ RSS news processing with rich content extraction
-- ✅ Article downloading with image handling
+- ✅ Website analysis with company intelligence and auto-save markdown reports
+- ✅ RSS news processing with intelligent domain-based file naming
+- ✅ Article downloading with image handling and professional HTML output
 - ✅ HTML to Markdown conversion with metadata preservation
-- ✅ External prompt management system
-- ✅ Comprehensive configuration with YAML
-- ✅ Performance optimization (early termination, caching)
-- ✅ Logging and metrics utilities
-- ✅ Complete documentation suite
+- ✅ Comprehensive markdown saving with YAML frontmatter and structured content
+- ✅ External prompt management system with caching
+- ✅ Comprehensive configuration with YAML and CLI overrides
+- ✅ Performance optimization (early termination, smart parsing)
+- ✅ Configurable logging and metrics utilities
+- ✅ Complete documentation suite with examples
 
 ### 🎯 Planned Features
 #### Core Functionality

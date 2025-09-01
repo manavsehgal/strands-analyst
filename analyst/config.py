@@ -56,6 +56,11 @@ class Config:
                 "save_markdown": True,
                 "timeout": 30
             },
+            "news": {
+                "output_dir": "refer/news",
+                "save_markdown": True,
+                "timeout": 30
+            },
             "app": {
                 "name": "Strands Analyst",
                 "version": "0.1.0"
@@ -180,6 +185,19 @@ class Config:
     def get_sitemeta_timeout(self) -> int:
         """Get the sitemeta request timeout in seconds."""
         return self.get('sitemeta.timeout', 30)
+    
+    # News configuration getters
+    def get_news_output_dir(self) -> str:
+        """Get the default output directory for news analysis reports."""
+        return self.get('news.output_dir', 'refer/news')
+    
+    def get_news_save_markdown(self) -> bool:
+        """Get whether to save response as markdown file by default."""
+        return self.get('news.save_markdown', True)
+    
+    def get_news_timeout(self) -> int:
+        """Get the news request timeout in seconds."""
+        return self.get('news.timeout', 30)
     
     # Logging configuration getters
     def get_logging_enabled(self) -> bool:
@@ -321,3 +339,18 @@ def get_sitemeta_save_markdown() -> bool:
 def get_sitemeta_timeout() -> int:
     """Get the sitemeta request timeout in seconds."""
     return config.get_sitemeta_timeout()
+
+
+def get_news_output_dir() -> str:
+    """Get the default output directory for news analysis reports."""
+    return config.get_news_output_dir()
+
+
+def get_news_save_markdown() -> bool:
+    """Get whether to save response as markdown file by default."""
+    return config.get_news_save_markdown()
+
+
+def get_news_timeout() -> int:
+    """Get the news request timeout in seconds."""
+    return config.get_news_timeout()
