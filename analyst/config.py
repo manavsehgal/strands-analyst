@@ -46,6 +46,30 @@ class Config:
             "app": {
                 "name": "Strands Analyst",
                 "version": "0.1.0"
+            },
+            "logging": {
+                "level": "INFO",
+                "show_by_default": False,
+                "show_in_verbose": True,
+                "format": "%(levelname)s | %(name)s | %(message)s",
+                "enabled": True
+            },
+            "metrics": {
+                "show_by_default": False,
+                "show_in_verbose": True,
+                "include": {
+                    "model": True,
+                    "tokens": True,
+                    "duration": True,
+                    "latency": True,
+                    "tool_usage": True,
+                    "cycles": False
+                },
+                "display": {
+                    "colors": True,
+                    "minimalist": True,
+                    "add_spacing": True
+                }
             }
         }
         
@@ -104,6 +128,72 @@ class Config:
     def get_news_max_items(self) -> int:
         """Get the maximum number of news items allowed."""
         return self.get('news.max_items', 50)
+    
+    # Logging configuration getters
+    def get_logging_enabled(self) -> bool:
+        """Get whether logging is enabled."""
+        return self.get('logging.enabled', True)
+    
+    def get_logging_level(self) -> str:
+        """Get the logging level."""
+        return self.get('logging.level', 'INFO')
+    
+    def get_logging_show_by_default(self) -> bool:
+        """Get whether to show logs by default (non-verbose mode)."""
+        return self.get('logging.show_by_default', False)
+    
+    def get_logging_show_in_verbose(self) -> bool:
+        """Get whether to show logs in verbose mode."""
+        return self.get('logging.show_in_verbose', True)
+    
+    def get_logging_format(self) -> str:
+        """Get the logging format string."""
+        return self.get('logging.format', '%(levelname)s | %(name)s | %(message)s')
+    
+    # Metrics configuration getters
+    def get_metrics_show_by_default(self) -> bool:
+        """Get whether to show metrics by default (non-verbose mode)."""
+        return self.get('metrics.show_by_default', False)
+    
+    def get_metrics_show_in_verbose(self) -> bool:
+        """Get whether to show metrics in verbose mode."""
+        return self.get('metrics.show_in_verbose', True)
+    
+    def get_metrics_include_model(self) -> bool:
+        """Get whether to include model info in metrics."""
+        return self.get('metrics.include.model', True)
+    
+    def get_metrics_include_tokens(self) -> bool:
+        """Get whether to include token usage in metrics."""
+        return self.get('metrics.include.tokens', True)
+    
+    def get_metrics_include_duration(self) -> bool:
+        """Get whether to include duration in metrics."""
+        return self.get('metrics.include.duration', True)
+    
+    def get_metrics_include_latency(self) -> bool:
+        """Get whether to include latency in metrics."""
+        return self.get('metrics.include.latency', True)
+    
+    def get_metrics_include_tool_usage(self) -> bool:
+        """Get whether to include tool usage in metrics."""
+        return self.get('metrics.include.tool_usage', True)
+    
+    def get_metrics_include_cycles(self) -> bool:
+        """Get whether to include cycle info in metrics."""
+        return self.get('metrics.include.cycles', False)
+    
+    def get_metrics_use_colors(self) -> bool:
+        """Get whether to use colors in metrics display."""
+        return self.get('metrics.display.colors', True)
+    
+    def get_metrics_minimalist(self) -> bool:
+        """Get whether to use minimalist metrics display."""
+        return self.get('metrics.display.minimalist', True)
+    
+    def get_metrics_add_spacing(self) -> bool:
+        """Get whether to add spacing around metrics."""
+        return self.get('metrics.display.add_spacing', True)
     
     def reload(self):
         """Reload configuration from file."""

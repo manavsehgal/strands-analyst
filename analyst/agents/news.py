@@ -1,21 +1,13 @@
-import logging
 from strands import Agent
 from ..tools import fetch_rss_content
 from ..config import get_config
 from ..prompts import format_prompt_cached
+from ..utils import with_logging, print_metrics
 
 
+@with_logging()
 def create_news_agent():
     """Create and return an agent configured for RSS news analysis."""
-    # Enables Strands debug log level
-    logging.getLogger("strands").setLevel(logging.INFO)
-    
-    # Sets the logging format and streams logs to stderr
-    logging.basicConfig(
-        format="%(levelname)s | %(name)s | %(message)s",
-        handlers=[logging.StreamHandler()]
-    )
-    
     # Create an agent with custom RSS tool
     return Agent(tools=[fetch_rss_content])
 
@@ -49,12 +41,10 @@ def news(rss_url: str, max_items: int = None, agent=None):
     return agent(message)
 
 
-def print_result_stats(result, agent):
-    """Print statistics about the agent's result."""
-    print(f"\nModel: {agent.model.config["model_id"]}\n")
-    print(f"Tokens: {int(result.metrics.get_summary()["accumulated_usage"]["totalTokens"]):,}")
-    print(f"Duration: {float(result.metrics.get_summary()["average_cycle_time"]):.2f}s")
-    print(f"Latency: {float(result.metrics.get_summary()["accumulated_metrics"]["latencyMs"])/1000:.2f}s")
+# Use the utility function for printing metrics
+def print_result_metrics(result, agent):
+    """Print metrics about the agent's result."""
+    print_metrics(result, agent)
 
 
 # Example usage when run directly
@@ -62,4 +52,4 @@ if __name__ == "__main__":
     agent = create_news_agent()
     # Example with BBC News RSS feed
     result = news("http://feeds.bbci.co.uk/news/rss.xml", agent)
-    print_result_stats(result, agent)
+    print_result_metrics(result, agent)

@@ -12,6 +12,9 @@ analyst/cli/news.py
 analyst/tools/__init__.py
 analyst/tools/fetch_rss_content.py
 analyst/tools/fetch_url_metadata.py
+analyst/utils/__init__.py
+analyst/utils/logging_utils.py
+analyst/utils/metrics_utils.py
 strands_analyst.egg-info/PKG-INFO
 strands_analyst.egg-info/SOURCES.txt
 strands_analyst.egg-info/dependency_links.txt

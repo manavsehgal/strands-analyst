@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from ..agents import create_news_agent, news, print_result_stats
+from ..agents import create_news_agent, news, print_result_metrics
 from ..config import get_config
+from ..utils import configure_logging, print_metrics
 
 
 def main():
@@ -28,7 +29,7 @@ def main():
     parser.add_argument(
         "--verbose", "-v",
         action="store_true",
-        help="Show detailed statistics about the analysis"
+        help="Show detailed metrics about the analysis"
     )
     
     args = parser.parse_args()
@@ -43,13 +44,19 @@ def main():
             rss_url = f"https://{rss_url}"
     
     try:
+        # Configure logging based on verbose flag
+        configure_logging(verbose=args.verbose)
+        
         # Create agent and analyze RSS feed
         agent = create_news_agent()
         result = news(rss_url, max_items=args.count, agent=agent)
         
-        # The result is printed by the agent, but we can add stats
-        if args.verbose:
-            print_result_stats(result, agent)
+        # Add newline after logs if logging was shown
+        if args.verbose and config.get_logging_show_in_verbose():
+            print()  # Newline after logs to separate from agent response
+        
+        # Print metrics (will check config internally)
+        print_metrics(result, agent, verbose=args.verbose)
             
     except Exception as e:
         print(f"Error processing RSS feed {rss_url}: {e}", file=sys.stderr)

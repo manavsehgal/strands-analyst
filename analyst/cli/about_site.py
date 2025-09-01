@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from ..agents import create_about_site_agent, about_site, print_result_stats
+from ..agents import create_about_site_agent, about_site, print_result_metrics
+from ..utils import configure_logging, print_metrics
 
 
 def main():
@@ -17,7 +18,7 @@ def main():
     parser.add_argument(
         "--verbose", "-v",
         action="store_true",
-        help="Show detailed statistics about the analysis"
+        help="Show detailed metrics about the analysis"
     )
     
     args = parser.parse_args()
@@ -28,13 +29,21 @@ def main():
         url = f"https://{url}"
     
     try:
+        # Configure logging based on verbose flag
+        configure_logging(verbose=args.verbose)
+        
         # Create agent and analyze
         agent = create_about_site_agent()
         result = about_site(url, agent)
-                
-        # Print stats if verbose
-        if args.verbose:
-            print_result_stats(result, agent)
+        
+        # Add newline after logs if logging was shown
+        from ..config import get_config
+        config = get_config()
+        if args.verbose and config.get_logging_show_in_verbose():
+            print()  # Newline after logs to separate from agent response
+        
+        # Print metrics (will check config internally)
+        print_metrics(result, agent, verbose=args.verbose)
             
     except Exception as e:
         print(f"Error analyzing {url}: {e}", file=sys.stderr)

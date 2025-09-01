@@ -26,3 +26,48 @@ app:
   
   # Version
   version: "0.1.0"
+
+# Logging configuration
+logging:
+  # Default logging level (DEBUG, INFO, WARNING, ERROR)
+  level: "INFO"
+  
+  # Whether to show logs in non-verbose mode
+  show_by_default: false
+  
+  # Whether to show logs when verbose flag is used
+  show_in_verbose: true
+  
+  # Log format string
+  format: "%(levelname)s | %(name)s | %(message)s"
+  
+  # Whether logging is completely disabled
+  enabled: true
+
+# Metrics reporting configuration  
+metrics:
+  # Whether to show metrics by default (without verbose flag)
+  show_by_default: false
+  
+  # Whether to show metrics when verbose flag is used
+  show_in_verbose: true
+  
+  # Which metrics to include in reports
+  include:
+    model: true
+    tokens: true
+    duration: true
+    latency: true
+    tool_usage: true
+    cycles: false  # Only show for verbose or multi-cycle runs
+  
+  # Display formatting options
+  display:
+    # Whether to use colors in output
+    colors: true
+    
+    # Minimalist mode (less detailed output)
+    minimalist: true
+    
+    # Add spacing around metrics
+    add_spacing: true

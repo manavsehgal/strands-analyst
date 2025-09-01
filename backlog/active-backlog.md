@@ -155,4 +155,38 @@
     
     The agent architecture now uses external prompt files for better maintainability and flexibility. Prompts are cached for performance and can be easily modified without touching agent code. The system supports variable substitution (like {url}, {max_items}, {rss_url}) for dynamic prompt generation.
 
-[ ] Simplify the agents/ code by extracting the logging and priting stats code into reusable decorators. Make them both configurable and comprehensive modules after reading logging docs https://strandsagents.com/latest/documentation/docs/user-guide/observability-evaluation/logs/ and metrics docs https://strandsagents.com/latest/documentation/docs/user-guide/observability-evaluation/metrics/. Rename stats as metrics.
+[x] Simplify the agents/ code by extracting the logging and priting stats related code into reusable decorators in utils/ folder. Make them both configurable and comprehensive modules after reading logging docs https://strandsagents.com/latest/documentation/docs/user-guide/observability-evaluation/logs/ and metrics docs https://strandsagents.com/latest/documentation/docs/user-guide/observability-evaluation/metrics/. Rename stats as metrics.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Created comprehensive utils/ folder with logging_utils.py and metrics_utils.py modules
+    - ✅ Read Strands documentation on logging and metrics best practices for implementation guidance
+    - ✅ Implemented configurable logging utilities with @with_logging decorator for automatic setup
+    - ✅ Built comprehensive metrics display utilities with print_metrics function and advanced features
+    - ✅ Renamed all "stats" references to "metrics" throughout the entire codebase
+    - ✅ Refactored about_site agent to use @with_logging decorator and print_metrics utility
+    - ✅ Refactored news agent to use @with_logging decorator and print_metrics utility
+    - ✅ Updated all package exports to include new utility functions
+    - ✅ Fixed AgentResult import issues and successfully tested both CLI commands
+    - ✅ Verified functionality: `about stripe.com --verbose` and `news <url> --count 2 --verbose` work perfectly
+    
+    The agent architecture is now significantly simplified with reusable decorators and utilities. Logging configuration is handled automatically via decorators, and metrics display uses a unified utility function. The system supports configurable logging levels, advanced metrics collection, and maintains full backward compatibility while providing a cleaner, more maintainable codebase.
+
+[x] Make logging warnings that show up when agents are run as configurable via config.yml including turning them off. Show logging only when verbose flag is used. Make metrics reporting also configurable in terms of useful metrics to show. Improve the metrics report rendering keeping is minimalist, yet informative. Use subtle gray color for logs rendering and bright colors for metrics. Add a newline before metrics rendering and add a newline after logs rendering to separate from the agent response.
+
+    **Completion Summary (2025-08-31):**
+    - ✅ Extended config.yml with comprehensive logging and metrics configuration sections
+    - ✅ Added logging controls: enabled/disabled, verbose/non-verbose modes, level, and format settings
+    - ✅ Added metrics controls: configurable display options, which metrics to show, colors, and spacing
+    - ✅ Updated config.py with getter methods for all new logging and metrics configuration options
+    - ✅ Completely rewrote logging utilities to respect configuration and verbose flag settings
+    - ✅ Implemented gray colored logging output (dark gray \033[90m) for subtle appearance
+    - ✅ Added proper newline spacing after logs to separate from agent response
+    - ✅ Redesigned metrics display with bright colors: cyan titles, yellow values, proper spacing
+    - ✅ Made metrics completely configurable - users can control which metrics appear
+    - ✅ Updated CLI components to configure logging with verbose flag before agent creation
+    - ✅ Added automatic spacing before metrics when configured to do so
+    - ✅ Implemented minimalist vs detailed metrics modes based on configuration
+    - ✅ Tested all combinations: non-verbose (clean), verbose (colored metrics), logging enabled (gray logs)
+    - ✅ Verified proper spacing: logs → newline → agent response → newline → metrics
+    
+    The system now provides complete control over logging and metrics display. In default configuration, non-verbose mode shows only clean agent responses. Verbose mode adds colorful, informative metrics. Logging can be independently controlled and appears in subtle gray when enabled. All aspects are configurable via config.yml, allowing users to customize the experience to their preferences while maintaining professional, readable output.
