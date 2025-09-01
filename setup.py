@@ -14,6 +14,7 @@ setup(
         "console_scripts": [
             "about=analyst.cli.about_site:main",
             "news=analyst.cli.news:main",
+            "article=analyst.cli.get_article:main",
         ],
     },
     python_requires=">=3.8",

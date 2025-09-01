@@ -14,6 +14,20 @@ rss:
   # Whether to include full content in RSS items (vs just summaries)
   include_full_content: true
 
+# Article download configuration
+article:
+  # Default output directory for downloaded articles
+  output_dir: "refer/articles"
+  
+  # Default timeout for article requests (seconds)
+  timeout: 30
+  
+  # Whether to download images by default
+  download_images: true
+  
+  # Maximum number of images to download per article
+  max_images: 20
+
 # General application settings
 app:
   # Application name

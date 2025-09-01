@@ -40,6 +40,12 @@ class Config:
                 "timeout": 30,
                 "include_full_content": True
             },
+            "article": {
+                "output_dir": "articles",
+                "timeout": 30,
+                "download_images": True,
+                "max_images": 20
+            },
             "app": {
                 "name": "Strands Analyst",
                 "version": "0.1.0"
@@ -122,6 +128,23 @@ class Config:
         """Get the RSS request timeout in seconds."""
         return self.get('rss.timeout', 30)
     
+    # Article configuration getters
+    def get_article_output_dir(self) -> str:
+        """Get the default output directory for downloaded articles."""
+        return self.get('article.output_dir', 'articles')
+    
+    def get_article_timeout(self) -> int:
+        """Get the article download timeout in seconds."""
+        return self.get('article.timeout', 30)
+    
+    def get_article_download_images(self) -> bool:
+        """Get whether to download images by default."""
+        return self.get('article.download_images', True)
+    
+    def get_article_max_images(self) -> int:
+        """Get the maximum number of images to download per article."""
+        return self.get('article.max_images', 20)
+    
     # Logging configuration getters
     def get_logging_enabled(self) -> bool:
         """Get whether logging is enabled."""
@@ -201,3 +224,34 @@ config = Config()
 def get_config() -> Config:
     """Get the global configuration instance."""
     return config
+
+
+# Convenience functions for direct access
+def get_rss_default_items() -> int:
+    """Get the default number of RSS items to fetch and display."""
+    return config.get_rss_default_items()
+
+
+def get_rss_max_items() -> int:
+    """Get the maximum number of RSS items allowed."""
+    return config.get_rss_max_items()
+
+
+def get_article_output_dir() -> str:
+    """Get the default output directory for downloaded articles."""
+    return config.get_article_output_dir()
+
+
+def get_article_timeout() -> int:
+    """Get the article download timeout in seconds."""
+    return config.get_article_timeout()
+
+
+def get_article_download_images() -> bool:
+    """Get whether to download images by default."""
+    return config.get_article_download_images()
+
+
+def get_article_max_images() -> int:
+    """Get the maximum number of images to download per article."""
+    return config.get_article_max_images()
