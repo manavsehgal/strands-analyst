@@ -416,3 +416,5 @@
     - **Cost controls**: Optional usage tracking and spending limits
     
     The system now provides enterprise-grade Amazon Bedrock optimization with comprehensive configurability, excellent performance, and production-ready features. All CLI commands benefit from the optimizations while maintaining full backward compatibility.
+
+[ ] Study https://strandsagents.com/latest/documentation/docs/user-guide/concepts/tools/community-tools-package/ and install all the community tools in this project. Now make these community tools available to `analystchat` by default and make these configurable using `config.yml` so that user can choose to make certain tools available or not. Make tool consent, and human in the loop settings also configurable, set safe defaults.

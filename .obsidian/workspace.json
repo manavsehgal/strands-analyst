@@ -164,6 +164,8 @@
   },
   "active": "9df6b2d10d08aeb0",
   "lastOpenFiles": [
+    "docs/chat-agent-guide.md",
+    "docs/news-agent-guide.md",
     "refer/chat-sessions",
     "analyst/cli/__pycache__/chat.cpython-313.pyc",
     "analyst/agents/__pycache__/chat.cpython-313.pyc",
@@ -175,7 +177,6 @@
     "refer/visualized/mermaid/mermaid/diagram_04.mmd",
     "refer/visualized/mermaid/mermaid/diagram_03.mmd",
     "refer/visualized/mermaid/mermaid/diagram_02.mmd",
-    "refer/visualized/mermaid/mermaid/diagram_01.mmd",
     "refer/visualized/ai-trillion-dollar-opportunity-sequoia-ai-ascent-2025-keynote/ai-trillion-dollar-opportunity-sequoia-ai-ascent-2025-keynote_with_visualizations.md",
     "analyst/prompts/visualize.md",
     "refer/code/mermaid.md",

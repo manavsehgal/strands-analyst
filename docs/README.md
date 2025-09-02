@@ -11,11 +11,12 @@ pip install -e .
 
 Use the CLI:
 ```bash
-about google.com
-about stripe.com --verbose
-news techcrunch.com/feed
+sitemeta google.com
+sitemeta stripe.com --verbose
+news http://feeds.bbci.co.uk/news/rss.xml
 article https://example.com/blog-post
 htmlmd saved-article/index.html
+analystchat "Analyze these websites and compare them"
 ```
 
 ## Documentation Structure
@@ -31,6 +32,8 @@ htmlmd saved-article/index.html
 ### Agent-Specific Guides
 - **[Article Agent Guide](article-agent-guide.md)** - Download and analyze web articles with metadata extraction and image preservation
 - **[HTML to Markdown Guide](htmlmd-agent-guide.md)** - Convert HTML files to well-formatted markdown with metadata preservation
+- **[News Agent Guide](news-agent-guide.md)** - Fetch and analyze RSS feeds to get intelligent news summaries and insights
+- **[Chat Agent Guide](chat-agent-guide.md)** - Interactive conversational interface with persistent memory and multi-tool access
 
 ### Examples
 - **[Examples](examples.md)** - Practical usage examples and workflows
@@ -58,6 +61,7 @@ This separation allows for:
 - 📰 **RSS & News** - Fetch and analyze RSS feeds and news articles
 - 📄 **Article Download** - Download web articles with images and metadata
 - 📝 **HTML to Markdown** - Convert HTML files to clean, formatted markdown
+- 💬 **Interactive Chat** - Conversational interface with memory and multi-tool access
 
 ### Technical Features  
 - 🔧 **Modular Tools** - Reusable tools for metadata extraction and content processing
