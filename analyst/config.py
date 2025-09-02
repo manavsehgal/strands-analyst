@@ -179,6 +179,94 @@ class Config:
                     "hourly_token_limit": 0,
                     "hourly_cost_limit": 0.0
                 }
+            },
+            "community_tools": {
+                "enabled": True,
+                "consent": {
+                    "require_consent": True,
+                    "bypass_for_safe_tools": True,
+                    "always_require_consent": ["shell", "python_repl", "file_write", "editor", "use_agent", "swarm", "workflow"]
+                },
+                "human_in_loop": {
+                    "enabled": True,
+                    "response_timeout": 300,
+                    "default_breakout": False
+                },
+                "categories": {
+                    "web_network": True,
+                    "file_operations": True,
+                    "code_system": True,
+                    "automation_workflow": True,
+                    "memory_storage": True,
+                    "communication": True,
+                    "utilities": True,
+                    "aws_services": False
+                },
+                "tools": {
+                    "web_network": {
+                        "http_request": {"enabled": True, "require_consent": False},
+                        "rss": {"enabled": True, "require_consent": False},
+                        "tavily": {"enabled": False, "require_consent": False}
+                    },
+                    "file_operations": {
+                        "file_read": {"enabled": True, "require_consent": False},
+                        "file_write": {"enabled": True, "require_consent": True},
+                        "editor": {"enabled": True, "require_consent": True}
+                    },
+                    "code_system": {
+                        "python_repl": {"enabled": True, "require_consent": True},
+                        "shell": {"enabled": True, "require_consent": True},
+                        "calculator": {"enabled": True, "require_consent": False},
+                        "environment": {"enabled": True, "require_consent": False}
+                    },
+                    "automation_workflow": {
+                        "use_agent": {"enabled": True, "require_consent": True},
+                        "swarm": {"enabled": False, "require_consent": True},
+                        "workflow": {"enabled": False, "require_consent": True},
+                        "cron": {"enabled": False, "require_consent": True},
+                        "batch": {"enabled": True, "require_consent": False}
+                    },
+                    "memory_storage": {
+                        "memory": {"enabled": True, "require_consent": False},
+                        "journal": {"enabled": True, "require_consent": False}
+                    },
+                    "communication": {
+                        "handoff_to_user": {"enabled": True, "require_consent": False},
+                        "slack": {"enabled": False, "require_consent": True}
+                    },
+                    "utilities": {
+                        "current_time": {"enabled": True, "require_consent": False},
+                        "sleep": {"enabled": True, "require_consent": False},
+                        "stop": {"enabled": True, "require_consent": False},
+                        "think": {"enabled": True, "require_consent": False},
+                        "use_llm": {"enabled": True, "require_consent": False}
+                    },
+                    "aws_services": {
+                        "use_aws": {"enabled": False, "require_consent": True}
+                    }
+                },
+                "agent_overrides": {
+                    "chat": {
+                        "enabled_categories": ["web_network", "file_operations", "code_system", "utilities", "communication", "memory_storage"],
+                        "tools": {
+                            "python_repl": {"require_consent": False},
+                            "file_read": {"require_consent": False},
+                            "calculator": {"require_consent": False}
+                        }
+                    },
+                    "sitemeta": {
+                        "enabled_categories": ["web_network", "utilities"]
+                    },
+                    "news": {
+                        "enabled_categories": ["web_network", "utilities", "memory_storage"]
+                    },
+                    "article": {
+                        "enabled_categories": ["web_network", "file_operations", "utilities", "memory_storage"]
+                    },
+                    "htmlmd": {
+                        "enabled_categories": ["file_operations", "utilities"]
+                    }
+                }
             }
         }
         
@@ -506,6 +594,115 @@ class Config:
         """Get the hourly cost limit in USD (0.0 = no limit)."""
         return self.get('bedrock.cost_optimization.hourly_cost_limit', 0.0)
     
+    # Community tools configuration getters
+    def get_community_tools_enabled(self) -> bool:
+        """Get whether community tools are enabled globally."""
+        return self.get('community_tools.enabled', True)
+    
+    def get_community_tools_require_consent(self) -> bool:
+        """Get whether tools require user consent by default."""
+        return self.get('community_tools.consent.require_consent', True)
+    
+    def get_community_tools_bypass_safe(self) -> bool:
+        """Get whether consent is bypassed for safe (read-only) tools."""
+        return self.get('community_tools.consent.bypass_for_safe_tools', True)
+    
+    def get_community_tools_always_consent(self) -> list:
+        """Get list of tools that always require consent."""
+        return self.get('community_tools.consent.always_require_consent', 
+                       ["shell", "python_repl", "file_write", "editor", "use_agent", "swarm", "workflow"])
+    
+    def get_community_tools_handoff_enabled(self) -> bool:
+        """Get whether human-in-the-loop handoff is enabled."""
+        return self.get('community_tools.human_in_loop.enabled', True)
+    
+    def get_community_tools_response_timeout(self) -> int:
+        """Get the timeout for user responses in seconds."""
+        return self.get('community_tools.human_in_loop.response_timeout', 300)
+    
+    def get_community_tools_default_breakout(self) -> bool:
+        """Get whether to break out of agent loop on handoff by default."""
+        return self.get('community_tools.human_in_loop.default_breakout', False)
+    
+    def get_community_tools_category_enabled(self, category: str) -> bool:
+        """Get whether a specific tool category is enabled."""
+        return self.get(f'community_tools.categories.{category}', True)
+    
+    def get_community_tools_tool_enabled(self, category: str, tool_name: str) -> bool:
+        """Get whether a specific tool is enabled."""
+        return self.get(f'community_tools.tools.{category}.{tool_name}.enabled', True)
+    
+    def get_community_tools_tool_consent(self, category: str, tool_name: str) -> bool:
+        """Get whether a specific tool requires consent."""
+        return self.get(f'community_tools.tools.{category}.{tool_name}.require_consent', False)
+    
+    def get_community_tools_for_agent(self, agent_name: str) -> dict:
+        """Get complete community tools configuration for a specific agent."""
+        # Get global settings
+        global_enabled = self.get_community_tools_enabled()
+        if not global_enabled:
+            return {"enabled": False, "tools": []}
+        
+        # Get agent-specific overrides
+        agent_categories = self.get(f'community_tools.agent_overrides.{agent_name}.enabled_categories')
+        if agent_categories is None:
+            # Use default categories if no override
+            agent_categories = []
+            for category in ["web_network", "file_operations", "code_system", "automation_workflow", 
+                           "memory_storage", "communication", "utilities", "aws_services"]:
+                if self.get_community_tools_category_enabled(category):
+                    agent_categories.append(category)
+        
+        # Build enabled tools list for this agent
+        enabled_tools = []
+        tool_configs = {}
+        
+        for category in agent_categories:
+            if not self.get_community_tools_category_enabled(category):
+                continue
+                
+            category_tools = self.get(f'community_tools.tools.{category}', {})
+            for tool_name, tool_config in category_tools.items():
+                if tool_config.get('enabled', True):
+                    enabled_tools.append(tool_name)
+                    
+                    # Check for agent-specific consent override
+                    agent_tool_config = self.get(f'community_tools.agent_overrides.{agent_name}.tools.{tool_name}')
+                    if agent_tool_config:
+                        consent_required = agent_tool_config.get('require_consent', tool_config.get('require_consent', False))
+                    else:
+                        consent_required = tool_config.get('require_consent', False)
+                    
+                    # Check if tool always requires consent
+                    if tool_name in self.get_community_tools_always_consent():
+                        consent_required = True
+                    
+                    # Check if consent is bypassed for safe tools
+                    if self.get_community_tools_bypass_safe() and not consent_required:
+                        consent_required = False
+                    
+                    tool_configs[tool_name] = {
+                        'enabled': True,
+                        'require_consent': consent_required,
+                        'category': category
+                    }
+        
+        return {
+            "enabled": True,
+            "tools": enabled_tools,
+            "tool_configs": tool_configs,
+            "consent_settings": {
+                "require_consent": self.get_community_tools_require_consent(),
+                "bypass_for_safe_tools": self.get_community_tools_bypass_safe(),
+                "always_require_consent": self.get_community_tools_always_consent()
+            },
+            "human_in_loop": {
+                "enabled": self.get_community_tools_handoff_enabled(),
+                "response_timeout": self.get_community_tools_response_timeout(),
+                "default_breakout": self.get_community_tools_default_breakout()
+            }
+        }
+    
     def reload(self):
         """Reload configuration from file."""
         self._config = None
@@ -648,3 +845,24 @@ def get_bedrock_streaming() -> bool:
 def get_bedrock_region() -> str:
     """Get the AWS region for Bedrock."""
     return config.get_bedrock_region()
+
+
+# Community tools configuration convenience functions
+def get_community_tools_enabled() -> bool:
+    """Get whether community tools are enabled globally."""
+    return config.get_community_tools_enabled()
+
+
+def get_community_tools_for_agent(agent_name: str) -> dict:
+    """Get complete community tools configuration for a specific agent."""
+    return config.get_community_tools_for_agent(agent_name)
+
+
+def get_community_tools_require_consent() -> bool:
+    """Get whether tools require user consent by default."""
+    return config.get_community_tools_require_consent()
+
+
+def get_community_tools_handoff_enabled() -> bool:
+    """Get whether human-in-the-loop handoff is enabled."""
+    return config.get_community_tools_handoff_enabled()

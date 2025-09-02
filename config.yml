@@ -187,7 +187,7 @@ bedrock:
     streaming: true
     
     # AWS region for Bedrock service (choose closest for better latency)
-    region_name: "us-west-2"
+    region_name: "us-east-1"
     
     # Content safety and guardrails
     guardrails:
@@ -272,3 +272,226 @@ bedrock:
     
     # Maximum cost per hour in USD (0.0 = no limit)
     hourly_cost_limit: 0.0
+
+# Community Tools Configuration
+# Controls which Strands community tools are available to agents
+community_tools:
+  # Global tool settings
+  enabled: true
+  
+  # Tool consent and safety settings
+  consent:
+    # Require user confirmation for potentially sensitive operations
+    require_consent: true
+    
+    # Bypass consent for non-destructive tools (read-only operations)
+    bypass_for_safe_tools: true
+    
+    # Tools that always require consent regardless of bypass setting
+    always_require_consent:
+      - "shell"
+      - "python_repl" 
+      - "file_write"
+      - "editor"
+      - "use_agent"
+      - "swarm"
+      - "workflow"
+  
+  # Human-in-the-loop configuration
+  human_in_loop:
+    # Enable handoff to user functionality
+    enabled: true
+    
+    # Default timeout for user responses (seconds, 0 = no timeout)
+    response_timeout: 300
+    
+    # Break out of agent loop on handoff by default
+    default_breakout: false
+  
+  # Tool categories and enablement
+  # Set to false to disable entire categories
+  categories:
+    web_network: true
+    file_operations: true
+    code_system: true
+    automation_workflow: true
+    memory_storage: true
+    communication: true
+    utilities: true
+    aws_services: false  # Disabled by default for security
+  
+  # Individual tool configuration
+  # Tools are organized by category for easy management
+  tools:
+    # Web & Network tools
+    web_network:
+      http_request:
+        enabled: true
+        require_consent: false
+        description: "Make HTTP requests to external APIs and websites"
+      
+      rss:
+        enabled: true
+        require_consent: false  
+        description: "Fetch and parse RSS feeds"
+      
+      tavily:
+        enabled: false  # Requires API key
+        require_consent: false
+        description: "Web search using Tavily API"
+    
+    # File Operations tools
+    file_operations:
+      file_read:
+        enabled: true
+        require_consent: false
+        description: "Read files from the local filesystem"
+      
+      file_write:
+        enabled: true
+        require_consent: true
+        description: "Write and modify files on the local filesystem"
+      
+      editor:
+        enabled: true
+        require_consent: true
+        description: "Interactive text editor for file modifications"
+    
+    # Code & System tools
+    code_system:
+      python_repl:
+        enabled: true
+        require_consent: true
+        description: "Execute Python code with persistent state"
+      
+      shell:
+        enabled: true
+        require_consent: true
+        description: "Execute shell commands with PTY support"
+      
+      calculator:
+        enabled: true
+        require_consent: false
+        description: "Perform mathematical calculations"
+      
+      environment:
+        enabled: true
+        require_consent: false
+        description: "Access environment variables and system information"
+    
+    # Automation & Workflow tools
+    automation_workflow:
+      use_agent:
+        enabled: true
+        require_consent: true
+        description: "Start new AI agents with different prompts and models"
+      
+      swarm:
+        enabled: false  # Advanced feature, disabled by default
+        require_consent: true
+        description: "Create and coordinate teams of AI agents"
+      
+      workflow:
+        enabled: false  # Advanced feature, disabled by default  
+        require_consent: true
+        description: "Advanced workflow orchestration"
+      
+      cron:
+        enabled: false  # Scheduling, disabled by default
+        require_consent: true
+        description: "Schedule tasks and workflows"
+      
+      batch:
+        enabled: true
+        require_consent: false
+        description: "Process multiple items in batches"
+    
+    # Memory & Storage tools
+    memory_storage:
+      memory:
+        enabled: true
+        require_consent: false
+        description: "Store and retrieve information across conversations"
+      
+      journal:
+        enabled: true
+        require_consent: false
+        description: "Maintain a journal of activities and insights"
+    
+    # Communication tools
+    communication:
+      handoff_to_user:
+        enabled: true
+        require_consent: false
+        description: "Pause execution and request user input"
+      
+      slack:
+        enabled: false  # Requires configuration
+        require_consent: true
+        description: "Send messages and interact with Slack"
+    
+    # Utility tools
+    utilities:
+      current_time:
+        enabled: true
+        require_consent: false
+        description: "Get current date and time"
+      
+      sleep:
+        enabled: true
+        require_consent: false
+        description: "Pause execution for specified duration"
+      
+      stop:
+        enabled: true
+        require_consent: false
+        description: "Stop agent execution gracefully"
+      
+      think:
+        enabled: true
+        require_consent: false
+        description: "Recursive thinking for sophisticated analysis"
+      
+      use_llm:
+        enabled: true
+        require_consent: false
+        description: "Use different language models for specialized tasks"
+    
+    # AWS Services (disabled by default for security)
+    aws_services:
+      use_aws:
+        enabled: false
+        require_consent: true
+        description: "Interact with AWS services"
+  
+  # Agent-specific tool configurations
+  # Override global settings for specific agents
+  agent_overrides:
+    chat:
+      # Enable more tools for interactive chat
+      enabled_categories: ["web_network", "file_operations", "code_system", "utilities", "communication", "memory_storage"]
+      
+      # Chat-specific tool settings
+      tools:
+        python_repl:
+          require_consent: false  # Less friction in chat mode
+        file_read:
+          require_consent: false
+        calculator:
+          require_consent: false
+        
+    sitemeta:
+      # Limited tools for site metadata analysis
+      enabled_categories: ["web_network", "utilities"]
+      
+    news:
+      # News-specific tools
+      enabled_categories: ["web_network", "utilities", "memory_storage"]
+      
+    article:
+      # Article analysis tools
+      enabled_categories: ["web_network", "file_operations", "utilities", "memory_storage"]
+      
+    htmlmd:
+      # HTML to markdown conversion tools
+      enabled_categories: ["file_operations", "utilities"]

@@ -72,6 +72,7 @@ analystchat "Compare Google and Microsoft's business models"
 - **Multi-turn conversations** with persistent memory
 - **Session management** for long research projects
 - **Natural language interface** to all analysis tools
+- **44+ Community tools** for coding, file ops, web requests, and more
 - **Conversation summaries** and export capabilities
 
 </td>
@@ -80,6 +81,8 @@ analystchat "Compare Google and Microsoft's business models"
 
 ### 🔧 **Technical Excellence**
 - **🤖 AI-Powered** — Claude Sonnet with agent-specific optimizations
+- **🛠️ Community Tools** — 44+ tools for coding, file ops, calculations, web requests
+- **🔒 Enterprise Security** — Configurable tool consent and safety mechanisms
 - **⚙️ Highly Configurable** — YAML-based settings for everything
 - **📱 Rich CLI** — Intuitive commands with comprehensive options
 - **🧩 Modular Architecture** — Clean separation of agents, tools, and interfaces
@@ -255,6 +258,9 @@ analystchat
 # Quick single queries
 analystchat "Analyze stripe.com and square.com, then compare their approaches"
 
+# Use community tools for coding assistance  
+analystchat "Calculate the compound interest on $10000 at 5% for 10 years"
+
 # Custom session with auto-save
 analystchat --session-id research-project --save-on-exit --verbose
 ```
@@ -271,12 +277,21 @@ Available capabilities:
 • RSS feed analysis and news content
 • Article downloading and content extraction
 • HTML to Markdown conversion
+• 44+ Community tools: coding, file ops, calculations, web requests
 • General analysis and research assistance
 
 Type 'help' for commands or 'quit' to exit
 ==================================================
 
-🗣️  You: analyze stripe.com and tell me about their payment processing
+🗣️  You: calculate 2 + 2 using the calculator tool
+
+🤖 Assistant: I'll use the calculator tool to compute 2 + 2 for you.
+
+[Uses calculator tool automatically]
+
+The result is 4. The calculator can handle complex mathematical operations including algebra, calculus, and more!
+
+🗣️  You: now analyze stripe.com and tell me about their payment processing  
 
 🤖 Assistant: I'll analyze Stripe.com for you...
 
@@ -284,13 +299,7 @@ Type 'help' for commands or 'quit' to exit
 
 Based on my analysis of Stripe.com, here's what I found about their payment processing:
 
-Stripe is a comprehensive financial infrastructure company that specializes in online payment processing. Here are the key aspects...
-
-🗣️  You: now compare that to square.com
-
-🤖 Assistant: Let me analyze Square.com to compare their approach...
-
-[Continues conversation with context from previous analysis]
+Stripe is a comprehensive financial infrastructure company that specializes in online payment processing...
 ```
 </details>
 
@@ -438,6 +447,52 @@ metrics:
 ```
 </details>
 
+<details>
+<summary><b>🛠️ Community Tools Configuration</b></summary>
+
+```yaml
+community_tools:
+  # Global enablement
+  enabled: true
+  
+  # Safety and consent settings
+  consent:
+    require_consent: true             # Require user confirmation for sensitive tools
+    bypass_for_safe_tools: true      # Auto-approve read-only operations
+    always_require_consent:           # Tools that always need approval
+      - "shell"                       # Shell command execution
+      - "python_repl"                 # Code execution  
+      - "file_write"                  # File modifications
+      - "editor"                      # Text editing
+      
+  # Agent-specific tool access
+  agent_overrides:
+    chat:
+      enabled_categories: 
+        - "web_network"               # HTTP requests, RSS feeds
+        - "file_operations"           # Read/write files
+        - "code_system"               # Python, shell, calculator
+        - "utilities"                 # Time, sleep, think tools
+        - "memory_storage"            # Persistent memory
+        - "communication"             # User interaction
+        
+    sitemeta:
+      enabled_categories:             # Limited tools for focused analysis
+        - "web_network"               # Only web-related tools
+        - "utilities"                 # Basic utilities
+```
+
+**Available Tool Categories:**
+- **Web & Network**: http_request, rss feeds, external API calls
+- **File Operations**: read, write, edit files with full permission control  
+- **Code & System**: Python REPL, shell access, calculator, environment info
+- **Memory & Storage**: Persistent memory across sessions, journaling
+- **Communication**: Human-in-the-loop interactions, notifications
+- **Utilities**: Time, sleep, recursive thinking, model switching
+- **Automation**: Agent spawning, batch processing (advanced users)
+
+</details>
+
 ---
 
 ## 🔌 Python API
@@ -485,6 +540,24 @@ response2 = chat_with_agent(agent, "Now compare it to microsoft.com")
 response3 = chat_with_agent(agent, "Download articles from both companies")
 
 print(f"Session preserved across interactions")
+```
+
+### Community Tools Access
+```python
+# Community tools are automatically available in chat agents
+from analyst.agents.chat import create_chat_agent, chat_with_agent
+
+agent = create_chat_agent()
+
+# Use calculator tool through natural language
+response = chat_with_agent(agent, "Calculate the square root of 144")
+print(response)  # "The square root of 144 is 12"
+
+# File operations with consent handling
+response = chat_with_agent(agent, "Read the file config.yml and summarize its contents")
+
+# Code execution (requires user consent for safety)  
+response = chat_with_agent(agent, "Write a Python script to generate fibonacci numbers")
 ```
 
 ### Direct Tool Access
@@ -631,7 +704,10 @@ Designed for researchers, analysts, and content creators who need intelligent au
 Complete toolchain from data extraction to formatted reports. Auto-saves everything as searchable markdown with metadata for building knowledge bases.
 
 ### 💬 **Conversational Interface**
-Natural language interaction with all analysis tools through the chat interface. Perfect for exploratory research and multi-step analysis workflows.
+Natural language interaction with all analysis tools plus 44+ community tools through the chat interface. Perfect for exploratory research, coding assistance, and multi-step analysis workflows.
+
+### 🔒 **Enterprise Security**
+Comprehensive tool consent and safety controls. Sensitive operations require user approval while read-only tools flow seamlessly. Configurable per-agent and per-tool.
 
 ---
 
@@ -645,6 +721,7 @@ Natural language interaction with all analysis tools through the chat interface.
 - Interactive chat with session management
 - AWS Bedrock optimization with streaming and caching
 - External prompt management and comprehensive configuration
+- **44+ Community tools** integration with enterprise security controls
 
 ### 🎯 **Next Release**
 - **Batch Processing** — Multiple URLs/feeds in single operations
