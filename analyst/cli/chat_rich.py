@@ -37,7 +37,7 @@ except ImportError:
     )
     USE_STREAMING = False
 from ..config import get_config
-from ..utils import configure_logging
+from ..utils import configure_logging, get_rotating_prompts, get_more_examples
 
 
 class RichChatInterface:
@@ -77,25 +77,15 @@ class RichChatInterface:
         )
         self.console.print(welcome_panel)
         
-        # Create capabilities table
-        capabilities = Table(
-            title="Available Capabilities",
-            show_header=False,
-            show_lines=False,
-            padding=(0, 1),
-            expand=False
+        # Show rotating exemplary prompts instead of static capabilities
+        rotating_prompts = get_rotating_prompts(display_count=3)
+        prompts_panel = Panel(
+            f"[bold green]{rotating_prompts}[/bold green]",
+            title="💡 Try These",
+            border_style="bright_green",
+            padding=(0, 1)
         )
-        capabilities.add_column("Icon", style="cyan", width=3)
-        capabilities.add_column("Feature", style="white")
-        
-        capabilities.add_row("🌐", "Website analysis and metadata extraction")
-        capabilities.add_row("📰", "RSS feed analysis and news content")
-        capabilities.add_row("📄", "Article downloading with image support")
-        capabilities.add_row("📝", "HTML to Markdown conversion")
-        capabilities.add_row("🔧", "Community tools integration")
-        capabilities.add_row("💬", "Multi-turn conversations with memory")
-        
-        self.console.print(capabilities)
+        self.console.print(prompts_panel)
         self.console.print()
         
         # Show session info if verbose
@@ -117,6 +107,7 @@ class RichChatInterface:
             """[bold cyan]📖 Available Commands:[/bold cyan]
 
 [green]help[/green]     - Show this help message
+[green]try[/green]      - Show more example prompts
 [green]session[/green]  - Show current session information
 [green]clear[/green]    - Clear conversation history
 [green]save[/green]     - Save current conversation
@@ -269,6 +260,17 @@ This enhanced chat session had access to:
                     
                     elif user_input.lower() == 'help':
                         self.print_help()
+                        continue
+                    
+                    elif user_input.lower() == 'try':
+                        # Show more example prompts
+                        examples_panel = Panel(
+                            get_more_examples(6),
+                            title="💡 More Example Prompts",
+                            border_style="bright_green",
+                            padding=(1, 1)
+                        )
+                        self.console.print(examples_panel)
                         continue
                     
                     elif user_input.lower() == 'session':

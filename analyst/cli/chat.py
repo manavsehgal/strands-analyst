@@ -7,15 +7,17 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+# Always import legacy dependencies for --use-legacy mode
+from ..agents.chat import create_chat_agent, chat_with_agent, get_session_info
+from ..config import get_config
+from ..utils import configure_logging, get_rotating_prompts, get_more_examples
+
 # Import the enhanced Rich UI version
 try:
     from .chat_rich import main as rich_main
     RICH_AVAILABLE = True
 except ImportError:
     RICH_AVAILABLE = False
-    from ..agents.chat import create_chat_agent, chat_with_agent, get_session_info
-    from ..config import get_config
-    from ..utils import configure_logging
 
 
 def print_welcome_message():
@@ -23,13 +25,12 @@ def print_welcome_message():
     print("🤖 Analyst Chat - Interactive Analysis Assistant")
     print("=" * 50)
     print()
-    print("Available capabilities:")
-    print("• Website analysis and metadata extraction")  
-    print("• RSS feed analysis and news content")
-    print("• Article downloading and content extraction")
-    print("• HTML to Markdown conversion")
-    print("• General analysis and research assistance")
+    
+    # Show rotating exemplary prompts instead of static capabilities
+    rotating_prompts = get_rotating_prompts(display_count=3)
+    print(rotating_prompts)
     print()
+    
     print("Type 'help' for commands or 'quit' to exit")
     print("=" * 50)
     print()
@@ -39,6 +40,7 @@ def print_help():
     """Print help information for chat commands."""
     print("📖 Available Commands:")
     print("  help     - Show this help message")
+    print("  try      - Show more example prompts")
     print("  session  - Show current session information")
     print("  clear    - Clear conversation history") 
     print("  save     - Save current conversation")
@@ -139,6 +141,12 @@ def interactive_chat(agent, args):
                 
                 elif user_input.lower() == 'help':
                     print_help()
+                    continue
+                
+                elif user_input.lower() == 'try':
+                    print("💡 More Example Prompts:")
+                    print(get_more_examples(6))
+                    print()
                     continue
                 
                 elif user_input.lower() == 'session':

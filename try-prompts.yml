@@ -1,0 +1,88 @@
+# Try Prompts for Analyst Chat
+# Exemplary prompts showcasing various tool capabilities
+# These rotate in the welcome screen instead of static "Available Capabilities"
+
+prompts:
+  # Website Analysis & Business Intelligence
+  - category: "website_analysis"
+    prompt: "Analyze stripe.com"
+    description: "Website metadata extraction and analysis"
+    
+  - category: "business_intelligence" 
+    prompt: "Compare current ROCE of Meta and Nvidia"
+    description: "Financial analysis using web research and calculations"
+    
+  - category: "website_analysis"
+    prompt: "What's the business model of decagon.ai?"
+    description: "Website analysis for business model understanding"
+
+  # News & RSS Analysis
+  - category: "news_analysis"
+    prompt: "What's new at AWS?"
+    description: "RSS feed analysis and news summarization"
+    
+  - category: "news_analysis"
+    prompt: "Summarize latest TechCrunch headlines"
+    description: "RSS feed processing and content summarization"
+    
+  - category: "market_research"
+    prompt: "What are the trending topics in AI news today?"
+    description: "Multi-source RSS analysis and trend identification"
+
+  # Article & Content Processing  
+  - category: "content_processing"
+    prompt: "Download and summarize the latest OpenAI blog post"
+    description: "Article downloading with content extraction"
+    
+  - category: "content_processing"
+    prompt: "Convert this HTML page to clean Markdown"
+    description: "HTML to Markdown conversion"
+    
+  - category: "research"
+    prompt: "Research and compare top 5 AI coding assistants"
+    description: "Multi-step research with web analysis"
+
+  # Community Tools & Calculations
+  - category: "calculations"
+    prompt: "Calculate compound interest on $10000 at 7% for 20 years"
+    description: "Mathematical calculations using community tools"
+    
+  - category: "data_analysis"
+    prompt: "Find the tallest buildings by country and create a summary"
+    description: "Web research with data organization"
+    
+  - category: "automation"
+    prompt: "Check if my website is down and monitor its status"
+    description: "Network monitoring and web health checks"
+
+  # Complex Multi-Step Tasks
+  - category: "research"
+    prompt: "Analyze the competitive landscape for payment processors"
+    description: "Multi-step business intelligence research"
+    
+  - category: "market_analysis" 
+    prompt: "What are the key trends in enterprise AI adoption?"
+    description: "Market research with multiple data sources"
+    
+  - category: "productivity"
+    prompt: "Help me plan a comprehensive competitor analysis workflow"
+    description: "Task planning and workflow automation"
+
+# Rotation settings
+rotation:
+  display_count: 3  # Show 3 prompts at a time
+  separator: " | "  # Separator between prompts
+  format: "\"{prompt}\""  # Format template for each prompt (no "Try:" prefix)
+  
+# Categories for smart rotation (ensure variety)
+categories:
+  - "website_analysis"
+  - "business_intelligence" 
+  - "news_analysis"
+  - "content_processing"
+  - "calculations"
+  - "research"
+  - "market_analysis"
+  - "automation"
+  - "productivity"
+  - "data_analysis"

@@ -525,3 +525,51 @@
     - **Maintained compatibility**: Legacy interface still available, all existing features preserved
     
     The enhanced analystchat now provides a professional, modern terminal interface with real-time streaming, rich formatting, and improved user experience while maintaining full backward compatibility.
+
+[x] When `analystchat` loads instead of "Available Capabilities" box of pre-canned capabilities, rotate three short exemplary prompts based on tools available in format like this. Try: "Compare current ROCE of Meta and Nvidia" | "Analyze stripe.com" | "What's New at AWS". Pre-generate these and save them in `try-prompts.yml` based on custom and Strands community tools docs.
+
+**Completion Summary (2025-09-02):**
+- ✅ **Created try-prompts.yml**: Generated comprehensive YAML file with 15+ exemplary prompts across 10 categories
+- ✅ **Built prompt utility system**: Created `analyst/utils/prompt_utils.py` with smart rotation and category diversity
+- ✅ **Updated legacy interface**: Replaced static "Available capabilities" list with rotating prompts in `chat.py`
+- ✅ **Updated Rich UI interface**: Replaced capabilities table with beautiful "💡 Try These" panel in `chat_rich.py`
+- ✅ **Added utility exports**: Updated `utils/__init__.py` to export prompt functions
+- ✅ **Verified functionality**: Tested both interfaces show rotating prompts correctly
+- ✅ **Maintained format consistency**: Both interfaces use the requested "Try: [prompt]" format with "|" separators
+
+**Key Features Implemented:**
+- **Smart rotation**: Ensures category diversity in displayed prompts (no duplicates of same type)
+- **Graceful fallbacks**: System works even if YAML file is missing (uses default prompts)
+- **Configurable settings**: Display count, separators, and format templates configurable via YAML
+- **Rich categorization**: 10+ categories covering website analysis, business intelligence, news analysis, etc.
+- **Professional presentation**: Legacy shows clean text format, Rich UI shows styled panel
+
+**Example Outputs:**
+- **Legacy**: `Try: "Analyze stripe.com" | Try: "Compare current ROCE of Meta and Nvidia" | Try: "Summarize latest TechCrunch headlines"`
+- **Rich UI**: Beautiful green-bordered panel with "💡 Try These" title containing formatted rotating prompts
+
+The welcome screen now showcases concrete examples of what users can do instead of abstract capability descriptions, improving discoverability and user engagement with specific, actionable prompts.
+
+[x] Remove the "Try: " prefix for the rotating prompt examples. Also ensure the same prompt examples do not show again and again, randomize. Add an in-chat command "try" to show more examples.
+
+**Completion Summary (2025-09-02):**
+- ✅ **Removed "Try: " prefix**: Updated format templates in both `try-prompts.yml` and `prompt_utils.py` default fallback
+- ✅ **Enhanced randomization**: Improved `select_diverse_prompts()` function with category order shuffling and final result shuffling
+- ✅ **Added "try" command**: Implemented new interactive command in both legacy and Rich UI interfaces
+- ✅ **Created get_more_examples()**: New utility function that displays categorized examples with proper formatting
+- ✅ **Updated help systems**: Added "try" command to help documentation in both interfaces
+- ✅ **Verified functionality**: All three requirements tested and working correctly
+
+**Key Implementation Details:**
+- **Format change**: `"Try: \"{prompt}\""` → `"\"{prompt}\""` 
+- **Randomization improvements**: Category shuffling + multiple random selections + final shuffle ensures no repeated patterns
+- **Command integration**: "try" command shows 6 diverse examples with category labels like `[Website Analysis] "Analyze stripe.com"`
+- **Rich UI enhancement**: Beautiful panel display with green border and proper formatting
+- **Legacy UI support**: Clean text-based display with consistent formatting
+
+**Example Outputs:**
+- **Welcome prompts**: `"Analyze stripe.com" | "Compare current ROCE of Meta and Nvidia" | "What's new at AWS?"`
+- **Try command**: Shows categorized examples like `[Calculations] "Calculate compound interest on $10000 at 7% for 20 years"`
+
+The rotating prompt system now provides cleaner presentation without redundant prefixes, true randomization preventing repetitive displays, and an interactive "try" command for users to discover more examples on demand.
+
