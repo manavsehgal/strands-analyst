@@ -16,6 +16,7 @@ setup(
             "news=analyst.cli.news:main",
             "article=analyst.cli.get_article:main",
             "htmlmd=analyst.cli.html_to_markdown:main",
+            "analystchat=analyst.cli.chat:main",
         ],
     },
     python_requires=">=3.8",

@@ -61,6 +61,20 @@ news:
   # Timeout for news requests (seconds)
   timeout: 30
 
+# Chat interface configuration
+chat:
+  # Default session directory for chat conversations
+  session_dir: "refer/chat-sessions"
+  
+  # Default conversation window size for context management
+  window_size: 20
+  
+  # Whether to save conversation summaries on exit by default
+  save_on_exit: true
+  
+  # Session timeout in minutes (0 = no timeout)
+  session_timeout: 0
+
 # General application settings
 app:
   # Application name

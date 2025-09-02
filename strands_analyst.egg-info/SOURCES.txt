@@ -4,11 +4,13 @@ analyst/__init__.py
 analyst/config.py
 analyst/prompts.py
 analyst/agents/__init__.py
+analyst/agents/chat.py
 analyst/agents/get_article.py
 analyst/agents/html_to_markdown.py
 analyst/agents/news.py
 analyst/agents/sitemeta.py
 analyst/cli/__init__.py
+analyst/cli/chat.py
 analyst/cli/get_article.py
 analyst/cli/html_to_markdown.py
 analyst/cli/news.py

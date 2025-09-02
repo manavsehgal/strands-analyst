@@ -61,6 +61,12 @@ class Config:
                 "save_markdown": True,
                 "timeout": 30
             },
+            "chat": {
+                "session_dir": "refer/chat-sessions",
+                "window_size": 20,
+                "save_on_exit": True,
+                "session_timeout": 0
+            },
             "app": {
                 "name": "Strands Analyst",
                 "version": "0.1.0"
@@ -198,6 +204,23 @@ class Config:
     def get_news_timeout(self) -> int:
         """Get the news request timeout in seconds."""
         return self.get('news.timeout', 30)
+    
+    # Chat configuration getters
+    def get_chat_session_dir(self) -> str:
+        """Get the default session directory for chat conversations."""
+        return self.get('chat.session_dir', 'refer/chat-sessions')
+    
+    def get_chat_window_size(self) -> int:
+        """Get the default conversation window size."""
+        return self.get('chat.window_size', 20)
+    
+    def get_chat_save_on_exit(self) -> bool:
+        """Get whether to save conversation summaries on exit by default."""
+        return self.get('chat.save_on_exit', True)
+    
+    def get_chat_session_timeout(self) -> int:
+        """Get the session timeout in minutes."""
+        return self.get('chat.session_timeout', 0)
     
     # Logging configuration getters
     def get_logging_enabled(self) -> bool:
@@ -354,3 +377,23 @@ def get_news_save_markdown() -> bool:
 def get_news_timeout() -> int:
     """Get the news request timeout in seconds."""
     return config.get_news_timeout()
+
+
+def get_chat_session_dir() -> str:
+    """Get the default session directory for chat conversations."""
+    return config.get_chat_session_dir()
+
+
+def get_chat_window_size() -> int:
+    """Get the default conversation window size."""
+    return config.get_chat_window_size()
+
+
+def get_chat_save_on_exit() -> bool:
+    """Get whether to save conversation summaries on exit by default."""
+    return config.get_chat_save_on_exit()
+
+
+def get_chat_session_timeout() -> int:
+    """Get the session timeout in minutes."""
+    return config.get_chat_session_timeout()

@@ -356,3 +356,34 @@
     
     The news agent now provides comprehensive RSS analysis with persistent markdown file storage, matching the functionality implemented for the sitemeta agent. Users can analyze RSS feeds and save formatted reports with intelligent naming based on the feed domain.
 
+[x] Read https://strandsagents.com/latest/documentation/docs/user-guide/concepts/agents/conversation-management/, https://strandsagents.com/latest/documentation/docs/user-guide/concepts/agents/session-management/, and https://strandsagents.com/latest/documentation/docs/user-guide/concepts/agents/state/ to implement analytics/chat/ as terminal user interface. Create an `analystchat` CLI command to shart chat interface. Enable multi-turn conversation.
+
+    **Completion Summary (2025-09-01):**
+    - ✅ **Researched Strands documentation**: Comprehensive study of conversation management, session management, and state management concepts and implementation patterns
+    - ✅ **Created chat agent**: Implemented `analyst/agents/chat.py` with multi-tool access (website analysis, RSS feeds, article download, HTML to Markdown conversion)
+    - ✅ **Built terminal UI**: Comprehensive CLI interface in `analyst/cli/chat.py` with interactive mode, single-message mode, and rich command set
+    - ✅ **Implemented session management**: FileSessionManager integration for conversation persistence across interactions
+    - ✅ **Added configuration support**: Extended `config.yml` and `config.py` with chat-specific settings (session directory, window size, save options)
+    - ✅ **Package integration**: Updated all `__init__.py` files and `setup.py` to include analystchat console script entry point
+    - ✅ **Rich CLI features**: Welcome messages, help system, session info, conversation summaries, verbose mode, and configurable options
+    - ✅ **Multi-turn conversation**: Session persistence enables continued conversations across CLI sessions
+    - ✅ **Tested successfully**: `analystchat "Hello, can you help me analyze a website?" --verbose` works perfectly with metrics display
+    
+    **Key Features Implemented:**
+    - **Interactive chat mode**: Full terminal interface with commands (help, session, save, quit)
+    - **Single-message mode**: Direct CLI usage for quick queries
+    - **Session persistence**: Conversations automatically saved and can be resumed
+    - **Comprehensive toolset**: Access to all existing analyst tools through natural conversation
+    - **Rich terminal UI**: Emojis, colors, structured output, and user-friendly interface
+    - **Configurable settings**: Session directory, window size, auto-save options via config.yml
+    - **Conversation summaries**: Automatic markdown summaries with session metadata
+    - **Error handling**: Graceful handling of interrupts, EOF, and connection issues
+    
+    **CLI Usage Examples:**
+    - `analystchat` - Interactive mode with full terminal interface
+    - `analystchat "analyze google.com" --verbose` - Single message with metrics
+    - `analystchat --session-id my-session --save-on-exit` - Custom session with auto-save
+    
+    The analystchat command provides a comprehensive chat interface for AI-powered analysis with multi-turn conversations, session management, and access to all existing analyst tools through natural language interaction.
+
+[ ] Read carefully https://strandsagents.com/latest/documentation/docs/user-guide/concepts/model-providers/amazon-bedrock/ docs and improve the performance and optimization of chat, agents, prompts, and tools by using Amazon Bedrock as the primary provider. Make all optimizations configurable using `config.yml` and choose sensible defaults based on the docs.
