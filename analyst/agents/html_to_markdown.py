@@ -1,14 +1,36 @@
 from strands import Agent
+from strands.models.bedrock import BedrockModel
 from ..tools import convert_html_to_markdown
-from ..config import get_config
+from ..config import get_config, get_bedrock_config_for_agent
 from ..prompts import format_prompt_cached
 from ..utils import print_metrics
 
 
 def create_html_to_markdown_agent():
-    """Create and return an agent configured for HTML to Markdown conversion."""
-    # Create an agent with HTML to Markdown conversion tool
-    return Agent(tools=[convert_html_to_markdown])
+    """Create and return an agent configured for HTML to Markdown conversion with Bedrock optimizations."""
+    # Get optimized Bedrock configuration for this agent (use article config as this is related to content processing)
+    bedrock_config = get_bedrock_config_for_agent('article')
+    
+    # Create optimized Bedrock model
+    bedrock_model = BedrockModel(
+        model_id=bedrock_config['model_id'],
+        temperature=bedrock_config['temperature'],
+        top_p=bedrock_config['top_p'],
+        max_tokens=bedrock_config['max_tokens'],
+        stop_sequences=bedrock_config['stop_sequences'],
+        streaming=bedrock_config['streaming'],
+        region_name=bedrock_config['region_name']
+    )
+    
+    # Add optional features if configured
+    if bedrock_config['guardrail_id']:
+        bedrock_model.guardrail_id = bedrock_config['guardrail_id']
+    
+    # Create agent with optimized model and tools
+    return Agent(
+        model=bedrock_model,
+        tools=[convert_html_to_markdown]
+    )
 
 
 def html_to_markdown(html_file_path: str, output_filename: str = None, 

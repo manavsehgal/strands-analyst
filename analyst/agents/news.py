@@ -3,16 +3,38 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 from strands import Agent
+from strands.models.bedrock import BedrockModel
 from ..tools import fetch_rss_content
-from ..config import get_config, get_news_output_dir, get_news_save_markdown
+from ..config import get_config, get_news_output_dir, get_news_save_markdown, get_bedrock_config_for_agent
 from ..prompts import format_prompt_cached
 from ..utils import print_metrics
 
 
 def create_news_agent():
-    """Create and return an agent configured for RSS news analysis."""
-    # Create an agent with custom RSS tool
-    return Agent(tools=[fetch_rss_content])
+    """Create and return an agent configured for RSS news analysis with Bedrock optimizations."""
+    # Get optimized Bedrock configuration for this agent
+    bedrock_config = get_bedrock_config_for_agent('news')
+    
+    # Create optimized Bedrock model
+    bedrock_model = BedrockModel(
+        model_id=bedrock_config['model_id'],
+        temperature=bedrock_config['temperature'],
+        top_p=bedrock_config['top_p'],
+        max_tokens=bedrock_config['max_tokens'],
+        stop_sequences=bedrock_config['stop_sequences'],
+        streaming=bedrock_config['streaming'],
+        region_name=bedrock_config['region_name']
+    )
+    
+    # Add optional features if configured
+    if bedrock_config['guardrail_id']:
+        bedrock_model.guardrail_id = bedrock_config['guardrail_id']
+    
+    # Create agent with optimized model and tools
+    return Agent(
+        model=bedrock_model,
+        tools=[fetch_rss_content]
+    )
 
 
 def _save_response_to_markdown(rss_url: str, response_text: str, output_dir: str = None) -> str:

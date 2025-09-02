@@ -119,10 +119,89 @@ from analyst.tools import fetch_url_metadata
 from analyst.cli import sitemeta_main
 ```
 
+## Amazon Bedrock Configuration
+
+The project uses AWS Bedrock as the primary model provider with comprehensive optimization configurations in `config.yml`.
+
+### Model Configuration
+```yaml
+bedrock:
+  model:
+    # Primary model using inference profile for optimal performance and availability
+    default_model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+    
+    models:
+      fast: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+      reasoning: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+      chat: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+```
+
+### Performance Optimization
+
+Each agent has customized performance parameters:
+
+- **Temperature**: Controls response randomness (0.0-1.0)
+  - `sitemeta`: 0.2 (focused for structured data)
+  - `news`: 0.4 (slightly more varied for summaries)
+  - `article`: 0.3 (balanced for analysis)
+  - `chat`: 0.5 (conversational)
+
+- **Top-p**: Nucleus sampling for diversity (0.0-1.0)
+- **Max Tokens**: Agent-specific limits (2048-8192)
+- **Streaming**: Enabled for faster perceived response time
+
+### Agent-Specific Optimizations
+
+```yaml
+bedrock:
+  agents:
+    sitemeta:
+      reasoning_mode: false
+      optimize_system_prompt: true
+    
+    news:
+      reasoning_mode: false
+      batch_processing: true
+    
+    article:
+      reasoning_mode: true    # Complex analysis
+      optimize_system_prompt: true
+    
+    chat:
+      reasoning_mode: false
+      session_optimization: true
+      multimodal: true
+```
+
+### Advanced Features
+
+- **Caching**: Prompt and tool caching enabled for performance
+- **Guardrails**: Optional content filtering configuration
+- **Cost Optimization**: Usage tracking and cost warnings
+- **Regional Configuration**: US-West-2 for optimal latency
+
+### Configuration Access
+
+Use the configuration system to access Bedrock settings programmatically:
+
+```python
+from analyst.config import get_bedrock_config_for_agent
+
+# Get complete Bedrock config for an agent
+config = get_bedrock_config_for_agent('sitemeta')
+
+# Access specific settings
+model_id = config['model_id']
+temperature = config['temperature']
+```
+
 ## Important Notes
 
-- The agents use AWS Bedrock for model inference (Claude Sonnet 4)
+- All agents use optimized AWS Bedrock with Claude 3.7 Sonnet inference profiles
+- Configuration is environment-specific and can be customized per agent
+- Claude 3.7 Sonnet provides excellent performance with better availability (less throttling)
+- Streaming is enabled by default for better user experience
 - Logging is configured to INFO level for the Strands framework
 - Tools should handle errors gracefully and return structured data
 - All components follow the established naming conventions for consistency
-- CLI commands provide both basic and verbose output modes
+- CLI commands provide both basic and verbose output modes with metrics

@@ -94,6 +94,91 @@ class Config:
                     "minimalist": True,
                     "add_spacing": True
                 }
+            },
+            "bedrock": {
+                "model": {
+                    "default_model_id": "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+                    "models": {
+                        "fast": "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+                        "reasoning": "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+                        "chat": "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+                    }
+                },
+                "performance": {
+                    "temperature": {
+                        "default": 0.3,
+                        "sitemeta": 0.2,
+                        "news": 0.4,
+                        "article": 0.3,
+                        "chat": 0.5
+                    },
+                    "top_p": {
+                        "default": 0.8,
+                        "sitemeta": 0.7,
+                        "news": 0.8,
+                        "article": 0.8,
+                        "chat": 0.9
+                    },
+                    "max_tokens": {
+                        "default": 4096,
+                        "sitemeta": 2048,
+                        "news": 3072,
+                        "article": 8192,
+                        "chat": 4096
+                    },
+                    "stop_sequences": {
+                        "default": []
+                    }
+                },
+                "advanced": {
+                    "streaming": True,
+                    "region_name": "us-west-2",
+                    "guardrails": {
+                        "guardrail_id": None,
+                        "enable_content_filtering": False
+                    },
+                    "caching": {
+                        "cache_prompt": True,
+                        "cache_tools": True,
+                        "cache_timeout": 3600
+                    },
+                    "timeouts": {
+                        "connection_timeout": 30,
+                        "read_timeout": 120,
+                        "total_timeout": 180
+                    }
+                },
+                "agents": {
+                    "sitemeta": {
+                        "model_id": None,
+                        "reasoning_mode": False,
+                        "optimize_system_prompt": True
+                    },
+                    "news": {
+                        "model_id": None,
+                        "reasoning_mode": False,
+                        "optimize_system_prompt": True,
+                        "batch_processing": True
+                    },
+                    "article": {
+                        "model_id": None,
+                        "reasoning_mode": True,
+                        "optimize_system_prompt": True
+                    },
+                    "chat": {
+                        "model_id": None,
+                        "reasoning_mode": False,
+                        "optimize_system_prompt": True,
+                        "session_optimization": True,
+                        "multimodal": True
+                    }
+                },
+                "cost_optimization": {
+                    "track_usage": True,
+                    "cost_warnings": True,
+                    "hourly_token_limit": 0,
+                    "hourly_cost_limit": 0.0
+                }
             }
         }
         
@@ -288,6 +373,139 @@ class Config:
         """Get whether to add spacing around metrics."""
         return self.get('metrics.display.add_spacing', True)
     
+    # Bedrock model configuration getters
+    def get_bedrock_default_model_id(self) -> str:
+        """Get the default Bedrock model ID."""
+        return self.get('bedrock.model.default_model_id', 'us.anthropic.claude-3-7-sonnet-20250219-v1:0')
+    
+    def get_bedrock_model_for_agent(self, agent_name: str) -> Optional[str]:
+        """Get the specific model ID for an agent, or None to use default."""
+        return self.get(f'bedrock.agents.{agent_name}.model_id')
+    
+    def get_bedrock_fast_model(self) -> str:
+        """Get the fast model ID."""
+        return self.get('bedrock.model.models.fast', 'us.anthropic.claude-3-7-sonnet-20250219-v1:0')
+    
+    def get_bedrock_reasoning_model(self) -> str:
+        """Get the reasoning model ID."""
+        return self.get('bedrock.model.models.reasoning', 'us.anthropic.claude-3-7-sonnet-20250219-v1:0')
+    
+    def get_bedrock_chat_model(self) -> str:
+        """Get the chat model ID."""
+        return self.get('bedrock.model.models.chat', 'us.anthropic.claude-3-7-sonnet-20250219-v1:0')
+    
+    # Bedrock performance configuration getters
+    def get_bedrock_temperature(self, agent_name: str = None) -> float:
+        """Get the temperature setting for an agent or default."""
+        if agent_name:
+            temp = self.get(f'bedrock.performance.temperature.{agent_name}')
+            if temp is not None:
+                return temp
+        return self.get('bedrock.performance.temperature.default', 0.3)
+    
+    def get_bedrock_top_p(self, agent_name: str = None) -> float:
+        """Get the top_p setting for an agent or default."""
+        if agent_name:
+            top_p = self.get(f'bedrock.performance.top_p.{agent_name}')
+            if top_p is not None:
+                return top_p
+        return self.get('bedrock.performance.top_p.default', 0.8)
+    
+    def get_bedrock_max_tokens(self, agent_name: str = None) -> int:
+        """Get the max_tokens setting for an agent or default."""
+        if agent_name:
+            max_tokens = self.get(f'bedrock.performance.max_tokens.{agent_name}')
+            if max_tokens is not None:
+                return max_tokens
+        return self.get('bedrock.performance.max_tokens.default', 4096)
+    
+    def get_bedrock_stop_sequences(self, agent_name: str = None) -> list:
+        """Get the stop sequences for an agent or default."""
+        if agent_name:
+            stop_seq = self.get(f'bedrock.performance.stop_sequences.{agent_name}')
+            if stop_seq is not None:
+                return stop_seq
+        return self.get('bedrock.performance.stop_sequences.default', [])
+    
+    # Bedrock advanced configuration getters
+    def get_bedrock_streaming(self) -> bool:
+        """Get whether streaming is enabled."""
+        return self.get('bedrock.advanced.streaming', True)
+    
+    def get_bedrock_region(self) -> str:
+        """Get the AWS region for Bedrock."""
+        return self.get('bedrock.advanced.region_name', 'us-west-2')
+    
+    def get_bedrock_guardrail_id(self) -> Optional[str]:
+        """Get the guardrail ID for content filtering."""
+        return self.get('bedrock.advanced.guardrails.guardrail_id')
+    
+    def get_bedrock_content_filtering(self) -> bool:
+        """Get whether content filtering is enabled."""
+        return self.get('bedrock.advanced.guardrails.enable_content_filtering', False)
+    
+    def get_bedrock_cache_prompt(self) -> bool:
+        """Get whether prompt caching is enabled."""
+        return self.get('bedrock.advanced.caching.cache_prompt', True)
+    
+    def get_bedrock_cache_tools(self) -> bool:
+        """Get whether tool caching is enabled."""
+        return self.get('bedrock.advanced.caching.cache_tools', True)
+    
+    def get_bedrock_cache_timeout(self) -> int:
+        """Get the cache timeout in seconds."""
+        return self.get('bedrock.advanced.caching.cache_timeout', 3600)
+    
+    def get_bedrock_connection_timeout(self) -> int:
+        """Get the connection timeout in seconds."""
+        return self.get('bedrock.advanced.timeouts.connection_timeout', 30)
+    
+    def get_bedrock_read_timeout(self) -> int:
+        """Get the read timeout in seconds."""
+        return self.get('bedrock.advanced.timeouts.read_timeout', 120)
+    
+    def get_bedrock_total_timeout(self) -> int:
+        """Get the total request timeout in seconds."""
+        return self.get('bedrock.advanced.timeouts.total_timeout', 180)
+    
+    # Bedrock agent-specific configuration getters
+    def get_bedrock_reasoning_mode(self, agent_name: str) -> bool:
+        """Get whether reasoning mode is enabled for a specific agent."""
+        return self.get(f'bedrock.agents.{agent_name}.reasoning_mode', False)
+    
+    def get_bedrock_optimize_system_prompt(self, agent_name: str) -> bool:
+        """Get whether system prompt optimization is enabled for a specific agent."""
+        return self.get(f'bedrock.agents.{agent_name}.optimize_system_prompt', True)
+    
+    def get_bedrock_batch_processing(self, agent_name: str) -> bool:
+        """Get whether batch processing is enabled for a specific agent."""
+        return self.get(f'bedrock.agents.{agent_name}.batch_processing', False)
+    
+    def get_bedrock_session_optimization(self, agent_name: str) -> bool:
+        """Get whether session optimization is enabled for a specific agent."""
+        return self.get(f'bedrock.agents.{agent_name}.session_optimization', False)
+    
+    def get_bedrock_multimodal(self, agent_name: str) -> bool:
+        """Get whether multimodal support is enabled for a specific agent."""
+        return self.get(f'bedrock.agents.{agent_name}.multimodal', False)
+    
+    # Bedrock cost optimization getters
+    def get_bedrock_track_usage(self) -> bool:
+        """Get whether usage tracking is enabled."""
+        return self.get('bedrock.cost_optimization.track_usage', True)
+    
+    def get_bedrock_cost_warnings(self) -> bool:
+        """Get whether cost warnings are enabled."""
+        return self.get('bedrock.cost_optimization.cost_warnings', True)
+    
+    def get_bedrock_hourly_token_limit(self) -> int:
+        """Get the hourly token limit (0 = no limit)."""
+        return self.get('bedrock.cost_optimization.hourly_token_limit', 0)
+    
+    def get_bedrock_hourly_cost_limit(self) -> float:
+        """Get the hourly cost limit in USD (0.0 = no limit)."""
+        return self.get('bedrock.cost_optimization.hourly_cost_limit', 0.0)
+    
     def reload(self):
         """Reload configuration from file."""
         self._config = None
@@ -397,3 +615,36 @@ def get_chat_save_on_exit() -> bool:
 def get_chat_session_timeout() -> int:
     """Get the session timeout in minutes."""
     return config.get_chat_session_timeout()
+
+
+# Bedrock configuration convenience functions
+def get_bedrock_config_for_agent(agent_name: str) -> dict:
+    """Get complete Bedrock configuration for a specific agent."""
+    return {
+        'model_id': config.get_bedrock_model_for_agent(agent_name) or config.get_bedrock_default_model_id(),
+        'temperature': config.get_bedrock_temperature(agent_name),
+        'top_p': config.get_bedrock_top_p(agent_name),
+        'max_tokens': config.get_bedrock_max_tokens(agent_name),
+        'stop_sequences': config.get_bedrock_stop_sequences(agent_name),
+        'streaming': config.get_bedrock_streaming(),
+        'region_name': config.get_bedrock_region(),
+        'reasoning_mode': config.get_bedrock_reasoning_mode(agent_name),
+        'guardrail_id': config.get_bedrock_guardrail_id(),
+        'cache_prompt': config.get_bedrock_cache_prompt(),
+        'cache_tools': config.get_bedrock_cache_tools()
+    }
+
+
+def get_bedrock_default_model_id() -> str:
+    """Get the default Bedrock model ID."""
+    return config.get_bedrock_default_model_id()
+
+
+def get_bedrock_streaming() -> bool:
+    """Get whether streaming is enabled."""
+    return config.get_bedrock_streaming()
+
+
+def get_bedrock_region() -> str:
+    """Get the AWS region for Bedrock."""
+    return config.get_bedrock_region()

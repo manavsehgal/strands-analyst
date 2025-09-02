@@ -1,6 +1,7 @@
 import uuid
 from typing import Optional, Dict, Any
 from strands import Agent
+from strands.models.bedrock import BedrockModel
 from strands.session.file_session_manager import FileSessionManager
 from ..tools import (
     fetch_url_metadata,
@@ -8,7 +9,7 @@ from ..tools import (
     download_article_content,
     convert_html_to_markdown
 )
-from ..config import get_config
+from ..config import get_config, get_bedrock_config_for_agent
 from ..utils import configure_logging, print_metrics
 
 
@@ -42,15 +43,33 @@ def create_chat_agent(
     if enable_logging:
         configure_logging(verbose=False)
     
+    # Get optimized Bedrock configuration for chat agent
+    bedrock_config = get_bedrock_config_for_agent('chat')
+    
+    # Create optimized Bedrock model
+    bedrock_model = BedrockModel(
+        model_id=bedrock_config['model_id'],
+        temperature=bedrock_config['temperature'],
+        top_p=bedrock_config['top_p'],
+        max_tokens=bedrock_config['max_tokens'],
+        stop_sequences=bedrock_config['stop_sequences'],
+        streaming=bedrock_config['streaming'],
+        region_name=bedrock_config['region_name']
+    )
+    
+    # Add optional features if configured
+    if bedrock_config['guardrail_id']:
+        bedrock_model.guardrail_id = bedrock_config['guardrail_id']
+    
     # Set up session management for conversation persistence
     session_manager = FileSessionManager(
         session_id=session_id,
         session_dir=session_dir
     )
     
-    # Create agent with all available tools and session management
-    # Note: Conversation management will be added once proper import is found
+    # Create agent with optimized model, all available tools and session management
     agent = Agent(
+        model=bedrock_model,
         tools=[
             fetch_url_metadata,
             fetch_rss_content,

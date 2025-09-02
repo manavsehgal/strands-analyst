@@ -127,3 +127,148 @@ metrics:
     
     # Add spacing around metrics
     add_spacing: true
+
+# Amazon Bedrock Model Configuration
+# Optimizes agent performance using AWS Bedrock model provider
+bedrock:
+  # Default model configuration
+  model:
+    # Primary model ID for general analysis tasks
+    # Using Claude 3.7 Sonnet inference profile for optimal performance and availability
+    default_model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+    
+    # Model IDs for specific use cases (overrides default when specified)
+    models:
+      # Fast model for quick analysis and simple tasks
+      fast: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+      
+      # Reasoning model for complex analysis tasks
+      reasoning: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+      
+      # Chat model for conversational interactions
+      chat: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+  
+  # Performance optimization parameters
+  performance:
+    # Temperature: Controls response randomness (0.0-1.0)
+    # Lower = more focused/consistent, Higher = more creative/varied
+    temperature:
+      default: 0.3        # Balanced for analysis tasks
+      sitemeta: 0.2       # More focused for metadata extraction
+      news: 0.4           # Slightly more varied for news summaries
+      article: 0.3        # Balanced for article analysis
+      chat: 0.5           # More conversational for chat
+    
+    # Top-p: Nucleus sampling for response diversity (0.0-1.0)
+    # Lower = more focused vocabulary, Higher = more diverse
+    top_p:
+      default: 0.8
+      sitemeta: 0.7       # More focused for structured data
+      news: 0.8           # Balanced for varied content
+      article: 0.8        # Balanced for article analysis
+      chat: 0.9           # More diverse for conversation
+    
+    # Maximum tokens to generate
+    max_tokens:
+      default: 4096
+      sitemeta: 2048      # Shorter for metadata analysis
+      news: 3072          # Medium for news summaries
+      article: 8192       # Longer for detailed article analysis
+      chat: 4096          # Balanced for conversation
+    
+    # Stop sequences to control generation
+    stop_sequences:
+      default: []
+      # Custom stop sequences can be added per use case
+  
+  # Advanced optimization settings
+  advanced:
+    # Enable streaming mode for faster perceived response time
+    streaming: true
+    
+    # AWS region for Bedrock service (choose closest for better latency)
+    region_name: "us-west-2"
+    
+    # Content safety and guardrails
+    guardrails:
+      # Guardrail ID for content filtering (optional)
+      guardrail_id: null
+      
+      # Enable content filtering
+      enable_content_filtering: false
+    
+    # Caching optimizations for better performance
+    caching:
+      # Cache system prompts for reuse across requests
+      cache_prompt: true
+      
+      # Cache tool definitions for reuse
+      cache_tools: true
+      
+      # Cache timeout in seconds (0 = no timeout)
+      cache_timeout: 3600
+    
+    # Request timeout settings
+    timeouts:
+      # Connection timeout in seconds
+      connection_timeout: 30
+      
+      # Read timeout in seconds
+      read_timeout: 120
+      
+      # Total request timeout in seconds
+      total_timeout: 180
+  
+  # Agent-specific optimizations
+  agents:
+    # Site metadata agent optimizations
+    sitemeta:
+      # Override global model for this specific agent
+      model_id: null  # Uses default if null
+      
+      # Enable reasoning mode for complex site analysis
+      reasoning_mode: false
+      
+      # Custom system prompt optimizations
+      optimize_system_prompt: true
+    
+    # News agent optimizations
+    news:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+      
+      # Batch processing for multiple RSS items
+      batch_processing: true
+    
+    # Article agent optimizations
+    article:
+      model_id: null
+      reasoning_mode: true  # Enable for detailed article analysis
+      optimize_system_prompt: true
+    
+    # Chat agent optimizations
+    chat:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+      
+      # Session-specific optimizations
+      session_optimization: true
+      
+      # Enable multimodal support for chat
+      multimodal: true
+  
+  # Usage and cost optimization
+  cost_optimization:
+    # Enable cost tracking and reporting
+    track_usage: true
+    
+    # Warn when approaching cost thresholds
+    cost_warnings: true
+    
+    # Maximum tokens per hour (0 = no limit)
+    hourly_token_limit: 0
+    
+    # Maximum cost per hour in USD (0.0 = no limit)
+    hourly_cost_limit: 0.0
