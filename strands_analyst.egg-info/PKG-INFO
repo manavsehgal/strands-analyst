@@ -21,6 +21,7 @@ Requires-Dist: beautifulsoup4>=4.12.0
 Requires-Dist: readability-lxml>=0.8
 Requires-Dist: markdownify>=0.11.6
 Requires-Dist: pyyaml>=6.0
+Requires-Dist: rich>=13.7.0
 Dynamic: author
 Dynamic: classifier
 Dynamic: requires-dist

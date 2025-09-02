@@ -470,3 +470,58 @@
     - **Automation**: batch, use_agent (swarm/workflow disabled by default for safety)
     
     The implementation provides enterprise-grade configurability while maintaining security through safe defaults and comprehensive consent mechanisms. Users can now leverage the full power of the Strands community tools ecosystem through the analystchat interface.
+
+[x] You are improving the rendering and user experience of the `analystchat` terminal user interface. 
+- First read the following docs carefully:
+    - https://strandsagents.com/latest/documentation/docs/user-guide/concepts/streaming/async-iterators/
+    - https://strandsagents.com/latest/documentation/docs/user-guide/concepts/streaming/callback-handlers/
+    - https://strandsagents.com/latest/documentation/docs/user-guide/concepts/agents/hooks/
+    - https://strandsagents.com/latest/documentation/docs/user-guide/concepts/agents/structured-output/
+- Next read the following docs carefully:
+    - https://rich.readthedocs.io/en/stable/markdown.html
+    - https://rich.readthedocs.io/en/stable/live.html
+- Now plan the user interface design for `analystchat` to take advantages of both Strands and Rich capabilities.
+- Refactor to build the rich UI with streaming support.
+
+    **Completion Summary (2025-09-02):**
+    - ✅ **Researched Strands documentation**: Studied async iterators, callback handlers, hooks, and structured output features for streaming implementation
+    - ✅ **Researched Rich documentation**: Learned about markdown rendering and Live display capabilities for real-time terminal UI updates
+    - ✅ **Analyzed current implementation**: Reviewed existing chat.py and chat CLI to understand architecture and identify improvement areas
+    - ✅ **Designed enhanced UI architecture**: Created comprehensive plan for streaming support with callback handlers and Rich UI components
+    - ✅ **Added Rich dependency**: Updated analyst/requirements.txt to include rich>=13.7.0 for enhanced terminal rendering
+    - ✅ **Implemented streaming chat agent**: Created analyst/agents/chat_streaming.py with:
+      - StreamingCallbackHandler class for real-time response streaming
+      - Live display updates with text chunks and tool usage indicators
+      - Support for markdown rendering and syntax highlighting
+      - Progress indicators for tool execution
+      - Configurable thinking/reasoning display
+    - ✅ **Created Rich CLI interface**: Built analyst/cli/chat_rich.py with:
+      - Enhanced welcome screen with panels and tables
+      - Rich prompts with color-coded user/assistant indicators
+      - Live streaming display with transient updates
+      - Beautiful help system with formatted panels
+      - Session information display with tables
+      - Interactive commands (help, session, save, clear, theme, quit)
+      - Progress spinners for saving operations
+      - Error handling with styled panels
+    - ✅ **Integrated fallback mechanism**: Modified existing chat.py CLI to:
+      - Automatically use Rich UI when available
+      - Fall back to legacy interface with --use-legacy flag
+      - Maintain backward compatibility
+    - ✅ **Fixed session management**: Added session_manager attribute to agent for compatibility
+    - ✅ **Updated package exports**: Added streaming components to analyst/agents/__init__.py
+    - ✅ **Successfully tested**: Verified analystchat works with:
+      - Single message mode with Rich panels
+      - Streaming responses with real-time display
+      - Verbose mode showing colored metrics
+      - Calculator tool integration working correctly
+    
+    **Key Improvements Delivered:**
+    - **Real-time streaming**: Responses now stream character by character using callback handlers
+    - **Rich UI components**: Beautiful panels, tables, spinners, and markdown rendering
+    - **Enhanced readability**: Color-coded output, formatted sections, and clear visual hierarchy
+    - **Tool usage indicators**: Live updates showing when tools are being used
+    - **Better user experience**: Interactive prompts, progress indicators, and professional appearance
+    - **Maintained compatibility**: Legacy interface still available, all existing features preserved
+    
+    The enhanced analystchat now provides a professional, modern terminal interface with real-time streaming, rich formatting, and improved user experience while maintaining full backward compatibility.

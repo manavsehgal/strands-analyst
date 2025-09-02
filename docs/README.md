@@ -1,6 +1,24 @@
 # Strands Analyst Documentation
 
-Welcome to the Strands Analyst package - a modular AI agent framework for analyzing websites and extracting metadata.
+Welcome to the Strands Analyst package - a comprehensive AI agent framework for web analysis, content extraction, and intelligent research with enhanced terminal UI.
+
+## ✨ Recent Updates
+
+### Enhanced Chat Experience
+The analystchat command now features a **Rich Terminal UI** with:
+- 🎨 **Beautiful panels** and color-coded output
+- ⚡ **Real-time streaming** responses as they generate
+- 🔧 **Live tool indicators** showing active operations
+- 📝 **Markdown rendering** for formatted content
+- 🔄 **Stable fallback modes** for compatibility
+
+### Community Tools Integration  
+Access to **44+ professional-grade tools**:
+- 🧮 Mathematical calculations and Python execution
+- 📁 File operations and system commands
+- 🌐 HTTP requests and web scraping
+- 💾 Memory and persistent storage
+- 🤖 Agent orchestration and batch processing
 
 ## Quick Start
 
@@ -9,14 +27,20 @@ Install the package:
 pip install -e .
 ```
 
-Use the CLI:
+Use the enhanced CLI:
 ```bash
-sitemeta google.com
+# Enhanced chat with streaming UI
+analystchat "Analyze google.com and compare it to stripe.com"
+
+# Single commands with Rich output
 sitemeta stripe.com --verbose
-news http://feeds.bbci.co.uk/news/rss.xml
-article https://example.com/blog-post
-htmlmd saved-article/index.html
-analystchat "Analyze these websites and compare them"
+news http://feeds.bbci.co.uk/news/rss.xml --save-markdown
+article https://example.com/blog-post --no-images
+htmlmd saved-article/index.html --no-metadata
+
+# Community tools integration
+analystchat "calculate the square root of 144"
+analystchat "read this RSS feed and save summary to file"
 ```
 
 ## Documentation Structure
@@ -28,6 +52,11 @@ analystchat "Analyze these websites and compare them"
 - **[Tools Guide](tools-guide.md)** - Available tools and their usage
 - **[Configuration Guide](configuration-guide.md)** - Configuration options and settings
 - **[Developer Guide](developer-guide.md)** - Extending the package with new agents and tools
+
+### Enhanced Features ✨
+- **[Enhanced Chat Guide](enhanced-chat-guide.md)** - Rich terminal UI with streaming support
+- **[Community Tools Guide](community-tools-guide.md)** - 44+ professional tools integration
+- **[Streaming Features Guide](streaming-features-guide.md)** - Technical implementation details
 
 ### Agent-Specific Guides
 - **[Article Agent Guide](article-agent-guide.md)** - Download and analyze web articles with metadata extraction and image preservation
@@ -65,11 +94,13 @@ This separation allows for:
 
 ### Technical Features  
 - 🔧 **Modular Tools** - Reusable tools for metadata extraction and content processing
-- 🤖 **AI-Powered** - Uses Strands framework with AWS Bedrock (Claude Sonnet 4)
+- 🤖 **AI-Powered** - Uses Strands framework with AWS Bedrock (Claude 3.7 Sonnet)
+- 🎨 **Rich Terminal UI** - Beautiful, interactive command-line experience with streaming
 - 📱 **CLI Interface** - Simple command-line usage with comprehensive options
 - 🧩 **Extensible** - Easy to add new agents and tools
-- ⚙️ **Configurable** - Flexible configuration system with YAML settings
+- ⚙️ **Configurable** - Flexible configuration system with YAML settings and Bedrock optimization
 - 🖼️ **Image Handling** - Smart image downloading and reference management
+- 🌍 **Community Tools** - Access to 44+ professional-grade tools for enhanced capabilities
 
 ## Support
 

@@ -7,9 +7,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from ..agents.chat import create_chat_agent, chat_with_agent, get_session_info
-from ..config import get_config
-from ..utils import configure_logging
+# Import the enhanced Rich UI version
+try:
+    from .chat_rich import main as rich_main
+    RICH_AVAILABLE = True
+except ImportError:
+    RICH_AVAILABLE = False
+    from ..agents.chat import create_chat_agent, chat_with_agent, get_session_info
+    from ..config import get_config
+    from ..utils import configure_logging
 
 
 def print_welcome_message():
@@ -187,6 +193,11 @@ def single_message_mode(agent, message: str, args):
 
 def main():
     """Main CLI entry point for the analystchat command."""
+    # Check if --use-legacy flag is present to force legacy mode
+    if '--use-legacy' not in sys.argv and RICH_AVAILABLE:
+        # Use the enhanced Rich UI version by default
+        return rich_main()
+    
     parser = argparse.ArgumentParser(
         description="Interactive chat interface for AI-powered analysis with multi-turn conversations.",
         prog="analystchat"
@@ -225,6 +236,11 @@ def main():
         "--save-on-exit",
         action="store_true",
         help="Automatically save conversation summary when exiting"
+    )
+    parser.add_argument(
+        "--use-legacy",
+        action="store_true",
+        help="Use legacy interface instead of Rich UI"
     )
     
     args = parser.parse_args()
