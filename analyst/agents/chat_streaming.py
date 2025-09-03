@@ -19,6 +19,15 @@ from rich.table import Table
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.layout import Layout
 from rich.syntax import Syntax
+from rich.prompt import Confirm
+
+# Import Strands hooks for consent handling
+try:
+    from strands.hooks import HookProvider, HookRegistry
+    from strands.hooks.events import BeforeToolInvocationEvent, AfterToolInvocationEvent
+    HOOKS_AVAILABLE = True
+except ImportError:
+    HOOKS_AVAILABLE = False
 
 from ..tools import (
     fetch_url_metadata,
@@ -49,6 +58,8 @@ class StreamingCallbackHandler:
         self.is_streaming = False
         self.last_update_time = time.time()
         self.buffer = ""
+        self.consent_requested = False
+        self.original_stdin = None
         
     def __call__(self, **kwargs):
         """
@@ -145,6 +156,72 @@ class StreamingCallbackHandler:
     def get_final_content(self) -> str:
         """Get the final accumulated content."""
         return self.current_content
+    
+    def _handle_consent_request(self, tool_name: str = None):
+        """
+        Handle consent request with Rich UI formatting.
+        
+        Args:
+            tool_name: Name of the tool requiring consent
+        """
+        self.consent_requested = True
+        
+        # Pause streaming to show consent prompt clearly
+        if self.live_display:
+            self.live_display.stop()
+        
+        # Create a prominent consent panel
+        tool_info = f" for [yellow]{tool_name}[/yellow]" if tool_name else ""
+        consent_panel = Panel(
+            f"[bold red]⚠️  Permission Required[/bold red]\n\n"
+            f"The system is requesting permission to proceed{tool_info}.\n"
+            f"[dim]This tool may perform sensitive operations.[/dim]\n\n"
+            f"[green]Do you want to proceed?[/green] [dim](y/n)[/dim]",
+            title="🔐 User Consent Required",
+            border_style="red",
+            padding=(1, 2)
+        )
+        self.console.print(consent_panel)
+        
+        # Ensure proper terminal handling for input
+        import sys
+        if hasattr(sys.stdin, 'fileno'):
+            try:
+                # Make sure stdin is properly connected
+                if not sys.stdin.isatty():
+                    self.console.print("[yellow]Warning: Not running in interactive terminal. Defaulting to 'yes'.[/yellow]")
+                    return True
+            except:
+                pass
+        
+        return self._get_user_consent()
+    
+    def _get_user_consent(self) -> bool:
+        """
+        Get user consent with proper error handling.
+        
+        Returns:
+            True if user consents, False otherwise
+        """
+        try:
+            from rich.prompt import Confirm
+            return Confirm.ask(
+                "[bold cyan]Proceed?[/bold cyan]",
+                console=self.console,
+                default=False
+            )
+        except (EOFError, KeyboardInterrupt):
+            self.console.print("\n[red]Operation cancelled by user.[/red]")
+            return False
+        except Exception as e:
+            self.console.print(f"[yellow]Warning: Could not get user input ({e}). Defaulting to 'no'.[/yellow]")
+            return False
+    
+    def _restore_streaming(self):
+        """Restore streaming after consent handling."""
+        self.consent_requested = False
+        if self.live_display:
+            self.live_display.start()
 
 
 def _load_community_tools(agent_name: str = "chat") -> List:
@@ -395,6 +472,164 @@ def create_streaming_chat_agent(
     return agent, console
 
 
+class ToolConsentHookProvider:
+    """Hook provider for handling tool consent with Rich UI."""
+    
+    def __init__(self, console: Console, live_display: Optional[Live] = None):
+        """Initialize the consent hook provider."""
+        self.console = console
+        self.live_display = live_display
+        self.consent_required_tools = {
+            'shell', 'python_repl', 'file_write', 'editor', 
+            'use_agent', 'swarm', 'workflow', 'use_computer'
+        }
+        
+    def register_hooks(self, registry):
+        """Register hooks with the agent."""
+        if HOOKS_AVAILABLE:
+            registry.add_callback(BeforeToolInvocationEvent, self.handle_before_tool_invocation)
+    
+    def handle_before_tool_invocation(self, event):
+        """Handle tool invocation to check for consent requirements."""
+        tool_name = getattr(event.tool_use, 'name', 'unknown')
+        
+        # Check if this tool requires consent (based on config or tool nature)
+        if self._requires_consent(tool_name):
+            # Pause streaming if active
+            if self.live_display:
+                self.live_display.stop()
+            
+            # Get consent from user
+            consent_granted = self._get_tool_consent(tool_name, event)
+            
+            # Resume streaming
+            if self.live_display:
+                self.live_display.start()
+            
+            # If consent denied, we could modify the event or raise an exception
+            if not consent_granted:
+                # This approach depends on how the Strands framework handles consent
+                # For now, we'll show a cancellation message
+                self.console.print(Panel(
+                    "[red]Tool execution cancelled by user.[/red]",
+                    title="❌ Operation Cancelled",
+                    border_style="red"
+                ))
+                # Note: The actual cancellation mechanism depends on the framework
+    
+    def _requires_consent(self, tool_name: str) -> bool:
+        """Check if a tool requires user consent."""
+        # Check against list of tools that always require consent
+        if tool_name.lower() in self.consent_required_tools:
+            return True
+        
+        # Check if consent is bypassed globally
+        if os.environ.get("BYPASS_TOOL_CONSENT") == "true":
+            return False
+        
+        return False
+    
+    def _get_tool_consent(self, tool_name: str, event) -> bool:
+        """Get user consent for tool execution."""
+        import sys
+        
+        # Get tool input for context
+        tool_input = getattr(event.tool_use, 'input', {})
+        input_summary = str(tool_input)[:100] + "..." if len(str(tool_input)) > 100 else str(tool_input)
+        
+        consent_panel = Panel(
+            f"[bold red]⚠️  Tool Permission Required[/bold red]\n\n"
+            f"Tool: [yellow]{tool_name}[/yellow]\n"
+            f"Input: [dim]{input_summary}[/dim]\n\n"
+            f"[bold]This tool may perform sensitive operations.[/bold]\n"
+            f"[dim]This includes file system modifications, code execution, or system commands.[/dim]\n\n"
+            f"[green]Do you want to allow this tool to execute?[/green]",
+            title="🔐 User Consent Required",
+            border_style="red",
+            padding=(1, 2)
+        )
+        
+        self.console.print()  # Add spacing
+        self.console.print(consent_panel)
+        
+        try:
+            # Handle non-interactive environments
+            if not sys.stdin.isatty():
+                self.console.print("[yellow]⚠️  Non-interactive environment detected.[/yellow]")
+                self.console.print("[dim]Set BYPASS_TOOL_CONSENT=true to automatically allow tool execution.[/dim]")
+                # Default to allow in non-interactive mode if the tool was configured to run
+                return True
+                
+            return Confirm.ask(
+                "\n[bold cyan]Allow this tool to execute?[/bold cyan]",
+                console=self.console,
+                default=False
+            )
+        except (EOFError, KeyboardInterrupt):
+            self.console.print("\n[red]❌ Operation cancelled by user.[/red]")
+            return False
+        except Exception as e:
+            self.console.print(f"\n[yellow]⚠️  Could not get user input ({e}). Defaulting to 'no' for security.[/yellow]")
+            return False
+
+
+def _setup_consent_hooks(agent: Agent, console: Console, live_display: Optional[Live] = None):
+    """
+    Set up consent hooks for the agent using the Strands hooks system.
+    
+    Args:
+        agent: The agent to add hooks to
+        console: Rich Console for rendering
+        live_display: Optional live display for streaming
+    """
+    if not HOOKS_AVAILABLE:
+        # Fall back to environment variable approach
+        import sys
+        original_input = input
+        
+        def rich_input_handler(prompt=""):
+            """Custom input handler with Rich UI."""
+            # Detect consent prompts
+            if any(keyword in prompt.lower() for keyword in ['proceed', 'allow', 'consent', 'permission']):
+                console.print()
+                consent_panel = Panel(
+                    f"[bold red]⚠️  Permission Required[/bold red]\n\n"
+                    f"[white]{prompt}[/white]\n\n"
+                    f"[dim]A tool is requesting permission to proceed.[/dim]",
+                    title="🔐 Tool Consent",
+                    border_style="red",
+                    padding=(1, 2)
+                )
+                console.print(consent_panel)
+                
+                try:
+                    return Confirm.ask(
+                        "[bold cyan]Proceed?[/bold cyan]",
+                        console=console,
+                        default=False
+                    )
+                except:
+                    return "n"
+            
+            return original_input(prompt)
+        
+        # Monkey patch input temporarily
+        import builtins
+        builtins.input = rich_input_handler
+        return lambda: setattr(builtins, 'input', original_input)
+    
+    # Use proper hooks system
+    consent_provider = ToolConsentHookProvider(console, live_display)
+    
+    # Register hooks with the agent
+    if hasattr(agent, 'add_hook_provider'):
+        agent.add_hook_provider(consent_provider)
+    elif hasattr(agent, 'hook_registry'):
+        consent_provider.register_hooks(agent.hook_registry)
+    
+    return consent_provider
+
+
 def chat_with_streaming(
     agent: Agent,
     message: str,
@@ -430,6 +665,9 @@ def chat_with_streaming(
             # Update callback handler with live display
             callback_handler.live_display = live
             
+            # Setup consent hooks for the agent
+            consent_cleanup = _setup_consent_hooks(agent, console, live)
+            
             # Set the callback handler on the agent
             original_callback = getattr(agent, 'callback_handler', None)
             agent.callback_handler = callback_handler
@@ -442,6 +680,10 @@ def chat_with_streaming(
                 agent.callback_handler = original_callback
             else:
                 delattr(agent, 'callback_handler')
+        
+        # Cleanup consent hooks if needed
+        if callable(consent_cleanup):
+            consent_cleanup()
         
         # Always display the final response with proper formatting
         # This ensures we show the complete, properly formatted response

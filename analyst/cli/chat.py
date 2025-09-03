@@ -11,6 +11,7 @@ from typing import Optional
 from ..agents.chat import create_chat_agent, chat_with_agent, get_session_info
 from ..config import get_config
 from ..utils import configure_logging, get_rotating_prompts, get_more_examples
+from ..utils.consent_patch import enable_rich_consent_prompts, disable_rich_consent_prompts
 
 # Import the enhanced Rich UI version
 try:
@@ -254,6 +255,9 @@ def main():
     args = parser.parse_args()
     
     try:
+        # Enable Rich UI consent prompts globally  
+        enable_rich_consent_prompts()
+        
         # Configure logging
         if not args.no_logging:
             configure_logging(verbose=args.verbose)
@@ -277,8 +281,13 @@ def main():
         else:
             # Interactive mode
             interactive_chat(agent, args)
+        
+        # Cleanup consent prompts on successful exit
+        disable_rich_consent_prompts()
             
     except Exception as e:
+        # Cleanup consent prompts on error
+        disable_rich_consent_prompts()
         print(f"❌ Failed to start chat: {e}", file=sys.stderr)
         sys.exit(1)
 

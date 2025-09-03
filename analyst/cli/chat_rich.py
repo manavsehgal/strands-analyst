@@ -38,6 +38,7 @@ except ImportError:
     USE_STREAMING = False
 from ..config import get_config
 from ..utils import configure_logging, get_rotating_prompts, get_more_examples
+from ..utils.consent_patch import enable_rich_consent_prompts, disable_rich_consent_prompts
 
 
 class RichChatInterface:
@@ -411,6 +412,9 @@ def main():
         # Create Rich console
         console = Console()
         
+        # Enable Rich UI consent prompts globally
+        enable_rich_consent_prompts(console)
+        
         # Create chat agent (streaming or stable based on availability and preference)
         if args.no_streaming or not USE_STREAMING:
             # Use stable non-streaming version
@@ -443,8 +447,13 @@ def main():
         else:
             # Interactive mode
             interface.run_interactive()
+        
+        # Cleanup consent prompts on successful exit
+        disable_rich_consent_prompts()
             
     except Exception as e:
+        # Cleanup consent prompts on error
+        disable_rich_consent_prompts()
         console = Console()
         error_panel = Panel(
             f"[red]❌ Failed to start chat:[/red]\n{str(e)}",

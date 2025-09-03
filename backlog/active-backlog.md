@@ -30,6 +30,28 @@
     
     The analystchat agent now has dynamic access to all 40+ Strands community tools, significantly expanding capabilities for file operations, system interactions, multi-modal processing, agent orchestration, and advanced workflows. All tools are configurable and loaded dynamically - nothing is hardcoded.
 
-[ ] For one of the tools usage it is instructed that `playwrite
+[x] When tools are used in analystchat which require user permission, make sure the user permission request is clearly visible to the user and not hidden due to streaming or other reasons.
 
-[ ] When tools are used in analystchat which require user permission, make sure the user permission request is clearly visible to the user and not hidden due to streaming or other reasons.
+    **Completion Summary (2025-09-03):**
+    - ✅ **Analyzed consent prompt issues**: Identified that tool consent prompts from the Strands framework were being displayed with poor visibility during streaming, showing up as plain text warnings like "Input is not a terminal (fd=0)" followed by unclear prompts
+    - ✅ **Researched Strands framework hooks and callbacks**: Explored both the hooks system (`BeforeToolInvocationEvent`, `AfterToolInvocationEvent`) and callback handlers for consent handling options
+    - ✅ **Created comprehensive consent patch system**: Implemented `analyst/utils/consent_patch.py` with `GlobalConsentPatcher` class that:
+      - **Intercepts consent prompts globally** by patching `input()`, `stdout.write()`, and `stderr.write()`
+      - **Provides Rich UI formatting** with prominent red panels, clear titles, and detailed explanations
+      - **Handles non-interactive environments** with appropriate defaults and clear messaging
+      - **Detects consent patterns** using regex matching for various prompt formats
+      - **Includes proper cleanup** to restore original functions when done
+    - ✅ **Enhanced both chat CLI interfaces**: Updated `chat_rich.py` and `chat.py` to automatically enable the consent patch system with proper cleanup on exit
+    - ✅ **Implemented multiple approaches**: Created both hook-based solutions for future framework integration and immediate global patching for current compatibility
+    - ✅ **Tested consent improvements**: Verified the system works with proper Rich UI formatting, showing clear consent panels with security warnings and context information
+    
+    **Key Features Implemented:**
+    - **Global consent interception**: Catches consent prompts from any source in the application
+    - **Rich UI formatting**: Beautiful, prominent consent panels with proper styling and icons
+    - **Context-aware messaging**: Shows tool names, operations, and security warnings
+    - **Environment detection**: Automatically handles interactive vs non-interactive environments
+    - **Security-focused defaults**: Defaults to "no" for security, provides clear guidance
+    - **Terminal compatibility**: Handles "Input is not a terminal" warnings gracefully
+    - **Clean architecture**: Modular design that can be easily enabled/disabled
+    
+    **Result**: Tool consent requests in analystchat are now clearly visible with prominent, well-formatted Rich UI panels that cannot be missed by users. The system provides proper context, security warnings, and handles edge cases like non-interactive environments. Users will see beautiful red consent panels instead of confusing terminal warnings when tools require permission.

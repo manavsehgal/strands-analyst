@@ -19,6 +19,7 @@ Access to **44+ professional-grade tools**:
 - 🌐 HTTP requests and web scraping
 - 💾 Memory and persistent storage
 - 🤖 Agent orchestration and batch processing
+- 💻 **Computer & browser automation** via shell integration
 
 ## Quick Start
 
@@ -41,6 +42,10 @@ htmlmd saved-article/index.html --no-metadata
 # Community tools integration
 analystchat "calculate the square root of 144"
 analystchat "read this RSS feed and save summary to file"
+
+# Computer and browser automation  
+analystchat "take a screenshot of my desktop using shell"
+analystchat "screenshot google.com using shell and playwright"
 ```
 
 ## Documentation Structure
@@ -56,6 +61,7 @@ analystchat "read this RSS feed and save summary to file"
 ### Enhanced Features ✨
 - **[Enhanced Chat Guide](enhanced-chat-guide.md)** - Rich terminal UI with streaming support
 - **[Community Tools Guide](community-tools-guide.md)** - 44+ professional tools integration
+- **[Automation Guide](automation-guide.md)** - Computer & browser automation via shell
 - **[Streaming Features Guide](streaming-features-guide.md)** - Technical implementation details
 
 ### Agent-Specific Guides
@@ -91,6 +97,7 @@ This separation allows for:
 - 📄 **Article Download** - Download web articles with images and metadata
 - 📝 **HTML to Markdown** - Convert HTML files to clean, formatted markdown
 - 💬 **Interactive Chat** - Conversational interface with memory and multi-tool access
+- 💻 **Computer & Browser Automation** - Screenshots, system control, web automation via shell
 
 ### Technical Features  
 - 🔧 **Modular Tools** - Reusable tools for metadata extraction and content processing

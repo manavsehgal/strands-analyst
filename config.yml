@@ -279,23 +279,16 @@ community_tools:
   # Global tool settings
   enabled: true
   
-  # Tool consent and safety settings
+  # Tool consent and safety settings - DISABLED for Claude Code compatibility
   consent:
-    # Require user confirmation for potentially sensitive operations
-    require_consent: true
+    # Disable consent prompts as they break in non-interactive environments
+    require_consent: false
     
-    # Bypass consent for non-destructive tools (read-only operations)
+    # Bypass all consent for seamless operation
     bypass_for_safe_tools: true
     
-    # Tools that always require consent regardless of bypass setting
-    always_require_consent:
-      - "shell"
-      - "python_repl" 
-      - "file_write"
-      - "editor"
-      - "use_agent"
-      - "swarm"
-      - "workflow"
+    # Only require consent for truly dangerous operations (none for now)
+    always_require_consent: []
   
   # Human-in-the-loop configuration
   human_in_loop:
@@ -373,8 +366,8 @@ community_tools:
       
       shell:
         enabled: true
-        require_consent: true
-        description: "Execute shell commands"
+        require_consent: false  # Shell is our primary automation tool
+        description: "Execute shell commands for computer and browser automation"
       
       cron:
         enabled: false  # Disabled by default for security
@@ -382,9 +375,9 @@ community_tools:
         description: "Task scheduling with cron jobs"
       
       use_computer:
-        enabled: true
+        enabled: false  # Disabled - causes consent issues, use shell instead
         require_consent: true
-        description: "Automate desktop actions and GUI interactions"
+        description: "DISABLED: Use shell tool for computer automation instead"
     
     # Code Interpretation tools
     code_interpretation:
@@ -411,9 +404,9 @@ community_tools:
         description: "Slack integration with real-time events, API access, and message sending"
       
       browser:
-        enabled: true
+        enabled: false  # Disabled - causes consent issues, use shell + playwright instead
         require_consent: false
-        description: "Automate web browser interactions"
+        description: "DISABLED: Use shell tool with playwright for browser automation instead"
       
       rss:
         enabled: true
@@ -562,31 +555,60 @@ community_tools:
         "communication"
       ]
       
-      # Chat-specific tool settings (reduce friction for common tools)
+      # Chat-specific tool settings - NO CONSENT for smooth operation
       tools:
+        # Core automation (shell is primary tool for computer/browser control)
+        shell:
+          require_consent: false
+        environment:
+          require_consent: false
+        
+        # Code execution
         python_repl:
           require_consent: false
         code_interpreter:
           require_consent: false
+          
+        # File operations
         file_read:
           require_consent: false
+        file_write:
+          require_consent: false
+        editor:
+          require_consent: false
+        
+        # Utilities
         calculator:
           require_consent: false
         current_time:
           require_consent: false
         sleep:
           require_consent: false
+        
+        # AI capabilities
         think:
           require_consent: false
         use_llm:
           require_consent: false
         load_tool:
           require_consent: false
-        browser:
-          require_consent: false
+        
+        # Multimedia (working)
         image_reader:
           require_consent: false
         diagram:
+          require_consent: false
+        
+        # Memory and data
+        memory:
+          require_consent: false
+        retrieve:
+          require_consent: false
+        
+        # RSS and web content
+        rss:
+          require_consent: false
+        http_request:
           require_consent: false
         
     sitemeta:

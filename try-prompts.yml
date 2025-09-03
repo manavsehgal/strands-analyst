@@ -55,6 +55,61 @@ prompts:
     prompt: "Check if my website is down and monitor its status"
     description: "Network monitoring and web health checks"
 
+  # Computer Automation (NEW)
+  - category: "computer_automation"
+    prompt: "Take a screenshot of my desktop using shell"
+    description: "Desktop screenshot capture via shell automation"
+    
+  - category: "computer_automation" 
+    prompt: "Get my current screen resolution and system information"
+    description: "System information gathering using shell commands"
+    
+  - category: "computer_automation"
+    prompt: "Open Safari and find all running applications"
+    description: "Application control and process management"
+    
+  - category: "system_operations"
+    prompt: "Find all Python files in the current directory using shell"
+    description: "File system operations and search via shell"
+    
+  - category: "system_operations"
+    prompt: "Check disk space and memory usage on my system"
+    description: "System resource monitoring via shell commands"
+
+  # Browser Automation (NEW) 
+  - category: "browser_automation"
+    prompt: "Take a screenshot of google.com using shell and playwright"
+    description: "Web page screenshot capture via browser automation"
+    
+  - category: "browser_automation"
+    prompt: "Create a PDF of the anthropic.com homepage"
+    description: "Website PDF generation using playwright automation"
+    
+  - category: "browser_automation"
+    prompt: "Screenshot both desktop and mobile views of stripe.com"
+    description: "Multi-viewport web page capture automation"
+    
+  - category: "browser_automation"
+    prompt: "Open Chrome and navigate to three different websites"
+    description: "Browser control and multi-tab automation"
+
+  # Advanced Automation (NEW)
+  - category: "advanced_automation"
+    prompt: "Take a desktop screenshot then screenshot google.com"
+    description: "Multi-step automation combining computer and browser tasks"
+    
+  - category: "advanced_automation"
+    prompt: "Monitor system resources and screenshot my current work"
+    description: "Combined system monitoring and documentation automation"
+    
+  - category: "advanced_automation" 
+    prompt: "Create website screenshots for my top 5 competitors"
+    description: "Batch browser automation for competitive analysis"
+    
+  - category: "file_automation"
+    prompt: "Find large files and organize them by type using shell"
+    description: "Advanced file system automation and organization"
+
   # Complex Multi-Step Tasks
   - category: "research"
     prompt: "Analyze the competitive landscape for payment processors"
@@ -67,6 +122,80 @@ prompts:
   - category: "productivity"
     prompt: "Help me plan a comprehensive competitor analysis workflow"
     description: "Task planning and workflow automation"
+    
+  # Workflow Automation (NEW)
+  - category: "workflow_automation"
+    prompt: "Automate my morning research routine: news, competitor sites, and reports"
+    description: "Multi-step workflow automation with various data sources"
+    
+  - category: "workflow_automation"
+    prompt: "Create a testing workflow: screenshot my app, then competitor apps"
+    description: "Automated testing and comparison workflow"
+    
+  - category: "workflow_automation"
+    prompt: "Help me document my system setup with screenshots and configs"
+    description: "Documentation automation combining system info and visual capture"
+    
+  # Developer Automation (NEW)
+  - category: "developer_automation"
+    prompt: "Find all TypeScript files and check my Node.js version"
+    description: "Development environment analysis via shell"
+    
+  - category: "developer_automation"
+    prompt: "Screenshot my localhost app and compare it to production"
+    description: "Development workflow automation with visual comparison"
+    
+  - category: "developer_automation"
+    prompt: "Monitor my development server and capture error screenshots"
+    description: "Automated development monitoring and debugging"
+
+  # Content Creation Automation (NEW)
+  - category: "content_automation"
+    prompt: "Create a visual report: screenshot websites and generate summaries"
+    description: "Automated content creation combining visual and text analysis"
+    
+  - category: "content_automation"
+    prompt: "Document the top 3 design trends by screenshotting examples"
+    description: "Research automation with visual documentation"
+
+  # Integration & Advanced Use Cases (NEW)
+  - category: "integration_automation" 
+    prompt: "Analyze stripe.com then screenshot their pricing page"
+    description: "Combined website analysis and browser automation"
+    
+  - category: "integration_automation"
+    prompt: "Check the latest AI news, then screenshot the top stories"
+    description: "News analysis integrated with visual documentation"
+    
+  - category: "integration_automation"
+    prompt: "Find Python files, take a desktop screenshot, then analyze my workflow"
+    description: "Multi-modal automation combining file, visual, and analytical tasks"
+
+  # Creative Automation (NEW)
+  - category: "creative_automation"
+    prompt: "Create a visual competitor dashboard with screenshots and analysis"
+    description: "Creative automation combining research, screenshots, and organization"
+    
+  - category: "creative_automation"
+    prompt: "Build a system health report with screenshots and metrics"
+    description: "Comprehensive system documentation automation"
+    
+  - category: "creative_automation"
+    prompt: "Document my development environment: code, configs, and screenshots"
+    description: "Complete development environment documentation automation"
+
+  # Real-world Scenarios (NEW)
+  - category: "real_world_automation"
+    prompt: "Help me prepare for a client demo: screenshots, analysis, and talking points"
+    description: "Complete demo preparation automation workflow"
+    
+  - category: "real_world_automation" 
+    prompt: "Monitor my competitor's website changes and document them visually"
+    description: "Competitive intelligence automation with visual tracking"
+    
+  - category: "real_world_automation"
+    prompt: "Create an onboarding guide with system screenshots and instructions"
+    description: "Documentation automation for team onboarding"
 
 # Rotation settings
 rotation:
@@ -86,3 +215,15 @@ categories:
   - "automation"
   - "productivity"
   - "data_analysis"
+  # New automation categories
+  - "computer_automation"
+  - "browser_automation"
+  - "system_operations"
+  - "advanced_automation"
+  - "file_automation"
+  - "workflow_automation"
+  - "developer_automation"
+  - "content_automation"
+  - "integration_automation"
+  - "creative_automation"
+  - "real_world_automation"
