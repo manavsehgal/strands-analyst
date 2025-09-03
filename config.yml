@@ -370,14 +370,14 @@ community_tools:
         description: "Execute shell commands for system operations (requires user consent)"
       
       cron:
-        enabled: false  # Disabled by default for security
+        enabled: true  # Enabled with consent for scheduling tasks
         require_consent: true
         description: "Task scheduling with cron jobs"
       
       use_computer:
-        enabled: false  # Disabled - causes consent issues, use shell instead
+        enabled: true  # Enabled with proper consent handling
         require_consent: true
-        description: "DISABLED: Use shell tool for computer automation instead"
+        description: "Computer automation and screenshot capabilities"
     
     # Code Interpretation tools
     code_interpretation:
@@ -399,14 +399,14 @@ community_tools:
         description: "Make API calls, fetch web data, and call local HTTP servers"
       
       slack:
-        enabled: false  # Requires configuration
+        enabled: true  # Enabled for Slack integration
         require_consent: true
         description: "Slack integration with real-time events, API access, and message sending"
       
       browser:
-        enabled: false  # Disabled - causes consent issues, use shell + playwright instead
-        require_consent: false
-        description: "DISABLED: Use shell tool with playwright for browser automation instead"
+        enabled: true  # Enabled with proper consent handling
+        require_consent: true
+        description: "Browser automation for web scraping and screenshots"
       
       rss:
         enabled: true
@@ -448,7 +448,7 @@ community_tools:
     # AWS Services tools
     aws_services:
       use_aws:
-        enabled: false
+        enabled: true
         require_consent: true
         description: "Interact with AWS services"
     
@@ -492,7 +492,7 @@ community_tools:
         description: "Create structured tasks and logs for agents to manage and work from"
       
       swarm:
-        enabled: false  # Advanced feature, disabled by default
+        enabled: true  # Enabled for advanced agent coordination
         require_consent: true
         description: "Coordinate multiple AI agents in a swarm / network of agents"
       
@@ -517,7 +517,7 @@ community_tools:
         description: "Run a new AI event loop with custom prompts"
       
       workflow:
-        enabled: false  # Advanced feature, disabled by default  
+        enabled: true  # Enabled for workflow orchestration
         require_consent: true
         description: "Orchestrate sequenced workflows"
       

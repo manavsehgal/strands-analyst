@@ -164,6 +164,8 @@
   },
   "active": "9df6b2d10d08aeb0",
   "lastOpenFiles": [
+    "config.yml.tmp.48254.1756906947973",
+    "debug_tools.py",
     "run-analystchat.sh",
     "analyst/agents/__init__.py.tmp.48254.1756878858323",
     "README.md.tmp.48254.1756878762082",
@@ -174,9 +176,7 @@
     "docs/README.md.tmp.48254.1756877548849",
     "docs/README.md.tmp.48254.1756877544061",
     "docs/automation-guide.md",
-    "README.md.tmp.48254.1756877453611",
     "anthropic_screenshot.png",
-    "CLAUDE.md.tmp.48254.1756877320519",
     "backlog/active-backlog.md",
     "backlog/backlog-archive-001.md",
     "refer/articles/meta-home/images/2016_08_22_131442_40m_RGB.jpg",
