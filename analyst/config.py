@@ -648,8 +648,8 @@ class Config:
         if agent_categories is None:
             # Use default categories if no override
             agent_categories = []
-            for category in ["web_network", "file_operations", "code_system", "automation_workflow", 
-                           "memory_storage", "communication", "utilities", "aws_services"]:
+            for category in ["rag_memory", "file_operations", "shell_system", "code_interpretation", 
+                           "web_network", "multimodal", "aws_services", "utilities", "agents_workflows", "communication"]:
                 if self.get_community_tools_category_enabled(category):
                     agent_categories.append(category)
         

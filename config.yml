@@ -311,173 +311,282 @@ community_tools:
   # Tool categories and enablement
   # Set to false to disable entire categories
   categories:
-    web_network: true
+    rag_memory: true
     file_operations: true
-    code_system: true
-    automation_workflow: true
-    memory_storage: true
-    communication: true
-    utilities: true
+    shell_system: true
+    code_interpretation: true
+    web_network: true
+    multimodal: true
     aws_services: false  # Disabled by default for security
+    utilities: true
+    agents_workflows: true
+    communication: true
   
   # Individual tool configuration
   # Tools are organized by category for easy management
   tools:
+    # RAG & Memory tools
+    rag_memory:
+      retrieve:
+        enabled: true
+        require_consent: false
+        description: "Semantically retrieve data from Amazon Bedrock Knowledge Bases"
+      
+      memory:
+        enabled: true
+        require_consent: false
+        description: "Agent memory persistence in Amazon Bedrock Knowledge Bases"
+      
+      agent_core_memory:
+        enabled: true
+        require_consent: false
+        description: "Integration with Amazon Bedrock Agent Core Memory"
+      
+      mem0_memory:
+        enabled: true
+        require_consent: false
+        description: "Agent memory and personalization built on top of Mem0"
+    
+    # File Operations tools
+    file_operations:
+      editor:
+        enabled: true
+        require_consent: true
+        description: "File editing operations like line edits, search, and undo"
+      
+      file_read:
+        enabled: true
+        require_consent: false
+        description: "Read and parse files"
+      
+      file_write:
+        enabled: true
+        require_consent: true
+        description: "Create and modify files"
+    
+    # Shell & System tools
+    shell_system:
+      environment:
+        enabled: true
+        require_consent: false
+        description: "Manage environment variables"
+      
+      shell:
+        enabled: true
+        require_consent: true
+        description: "Execute shell commands"
+      
+      cron:
+        enabled: false  # Disabled by default for security
+        require_consent: true
+        description: "Task scheduling with cron jobs"
+      
+      use_computer:
+        enabled: true
+        require_consent: true
+        description: "Automate desktop actions and GUI interactions"
+    
+    # Code Interpretation tools
+    code_interpretation:
+      python_repl:
+        enabled: true
+        require_consent: true
+        description: "Run Python code"
+      
+      code_interpreter:
+        enabled: true
+        require_consent: true
+        description: "Execute code in isolated sandboxes"
+    
     # Web & Network tools
     web_network:
       http_request:
         enabled: true
         require_consent: false
-        description: "Make HTTP requests to external APIs and websites"
+        description: "Make API calls, fetch web data, and call local HTTP servers"
+      
+      slack:
+        enabled: false  # Requires configuration
+        require_consent: true
+        description: "Slack integration with real-time events, API access, and message sending"
+      
+      browser:
+        enabled: true
+        require_consent: false
+        description: "Automate web browser interactions"
       
       rss:
         enabled: true
         require_consent: false  
-        description: "Fetch and parse RSS feeds"
-      
-      tavily:
-        enabled: false  # Requires API key
-        require_consent: false
-        description: "Web search using Tavily API"
+        description: "Manage and process RSS feeds"
     
-    # File Operations tools
-    file_operations:
-      file_read:
+    # Multi-modal tools
+    multimodal:
+      generate_image_stability:
         enabled: true
         require_consent: false
-        description: "Read files from the local filesystem"
+        description: "Create images with Stability AI"
       
-      file_write:
+      image_reader:
         enabled: true
-        require_consent: true
-        description: "Write and modify files on the local filesystem"
+        require_consent: false
+        description: "Process and analyze images"
       
-      editor:
+      generate_image:
         enabled: true
-        require_consent: true
-        description: "Interactive text editor for file modifications"
+        require_consent: false
+        description: "Create AI generated images with Amazon Bedrock"
+      
+      nova_reels:
+        enabled: true
+        require_consent: false
+        description: "Create AI generated videos with Nova Reels on Amazon Bedrock"
+      
+      speak:
+        enabled: true
+        require_consent: false
+        description: "Generate speech from text using macOS say command or Amazon Polly"
+      
+      diagram:
+        enabled: true
+        require_consent: false
+        description: "Create cloud architecture and UML diagrams"
     
-    # Code & System tools
-    code_system:
-      python_repl:
-        enabled: true
+    # AWS Services tools
+    aws_services:
+      use_aws:
+        enabled: false
         require_consent: true
-        description: "Execute Python code with persistent state"
-      
-      shell:
-        enabled: true
-        require_consent: true
-        description: "Execute shell commands with PTY support"
-      
+        description: "Interact with AWS services"
+    
+    # Utilities tools
+    utilities:
       calculator:
         enabled: true
         require_consent: false
-        description: "Perform mathematical calculations"
+        description: "Perform mathematical operations"
       
-      environment:
+      current_time:
         enabled: true
         require_consent: false
-        description: "Access environment variables and system information"
+        description: "Get the current date and time"
+      
+      load_tool:
+        enabled: true
+        require_consent: false
+        description: "Dynamically load more tools at runtime"
+      
+      sleep:
+        enabled: true
+        require_consent: false
+        description: "Pause execution with interrupt support"
     
-    # Automation & Workflow tools
-    automation_workflow:
-      use_agent:
-        enabled: true
-        require_consent: true
-        description: "Start new AI agents with different prompts and models"
-      
-      swarm:
-        enabled: false  # Advanced feature, disabled by default
-        require_consent: true
-        description: "Create and coordinate teams of AI agents"
-      
-      workflow:
-        enabled: false  # Advanced feature, disabled by default  
-        require_consent: true
-        description: "Advanced workflow orchestration"
-      
-      cron:
-        enabled: false  # Scheduling, disabled by default
-        require_consent: true
-        description: "Schedule tasks and workflows"
-      
-      batch:
+    # Agents & Workflows tools
+    agents_workflows:
+      graph:
         enabled: true
         require_consent: false
-        description: "Process multiple items in batches"
-    
-    # Memory & Storage tools
-    memory_storage:
-      memory:
+        description: "Create and manage multi-agent systems using Strands SDK Graph implementation"
+      
+      agent_graph:
         enabled: true
         require_consent: false
-        description: "Store and retrieve information across conversations"
+        description: "Create and manage graphs of agents"
       
       journal:
         enabled: true
         require_consent: false
-        description: "Maintain a journal of activities and insights"
+        description: "Create structured tasks and logs for agents to manage and work from"
+      
+      swarm:
+        enabled: false  # Advanced feature, disabled by default
+        require_consent: true
+        description: "Coordinate multiple AI agents in a swarm / network of agents"
+      
+      stop:
+        enabled: true
+        require_consent: false
+        description: "Force stop the agent event loop"
+      
+      use_agent:
+        enabled: true
+        require_consent: true
+        description: "Run a new AI event loop with custom prompts and different model providers"
+      
+      think:
+        enabled: true
+        require_consent: false
+        description: "Perform deep thinking by creating parallel branches of agentic reasoning"
+      
+      use_llm:
+        enabled: true
+        require_consent: false
+        description: "Run a new AI event loop with custom prompts"
+      
+      workflow:
+        enabled: false  # Advanced feature, disabled by default  
+        require_consent: true
+        description: "Orchestrate sequenced workflows"
+      
+      batch:
+        enabled: true
+        require_consent: false
+        description: "Call multiple tools from a single model request"
+      
+      a2a_client:
+        enabled: true
+        require_consent: false
+        description: "Enable agent-to-agent communication"
     
     # Communication tools
     communication:
       handoff_to_user:
         enabled: true
         require_consent: false
-        description: "Pause execution and request user input"
-      
-      slack:
-        enabled: false  # Requires configuration
-        require_consent: true
-        description: "Send messages and interact with Slack"
-    
-    # Utility tools
-    utilities:
-      current_time:
-        enabled: true
-        require_consent: false
-        description: "Get current date and time"
-      
-      sleep:
-        enabled: true
-        require_consent: false
-        description: "Pause execution for specified duration"
-      
-      stop:
-        enabled: true
-        require_consent: false
-        description: "Stop agent execution gracefully"
-      
-      think:
-        enabled: true
-        require_consent: false
-        description: "Recursive thinking for sophisticated analysis"
-      
-      use_llm:
-        enabled: true
-        require_consent: false
-        description: "Use different language models for specialized tasks"
-    
-    # AWS Services (disabled by default for security)
-    aws_services:
-      use_aws:
-        enabled: false
-        require_consent: true
-        description: "Interact with AWS services"
+        description: "Enable human-in-the-loop workflows by pausing agent execution for user input or transferring control entirely to the user"
   
   # Agent-specific tool configurations
   # Override global settings for specific agents
   agent_overrides:
     chat:
-      # Enable more tools for interactive chat
-      enabled_categories: ["web_network", "file_operations", "code_system", "utilities", "communication", "memory_storage"]
+      # Enable comprehensive tool set for interactive chat
+      enabled_categories: [
+        "rag_memory", 
+        "file_operations", 
+        "shell_system", 
+        "code_interpretation", 
+        "web_network", 
+        "multimodal", 
+        "utilities", 
+        "agents_workflows", 
+        "communication"
+      ]
       
-      # Chat-specific tool settings
+      # Chat-specific tool settings (reduce friction for common tools)
       tools:
         python_repl:
-          require_consent: false  # Less friction in chat mode
+          require_consent: false
+        code_interpreter:
+          require_consent: false
         file_read:
           require_consent: false
         calculator:
+          require_consent: false
+        current_time:
+          require_consent: false
+        sleep:
+          require_consent: false
+        think:
+          require_consent: false
+        use_llm:
+          require_consent: false
+        load_tool:
+          require_consent: false
+        browser:
+          require_consent: false
+        image_reader:
+          require_consent: false
+        diagram:
           require_consent: false
         
     sitemeta:
@@ -486,11 +595,11 @@ community_tools:
       
     news:
       # News-specific tools
-      enabled_categories: ["web_network", "utilities", "memory_storage"]
+      enabled_categories: ["web_network", "utilities", "rag_memory"]
       
     article:
       # Article analysis tools
-      enabled_categories: ["web_network", "file_operations", "utilities", "memory_storage"]
+      enabled_categories: ["web_network", "file_operations", "utilities", "rag_memory", "multimodal"]
       
     htmlmd:
       # HTML to markdown conversion tools
