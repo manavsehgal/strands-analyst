@@ -164,6 +164,8 @@
   },
   "active": "9df6b2d10d08aeb0",
   "lastOpenFiles": [
+    "debug_agent.py",
+    "debug_prompt.py",
     "debug_tools.py",
     "refer/articles/amazoncom-shoes/index.html",
     "refer/articles/amazoncom-shoes/images",
@@ -175,8 +177,6 @@
     "refer/articles/iau-minor-planet-center",
     "refer/articles/portfolio-3i-infrastructure/index.html",
     "refer/articles/portfolio-3i-infrastructure/images",
-    "refer/articles/portfolio-3i-infrastructure",
-    "refer/articles/our-portfolio-companies-3i-group-3i-group-plc/index.html",
     "refer/articles/meta-home/images/2016_08_22_131442_40m_RGB.jpg",
     "refer/articles/meta-home/images/Facebook_Logo_Primary.png",
     "refer/articles/meta-home/images/code-icon.png",

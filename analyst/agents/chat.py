@@ -178,21 +178,53 @@ Always be helpful, clear, and suggest the best tools for the user's needs. If a 
         "Agents & Workflows": ["graph", "agent_graph", "journal", "swarm", "stop", "handoff_to_user", "use_agent", "think", "use_llm", "workflow", "batch", "a2a_client"]
     }
     
-    # Get tool names from loaded community tools
+    # Get tool names from loaded community tools with improved name extraction
     loaded_tool_names = []
+    
+    # Tool name mapping for edge cases where extracted names don't match expected names
+    tool_name_mappings = {
+        'AgentCoreMemoryToolProvider': 'agent_core_memory',
+        'strands_tools.code_interpreter.code_interpreter': 'code_interpreter',
+        'strands_tools.browser.browser': 'browser',
+        'A2ACardResolver': 'a2a_client'
+    }
+    
     for tool in community_tools:
+        tool_name = None
+        
+        # Try to get tool name from __name__ attribute first
         if hasattr(tool, '__name__'):
-            loaded_tool_names.append(tool.__name__)
+            tool_name = tool.__name__
         elif hasattr(tool, '__module__'):
             module_parts = tool.__module__.split('.')
             if len(module_parts) > 1:
-                loaded_tool_names.append(module_parts[-1])
+                tool_name = module_parts[-1]
+        
+        # Apply name mappings for edge cases
+        if tool_name in tool_name_mappings:
+            tool_name = tool_name_mappings[tool_name]
+        
+        # Handle complex tool names (e.g., 'strands_tools.code_interpreter.code_interpreter')
+        if tool_name and '.' in tool_name and tool_name.startswith('strands_tools.'):
+            # Extract the last part after the final dot
+            tool_name = tool_name.split('.')[-1]
+        
+        if tool_name:
+            loaded_tool_names.append(tool_name)
+    
+    # Remove duplicates from loaded tool names while preserving order
+    loaded_tool_names = list(dict.fromkeys(loaded_tool_names))
     
     # Add categories that have loaded tools
+    categories_added = 0
     for category, tools_in_category in tool_categories.items():
         category_tools = [tool for tool in tools_in_category if tool in loaded_tool_names]
         if category_tools:
             community_prompt += f"\n- {category}: {', '.join(category_tools)}"
+            categories_added += 1
+    
+    # Add summary of available tools
+    community_prompt += f"\n\nTotal: {len(loaded_tool_names)} community tools across {categories_added} categories"
     
     return base_prompt + community_prompt + """
 
