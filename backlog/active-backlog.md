@@ -55,3 +55,5 @@
     - **Clean architecture**: Modular design that can be easily enabled/disabled
     
     **Result**: Tool consent requests in analystchat are now clearly visible with prominent, well-formatted Rich UI panels that cannot be missed by users. The system provides proper context, security warnings, and handles edge cases like non-interactive environments. Users will see beautiful red consent panels instead of confusing terminal warnings when tools require permission.
+  
+  [ ] Review the backlog/active-backlog.md and backlog/backlog-archive-001.md and the project code, docs/ folder contents and the README.md. Now rollback Rich markdown rendering analystchat and only retain the original "legacy" chat using default Strands Agents streaming capability. This step is taken due to various issues with rendering Rich chat including permissions not showing, etc. Once this rollback is done, bring back user permissions or consent for tools like shell, automations, etc. and do not bypass user concent where user security and safety is a concern.
