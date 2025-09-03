@@ -31,16 +31,15 @@ def _load_community_tools(agent_name: str = "chat") -> List:
     if not tools_config["enabled"]:
         return tools
     
-    # Respect consent settings from configuration - DO NOT automatically bypass
+    # Respect consent settings from configuration
     consent_settings = tools_config["consent_settings"]
     
-    # Only set bypass if explicitly configured to do so
-    if not consent_settings["require_consent"] and consent_settings.get("bypass_for_safe_tools", False):
-        # Only bypass for explicitly safe tools like calculator, current_time
-        safe_tools = {"calculator", "current_time", "http_request", "file_read", "memory"}
-        # Check if all enabled tools are in the safe list
-        if all(tool in safe_tools for tool in tools_config["tools"]):
-            os.environ["BYPASS_TOOL_CONSENT"] = "true"
+    # Check agent-specific tool configurations to determine consent bypass
+    tool_configs = tools_config.get("tool_configs", {})
+    
+    # Only bypass consent if the user explicitly configured it to be bypassed
+    # via environment variables set before running the program
+    # Do NOT automatically set BYPASS_TOOL_CONSENT here as it bypasses security
     
     # Check for direct enabled_tools list in agent overrides
     config = get_config()

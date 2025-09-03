@@ -555,35 +555,35 @@ community_tools:
         "communication"
       ]
       
-      # Chat-specific tool settings - NO CONSENT for smooth operation
+      # Chat-specific tool settings - SELECTIVE CONSENT for security
       tools:
-        # Core automation (shell is primary tool for computer/browser control)
+        # Core automation - REQUIRE CONSENT for shell (can execute any command)
         shell:
-          require_consent: false
+          require_consent: true  # Security: shell commands can modify system
         environment:
-          require_consent: false
+          require_consent: false  # Safe: only manages environment variables
         
-        # Code execution
+        # Code execution - REQUIRE CONSENT (can execute arbitrary code)
         python_repl:
-          require_consent: false
+          require_consent: true  # Security: can execute arbitrary Python code
         code_interpreter:
-          require_consent: false
+          require_consent: true  # Security: can execute code
           
-        # File operations
+        # File operations - Mixed based on operation type
         file_read:
-          require_consent: false
+          require_consent: false  # Safe: read-only operation
         file_write:
-          require_consent: false
+          require_consent: true  # Security: can modify/create files
         editor:
-          require_consent: false
+          require_consent: true  # Security: can modify files
         
-        # Utilities
+        # Utilities - Safe tools don't need consent
         calculator:
-          require_consent: false
+          require_consent: false  # Safe: mathematical operations only
         current_time:
-          require_consent: false
+          require_consent: false  # Safe: returns current time
         sleep:
-          require_consent: false
+          require_consent: false  # Safe: just pauses execution
         
         # AI capabilities
         think:
