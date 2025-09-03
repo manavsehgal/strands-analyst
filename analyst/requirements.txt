@@ -1,5 +1,5 @@
 strands-agents>=1.0.0
-strands-agents-tools>=0.2.0
+strands-agents-tools[mem0_memory,local_chromium_browser,agent_core_browser,agent_core_code_interpreter,a2a_client,diagram,rss,use_computer]>=0.2.0
 feedparser>=6.0.10
 requests>=2.31.0
 beautifulsoup4>=4.12.0

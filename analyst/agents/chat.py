@@ -36,48 +36,72 @@ def _load_community_tools(agent_name: str = "chat") -> List:
     if not consent_settings["require_consent"]:
         os.environ["BYPASS_TOOL_CONSENT"] = "true"
     
+    # Check for direct enabled_tools list in agent overrides
+    config = get_config()
+    enabled_tools_list = config.get(f'community_tools.agent_overrides.{agent_name}.enabled_tools')
+    if enabled_tools_list:
+        # Use the direct list of enabled tools if specified
+        tools_config["tools"] = enabled_tools_list
+    
     # Tool module mapping - maps tool names to their strands_tools modules
     tool_module_mapping = {
-        # Web & Network
-        "http_request": "strands_tools.http_request",
-        "rss": "strands_tools.rss",
-        "tavily": "strands_tools.tavily",
+        # RAG & Memory
+        "retrieve": "strands_tools.retrieve",
+        "memory": "strands_tools.memory",
+        "agent_core_memory": "strands_tools.agent_core_memory",
+        "mem0_memory": "strands_tools.mem0_memory",
         
         # File Operations
-        "file_read": "strands_tools.file_read",
-        "file_write": "strands_tools.file_write", 
         "editor": "strands_tools.editor",
+        "file_read": "strands_tools.file_read",
+        "file_write": "strands_tools.file_write",
         
-        # Code & System
-        "python_repl": "strands_tools.python_repl",
-        "shell": "strands_tools.shell",
-        "calculator": "strands_tools.calculator",
+        # Shell & System
         "environment": "strands_tools.environment",
-        
-        # Automation & Workflow
-        "use_agent": "strands_tools.use_agent",
-        "swarm": "strands_tools.swarm",
-        "workflow": "strands_tools.workflow",
+        "shell": "strands_tools.shell",
         "cron": "strands_tools.cron",
-        "batch": "strands_tools.batch",
+        "use_computer": "strands_tools.use_computer",
         
-        # Memory & Storage
-        "memory": "strands_tools.memory",
-        "journal": "strands_tools.journal",
+        # Code Interpretation
+        "python_repl": "strands_tools.python_repl",
+        "code_interpreter": "strands_tools.code_interpreter",
         
-        # Communication
-        "handoff_to_user": "strands_tools.handoff_to_user",
+        # Web & Network
+        "http_request": "strands_tools.http_request",
         "slack": "strands_tools.slack",
+        "browser": "strands_tools.browser",
+        "rss": "strands_tools.rss",
         
-        # Utilities
-        "current_time": "strands_tools.current_time",
-        "sleep": "strands_tools.sleep",
-        "stop": "strands_tools.stop",
-        "think": "strands_tools.think",
-        "use_llm": "strands_tools.use_llm",
+        # Multi-modal
+        "generate_image_stability": "strands_tools.generate_image_stability",
+        "image_reader": "strands_tools.image_reader",
+        "generate_image": "strands_tools.generate_image",
+        "nova_reels": "strands_tools.nova_reels",
+        "speak": "strands_tools.speak",
+        "diagram": "strands_tools.diagram",
         
         # AWS Services
-        "use_aws": "strands_tools.use_aws"
+        "use_aws": "strands_tools.use_aws",
+        
+        # Utilities
+        "calculator": "strands_tools.calculator",
+        "current_time": "strands_tools.current_time",
+        "load_tool": "strands_tools.load_tool",
+        "sleep": "strands_tools.sleep",
+        
+        # Agents & Workflows
+        "graph": "strands_tools.graph",
+        "agent_graph": "strands_tools.agent_graph",
+        "journal": "strands_tools.journal",
+        "swarm": "strands_tools.swarm",
+        "stop": "strands_tools.stop",
+        "handoff_to_user": "strands_tools.handoff_to_user",
+        "use_agent": "strands_tools.use_agent",
+        "think": "strands_tools.think",
+        "use_llm": "strands_tools.use_llm",
+        "workflow": "strands_tools.workflow",
+        "batch": "strands_tools.batch",
+        "a2a_client": "strands_tools.a2a_client"
     }
     
     # Load each enabled tool
@@ -103,10 +127,12 @@ def _load_community_tools(agent_name: str = "chat") -> List:
                                 break
                 
             except ImportError as e:
-                print(f"Warning: Could not import community tool '{tool_name}': {e}")
+                # Silently skip tools that aren't installed - they may require extras
                 continue
             except Exception as e:
-                print(f"Warning: Error loading community tool '{tool_name}': {e}")
+                # Only log unexpected errors
+                if "module" not in str(e).lower():
+                    print(f"Warning: Error loading community tool '{tool_name}': {e}")
                 continue
     
     return tools
@@ -123,7 +149,7 @@ def _generate_system_prompt_with_tools(available_tools: List, community_tools: L
     Returns:
         Formatted system prompt string
     """
-    base_prompt = """You are a helpful AI analyst assistant with access to various analysis and productivity tools.
+    base_prompt = """You are a powerful AI analyst assistant with access to comprehensive analysis and productivity tools.
 
 Built-in Analysis Capabilities:
 - Website analysis: Extract metadata, titles, descriptions from URLs
@@ -141,14 +167,15 @@ Always be helpful, clear, and suggest the best tools for the user's needs. If a 
     
     # Group tools by category for better organization
     tool_categories = {
-        "Web & Network": ["http_request", "rss", "tavily"],
-        "File Operations": ["file_read", "file_write", "editor"],
-        "Code & System": ["python_repl", "shell", "calculator", "environment"],
-        "Automation": ["use_agent", "batch", "workflow", "swarm", "cron"],
-        "Memory & Storage": ["memory", "journal"],
-        "Communication": ["handoff_to_user", "slack"],
-        "Utilities": ["current_time", "sleep", "stop", "think", "use_llm"],
-        "AWS Services": ["use_aws"]
+        "RAG & Memory": ["retrieve", "memory", "agent_core_memory", "mem0_memory"],
+        "File Operations": ["editor", "file_read", "file_write"],
+        "Shell & System": ["environment", "shell", "cron", "use_computer"],
+        "Code Interpretation": ["python_repl", "code_interpreter"],
+        "Web & Network": ["http_request", "slack", "browser", "rss"],
+        "Multi-modal": ["generate_image_stability", "image_reader", "generate_image", "nova_reels", "speak", "diagram"],
+        "AWS Services": ["use_aws"],
+        "Utilities": ["calculator", "current_time", "load_tool", "sleep"],
+        "Agents & Workflows": ["graph", "agent_graph", "journal", "swarm", "stop", "handoff_to_user", "use_agent", "think", "use_llm", "workflow", "batch", "a2a_client"]
     }
     
     # Get tool names from loaded community tools
