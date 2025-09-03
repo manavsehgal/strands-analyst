@@ -7,18 +7,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-# Always import legacy dependencies for --use-legacy mode
+# Import standard chat dependencies
 from ..agents.chat import create_chat_agent, chat_with_agent, get_session_info
 from ..config import get_config
 from ..utils import configure_logging, get_rotating_prompts, get_more_examples
-from ..utils.consent_patch import enable_rich_consent_prompts, disable_rich_consent_prompts
-
-# Import the enhanced Rich UI version
-try:
-    from .chat_rich import main as rich_main
-    RICH_AVAILABLE = True
-except ImportError:
-    RICH_AVAILABLE = False
 
 
 def print_welcome_message():
@@ -202,10 +194,6 @@ def single_message_mode(agent, message: str, args):
 
 def main():
     """Main CLI entry point for the analystchat command."""
-    # Check if --use-legacy flag is present to force legacy mode
-    if '--use-legacy' not in sys.argv and RICH_AVAILABLE:
-        # Use the enhanced Rich UI version by default
-        return rich_main()
     
     parser = argparse.ArgumentParser(
         description="Interactive chat interface for AI-powered analysis with multi-turn conversations.",
@@ -246,17 +234,10 @@ def main():
         action="store_true",
         help="Automatically save conversation summary when exiting"
     )
-    parser.add_argument(
-        "--use-legacy",
-        action="store_true",
-        help="Use legacy interface instead of Rich UI"
-    )
     
     args = parser.parse_args()
     
     try:
-        # Enable Rich UI consent prompts globally  
-        enable_rich_consent_prompts()
         
         # Configure logging
         if not args.no_logging:
@@ -282,12 +263,8 @@ def main():
             # Interactive mode
             interactive_chat(agent, args)
         
-        # Cleanup consent prompts on successful exit
-        disable_rich_consent_prompts()
             
     except Exception as e:
-        # Cleanup consent prompts on error
-        disable_rich_consent_prompts()
         print(f"❌ Failed to start chat: {e}", file=sys.stderr)
         sys.exit(1)
 

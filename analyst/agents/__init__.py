@@ -10,13 +10,11 @@ from .get_article import print_result_metrics as get_article_print_result_metric
 from .html_to_markdown import create_html_to_markdown_agent, html_to_markdown
 from .html_to_markdown import print_result_metrics as html_to_markdown_print_result_metrics
 from .chat import create_chat_agent, chat_with_agent, get_session_info
-from .chat_streaming import create_streaming_chat_agent, chat_with_streaming
 
 __all__ = [
     "create_sitemeta_agent", "sitemeta", "print_result_metrics",
     "create_news_agent", "news", "news_print_result_metrics",
     "create_get_article_agent", "get_article", "get_article_print_result_metrics",
     "create_html_to_markdown_agent", "html_to_markdown", "html_to_markdown_print_result_metrics",
-    "create_chat_agent", "chat_with_agent", "get_session_info",
-    "create_streaming_chat_agent", "chat_with_streaming"
+    "create_chat_agent", "chat_with_agent", "get_session_info"
 ]

@@ -279,16 +279,16 @@ community_tools:
   # Global tool settings
   enabled: true
   
-  # Tool consent and safety settings - DISABLED for Claude Code compatibility
+  # Tool consent and safety settings - RESTORED for user security
   consent:
-    # Disable consent prompts as they break in non-interactive environments
-    require_consent: false
+    # Require consent prompts for security-sensitive operations
+    require_consent: true
     
-    # Bypass all consent for seamless operation
-    bypass_for_safe_tools: true
+    # Only bypass consent for truly safe, read-only tools
+    bypass_for_safe_tools: false
     
-    # Only require consent for truly dangerous operations (none for now)
-    always_require_consent: []
+    # Tools that always require consent (security-sensitive operations)
+    always_require_consent: ["shell", "python_repl", "file_write", "editor", "use_computer", "swarm", "workflow", "use_agent"]
   
   # Human-in-the-loop configuration
   human_in_loop:
@@ -366,8 +366,8 @@ community_tools:
       
       shell:
         enabled: true
-        require_consent: false  # Shell is our primary automation tool
-        description: "Execute shell commands for computer and browser automation"
+        require_consent: true  # Shell commands can modify system - require consent
+        description: "Execute shell commands for system operations (requires user consent)"
       
       cron:
         enabled: false  # Disabled by default for security

@@ -4,48 +4,39 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Strands](https://img.shields.io/badge/powered%20by-Strands-orange.svg)](https://github.com/anthropics/strands)
 [![AWS Bedrock](https://img.shields.io/badge/AI-Claude%203.7%20Sonnet-purple.svg)](https://aws.amazon.com/bedrock/)
-[![Rich UI](https://img.shields.io/badge/UI-Rich%20Terminal-brightgreen.svg)](https://rich.readthedocs.io/)
+[![Security](https://img.shields.io/badge/Security-First-red.svg)]()
 
-**Intelligent analysis with professional terminal UI** — A comprehensive AI agent framework for website intelligence, news monitoring, content archival, and research automation featuring real-time streaming responses and beautiful Rich terminal interface.
+**Intelligent analysis with secure AI agents** — A comprehensive AI agent framework for website intelligence, news monitoring, content archival, and research automation with proper security controls and user consent mechanisms.
 
-Built on the [Strands](https://github.com/anthropics/strands) platform with enterprise-grade AWS Bedrock integration, 44+ community tools, and modern terminal UI for production-ready analysis workflows.
+Built on the [Strands](https://github.com/anthropics/strands) platform with enterprise-grade AWS Bedrock integration, 44+ community tools, and security-first design for production-ready analysis workflows.
 
 ---
 
-## ✨ **What's New — Enhanced Terminal Experience**
-
-### 🎨 **Rich Terminal UI with Streaming**
-- **🎭 Beautiful panels** with color-coded sections and professional styling
-- **⚡ Real-time streaming** responses that appear as they're generated
-- **🔧 Live tool indicators** showing active operations with progress
-- **📝 Markdown rendering** for formatted output in the terminal
-- **🎯 Interactive prompts** with enhanced styling and user experience
+## ✨ **Core Features — Professional AI Analysis**
 
 ### 🛠️ **44+ Community Tools Integration**
-- **🧮 Mathematical calculations** and Python code execution
-- **📁 File operations** with granular permission controls
+- **🧮 Mathematical calculations** and Python code execution (with user consent)
+- **📁 File operations** with security-first permission controls
 - **🌐 HTTP requests** and web scraping capabilities  
 - **💾 Memory & storage** for persistent analysis sessions
 - **🤖 Agent orchestration** and batch processing workflows
+- **🔒 Security-focused** - explicit consent required for system-modifying operations
 
-### 💬 **Enhanced Chat Experience**
+### 💬 **Interactive Chat Experience**
 ```bash
-# Beautiful welcome screen with streaming responses
+# Clean, professional command-line interface
 analystchat
 
-# Professional UI with tool indicators and live updates
+# Natural language interaction with built-in tools
 You: analyze stripe.com and calculate their potential market size
 
-🔧 Using tool: fetch_url_metadata
-🔧 Using tool: calculator
+🤖 Assistant: I'll help you analyze Stripe's website and estimate their market size.
+Let me start by extracting metadata from stripe.com...
 
-╭──────────── 🤖 Assistant Response ─────────────╮
-│                                               │
-│ # Stripe Analysis & Market Size Calculation   │
-│                                               │
-│ Based on my analysis of Stripe.com...        │
-│                                               │
-╰───────────────────────────────────────────────╯
+[Using tool: fetch_url_metadata]
+[Tool requires permission: calculator - Allow? (y/n)]
+
+# Based on my analysis of Stripe.com...
 ```
 
 ---
@@ -177,30 +168,20 @@ analystchat "Analyze stripe.com and calculate compound interest on $10000" --ver
 
 # Use community tools through natural conversation
 analystchat "read config.yml and explain the Bedrock settings"
-
-# Stable mode for consistent output (no streaming)
-analystchat --no-streaming
-
-# Legacy mode for compatibility
-analystchat --use-legacy
 ```
 
-### Computer & Browser Automation (NEW 🚀)
+### System Automation with Security (🔒 Protected)
 ```bash
-# Computer automation via shell
+# System operations require user consent for security
 analystchat "take a screenshot of my desktop using shell"
-analystchat "get my screen resolution using shell"
-analystchat "open Safari using shell"
+# → System will ask: "Allow shell command execution? (y/n)"
 
-# Browser automation via shell + Playwright  
-analystchat "take a screenshot of google.com using shell and playwright"
-analystchat "create a PDF of anthropic.com using shell"
-analystchat "open Chrome and navigate to stripe.com using shell"
+analystchat "get my screen resolution using shell" 
+# → User consent required before system access
 
-# Advanced system operations
+# File operations with permissions
 analystchat "find all Python files in the current directory using shell"
-analystchat "check running processes using shell"
-analystchat "use AppleScript via shell to control applications"
+# → Permission prompt before file system access
 ```
 
 <details>

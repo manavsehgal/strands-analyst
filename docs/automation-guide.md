@@ -1,16 +1,16 @@
 # Computer & Browser Automation Guide
 
-Strands Analyst provides comprehensive computer and browser automation capabilities through a reliable shell-based approach. This guide covers all automation features and best practices.
+Strands Analyst provides computer and browser automation capabilities through system tools with proper security controls. This guide covers available automation features and security practices.
 
 ## Overview
 
-After extensive testing and optimization, Strands Analyst uses the **shell tool** as the primary automation interface. This approach provides:
+Strands Analyst provides automation capabilities through community tools including the **shell tool**. For security and user protection:
 
-- ✅ **Reliable operation** without interactive consent prompt failures
-- ✅ **Full computer control** via system commands  
-- ✅ **Complete browser automation** via Playwright CLI integration
-- ✅ **Seamless operation** with no blocking prompts
-- ✅ **Cross-platform support** with intelligent command detection
+- ⚠️  **User consent required** for system-level operations that can modify your computer
+- 🔒 **Security-first approach** with explicit permission prompts for dangerous operations
+- 💻 **Cross-platform support** with system command integration  
+- 🛡️  **Safe defaults** - read-only operations don't require consent, write operations do
+- 📝 **Clear permissions** - you'll be asked before any system modifications
 
 ## Quick Start
 

@@ -56,4 +56,46 @@
     
     **Result**: Tool consent requests in analystchat are now clearly visible with prominent, well-formatted Rich UI panels that cannot be missed by users. The system provides proper context, security warnings, and handles edge cases like non-interactive environments. Users will see beautiful red consent panels instead of confusing terminal warnings when tools require permission.
   
-  [ ] Review the backlog/active-backlog.md and backlog/backlog-archive-001.md and the project code, docs/ folder contents and the README.md. Now rollback Rich markdown rendering analystchat and only retain the original "legacy" chat using default Strands Agents streaming capability. This step is taken due to various issues with rendering Rich chat including permissions not showing, etc. Once this rollback is done, bring back user permissions or consent for tools like shell, automations, etc. and do not bypass user concent where user security and safety is a concern.
+[x] Review the backlog/active-backlog.md and backlog/backlog-archive-001.md and the project code, docs/ folder contents and the README.md. Now rollback Rich markdown rendering analystchat and only retain the original "legacy" chat using default Strands Agents streaming capability. This step is taken due to various issues with rendering Rich chat including permissions not showing, etc. Once this rollback is done, bring back user permissions or consent for tools like shell, automations, etc. and do not bypass user concent where user security and safety is a concern. Remove the dependencies for Rich UI, update the docs/ folder, README.md and CLAUDE.md accordingly.
+
+    **Completion Summary (2025-09-03):**
+    - ✅ **Reviewed project state and backlog archives**: Analyzed current Rich UI implementation and identified all components that needed rollback
+    - ✅ **Successfully rolled back analystchat to legacy Strands streaming**: 
+      - Removed Rich UI dispatcher from chat.py CLI, made it the primary interface
+      - Updated chat agent to remove Rich UI components and use standard Strands streaming
+      - Eliminated all Rich UI formatting, panels, and interactive elements
+    - ✅ **Restored proper security controls**:
+      - Removed automatic consent bypass mechanisms (`BYPASS_TOOL_CONSENT=true`)
+      - Updated config.yml to require consent for security-sensitive tools (shell, python_repl, file_write, etc.)
+      - Restored `require_consent: true` for shell tool and other dangerous operations
+      - Updated system prompts to inform users about security requirements
+    - ✅ **Removed Rich UI dependencies completely**:
+      - Removed `rich>=13.7.0` from requirements.txt
+      - Deleted Rich UI files: chat_rich.py, chat_streaming.py, chat_no_streaming.py, consent_patch.py
+      - Fixed import errors in __init__.py files to remove references to deleted modules
+      - Verified no Rich imports remain in codebase
+    - ✅ **Updated all documentation**:
+      - docs/: Removed enhanced-chat-guide.md and streaming-features-guide.md, updated automation-guide.md to reflect security-first approach
+      - README.md: Replaced Rich UI marketing content with security-focused messaging, updated badges and examples to show consent prompts
+      - CLAUDE.md: Updated automation sections to require consent instead of bypassing it, corrected all examples to show permission prompts
+    - ✅ **Verified functionality with comprehensive testing**:
+      - Confirmed analystchat works with clean text interface (no Rich formatting)
+      - Verified consent prompts work correctly for shell tool (tested with "n" response)
+      - Confirmed calculator tool works without consent (safe tool)
+      - Verified proper error handling and user education about security
+
+    **Key Security Improvements:**
+    - **Consent restored**: Shell and other dangerous tools now require explicit user permission
+    - **Educational prompts**: Users are clearly informed why consent is needed ("can modify your system")  
+    - **Safe defaults**: Only read-only tools like calculator and http_request bypass consent
+    - **Clean interface**: Standard Strands streaming provides reliable, professional output
+    - **User control**: Users can decline dangerous operations and receive helpful explanations
+
+    **Technical Changes:**
+    - **Interface**: Reverted to standard Strands Agents streaming (no Rich panels/formatting)
+    - **Security**: `require_consent: true` for shell, python_repl, file_write, editor, use_computer, etc.
+    - **Dependencies**: Removed Rich UI library and all related code
+    - **Configuration**: Updated config.yml security settings and removed bypass mechanisms
+    - **Documentation**: Comprehensive updates reflecting security-first approach
+
+    The rollback successfully addresses the issues with Rich chat rendering and permission visibility while restoring proper security controls. Users now have full control over potentially dangerous operations with clear, understandable consent prompts using the reliable Strands Agents streaming interface.

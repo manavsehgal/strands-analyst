@@ -31,14 +31,16 @@ def _load_community_tools(agent_name: str = "chat") -> List:
     if not tools_config["enabled"]:
         return tools
     
-    # FORCE bypass tool consent to prevent interactive prompt failures
-    os.environ["BYPASS_TOOL_CONSENT"] = "true"
-    os.environ["STRANDS_DISABLE_CACHE"] = "true"  # Prevent caching issues
-    
-    # Set consent bypass based on configuration
+    # Respect consent settings from configuration - DO NOT automatically bypass
     consent_settings = tools_config["consent_settings"]
-    if not consent_settings["require_consent"]:
-        os.environ["BYPASS_TOOL_CONSENT"] = "true"
+    
+    # Only set bypass if explicitly configured to do so
+    if not consent_settings["require_consent"] and consent_settings.get("bypass_for_safe_tools", False):
+        # Only bypass for explicitly safe tools like calculator, current_time
+        safe_tools = {"calculator", "current_time", "http_request", "file_read", "memory"}
+        # Check if all enabled tools are in the safe list
+        if all(tool in safe_tools for tool in tools_config["tools"]):
+            os.environ["BYPASS_TOOL_CONSENT"] = "true"
     
     # Check for direct enabled_tools list in agent overrides
     config = get_config()
@@ -161,23 +163,12 @@ Built-in Analysis Capabilities:
 - Article downloading: Download full articles with images and convert to various formats
 - HTML to Markdown conversion: Convert HTML content to well-formatted Markdown
 
-IMPORTANT AUTOMATION CAPABILITIES:
-🔧 SHELL TOOL - Your primary automation interface:
-- Computer automation: Screenshots, system info, file operations
-  Example: "shell: screencapture ~/Desktop/screenshot.png" 
-- Browser automation: Web screenshots, browser control
-  Example: "shell: playwright screenshot https://google.com ~/Desktop/page.png"
-  Example: "shell: open -a Safari https://example.com"
-- System control: Process management, environment setup
-  Example: "shell: ps aux | grep Chrome"
-- File operations: Directory navigation, file manipulation
-  Example: "shell: find . -name '*.py' | head -10"
-
-When users ask about:
-- Taking screenshots → Use shell with screencapture or playwright
-- Browser automation → Use shell with playwright commands or open commands  
-- Computer control → Use shell with system commands
-- File operations → Use shell commands or editor tool"""
+Available Community Tools (when enabled and with appropriate permissions):
+- Calculation and utilities: For mathematical operations and current time
+- File operations: For reading and writing files (requires consent for writes)
+- System operations: For shell commands and system interaction (requires consent)
+- Web requests: For HTTP requests and web scraping
+- Code execution: For Python REPL and code interpretation (requires consent)"""
 
     if not community_tools:
         return base_prompt + """
@@ -250,18 +241,10 @@ Always be helpful, clear, and suggest the best tools for the user's needs. If a 
     
     return base_prompt + community_prompt + """
 
-🚀 PRIMARY AUTOMATION APPROACH:
-- Use SHELL TOOL for computer/browser automation (not use_computer/browser tools)
-- Shell tool provides reliable, consent-free automation
-- Examples of shell automation:
-  • Screenshots: shell("screencapture ~/Desktop/shot.png")
-  • Browser: shell("playwright screenshot https://site.com ~/Desktop/page.png") 
-  • System: shell("system_profiler SPDisplaysDataType | grep Resolution")
-  • Files: shell("ls -la /path/to/directory")
+You can help users with analysis, research, coding, file operations, web requests, and general productivity tasks using these tools. Always be helpful, clear, and suggest the best tools for the user's needs.
 
-You can help users with analysis, research, coding, file operations, web requests, and comprehensive automation tasks. Always proactively suggest shell-based solutions for computer and browser automation needs.
-
-All tools are configured for seamless operation without consent prompts."""
+IMPORTANT SECURITY NOTICE:
+Some tools (like shell, file_write, python_repl) may require user consent before execution as they can modify your system or execute code. This is a safety feature to protect your security and privacy."""
 
 
 def create_chat_agent(
@@ -282,9 +265,7 @@ def create_chat_agent(
     Returns:
         Configured Agent instance with session management
     """
-    # SET ENVIRONMENT VARIABLES FIRST to prevent consent issues
-    os.environ["BYPASS_TOOL_CONSENT"] = "true"
-    os.environ["STRANDS_DISABLE_CACHE"] = "true"
+    # Respect user security preferences - DO NOT automatically bypass consent
     
     # Generate session ID if not provided
     if session_id is None:

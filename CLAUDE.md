@@ -36,7 +36,7 @@ For computer and browser automation capabilities, ensure Playwright browsers are
 playwright install
 ```
 
-All automation tools are configured to bypass consent prompts for seamless operation.
+Automation tools require user consent for security-sensitive operations to protect your system.
 
 ## Architecture
 
@@ -207,29 +207,31 @@ temperature = config['temperature']
 
 ### Shell-Based Automation Approach
 
-After extensive testing, the project uses the **shell tool** as the primary automation interface instead of individual `use_computer` and `browser` community tools. This approach provides:
+The project provides automation capabilities through community tools including the **shell tool**. For user security:
 
-- ✅ **Reliable operation** without consent prompt failures
-- ✅ **Full computer control** via system commands  
-- ✅ **Complete browser automation** via Playwright CLI
-- ✅ **No interactive prompts** that break in non-interactive environments
+- 🔒 **Security-first approach** with user consent required for system operations
+- ✅ **System integration** via commands when permission is granted
+- ⚠️  **Permission prompts** protect against unauthorized system modifications
+- 🛡️  **Safe defaults** - dangerous operations require explicit user approval
 
 ### Computer Automation Examples
 
-**Screenshots:**
+**Screenshots (requires consent):**
 ```bash
 analystchat "use shell to take a screenshot: screencapture ~/Desktop/screenshot.png"
+# → User will be prompted: "Allow shell command execution? (y/n)"
 ```
 
-**System Information:**
+**System Information (requires consent):**
 ```bash
 analystchat "use shell to get screen resolution: system_profiler SPDisplaysDataType | grep Resolution"
+# → Permission prompt before accessing system information
 ```
 
-**Application Control:**
+**Application Control (requires consent):**
 ```bash
 analystchat "use shell to open Safari: open -a Safari"
-analystchat "use shell to list running apps: ps aux | grep -v grep"
+# → User consent required before opening applications
 ```
 
 ### Browser Automation Examples
