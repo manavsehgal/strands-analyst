@@ -2,42 +2,14 @@
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Strands](https://img.shields.io/badge/powered%20by-Strands-orange.svg)](https://github.com/anthropics/strands)
+[![Strands](https://img.shields.io/badge/powered%20by-Strands%20Agents-orange.svg)](https://strandsagents.com)
 [![AWS Bedrock](https://img.shields.io/badge/AI-Claude%203.7%20Sonnet-purple.svg)](https://aws.amazon.com/bedrock/)
-[![Security](https://img.shields.io/badge/Security-First-red.svg)]()
+[![Security](https://img.shields.io/badge/Security-First%20Design-red.svg)]()
+[![Tools](https://img.shields.io/badge/Community%20Tools-40+-brightgreen.svg)]()
 
-**Intelligent analysis with secure AI agents** — A comprehensive AI agent framework for website intelligence, news monitoring, content archival, and research automation with proper security controls and user consent mechanisms.
+**Professional AI agents for intelligent analysis and automation** — A comprehensive framework for website intelligence, content analysis, and research automation with enterprise-grade security controls.
 
-Built on the [Strands](https://github.com/anthropics/strands) platform with enterprise-grade AWS Bedrock integration, 44+ community tools, and security-first design for production-ready analysis workflows.
-
----
-
-## ✨ **Core Features — Professional AI Analysis**
-
-### 🛠️ **44+ Community Tools Integration**
-- **🧮 Mathematical calculations** and Python code execution (with user consent)
-- **📁 File operations** with security-first permission controls
-- **🌐 HTTP requests** and web scraping capabilities  
-- **💾 Memory & storage** for persistent analysis sessions
-- **🤖 Agent orchestration** and batch processing workflows
-- **🔒 Security-focused** - explicit consent required for system-modifying operations
-
-### 💬 **Interactive Chat Experience**
-```bash
-# Clean, professional command-line interface
-analystchat
-
-# Natural language interaction with built-in tools
-You: analyze stripe.com and calculate their potential market size
-
-🤖 Assistant: I'll help you analyze Stripe's website and estimate their market size.
-Let me start by extracting metadata from stripe.com...
-
-[Using tool: fetch_url_metadata]
-[Tool requires permission: calculator - Allow? (y/n)]
-
-# Based on my analysis of Stripe.com...
-```
+Built on [Strands Agents](https://strandsagents.com) with AWS Bedrock integration, featuring 40+ community tools, security-first architecture, and production-ready analysis workflows.
 
 ---
 
@@ -47,694 +19,516 @@ Let me start by extracting metadata from stripe.com...
 # Install the package
 pip install -e .
 
-# Enhanced chat interface with streaming UI
-analystchat "Compare Google and Microsoft's business models"
+# Interactive AI assistant with 40+ tools
+analystchat
 
-# Analyze any website with Rich output
+# Analyze any website
 sitemeta stripe.com --verbose
 
-# Monitor RSS feeds with auto-save  
+# Monitor RSS feeds  
 news https://feeds.npr.org/1001/rss.xml --save-markdown
 
-# Download articles with professional progress indicators
+# Download and archive articles
 article https://anthropic.com/news/building-effective-agents
 
-# Convert HTML to markdown with enhanced display
+# Convert HTML to Markdown
 htmlmd refer/articles/my-post/index.html --verbose
 ```
 
-## ✨ Core Features
+## ✨ Core Capabilities
+
+### 🤖 **Intelligent Chat Assistant**
+```bash
+analystchat "analyze stripe.com and calculate their potential market size"
+```
+- Natural language interface with streaming responses
+- Access to 40+ community tools with security controls
+- Multi-turn conversations with session persistence
+- Tool execution with user consent for sensitive operations
+
+### 🌐 **Website Intelligence**
+```bash
+sitemeta google.com --save-markdown
+```
+- Instant company analysis from URLs
+- Smart metadata extraction with OpenGraph support
+- Auto-generated markdown reports with YAML frontmatter
+- Performance optimized with head-only downloads
+
+### 📰 **News & RSS Monitoring**
+```bash
+news https://techcrunch.com/feed/ --count 10 --verbose
+```
+- Multi-source RSS aggregation
+- Intelligent content extraction with fallbacks
+- Automated markdown reports with metrics
+- Batch processing for efficiency
+
+### 📄 **Content Archival**
+```bash
+article https://example.com/blog-post --output-dir ./research
+```
+- Complete article downloads with images
+- Professional HTML generation with styling
+- Smart folder organization
+- Readability-powered extraction
+
+### 📝 **HTML to Markdown Conversion**
+```bash
+htmlmd saved-page.html --output research-notes.md
+```
+- Clean markdown generation
+- Metadata preservation in frontmatter
+- Multiple heading styles support
+- Batch conversion capabilities
+
+## 🛠️ 40+ Community Tools
+
+The chat assistant has access to a comprehensive suite of tools:
 
 <table>
 <tr>
 <td width="50%">
 
-### 🌐 **Website Intelligence**
-- **Instant company analysis** from any URL
-- **Smart metadata extraction** with OpenGraph support
-- **Auto-generated markdown reports** with YAML frontmatter
-- **Blazing fast** — head-only downloads for speed
+**🔧 Core Utilities**
+- Calculator for mathematical operations
+- Current time and date information
+- HTTP requests for web interactions
+- Environment variable access
 
 </td>
 <td width="50%">
 
-### 📰 **News & RSS Monitoring**  
-- **Multi-source RSS aggregation** from major outlets
-- **Rich content extraction** with intelligent fallbacks
-- **Automated markdown reports** with domain-based naming
-- **Performance optimized** — ~0.13s for 5 items
+**📁 File Operations** 
+- File reading and writing (with consent)
+- Editor for code modifications
+- Directory traversal and search
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-### 📄 **Content Archival**
-- **Complete article downloads** with images and metadata
-- **Professional HTML generation** with proper styling
-- **Smart folder organization** with relative references
-- **Readability-powered** content extraction
+**💻 Code & System**
+- Python REPL execution (with consent)
+- Shell command execution (with consent)
+- Code interpretation and analysis
+- Cron job scheduling
 
 </td>
 <td width="50%">
 
-### 💬 **Enhanced Interactive Research**
-- **Rich Terminal UI** with streaming responses and panels
-- **Real-time tool indicators** showing active operations
-- **44+ Community tools** for coding, calculations, file ops
-- **Multi-turn conversations** with persistent memory
-- **Professional markdown rendering** in terminal
-- **Session management** for long research projects
+**🤖 Agent Orchestration**
+- Multi-agent workflows
+- Swarm coordination
+- Agent handoffs
+- Batch processing
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**💾 Memory & RAG**
+- Semantic retrieval from knowledge bases
+- Agent memory persistence
+- Context management
+- Vector storage integration
+
+</td>
+<td width="50%">
+
+**🎨 Multi-modal**
+- Image generation and reading
+- Diagram creation
+- Text-to-speech
+- Video generation capabilities
 
 </td>
 </tr>
 </table>
 
-### 🔧 **Technical Excellence**
-- **🎨 Rich Terminal UI** — Beautiful panels, streaming responses, live tool indicators
-- **⚡ Real-time Streaming** — Responses appear as they're generated with callback handlers
-- **🤖 AI-Powered** — Claude 3.7 Sonnet with agent-specific optimizations
-- **🛠️ 44+ Community Tools** — Coding, file ops, calculations, web requests with enterprise security
-- **💻 Computer & Browser Automation** — Screenshots, browser control, system operations via shell
-- **🔒 Enterprise Security** — Configurable tool consent and safety mechanisms (optimized for seamless operation)
-- **⚙️ Highly Configurable** — YAML-based settings for everything
-- **📱 Intelligent CLI** — Multiple interface modes (streaming, stable, legacy)
-- **🧩 Modular Architecture** — Clean separation of agents, tools, and interfaces
-- **📊 Performance Monitoring** — Detailed metrics and logging systems
-- **☁️ Cloud-Optimized** — AWS Bedrock with regional configuration and caching
+### 🔒 Security-First Design
 
----
+All potentially dangerous operations require explicit user consent:
+
+```
+You: use shell to list files in my home directory
+
+🤖 Assistant: I'll help you list files in your home directory using the shell tool.
+
+⚠️  Tool requires permission: shell
+This tool can modify your system. Allow? (y/n): _
+```
 
 ## 📦 Installation
 
+### Prerequisites
+- Python 3.8 or higher
+- AWS account with Bedrock access
+- AWS credentials configured ([setup guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html))
+
+### Setup
+
 ```bash
-# Clone and install
+# Clone the repository
 git clone https://github.com/yourusername/strands-analyst.git
 cd strands-analyst
 
-# Setup virtual environment
+# Create virtual environment
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install package
+# Install package with dependencies
 pip install -e .
-```
 
-### Prerequisites
-- **Python 3.8+** with pip
-- **AWS Account** with Bedrock access
-- **AWS Credentials** configured ([setup guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html))
-
-### Automation Setup
-For computer and browser automation capabilities:
-```bash
-# Install Playwright browsers for web automation
+# (Optional) Install Playwright for browser automation
 playwright install
-
-# All automation tools are configured to bypass consent prompts for seamless operation
 ```
-
----
 
 ## 🎯 Usage Examples
 
-### Enhanced Chat Interface (NEW ✨)
+### Interactive Chat Sessions
+
 ```bash
-# Start enhanced chat with Rich UI and streaming
+# Start interactive chat
 analystchat
 
-# Single message with beautiful formatting
-analystchat "Analyze stripe.com and calculate compound interest on $10000" --verbose
+🤖 Analyst Chat - Interactive Analysis Assistant
+==================================================
 
-# Use community tools through natural conversation
-analystchat "read config.yml and explain the Bedrock settings"
+Try these example prompts:
+• "analyze google.com and describe their business model"
+• "calculate compound interest on $10000 at 5% for 10 years"  
+• "read config.yml and explain the bedrock settings"
+
+Type 'help' for commands or 'quit' to exit
+==================================================
+
+You: analyze stripe.com
+
+🤖 Assistant: I'll analyze stripe.com for you...
+
+[Streaming response appears in real-time]
 ```
 
-### System Automation with Security (🔒 Protected)
+### Single Commands
+
 ```bash
-# System operations require user consent for security
-analystchat "take a screenshot of my desktop using shell"
-# → System will ask: "Allow shell command execution? (y/n)"
+# Quick website analysis
+analystchat "what does openai.com do?"
 
-analystchat "get my screen resolution using shell" 
-# → User consent required before system access
+# Use community tools
+analystchat "calculate the factorial of 12"
 
-# File operations with permissions
-analystchat "find all Python files in the current directory using shell"
-# → Permission prompt before file system access
+# File operations (requires consent)
+analystchat "read the package.json file"
 ```
 
-<details>
-<summary><b>💬 Enhanced Chat Interface</b></summary>
+### Website Analysis
 
-```
-╭──────────────────────────── Welcome ─────────────────────────────╮
-│                                                                  │
-│  🤖 Strands Analyst Chat - Enhanced Interactive Assistant        │
-│                                                                  │
-│  Powered by Amazon Bedrock with Claude 3.7 Sonnet               │
-│                                                                  │
-╰──────────────────────────────────────────────────────────────────╯
-
-              Available Capabilities              
-┌─────┬──────────────────────────────────────────┐
-│ 🌐  │ Website analysis and metadata extraction │
-│ 📰  │ RSS feed analysis and news content       │
-│ 📄  │ Article downloading with image support   │
-│ 📝  │ HTML to Markdown conversion              │
-│ 🔧  │ Community tools integration              │
-│ 💬  │ Multi-turn conversations with memory     │
-└─────┴──────────────────────────────────────────┘
-
-╭──────────────────────────────────────────────────────────────────╮
-│ Type 'help' for commands or 'quit' to exit                       │
-╰──────────────────────────────────────────────────────────────────╯
-
-You: calculate the square root of 144
-
-🔧 Using tool: calculator
-
-╭─────────── 🤖 Assistant Response ───────────────╮
-│                                                │
-│ The square root of 144 is 12.                 │
-│                                                │
-│ The calculator tool computed this perfectly!   │
-│                                                │
-╰────────────────────────────────────────────────╯
-
-Model: Claude 3.7 Sonnet | Tokens: 1,234 | Duration: 1.2s
-```
-</details>
-
-### Website Analysis with Rich Output
 ```bash
-# Quick company analysis with enhanced display
-sitemeta google.com --verbose
+# Basic analysis
+sitemeta google.com
 
-# Detailed analysis with custom output and auto-save
-sitemeta stripe.com --verbose --output-dir ./reports --save-markdown
+# Detailed with metrics
+sitemeta stripe.com --verbose
 
-# Control markdown saving with Rich progress indicators
-sitemeta openai.com --save-markdown
-sitemeta anthropic.com --no-markdown
+# Save to custom directory
+sitemeta openai.com --output-dir ./reports --save-markdown
 ```
 
-<details>
-<summary><b>📋 Enhanced Example Output</b></summary>
+### News Processing
 
-```
-🌐 Analyzing stripe.com...
-
-╭──────────── 🤖 Website Analysis ─────────────╮
-│                                              │
-│ # What does this company do?                 │
-│                                              │
-│ Stripe is a financial technology company     │
-│ that provides **financial infrastructure    │
-│ for online businesses**. They offer:        │
-│                                              │
-│ - Payment processing APIs                    │
-│ - Commerce solutions for internet businesses│ 
-│ - Developer tools for payment integration   │
-│ - AI-powered revenue operations tools       │
-│                                              │
-│ ## Key Topics & Categories                   │
-│                                              │
-│ - **Financial Infrastructure**               │
-│ - **Developer APIs**                         │
-│ - **E-commerce Tools**                       │
-│ - **Revenue Operations**                     │
-│                                              │
-╰──────────────────────────────────────────────╯
-
-💾 Analysis saved to: refer/sitemeta/stripe-com-meta-2025-09-02.md
-
-Model: Claude 3.7 Sonnet | Tokens: 1,456 | Duration: 2.87s
-```
-</details>
-
-### News & RSS Processing with Progress Indicators
 ```bash
-# Analyze RSS feeds with Rich progress display
-news http://feeds.bbci.co.uk/news/rss.xml --verbose
+# Fetch latest news
+news https://feeds.npr.org/1001/rss.xml
 
-# Custom item count with beautiful formatting
-news https://feeds.npr.org/1001/rss.xml --count 5 --output-dir ./news-archive
+# Custom item count with verbose output
+news https://techcrunch.com/feed/ --count 5 --verbose
 
-# Live progress indicators and auto-save
-news https://techcrunch.com/feed/ --verbose --save-markdown
+# Save to markdown
+news https://feeds.bbci.co.uk/news/rss.xml --save-markdown
 ```
 
-### Article Download with Enhanced UI
+### Article Downloads
+
 ```bash
-# Complete article with streaming progress
-article https://anthropic.com/news/building-effective-agents --verbose
+# Download with images
+article https://example.com/blog-post --verbose
 
-# Skip images with progress indicators
-article https://techcrunch.com/startup-news --no-images
+# Skip images for faster download
+article https://example.com/text-article --no-images
 
-# Custom destination with Rich display
-article https://example.com/blog-post --output-dir ./research --verbose
+# Custom output directory
+article https://example.com/research --output-dir ./archive
 ```
-
-### HTML to Markdown with Rich Display
-```bash
-# Convert with enhanced progress display
-htmlmd refer/articles/my-post/index.html --verbose
-
-# Custom output with Rich formatting
-htmlmd saved-article.html --output research-notes.md
-
-# Skip metadata with beautiful error handling
-htmlmd blog-post.html --no-metadata --verbose
-```
-
----
 
 ## 🏗️ Architecture
 
 ```
 strands-analyst/
-├── config.yml                    # YAML configuration hub
+├── config.yml                    # Comprehensive configuration
 ├── analyst/
-│   ├── agents/                   # AI agent implementations  
-│   │   ├── sitemeta.py              # Website intelligence
-│   │   ├── news.py                  # RSS/news processing
-│   │   ├── get_article.py           # Article downloading
-│   │   ├── html_to_markdown.py      # Content conversion
-│   │   ├── chat.py                  # Interactive assistant
-│   │   ├── chat_streaming.py        # 🆕 Enhanced streaming chat
-│   │   └── chat_no_streaming.py     # 🆕 Stable fallback chat
-│   ├── tools/                    # Reusable utilities
-│   │   ├── fetch_url_metadata.py     # Website metadata
-│   │   ├── fetch_rss_content.py      # RSS processing  
-│   │   ├── download_article_content.py # Article downloads
-│   │   └── convert_html_to_markdown.py # HTML conversion
-│   ├── prompts/                  # External prompt templates
+│   ├── agents/                   # AI agent implementations
+│   │   ├── sitemeta.py          # Website analysis agent
+│   │   ├── news.py              # RSS/news processing agent
+│   │   ├── get_article.py       # Article download agent
+│   │   ├── html_to_markdown.py  # HTML conversion agent
+│   │   └── chat.py              # Interactive chat agent
+│   ├── tools/                    # Reusable tool functions
+│   │   ├── fetch_url_metadata.py
+│   │   ├── fetch_rss_content.py
+│   │   ├── download_article_content.py
+│   │   └── convert_html_to_markdown.py
 │   ├── cli/                      # Command-line interfaces
-│   │   ├── sitemeta.py              # 'sitemeta' command
-│   │   ├── news.py                  # 'news' command  
-│   │   ├── get_article.py           # 'article' command
-│   │   ├── html_to_markdown.py      # 'htmlmd' command
-│   │   ├── chat.py                  # 'analystchat' command
-│   │   └── chat_rich.py             # 🆕 Enhanced Rich UI
+│   │   ├── sitemeta.py          # 'sitemeta' command
+│   │   ├── news.py              # 'news' command
+│   │   ├── get_article.py       # 'article' command
+│   │   ├── html_to_markdown.py  # 'htmlmd' command
+│   │   └── chat.py              # 'analystchat' command
 │   └── utils/                    # Shared utilities
-│       ├── logging_utils.py         # Configurable logging
-│       └── metrics_utils.py         # Performance metrics
-├── refer/                        # Generated content
-└── docs/                         # Comprehensive documentation
-    ├── enhanced-chat-guide.md       # 🆕 Rich UI guide
-    ├── community-tools-guide.md     # 🆕 Tools integration
-    └── streaming-features-guide.md  # 🆕 Technical details
+│       ├── logging_utils.py     # Logging configuration
+│       ├── metrics_utils.py     # Performance metrics
+│       ├── prompt_utils.py      # Prompt management
+│       └── config.py            # Configuration loader
+├── refer/                        # Output directory
+│   ├── sitemeta/                # Website analysis reports
+│   ├── news/                    # News summaries
+│   ├── articles/                # Downloaded articles
+│   └── chat-sessions/           # Chat history
+└── docs/                         # Documentation
 ```
 
-### Enhanced Components
-- **🎨 Rich UI** — Beautiful terminal interface with panels, tables, and live updates
-- **⚡ Streaming** — Real-time response generation with callback handlers
-- **🤖 Agents** — AI-powered coordinators with enhanced UX
-- **🛠️ Community Tools** — 44+ professional tools with enterprise security  
-- **💻 CLI** — Multiple interface modes (streaming, stable, legacy)
-- **📝 Prompts** — External template system with caching and variables
-- **⚙️ Config** — YAML-driven settings for everything including UI preferences
+### Key Components
 
----
+- **Agents**: AI-powered task coordinators using AWS Bedrock
+- **Tools**: Reusable functions for specific operations
+- **CLI**: User-friendly command-line interfaces
+- **Configuration**: YAML-based settings management
+- **Security**: Consent system for sensitive operations
 
 ## ⚙️ Configuration
 
-Customize all behavior including the enhanced UI via `config.yml`:
+All behavior is customizable via `config.yml`:
 
-<details>
-<summary><b>🎨 Enhanced UI Configuration</b></summary>
-
-```yaml
-# Enhanced chat interface settings
-chat:
-  ui:
-    use_rich: true                   # Enable Rich terminal UI
-    enable_streaming: true           # Real-time response streaming
-    show_welcome: true               # Enhanced welcome screen
-    color_output: true               # Color-coded output
-    
-  display:
-    refresh_rate: 4                  # Live display refresh rate (Hz)
-    panel_padding: [1, 2]           # Panel padding [vertical, horizontal]  
-    show_progress: true             # Progress indicators for operations
-    markdown_rendering: true        # Render markdown in terminal
-    
-  modes:
-    default_mode: "streaming"       # Options: streaming, stable, legacy
-    fallback_mode: "stable"         # Fallback when streaming fails
-    allow_legacy: true              # Allow --use-legacy flag
-```
-</details>
-
-<details>
-<summary><b>🔧 Core Settings</b></summary>
-
-```yaml
-# Website analysis
-sitemeta:
-  output_dir: "refer/sitemeta"      # Analysis reports directory
-  save_markdown: true               # Auto-save to markdown
-  timeout: 30                       # Request timeout (seconds)
-
-# RSS and news processing
-rss:
-  default_items: 10                 # Default news items to fetch
-  max_items: 50                     # Maximum allowed items
-  timeout: 30                       # Request timeout
-
-news:
-  output_dir: "refer/news"          # News reports directory
-  save_markdown: true               # Auto-save to markdown
-
-# Article downloading  
-article:
-  output_dir: "refer/articles"      # Default save location
-  download_images: true             # Enable image downloads
-  max_images: 20                    # Max images per article
-  timeout: 30                       # Request timeout
-
-# HTML to Markdown conversion
-markdown:
-  heading_style: "ATX"             # Heading format (ATX or SETEXT)
-  include_metadata: true           # YAML frontmatter
-```
-</details>
-
-<details>
-<summary><b>☁️ AWS Bedrock Optimization</b></summary>
-
+### AWS Bedrock Settings
 ```yaml
 bedrock:
   model:
-    # Primary model using inference profile for performance
+    # High-performance inference profile
     default_model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
     
   # Agent-specific optimizations
   agents:
     sitemeta:
-      temperature: 0.2              # Focused analysis
-      max_tokens: 2048             # Efficient responses
-      streaming: false             # Stable output for reports
+      temperature: 0.2      # Focused analysis
+      max_tokens: 2048      # Concise responses
       
     news:
-      temperature: 0.4              # Varied summaries  
-      max_tokens: 4096             # Rich content
-      streaming: false             # Consistent formatting
+      temperature: 0.4      # Varied summaries
+      batch_processing: true # Efficient multi-item processing
       
     chat:
-      temperature: 0.5              # Conversational
-      max_tokens: 8192             # Long responses
-      streaming: true              # Real-time experience
-      session_optimization: true    # Memory management
-      
-  # Performance features
-  region_name: "us-west-2"         # Optimized latency
-  enable_caching: true              # Prompt/tool caching
+      temperature: 0.5      # Natural conversation
+      streaming: true       # Real-time responses
+      max_tokens: 8192      # Extended conversations
 ```
-</details>
 
-<details>
-<summary><b>🛠️ Community Tools Configuration</b></summary>
-
+### Community Tools Configuration
 ```yaml
 community_tools:
-  # Global enablement
   enabled: true
   
-  # Consent settings optimized for seamless automation
+  # Security settings
   consent:
-    require_consent: false            # Disabled for seamless operation
-    bypass_for_safe_tools: true      # Bypass all consent for smooth operation
-    always_require_consent: []       # No consent required for any tools
+    require_consent: true
+    always_require_consent: 
+      - shell
+      - python_repl
+      - file_write
+      - editor
+      - use_computer
   
-  # Tool-specific settings for automation
-  tools:
-    shell:
-      enabled: true
-      require_consent: false          # Primary automation tool - no consent
-      description: "Execute shell commands for computer and browser automation"
-    
-    use_computer:
-      enabled: false                  # Disabled - causes consent issues, use shell instead
-      description: "DISABLED: Use shell tool for computer automation instead"
-      
-    browser:
-      enabled: false                  # Disabled - causes consent issues, use shell + playwright instead  
-      description: "DISABLED: Use shell tool with playwright for browser automation instead"
-      
-  # Agent-specific tool access with UI enhancements
-  agents:
-    chat:
-      enabled: true
-      ui_enhanced: true              # Enable Rich UI for this agent
-      tools:
-        # Safe tools (no consent, enhanced display)
-        - calculator
-        - current_time
-        - http_request
-        - file_read
-        - memory
-        
-        # Consent-required tools (Rich consent UI)
-        - python_repl
-        - shell
-        - file_write
-        
-    # Other agents use minimal tool sets
-    sitemeta:
-      tools: [http_request]          # Only web tools
+  # Tool categories
+  categories:
+    rag_memory: true
+    file_operations: true
+    shell_system: true
+    code_interpretation: true
+    web_network: true
+    multimodal: true
+    utilities: true
+    agents_workflows: true
 ```
 
-**Tool Categories with Enhanced UI:**
-- **🌐 Web & Network**: HTTP requests, RSS feeds with progress indicators
-- **📁 File Operations**: Read/write with permission dialogs and progress bars
-- **⚙️ Code & System**: Python REPL, shell with Rich consent interfaces
-- **💾 Memory & Storage**: Persistent memory with visual feedback
-- **💬 Communication**: User handoff with enhanced prompts
-- **🛠️ Utilities**: Time, calculations with live result display
-</details>
+### Output Settings
+```yaml
+sitemeta:
+  output_dir: "refer/sitemeta"
+  save_markdown: true
+  timeout: 30
 
----
+news:
+  output_dir: "refer/news"
+  save_markdown: true
+  default_items: 10
 
-## 🔌 Python API
-
-### Enhanced Chat Interface
-```python
-from analyst.agents.chat_streaming import create_streaming_chat_agent, chat_with_streaming
-from rich.console import Console
-
-# Create Rich-enabled chat agent
-console = Console()
-agent, console = create_streaming_chat_agent(console=console)
-
-# Chat with streaming responses and Rich UI
-response = chat_with_streaming(
-    agent=agent,
-    message="Analyze stripe.com and calculate market size",
-    console=console,
-    verbose=True
-)
+article:
+  output_dir: "refer/articles"
+  download_images: true
+  max_images: 20
 ```
 
-### Website Analysis with Auto-Save
+## 📊 Performance Metrics
+
+| Operation | Typical Time | Memory | Notes |
+|-----------|--------------|--------|-------|
+| Chat Response | 1-3s | <15MB | With streaming |
+| Website Analysis | 2-5s | <10MB | Head-only fetch |
+| RSS Processing | 0.5-2s | <5MB | 10 items |
+| Article Download | 5-15s | <20MB | With images |
+| HTML Conversion | <1s | <5MB | Local files |
+
+### Optimization Features
+- Native Strands streaming for real-time responses
+- AWS Bedrock caching for repeated operations
+- Regional optimization (us-west-2)
+- Session persistence for context
+- Batch processing for multiple items
+
+## 🔒 Security Features
+
+### User Consent System
+- Explicit permission required for system-modifying operations
+- Clear explanations of what each tool can do
+- Safe defaults (deny if uncertain)
+- Configurable per tool and per agent
+
+### Protected Operations
+- Shell command execution
+- File system writes
+- Python code execution
+- System automation
+- Network requests to internal resources
+
+### Safe Operations (No Consent Required)
+- Website analysis
+- RSS feed reading
+- Calculations
+- Time/date queries
+- Read-only file access (configurable)
+
+## 🐍 Python API
+
+### Create Agents
 ```python
 from analyst.agents import create_sitemeta_agent, sitemeta
+from analyst.agents.chat import create_chat_agent, chat_with_agent
 
+# Website analysis
 agent = create_sitemeta_agent()
-result = sitemeta(
-    url="https://stripe.com", 
-    agent=agent, 
-    save_markdown=True, 
-    output_dir="./reports"
-)
-print(f"Analysis: {result}")
-print(f"Saved to: {result.metadata.get('saved_to')}")
+result = sitemeta("https://stripe.com", agent)
+
+# Interactive chat
+chat_agent = create_chat_agent()
+response = chat_with_agent(chat_agent, "analyze google.com")
 ```
 
-### Community Tools Access with Enhanced UI
+### Use Tools Directly
 ```python
-from analyst.agents.chat_streaming import create_streaming_chat_agent, chat_with_streaming
-from rich.console import Console
+from analyst.tools import fetch_url_metadata, fetch_rss_content
 
-console = Console()
-agent, console = create_streaming_chat_agent()
+# Get website metadata
+metadata = fetch_url_metadata("https://example.com")
 
-# Use calculator with Rich display
-response = chat_with_streaming(
-    agent, 
-    "Calculate compound interest: principal=$10000, rate=5%, time=10 years",
-    console,
-    verbose=True
-)
-
-# File operations with consent UI
-response = chat_with_streaming(
-    agent,
-    "Read config.yml and explain the Bedrock optimization settings",
-    console
-)
+# Process RSS feed
+rss_items = fetch_rss_content("https://feeds.npr.org/1001/rss.xml", count=5)
 ```
 
----
+### Session Management
+```python
+from analyst.agents.chat import create_chat_agent, get_session_info
 
-## 📈 Performance & Scale
+# Create agent with specific session
+agent = create_chat_agent(session_id="research-123")
 
-| Operation | Typical Time | Memory Usage | Throughput | UI Enhancement |
-|-----------|--------------|--------------|------------|----------------|
-| Enhanced Chat | 1-3 seconds | <15MB | 20-60/min | Rich streaming UI |
-| Website Analysis | 2-5 seconds | <10MB | 12-30/min | Progress indicators |
-| RSS Feed (10 items) | 0.5-2 seconds | <5MB | 30-120/min | Live updates |
-| Article Download | 5-15 seconds | <20MB | 4-12/min | Rich progress bars |
-| HTML to Markdown | <1 second | <5MB | 60+/min | Instant feedback |
+# Get session information
+info = get_session_info(agent)
+print(f"Session ID: {info['session_id']}")
+```
 
-### Enhanced Performance Features
-- **⚡ Real-time streaming** with Rich terminal UI and callback handlers
-- **🎯 Smart buffering** for smooth display updates without flicker
-- **💾 Enhanced caching** for repeated operations with visual feedback
-- **🌍 Regional optimization** (us-west-2) for low latency responses
-- **🔄 Session persistence** with Rich progress indicators
-- **📊 Live metrics** displayed in beautiful formatted panels
+## 📚 Documentation
 
----
-
-## 🌐 Interface Modes
-
-### 🎨 **Enhanced Mode (Default)**
-- Rich terminal UI with panels and colors
-- Real-time streaming responses
-- Live tool execution indicators
-- Interactive help and session management
-
-### ⚖️ **Stable Mode (`--no-streaming`)**
-- Rich UI without streaming for consistent output
-- Complete responses displayed at once
-- Perfect for screen recording and automation
-
-### 🔧 **Legacy Mode (`--use-legacy`)**  
-- Plain text interface for compatibility
-- Minimal resource usage
-- Works in any terminal environment
-
----
-
-## 📖 Documentation
-
-Comprehensive guides available in [`docs/`](docs/):
+Comprehensive guides in the [`docs/`](docs/) directory:
 
 | Guide | Description |
 |-------|-------------|
-| **[Enhanced Chat Guide](docs/enhanced-chat-guide.md)** | 🆕 Rich UI and streaming features |
-| **[Community Tools Guide](docs/community-tools-guide.md)** | 🆕 44+ tools integration |
-| **[Automation Guide](docs/automation-guide.md)** | 🆕 Computer & browser automation |
-| **[Streaming Features Guide](docs/streaming-features-guide.md)** | 🆕 Technical implementation |
-| **[Installation](docs/installation.md)** | Setup and dependencies |
-| **[CLI Guide](docs/cli-guide.md)** | Complete command reference |
-| **[Configuration](docs/configuration-guide.md)** | YAML settings and customization |
+| [Installation](docs/installation.md) | Setup and dependencies |
+| [CLI Guide](docs/cli-guide.md) | Command reference |
+| [Configuration](docs/configuration-guide.md) | YAML settings |
+| [Community Tools](docs/community-tools-guide.md) | 40+ tools documentation |
+| [Automation](docs/automation-guide.md) | Browser and system automation |
+| [Developer Guide](docs/developer-guide.md) | API and extension development |
 
 ### Agent-Specific Guides
-| Agent | Guide | Description |
-|-------|-------|-------------|
-| **Chat** | [Chat Guide](docs/chat-agent-guide.md) | Interactive research with Rich UI |
-| **Website** | [Sitemeta Guide](docs/sitemeta-guide.md) | Company analysis workflows |
-| **News** | [News Guide](docs/news-agent-guide.md) | RSS monitoring and summaries |
-| **Articles** | [Article Guide](docs/article-agent-guide.md) | Content archival with images |
-| **Conversion** | [HTMLmd Guide](docs/htmlmd-agent-guide.md) | HTML to Markdown workflows |
-
----
-
-## 🌟 What Makes This Special
-
-### 🎨 **Beautiful Terminal Experience**
-Professional Rich UI with streaming responses, live tool indicators, and markdown rendering. The terminal interface rivals modern GUI applications in polish and usability.
-
-### 🧠 **Intelligence First**
-Built around Claude 3.7 Sonnet with agent-specific optimizations. Each agent is tuned for its specific task — from focused website analysis to conversational research assistance.
-
-### ⚡ **Real-time Everything** 
-Streaming responses appear as they're generated, tool execution is visualized in real-time, and progress indicators keep you informed throughout long operations.
-
-### 🔧 **Production Ready** 
-Enterprise-grade AWS Bedrock integration with streaming, caching, regional optimization, and comprehensive configuration management plus 44+ community tools.
-
-### 📊 **Research Focused**
-Designed for researchers, analysts, and content creators who need intelligent automation for information gathering and analysis workflows with professional presentation.
-
-### 🎯 **Batteries Included**
-Complete toolchain from data extraction to formatted reports. Auto-saves everything as searchable markdown with metadata for building knowledge bases.
-
-### 💬 **Conversational Interface**
-Natural language interaction with all analysis tools plus 44+ community tools through the enhanced chat interface. Perfect for exploratory research, coding assistance, and multi-step analysis workflows.
-
-### 🔒 **Enterprise Security**
-Comprehensive tool consent and safety controls with Rich UI consent dialogs. Sensitive operations require user approval while read-only tools flow seamlessly. Configurable per-agent and per-tool.
-
----
+- [Chat Agent](docs/chat-agent-guide.md) - Interactive assistant
+- [Sitemeta Agent](docs/agents-guide.md) - Website analysis
+- [News Agent](docs/news-agent-guide.md) - RSS processing
+- [Article Agent](docs/article-agent-guide.md) - Content downloads
+- [HTMLmd Agent](docs/htmlmd-agent-guide.md) - Format conversion
 
 ## 🗺️ Roadmap
 
-### ✅ **Current Release - Enhanced UI**
-- **🎨 Rich Terminal UI** with streaming responses and live tool indicators
-- **⚡ Real-time streaming** with callback handlers and smooth updates
-- **🛠️ 44+ Community tools** with enterprise security and Rich consent UI
-- Website intelligence, RSS monitoring, article archival with enhanced display
-- AWS Bedrock optimization with agent-specific tuning
-- External prompt management and comprehensive configuration
+### ✅ Current Release (v1.0)
+- Core agents for analysis and research
+- 40+ community tools integration
+- Security-first consent system
+- AWS Bedrock optimization
+- Session management
+- Streaming responses
 
-### 🎯 **Next Release - Advanced Features**
-- **📊 Rich Dashboard** — Terminal-based analytics and metrics dashboard
-- **🔄 Batch Processing** — Multiple URLs/feeds with progress visualization
-- **📑 Export Capabilities** — JSON, CSV, PDF report generation with Rich formatting
-- **🔍 SEO Analysis** — Technical insights with visual recommendations
-- **⚖️ Competitor Analysis** — Market positioning with Rich comparison tables
+### 🎯 Next Release (v1.1)
+- Batch processing improvements
+- Export to JSON/CSV formats
+- Enhanced caching system
+- SEO analysis tools
+- Competitor comparison features
 
-### 🚀 **Future Vision - Platform Expansion**
-- **🌐 Web Dashboard** — Browser interface complementing terminal UI
-- **🔌 REST API** — HTTP endpoints for service integration
-- **📱 Social Media** — Twitter, LinkedIn monitoring with Rich display
-- **🐳 Docker Support** — Containerized deployment with UI persistence
-
----
+### 🚀 Future Vision
+- REST API endpoints
+- Docker containerization
+- Social media monitoring
+- Custom agent creation framework
+- Plugin ecosystem
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Follow** the [naming conventions](CLAUDE.md) and Rich UI patterns
-4. **Add** tests and documentation including UI examples
-5. **Submit** a Pull Request
-
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing`)
+3. Follow naming conventions in [CLAUDE.md](CLAUDE.md)
+4. Add tests and documentation
+5. Submit a Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
----
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- **[Strands Framework](https://github.com/anthropics/strands)** — Core AI platform by Anthropic
-- **[Claude 3.7 Sonnet](https://www.anthropic.com/claude)** — Advanced AI model for intelligent analysis
-- **[Rich](https://rich.readthedocs.io/)** — Beautiful terminal formatting and UI components
-- **Open Source Community** — For excellent libraries and inspiration
+- [Strands Agents](https://strandsagents.com) - Core AI agent framework
+- [AWS Bedrock](https://aws.amazon.com/bedrock/) - Managed AI service
+- [Claude 3.7 Sonnet](https://www.anthropic.com/claude) - Advanced language model
+- Open source community for excellent libraries
 
 ---
 
 <div align="center">
 
-### **Professional AI analysis with beautiful terminal UI**
-*Real-time streaming • Rich formatting • 44+ tools • Enterprise ready*
+**Built with Strands Agents | Powered by Claude 3.7 Sonnet | Security-First Design**
 
-**[📖 Documentation](docs/) • [🚀 Quick Start](#-quick-start) • [🎨 Enhanced UI Demo](#enhanced-chat-interface-new-) • [⚙️ Configuration](#️-configuration)**
-
-*Making intelligent analysis accessible with professional terminal experience for researchers, developers, and analysts worldwide*
-
----
-
-**Strands Analyst** — *Intelligence meets beautiful design*
+[📖 Documentation](docs/) • [🚀 Quick Start](#-quick-start) • [⚙️ Configuration](#️-configuration) • [🔒 Security](#-security-features)
 
 </div>
