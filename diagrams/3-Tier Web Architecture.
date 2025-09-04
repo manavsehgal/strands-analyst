@@ -1,0 +1,295 @@
+digraph {
+	rankdir=TB
+	node [fontname=Arial shape=record]
+	edge [fontname=Arial fontsize=10]
+	graph [ranksep=0.5]
+	node [shape=none]
+	"Web Client" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">Web Client</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"Mobile Client" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">Mobile Client</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"Load Balancer" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">Load Balancer</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"Web Server 1" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">Web Server 1</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"Web Server 2" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">Web Server 2</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"App Server 1" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">App Server 1</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"App Server 2" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">App Server 2</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"Primary Database" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">Primary Database</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	"Replica Database" [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                        <TR>
+                            <TD>
+                                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+                                    <TR>
+                                        <TD>
+                                            <TABLE BORDER="0" CELLSPACING="0">
+                                                <TR>
+                                                    <TD ALIGN="RIGHT" WIDTH="20">
+                                                        <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0">
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                            <TR><TD WIDTH="15" HEIGHT="7"></TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                    <TD ALIGN="LEFT" CELLPADDING="4">
+                                                        <TABLE BORDER="0" CELLSPACING="0">
+                                                            <TR><TD ALIGN="CENTER">«component»</TD></TR>
+                                                            <TR><TD ALIGN="CENTER">Replica Database</TD></TR>
+                                                        </TABLE>
+                                                    </TD>
+                                                </TR>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                    
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>> margin=0 style=rounded]
+	subgraph cluster_0 {
+		bgcolor=white label="3-Tier Web Architecture" style=rounded
+	}
+	"Web Client" -> "Load Balancer" [label=HTTPS arrowhead=vee dir=forward style=dashed]
+	"Mobile Client" -> "Load Balancer" [label=HTTPS arrowhead=vee dir=forward style=dashed]
+	"Load Balancer" -> "Web Server 1" [label=HTTP arrowhead=vee dir=forward style=dashed]
+	"Load Balancer" -> "Web Server 2" [label=HTTP arrowhead=vee dir=forward style=dashed]
+	"Web Server 1" -> "App Server 1" [label="API Calls" arrowhead=vee dir=forward style=dashed]
+	"Web Server 1" -> "App Server 2" [label="API Calls" arrowhead=vee dir=forward style=dashed]
+	"Web Server 2" -> "App Server 1" [label="API Calls" arrowhead=vee dir=forward style=dashed]
+	"Web Server 2" -> "App Server 2" [label="API Calls" arrowhead=vee dir=forward style=dashed]
+	"App Server 1" -> "Primary Database" [label=SQL arrowhead=vee dir=forward style=dashed]
+	"App Server 2" -> "Primary Database" [label=SQL arrowhead=vee dir=forward style=dashed]
+	"Primary Database" -> "Replica Database" [label=Replication arrowhead=vee dir=forward style=dashed]
+	"Web Client" -> "Presentation Tier" [arrowhead=none style=solid]
+	"Mobile Client" -> "Presentation Tier" [arrowhead=none style=solid]
+	"Load Balancer" -> "Presentation Tier" [arrowhead=none style=solid]
+	"Web Server 1" -> "Presentation Tier" [arrowhead=none style=solid]
+	"Web Server 2" -> "Presentation Tier" [arrowhead=none style=solid]
+	"App Server 1" -> "Application Tier" [arrowhead=none style=solid]
+	"App Server 2" -> "Application Tier" [arrowhead=none style=solid]
+	"Primary Database" -> "Data Tier" [arrowhead=none style=solid]
+	"Replica Database" -> "Data Tier" [arrowhead=none style=solid]
+	rankdir=LR
+	splines=ortho
+	nodesep=1.0
+	ranksep=1.0
+}
