@@ -136,17 +136,20 @@ bedrock:
     # Primary model ID for general analysis tasks
     # Using Claude 3.7 Sonnet inference profile for optimal performance and availability
     default_model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+    # default_model_id: "us.anthropic.claude-sonnet-4-20250514-v1:0"
     
     # Model IDs for specific use cases (overrides default when specified)
     models:
       # Fast model for quick analysis and simple tasks
-      fast: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+      fast: "us.anthropic.claude-3-5-haiku-20241022-v1:0"
       
       # Reasoning model for complex analysis tasks
       reasoning: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+      # reasoning: "us.anthropic.claude-sonnet-4-20250514-v1:0"
       
       # Chat model for conversational interactions
       chat: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+      # chat: "us.anthropic.claude-sonnet-4-20250514-v1:0"
   
   # Performance optimization parameters
   performance:

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stripe Payments | Global Payment Processing Platform</title>
+    
+    <!-- Primary metadata -->
+    <meta name="description" content="Capture more revenue with a unified payments solution that eliminates the need for one-off merchant account, payment gateway, and processor integrations.">
+    
+    <!-- Source metadata -->
+    <meta name="source-url" content="https://stripe.com/payments">
+    <meta name="source-domain" content="stripe.com">
+    <meta name="date-scraped" content="2025-09-03 19:54:05">
+    
+    <!-- OpenGraph metadata -->
+    <meta property="og:title" content="Stripe Payments | Global Payment Processing Platform">
+    <meta property="og:description" content="Capture more revenue with a unified payments solution that eliminates the need for one-off merchant account, payment gateway, and processor integrations.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://stripe.com/payments">
+    
+    <!-- Styling -->
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: #fff;
+        }
+        
+        img { 
+            max-width: 100%; 
+            height: auto; 
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2, h3, h4, h5, h6 { 
+            color: #1a1a1a;
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+        }
+        
+        h1 { 
+            border-bottom: 3px solid #007acc;
+            padding-bottom: 0.3em;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.2em;
+        }
+        
+        a { 
+            color: #007acc; 
+            text-decoration: none; 
+        }
+        
+        a:hover { 
+            text-decoration: underline; 
+        }
+        
+        blockquote {
+            border-left: 4px solid #007acc;
+            margin: 0 0 1em 0;
+            padding: 0.5em 1em;
+            background: #f8f9fa;
+        }
+        
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 2em;
+            font-size: 0.9em;
+        }
+        
+        .metadata h3 {
+            margin-top: 0;
+            color: #586069;
+        }
+        
+        .metadata p {
+            margin: 0.5em 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="metadata">
+        <h3>📄 Document Information</h3>
+        <p><strong>Source:</strong> <a href="https://stripe.com/payments" target="_blank">stripe.com</a></p>
+        <p><strong>Archived:</strong> 2025-09-03 19:54:05</p>
+    </div>
+    
+    <main>
+        <html><body><div><figure class="DeveloperCentricCodeEditor" data-js-controller="DeveloperCentricCodeEditor">
+  <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
+const stripe = require('stripe')('sk_test_[REDACTED]');
+
+// Create a payment intent to start a purchase flow.
+let paymentIntent = await stripe.paymentIntents.create({
+  amount: 2000,
+  currency: 'usd',
+  description: 'My first payment',
+});
+
+// Complete the payment using a test card.
+await stripe.paymentIntents.confirm(paymentIntent.id, {
+  payment_method: 'pm_card_mastercard',
+});
+  </p>
+
+
+  <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
+Stripe.api_key = 'sk_test_[REDACTED]'
+
+# Create a payment intent to start a purchase flow.
+payment_intent = Stripe::PaymentIntent.create({
+  amount: 2000,
+  currency: 'usd',
+  description: 'My first payment',
+})
+
+# Complete the payment using a test card.
+Stripe::PaymentIntent.confirm(payment_intent.id, {
+  payment_method: 'pm_card_mastercard',
+})
+  </p>
+
+
+  <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
+stripe.api_key = 'sk_test_[REDACTED]'
+
+# Create a payment intent to start a purchase flow.
+payment_intent = stripe.PaymentIntent.create(
+  amount=2000,
+  currency='usd',
+  description='My first payment',
+)
+
+# Complete the payment using a test card.
+stripe.PaymentIntent.confirm(
+  payment_intent.id,
+  payment_method='pm_card_mastercard',
+)
+  </p>
+
+
+  <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
+stripe.Key = "sk_test_[REDACTED]"
+
+// Create a payment intent to start a purchase flow.
+params := &amp;stripe.PaymentIntentParams{
+  Amount: stripe.Int64(2000),
+  Currency: stripe.String(string(stripe.CurrencyUSD)),
+  Description: stripe.String("My first payment"),
+}
+pi, _ := paymentintent.New(params)
+
+// Complete the payment using a test card.
+confirmParams := &amp;stripe.PaymentIntentConfirmParams{
+  PaymentMethod: stripe.String("pm_card_mastercard"),
+}
+paymentintent.Confirm(pi.ID, confirmParams)
+  </p>
+
+
+  <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
+$stripe = new \Stripe\StripeClient('sk_test_[REDACTED]');
+
+// Create a payment intent to start a purchase flow.
+$payment_intent = $stripe-&gt;paymentIntents-&gt;create([
+  'amount' =&gt; 2000,
+  'currency' =&gt; 'usd',
+  'description' =&gt; 'My first payment',
+]);
+
+// Complete the payment using a test card.
+$payment_intent-&gt;confirm([
+  'payment_method' =&gt; 'pm_card_mastercard',
+]);
+  </p>
+
+
+  <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
+Stripe.apiKey = "sk_test_[REDACTED]";
+
+// Create a payment intent to start a purchase flow.
+PaymentIntentCreateParams params =
+  PaymentIntentCreateParams.builder()
+    .setAmount(2000L)
+    .setCurrency("usd")
+    .setDescription("My first payment")
+    .build();
+
+PaymentIntent paymentIntent = PaymentIntent.create(params);
+
+// Complete the payment using a test card.
+PaymentIntentConfirmParams confirmParams =
+  PaymentIntentConfirmParams.builder()
+    .setPaymentMethod("pm_card_mastercard")
+    .build();
+
+paymentIntent.confirm(confirmParams);
+  </p>
+
+
+  <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
+StripeConfiguration.ApiKey = "sk_test_[REDACTED]";
+
+// Create a payment intent to start a purchase flow.
+var options = new PaymentIntentCreateOptions
+{
+    Amount = 2000,
+    Currency = "usd",
+    Description = "My first payment",
+};
+var service = new PaymentIntentService();
+var paymentIntent = service.Create(options);
+
+// Complete the payment using a test card.
+var confirmOptions = new PaymentIntentConfirmOptions
+{
+    PaymentMethod = "pm_card_mastercard",
+};
+service.Confirm(paymentIntent.Id, confirmOptions);
+  </p>
+
+  <div class="
+    Card
+    
+    
+      Card--border
+      
+    
+    
+    
+    
+    
+    
+    
+  ">
+  <div class="DeveloperCentricCodeEditor__languages">
+        <nav class="SegmentedControl " data-js-controller="SegmentedControl" data-selection-mode="single">
+  <div class="SegmentedControl__container">
+    <div class="
+    HorizontalOverflowContainer
+    
+  " data-js-controller="HorizontalOverflowContainer">
+  <div class="HorizontalOverflowContainer__track" data-js-target="HorizontalOverflowContainer.track">
+    
+      <p class="SegmentedControl__backContainer" data-js-target="SegmentedControl.backButtonContainer" aria-hidden="true">
+        </p>
+    
+
+    <div class="HorizontalOverflowContainer__items">
+      <p class="SegmentedControl__buttons" data-js-target="SegmentedControl.items">
+        <button class="SegmentedControlButton SegmentedControlButton--active" data-js-target-list="SegmentedControl.buttons">
+  Node.js
+</button>
+            <button class="SegmentedControlButton " data-js-target-list="SegmentedControl.buttons">
+  Ruby
+</button>
+            <button class="SegmentedControlButton " data-js-target-list="SegmentedControl.buttons">
+  Python
+</button>
+            <button class="SegmentedControlButton " data-js-target-list="SegmentedControl.buttons">
+  Go
+</button>
+            <button class="SegmentedControlButton " data-js-target-list="SegmentedControl.buttons">
+  PHP
+</button>
+            <button class="SegmentedControlButton " data-js-target-list="SegmentedControl.buttons">
+  Java
+</button>
+            <button class="SegmentedControlButton " data-js-target-list="SegmentedControl.buttons">
+  .NET
+</button>
+        </p>
+    </div>
+
+    
+  </div>
+</div>
+  </div>
+</nav>
+      </div>
+
+  <div class="
+      CodeEditor
+      CodeEditor--focused
+      
+      
+      
+      
+    " aria-hidden="true" data-js-controller="CodeEditor" data-js-language-mode="javascript">
+    
+
+    
+      <p data-js-target="CodeEditor.finalCode">const stripe = require('stripe')('sk_test_[REDACTED]');
+
+// Create a payment intent to start a purchase flow.
+let paymentIntent = await stripe.paymentIntents.create({
+  amount: 2000,
+  currency: 'usd',
+  description: 'My first payment',
+});
+
+// Complete the payment using a test card.
+await stripe.paymentIntents.confirm(paymentIntent.id, {
+  payment_method: 'pm_card_mastercard',
+});</p>
+    
+
+    
+
+    <code class="CodeEditor__scrollContainer" data-js-target="CodeEditor.scrollContainer">
+      <pre class="CodeSyntax CodeEditor__editor">
+        
+        <span class="CodeEditorAsciiLoader"></span>
+        
+        <span class="CodeEditor__typingArea"><span class data-js-target="CodeEditor.editor"></span>
+          
+        </span></pre>
+    </code>
+
+    
+  </div>
+
+  
+    
+</div>
+</figure>
+</div></body></html>
+    </main>
+    
+    <footer style="margin-top: 3em; padding-top: 2em; border-top: 1px solid #e1e4e8; text-align: center; color: #586069; font-size: 0.9em;">
+        <p>This page was archived from <a href="https://stripe.com/payments" target="_blank">https://stripe.com/payments</a></p>
+        <p>Archived on 2025-09-03 19:54:05 using Analyst Article Downloader</p>
+    </footer>
+</body>
+</html>

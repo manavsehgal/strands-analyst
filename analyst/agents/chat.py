@@ -9,7 +9,8 @@ from ..tools import (
     fetch_url_metadata,
     fetch_rss_content, 
     download_article_content,
-    convert_html_to_markdown
+    convert_html_to_markdown,
+    speak_custom
 )
 from ..config import get_config, get_bedrock_config_for_agent, get_community_tools_for_agent
 from ..utils import configure_logging, print_metrics
@@ -109,8 +110,24 @@ def _load_community_tools(agent_name: str = "chat") -> List:
         "a2a_client": "strands_tools.a2a_client"
     }
     
-    # Load each enabled tool
+    # Priority tools that should be loaded first (to ensure they get registered)
+    priority_tools = ["speak", "diagram", "nova_reels", "generate_image", "use_computer", "browser"]
+    
+    # Load priority tools first
+    tools_to_load = []
+    remaining_tools = []
+    
     for tool_name in tools_config["tools"]:
+        if tool_name in priority_tools:
+            tools_to_load.append(tool_name)
+        else:
+            remaining_tools.append(tool_name)
+    
+    # Add remaining tools after priority ones
+    tools_to_load.extend(remaining_tools)
+    
+    # Load each enabled tool in priority order
+    for tool_name in tools_to_load:
         if tool_name in tool_module_mapping:
             try:
                 module_path = tool_module_mapping[tool_name]
@@ -161,6 +178,7 @@ Built-in Analysis Capabilities:
 - RSS feed analysis: Fetch and analyze RSS feeds and news content  
 - Article downloading: Download full articles with images and convert to various formats
 - HTML to Markdown conversion: Convert HTML content to well-formatted Markdown
+- Text-to-speech: Convert text to speech using macOS say command or Amazon Polly
 
 Available Community Tools (when enabled and with appropriate permissions):
 - Calculation and utilities: For mathematical operations and current time
@@ -310,7 +328,8 @@ def create_chat_agent(
         fetch_url_metadata,
         fetch_rss_content,
         download_article_content,
-        convert_html_to_markdown
+        convert_html_to_markdown,
+        speak_custom
     ]
     
     all_tools = built_in_tools + community_tools
