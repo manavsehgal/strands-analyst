@@ -1,223 +1,364 @@
 # Strands Analyst
 
-[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue.svg)](https://github.com/yourusername/strands-analyst)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Strands](https://img.shields.io/badge/powered%20by-Strands%20Agents-orange.svg)](https://strandsagents.com)
+<div align="center">
 
-**AI-powered analysis toolkit for AWS Solutions Architects and GenAI professionals** — Built on Strands Agents with AWS Bedrock integration, featuring specialized CLI tools and an interactive AI assistant with 40+ community tools.
+![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue)
+![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![AWS Bedrock](https://img.shields.io/badge/AWS-Bedrock-orange)
+![Strands Agents](https://img.shields.io/badge/powered%20by-Strands%20Agents-purple)
+![Claude 3.7 Sonnet](https://img.shields.io/badge/Claude-3.7%20Sonnet-blue)
 
-## Quick Start
+**Enterprise-Grade GenAI & Agentic AI Toolkit for AWS Solutions Architects**
+
+[🚀 Quick Start](#-quick-start) • [🎯 Features](#-key-features) • [📊 Architecture](#-architecture) • [🔧 Installation](#-installation) • [📖 Documentation](#-documentation)
+
+</div>
+
+---
+
+## 🎯 Overview
+
+Strands Analyst is a cutting-edge AI platform designed for AWS Solutions Architects and GenAI professionals. Built on the powerful Strands Agents framework with AWS Bedrock integration, it provides specialized CLI tools, an interactive AI assistant with 40+ community tools, and production-ready configurations for enterprise GenAI workflows.
+
+### 🌟 Why Strands Analyst?
+
+- **Enterprise-Ready**: Production configurations with AWS Bedrock Claude 3.7 Sonnet
+- **40+ AI Tools**: Comprehensive toolkit from RAG & memory to multimodal capabilities  
+- **Security-First**: Consent management for all system operations
+- **Performance Optimized**: Agent-specific tuning, streaming responses, prompt caching
+- **AWS Native**: Deep integration with Bedrock, optimized for AWS infrastructure
+
+## 🚀 Quick Start
 
 ```bash
-# Install the package
+# Install
 pip install -e .
 
-# Interactive AI assistant with 40+ tools
+# Interactive AI Assistant (40+ tools)
 analystchat
+> "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases"
+> "Compare Bedrock Claude vs Titan costs for 1 million users monthly"
+> "Create a GenAI transformation roadmap presentation"
 
-# Website analysis and competitive intelligence
-sitemeta stripe.com --verbose
+# Website Intelligence
+sitemeta anthropic.com --verbose
 
-# Monitor AWS GenAI announcements
-news https://aws.amazon.com/about-aws/whats-new/recent/feed/ --count 10
-
-# Extract and convert articles
-article https://aws.amazon.com/blogs/machine-learning/some-post --verbose
-```
-
-## Features
-
-### 🤖 Interactive AI Assistant
-```bash
-analystchat
-```
-- **40+ community tools** including diagram generation, web browsing, file operations, and system automation
-- **AWS Bedrock integration** with Claude 3.7 Sonnet
-- **Security-first design** with consent prompts for system operations
-- **GenAI-focused workflows** with specialized prompts and examples
-
-### 🌐 Website Intelligence
-```bash
-sitemeta anthropic.com --verbose --save-markdown
-```
-- Extract metadata, SEO information, and competitive intelligence
-- Support for bulk analysis and markdown output
-- Optimized for GenAI company research
-
-### 📰 Content Monitoring
-```bash
+# Content Monitoring  
 news https://aws.amazon.com/blogs/machine-learning/feed/ --count 5
-```
-- RSS feed monitoring and analysis
-- AWS service announcements tracking
-- Structured output for research archival
 
-### 📄 Article Processing
-```bash
-article https://example.com/blog-post --verbose
-htmlmd document.html --output report.md
-```
-- Content extraction and markdown conversion
-- Research documentation workflows
-- Bulk processing capabilities
-
-## Installation
-
-### Prerequisites
-- **Python 3.8+** (supports up to Python 3.13)
-- **AWS account** with Amazon Bedrock access
-- **AWS credentials** configured ([setup guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html))
-- **Graphviz** for diagrams: `brew install graphviz` (macOS) or `sudo apt-get install graphviz` (Ubuntu)
-
-### Setup
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/strands-analyst.git
-cd strands-analyst
-
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install with dependencies
-pip install -e .
-
-# Verify installation
-analystchat --help
-sitemeta --help
+# Article Processing
+article https://aws.amazon.com/blogs/machine-learning/latest-post
 ```
 
-## Architecture
+## 🎯 Key Features
+
+### 🤖 Interactive AI Assistant (`analystchat`)
+
+Advanced AI assistant with 40+ specialized tools across 10 categories:
+
+<details>
+<summary><b>📦 Complete Tool Categories (Click to expand)</b></summary>
+
+#### RAG & Memory Systems
+- `retrieve` - Semantic search and retrieval
+- `memory` - Session memory management
+- `agent_core_memory` - Persistent agent memory
+- `mem0_memory` - Advanced memory storage
+
+#### File Operations
+- `file_read` - Read files safely
+- `file_write` - Write files with consent
+- `editor` - Interactive file editing
+
+#### System & Automation  
+- `shell` - Execute shell commands (requires consent)
+- `use_computer` - Computer automation
+- `cron` - Schedule tasks
+- `environment` - Environment management
+
+#### Web & Network
+- `http_request` - HTTP/API requests
+- `browser` - Web browsing
+- `rss` - RSS feed monitoring  
+- `slack` - Slack integration
+
+#### Multimodal Capabilities
+- `diagram` - Generate architecture diagrams
+- `generate_image` - AI image generation
+- `speak` - Text-to-speech
+- `image_reader` - Image analysis
+- `nova_reels` - Video generation
+
+#### Development Tools
+- `python_repl` - Python execution (requires consent)
+- `code_interpreter` - Code analysis
+
+#### Agent Workflows
+- `workflow` - Complex workflows
+- `swarm` - Multi-agent coordination
+- `graph` - Agent graph creation
+- `think` - Advanced reasoning
+
+</details>
+
+### 📊 Specialized CLI Tools
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `sitemeta` | Website intelligence & SEO analysis | `sitemeta stripe.com --verbose` |
+| `news` | RSS feed monitoring & analysis | `news https://aws.amazon.com/feed/` |
+| `article` | Content extraction & processing | `article https://example.com/blog` |
+| `htmlmd` | HTML to Markdown conversion | `htmlmd document.html --output report.md` |
+
+### 🔐 Enterprise Security
+
+- **Explicit Consent**: Required for system-modifying operations
+- **Safe Defaults**: Read-only operations bypass consent
+- **Clear Messaging**: Security warnings and operation explanations
+- **Audit Trail**: All tool usage logged with metrics
+
+### ⚡ Performance Features
+
+- **Agent-Specific Tuning**: Optimized temperature, top_p, max_tokens per agent
+- **Streaming Responses**: Real-time output with Claude 3.7 Sonnet
+- **Prompt Caching**: Reduced token usage and latency
+- **Dynamic Tool Loading**: Only loads required tools per agent
+- **Metrics Tracking**: Token usage, latency, and performance monitoring
+
+## 📊 Architecture
+
+### System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     Strands Analyst                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
+│  │   CLI Layer  │  │  Agent Layer │  │  Tool Layer  │    │
+│  │              │  │              │  │              │    │
+│  │ • analystchat│→ │ • Chat Agent │→ │ • 40+ Tools  │    │
+│  │ • sitemeta   │  │ • Site Agent │  │ • Custom     │    │
+│  │ • news       │  │ • News Agent │  │ • Community  │    │
+│  │ • article    │  │ • Article    │  │              │    │
+│  └──────────────┘  └──────────────┘  └──────────────┘    │
+│                            ↓                               │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │              AWS Bedrock Integration                │   │
+│  │                                                     │   │
+│  │  • Claude 3.7 Sonnet (Inference Profiles)          │   │
+│  │  • Agent-specific configurations                   │   │
+│  │  • Streaming & caching optimizations               │   │
+│  └────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Directory Structure
 
 ```
 strands-analyst/
 ├── config.yml                 # AWS Bedrock & tool configuration
-├── try-prompts.yml            # 60+ example prompts for GenAI workflows
+├── try-prompts.yml           # 250+ GenAI workflow examples
 ├── analyst/
-│   ├── agents/               # Specialized AI agents
+│   ├── agents/               # AI agent implementations
 │   │   ├── chat.py          # Interactive assistant (40+ tools)
-│   │   ├── sitemeta.py      # Website analysis
+│   │   ├── sitemeta.py      # Website intelligence
 │   │   ├── news.py          # RSS monitoring
-│   │   ├── get_article.py   # Content extraction
-│   │   └── html_to_markdown.py  # Document conversion
-│   ├── tools/                # Custom tools
+│   │   └── get_article.py   # Content extraction
+│   ├── tools/                # Custom tool implementations
 │   │   ├── fetch_url_metadata.py
 │   │   ├── speak_tool.py
-│   │   └── ...
-│   ├── cli/                  # Command interfaces
-│   │   ├── chat.py          # analystchat command
-│   │   ├── sitemeta.py      # sitemeta command
-│   │   └── ...
-│   └── utils/                # Utilities and configuration
-└── docs/                     # Documentation
+│   │   └── http_request_tool.py
+│   ├── cli/                  # Command-line interfaces
+│   └── utils/                # Utilities & configuration
+├── docs/                     # Comprehensive documentation
+├── diagrams/                 # Architecture visualizations
+└── refer/                    # Examples & references
 ```
 
-## Usage Examples
+## 🔧 Installation
 
-### GenAI Professional Workflows
+### Prerequisites
+
+- **Python**: 3.8+ (tested up to 3.13)
+- **AWS Account**: With Amazon Bedrock access
+- **AWS Credentials**: Configured ([setup guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html))
+- **External Dependencies**:
+  - **Graphviz** (for diagram tool): 
+    - macOS: `brew install graphviz`
+    - Ubuntu/Debian: `sudo apt-get install graphviz`
+    - Windows: Download from [graphviz.org](https://graphviz.org/download/)
+  - **Playwright** (for browser automation):
+    ```bash
+    playwright install  # Install browsers after pip install
+    ```
+
+### Setup Instructions
 
 ```bash
-# Interactive mode with rotating example prompts
-analystchat
-# Try: "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
-# Try: "Compare Bedrock Claude vs Titan costs for 1 million users monthly"
-# Try: "Research the latest developments in Claude 3.7 Sonnet capabilities"
+# 1. Clone repository
+git clone https://github.com/yourusername/strands-analyst.git
+cd strands-analyst
 
-# Single queries
-analystchat "Create presentation visuals for our GenAI transformation roadmap"
-analystchat "Set up automated monitoring for our GenAI model performance"
-analystchat "Help me plan migration from OpenAI to Amazon Bedrock"
+# 2. Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# 3. Install package with dependencies
+pip install -e .
+
+# 4. Install optional dependencies
+playwright install        # For browser automation
+# brew install graphviz   # For diagram generation (macOS)
+
+# 5. Verify installation
+analystchat --help
+sitemeta --help
+```
+
+## 🎯 Usage Examples
+
+### GenAI Architecture & Design
+
+```bash
+# Architecture diagrams
+analystchat "Draw an enterprise RAG architecture with Bedrock Knowledge Bases"
+analystchat "Design a multi-modal GenAI system for text, images, and video"
+analystchat "Show me a conversational AI platform using Bedrock and API Gateway"
+
+# Cost analysis
+analystchat "Compare Bedrock Claude vs Titan costs for 1M users monthly"
+analystchat "Calculate ROI of Amazon Q Business for 5000 employees"
+analystchat "Model GenAI costs from startup to enterprise scale"
+```
+
+### Agentic AI Workflows
+
+```bash
+# Multi-agent systems
+analystchat "Create AI agents for automated content generation and review"
+analystchat "Design customer support automation with Bedrock Agents"
+analystchat "Build document processing with automated actions"
+
+# Complex workflows
+analystchat "Research Claude 3.7 vs Llama 3.1 capabilities and create comparison"
+analystchat "Analyze competitor GenAI offerings with screenshots and reports"
+```
+
+### AWS Integration Examples
+
+```bash
+# Training & optimization
+analystchat "Setup SageMaker HyperPod for Llama 3.1 training"
+analystchat "Compare Trainium2 vs P5 instances for model training"
+analystchat "Implement MoE architecture for domain-specific LLM"
+
+# Service integration
+analystchat "Integrate Comprehend with Bedrock for financial analysis"
+analystchat "Build meeting summarization with Transcribe and Claude"
+analystchat "Create contract analysis with Textract and Bedrock"
 ```
 
 ### Competitive Intelligence
 
 ```bash
-# AI company analysis
+# Company analysis
 sitemeta anthropic.com --verbose --save-markdown
-sitemeta openai.com --output-dir ./competitive-analysis
+sitemeta openai.com stripe.com --output-dir ./analysis
 
-# GenAI service monitoring  
-news https://aws.amazon.com/about-aws/whats-new/recent/feed/ --count 10 --verbose
-
-# Research documentation
-article https://aws.amazon.com/blogs/machine-learning/bedrock-agents --save-markdown
+# Market monitoring
+news https://aws.amazon.com/blogs/machine-learning/feed/
+article https://blog.openai.com/latest --save-markdown
 ```
 
-### Advanced Tool Usage
+## ⚙️ Configuration
 
-The `analystchat` assistant provides access to 40+ community tools organized by category:
+### AWS Bedrock Settings
 
-- **RAG & Memory**: retrieve, memory, agent_core_memory, mem0_memory
-- **File Operations**: file_read, file_write, editor
-- **System & Automation**: shell, use_computer, cron, environment
-- **Web & Network**: browser, http_request, rss, slack
-- **Multimodal**: diagram, generate_image, speak, image_reader, nova_reels
-- **Development**: python_repl, code_interpreter
-- **Agent Workflows**: workflow, swarm, graph, think, handoff_to_user
-
-Tools requiring system access show consent prompts for security.
-
-## Configuration
-
-### AWS Bedrock Integration
-
-Edit `config.yml` to customize model settings:
+The system uses optimized configurations for each agent (`config.yml`):
 
 ```yaml
 bedrock:
   model:
+    # High-performance inference profile
     default_model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+    
   agents:
     chat:
-      temperature: 0.5
-      streaming: true
-      max_tokens: 4096
+      temperature: 0.5      # Conversational balance
+      streaming: true       # Real-time responses
+      max_tokens: 4096     # Extended conversations
+      multimodal: true     # Image/diagram support
+      
     sitemeta:
-      temperature: 0.2
-      max_tokens: 2048
+      temperature: 0.2      # Focused, structured output
+      max_tokens: 2048     # Concise analysis
+      optimize_system_prompt: true
+      
+    article:
+      temperature: 0.3      # Analytical precision
+      max_tokens: 8192     # Long-form content
+      reasoning_mode: true  # Complex analysis
 ```
 
-### Community Tools
-
-Configure available tools and security settings:
+### Security Configuration
 
 ```yaml
 community_tools:
-  enabled: true
   consent:
     require_consent: true
-    always_require_consent: 
-      - shell
-      - python_repl
-      - file_write
-      - use_computer
-  categories:
-    file_operations: true
-    web_network: true
-    multimodal: true
-    # ... other categories
+    always_require_consent:
+      - shell              # System commands
+      - python_repl        # Code execution
+      - file_write         # File modifications
+      - use_computer       # UI automation
+      - editor            # File editing
 ```
 
-## Security
+## 📊 Performance Metrics
 
-- **Explicit consent** required for system-modifying operations
-- **Safe defaults** for read-only operations (calculations, web requests, file reading)
-- **Clear explanations** of tool capabilities and risks
-- **User control** over all potentially dangerous operations
+The system tracks comprehensive metrics for optimization:
 
-## Documentation
+- **Token Usage**: Input/output token tracking per agent
+- **Latency Metrics**: Model, network, and tool execution times
+- **Cost Analysis**: Real-time cost tracking with AWS pricing
+- **Cache Performance**: Hit rates for prompt and tool caching
+- **Tool Efficiency**: Execution time and success rates
 
-Comprehensive guides available in the [`docs/`](docs/) directory:
+Access metrics with verbose mode:
+```bash
+sitemeta example.com --verbose
+# Shows: tokens used, processing time, costs, cache hits
+```
 
-- [Installation Guide](docs/installation.md)
-- [CLI Reference](docs/cli-guide.md) 
-- [Configuration Guide](docs/configuration-guide.md)
-- [Community Tools Guide](docs/community-tools-guide.md)
-- [Agent Development](docs/agents-guide.md)
+## 🚦 Architecture Visualizations
 
-## Python API
+The project includes AWS architecture diagrams demonstrating:
+
+- **MoE LLM Training & Inference Pipeline**: Complete AWS infrastructure for Mixture-of-Experts models
+- **Multi-tier Web Applications**: Scalable 3-tier architectures on AWS
+- **GenAI Deployment Patterns**: Production deployment architectures for LLMs
+
+View in `diagrams/` directory or generate new ones:
+```bash
+analystchat "Create a diagram of our RAG architecture with Bedrock"
+```
+
+## 📖 Documentation
+
+Comprehensive guides in the [`docs/`](docs/) directory:
+
+| Guide | Description |
+|-------|-------------|
+| [Installation Guide](docs/installation.md) | Detailed setup instructions |
+| [CLI Reference](docs/cli-guide.md) | Complete command reference |
+| [Configuration Guide](docs/configuration-guide.md) | AWS Bedrock & tool settings |
+| [Community Tools Guide](docs/community-tools-guide.md) | 40+ tools documentation |
+| [Agent Development](docs/agents-guide.md) | Building custom agents |
+| [Automation Guide](docs/automation-guide.md) | Security & automation |
+
+## 🔬 Python API
 
 ```python
 from analyst.agents import create_sitemeta_agent, sitemeta
@@ -228,39 +369,58 @@ from analyst.tools import fetch_url_metadata
 agent = create_sitemeta_agent()
 result = sitemeta("https://anthropic.com", agent)
 
-# Interactive chat
+# Interactive chat with 40+ tools
 chat_agent = create_chat_agent()
-response = chat_with_agent(chat_agent, "Design RAG architecture using Bedrock")
+response = chat_with_agent(
+    chat_agent, 
+    "Design a RAG architecture using Bedrock"
+)
 
 # Direct tool usage
 metadata = fetch_url_metadata("https://openai.com")
 ```
 
-## Contributing
+## 🚀 Roadmap
+
+### Near Term
+- [ ] Multi-agent orchestration framework
+- [ ] Message-level caching for conversations
+- [ ] OpenTelemetry integration
+- [ ] Real-time cost tracking dashboard
+
+### Future
+- [ ] Mixture-of-Experts (MoE) architectures
+- [ ] SageMaker HyperPod integration
+- [ ] Edge computing patterns (<100ms latency)
+- [ ] Advanced reasoning with chain-of-thought
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing`)
 3. Follow conventions in [CLAUDE.md](CLAUDE.md)
-4. Add tests and update documentation
+4. Add tests and documentation
 5. Submit a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-- [Strands Agents](https://strandsagents.com) - AI agent framework
-- [AWS Bedrock](https://aws.amazon.com/bedrock/) - Foundation model platform  
+- [Strands Agents](https://strandsagents.com) - Powerful AI agent framework
+- [AWS Bedrock](https://aws.amazon.com/bedrock/) - Enterprise foundation models
 - [Claude 3.7 Sonnet](https://www.anthropic.com/claude) - Advanced language model
-- [Graphviz](https://graphviz.org/) - Diagram generation
+- [Graphviz](https://graphviz.org/) - Architecture diagram generation
 
 ---
 
 <div align="center">
 
-**Built for GenAI Professionals | Powered by AWS Bedrock | Security-First Design**
+**Built for GenAI Professionals • Powered by AWS Bedrock • Enterprise-Ready**
 
-[📖 Documentation](docs/) • [🚀 Quick Start](#quick-start) • [🏗️ Architecture](#architecture) • [🔒 Security](#security)
+[Website](https://strandsagents.com) • [Documentation](docs/) • [Issues](https://github.com/yourusername/strands-analyst/issues) • [Discussions](https://github.com/yourusername/strands-analyst/discussions)
 
 </div>

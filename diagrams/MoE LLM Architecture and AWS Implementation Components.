@@ -1,0 +1,23 @@
+digraph {
+	rankdir=TB
+	node [fontname=Arial shape=record]
+	edge [fontname=Arial fontsize=10]
+	graph [ranksep=0.5]
+	MoELLMArchitecture [label="{MoELLMArchitecture|- totalParameters: 671B\n- activeParameters: 37B\n- expertsPerModule: 256\n- activeExpertsPerToken: 9|+ trainModel()\n+ inferenceModel()\n+ optimizeMemory()}" shape=record]
+	TrainingPipeline [label="{TrainingPipeline|- instanceType: P5e\n- gpuMemory: 140GB\n- networkBandwidth: 400GBPS\n- storageLatency: sub-millisecond|+ distributeTraining()\n+ checkpointModel()\n+ autoRecover()\n+ monitorUtilization()}" shape=record]
+	InferencePipeline [label="{InferencePipeline|- instanceType: Inf2\n- cachingStrategy: Redis\n- inactiveExpertStorage: S3\n- routingMechanism: ALB|+ serveModel()\n+ cacheExperts()\n+ optimizeLatency()\n+ scaleHorizontally()}" shape=record]
+	SageMakerHyperPod [label="{SageMakerHyperPod|- clusterCreationTime: 10-15min\n- healthCheckFramework: NVIDIA DCGM\n- autoRecovery: enabled\n- orchestration: Slurm/EKS|+ createCluster()\n+ replaceNodes()\n+ resumeTraining()\n+ monitorHealth()}" shape=record]
+	MemoryManagement [label="{MemoryManagement|- kvCacheCompression: MLA\n- expertCaching: Redis\n- coldStorage: S3\n- prefixCaching: aggressive|+ compressKVCache()\n+ routeToExperts()\n+ storeInactiveExperts()\n+ optimizeMemoryBandwidth()}" shape=record]
+	MonitoringSystem [label="{MonitoringSystem|- visualization: Grafana\n- metrics: Prometheus\n- containerInsights: enabled\n- customMetrics: GPU temperature, power|+ trackUtilization()\n+ alertOnIssues()\n+ visualizePerformance()\n+ optimizeResources()}" shape=record]
+	MoERouter [label="{MoERouter|- routingAlgorithm: top-k\n- expertSelection: 9 of 256\n- loadBalancing: dynamic\n- cacheHitRate: optimized|+ selectExperts()\n+ balanceLoad()\n+ trackUtilization()\n+ optimizeRouting()}" shape=record]
+	AttentionMechanism [label="{AttentionMechanism|- type: Multi-Head Latent Attention\n- slidingWindow: 1024 tokens\n- globalAttention: 1:5 ratio\n- normalization: QK-Norm|+ processTokens()\n+ optimizeMemory()\n+ calculateAttention()\n+ applyNormalization()}" shape=record]
+	MoELLMArchitecture -> TrainingPipeline [label=""]
+	MoELLMArchitecture -> InferencePipeline [label=""]
+	MoELLMArchitecture -> MoERouter [arrowhead=diamond style=filled]
+	MoELLMArchitecture -> AttentionMechanism [arrowhead=diamond style=filled]
+	TrainingPipeline -> SageMakerHyperPod [arrowhead=open style=dashed]
+	InferencePipeline -> MemoryManagement [arrowhead=open style=dashed]
+	SageMakerHyperPod -> MonitoringSystem [label=""]
+	InferencePipeline -> MonitoringSystem [label=""]
+	MoERouter -> MemoryManagement [arrowhead=open style=dashed]
+}

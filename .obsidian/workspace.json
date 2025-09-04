@@ -11,10 +11,14 @@
             "id": "9df6b2d10d08aeb0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "refer/posts/aws-moe-pipelines.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "aws-moe-pipelines"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 230.5
   },
   "right": {
     "id": "2dcf2acfcee6285d",
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "refer/posts/aws-moe-pipelines.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for aws-moe-pipelines"
             }
           },
           {
@@ -108,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "refer/posts/aws-moe-pipelines.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from aws-moe-pipelines"
             }
           },
           {
@@ -136,12 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "refer/posts/aws-moe-pipelines.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of aws-moe-pipelines"
             }
           }
         ]
@@ -164,18 +171,25 @@
   },
   "active": "9df6b2d10d08aeb0",
   "lastOpenFiles": [
-    "analyst/agents/chat.py.tmp.26710.1756996049842",
-    "analyst/tools/http_request_tool.py.tmp.26710.1756995628987",
-    "analyst/tools/__pycache__/http_request_tool.cpython-313.pyc",
-    "analyst/tools/__init__.py.tmp.26710.1756995459965",
-    "analyst/tools/http_request_tool.py",
-    "debug_http_request.py",
+    "refer/posts/performance-strands-analyst.md",
+    "backlog/performance-backlog.md.tmp.46685.1757008204502",
+    "backlog/performance-backlog.md.tmp.46685.1757008194773",
+    "backlog/performance-backlog.md.tmp.46685.1757008183522",
+    "backlog/performance-backlog.md.tmp.46685.1757008161916",
+    "backlog/performance-backlog.md.tmp.46685.1757008150188",
+    "backlog/performance-backlog.md",
+    "refer/responses/apple-models.md",
+    "refer/posts/aws-moe-pipelines.md.bak",
+    "refer/posts/aws-moe-pipelines.md",
+    "refer/posts",
+    "diagrams/MoE LLM AWS Deployment Architecture..png",
+    "diagrams/MoE LLM AWS Deployment Architecture.",
+    "diagrams/MoE LLM Training and Inference Sequence.png",
+    "diagrams/MoE LLM Architecture and AWS Implementation Components..png",
+    "diagrams/MoE LLM Architecture and AWS Implementation Components.",
+    "diagrams/AWS MoE LLM Training and Inference Pipeline Architecture..png",
+    "diagrams/AWS MoE LLM Training and Inference Pipeline Architecture.",
     "test_save.md",
-    "analyst/utils/__pycache__/shell_wrapper.cpython-313.pyc",
-    "analyst/tools/__pycache__/save_file.cpython-313.pyc",
-    "backlog/active-backlog.md.tmp.26710.1756993197468",
-    "analyst/utils/shell_wrapper.py",
-    "analyst/utils/consent_manager.py",
     "apple-models.md",
     "refer/articles/applefastvlm-7b-hugging-face/images/acc_vs_latency_qwen-2.png",
     "refer/articles/diffucoder-a-apple-collection/images/DiSygV3dn7A_OjmGVTrHD.jpeg",
@@ -183,10 +197,6 @@
     "refer/articles/diffucoder-a-apple-collection/images/cef8fd55d114ae9ab80ce2d8a02865f5.svg",
     "refer/articles/diffucoder-a-apple-collection/images/1653390727490-5dd96eb166059660ed1ee413.jpeg",
     "refer/articles/diffucoder-a-apple-collection/images/a64c605a73b980da801c521b862026f4.svg",
-    "refer/articles/openelm-instruct-models-a-apple-collection/images/1642182289584-5e863990b6845d56ef3d4fb9.jpeg",
-    "refer/articles/openelm-instruct-models-a-apple-collection/images/1653390727490-5dd96eb166059660ed1ee413.jpeg",
-    "refer/articles/openelm-instruct-models-a-apple-collection/images/NQtzmrDdbG0H8qkZvRyGk.jpeg",
-    "refer/articles/openelm-instruct-models-a-apple-collection/images/1671292294864-5e00e3bdcbfd036a99df0da3.jpeg",
     "refer/articles/hubspot-software-tools-for-your-business-homepage/article.md",
     "docs/automation-guide.md",
     "backlog/active-backlog.md",
@@ -206,9 +216,6 @@
     "refer/test-news/cnn-com-news-2025-09-01.md",
     "refer/news/co-uk-news-2025-09-01.md",
     "refer/sitemeta/decagon-ai-meta-2025-09-01.md",
-    "refer/sitemeta/crescendo-ai-meta-2025-09-01.md",
-    "refer/test/stripe-com-meta-2025-09-01.md",
-    "refer/sitemeta/google-com-meta-2025-09-01.md",
-    "analyst/prompts/sitemeta.md"
+    "refer/sitemeta/crescendo-ai-meta-2025-09-01.md"
   ]
 }
