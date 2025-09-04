@@ -1,15 +1,16 @@
 # Strands Analyst
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue.svg)](https://github.com/yourusername/strands-analyst)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Strands](https://img.shields.io/badge/powered%20by-Strands%20Agents-orange.svg)](https://strandsagents.com)
 [![AWS Bedrock](https://img.shields.io/badge/AI-Claude%203.7%20Sonnet-purple.svg)](https://aws.amazon.com/bedrock/)
 [![Security](https://img.shields.io/badge/Security-First%20Design-red.svg)]()
-[![Tools](https://img.shields.io/badge/Community%20Tools-40+-brightgreen.svg)]()
+[![Tools](https://img.shields.io/badge/Community%20Tools-44+-brightgreen.svg)]()
 
 **Professional AI agents for intelligent analysis and automation** — A comprehensive framework for website intelligence, content analysis, and research automation with enterprise-grade security controls.
 
-Built on [Strands Agents](https://strandsagents.com) with AWS Bedrock integration, featuring 40+ community tools, security-first architecture, and production-ready analysis workflows.
+Built on [Strands Agents](https://strandsagents.com) with AWS Bedrock integration, featuring 44+ community tools, security-first architecture, and production-ready analysis workflows.
 
 ---
 
@@ -19,7 +20,7 @@ Built on [Strands Agents](https://strandsagents.com) with AWS Bedrock integratio
 # Install the package
 pip install -e .
 
-# Interactive AI assistant with 40+ tools
+# Interactive AI assistant with 44+ tools
 analystchat
 
 # Analyze any website
@@ -33,6 +34,12 @@ article https://anthropic.com/news/building-effective-agents
 
 # Convert HTML to Markdown
 htmlmd refer/articles/my-post/index.html --verbose
+
+# Create diagrams and visualizations
+analystchat "draw a network diagram with 5 nodes"
+
+# Text-to-speech conversion
+analystchat "convert this text to speech: Hello world"
 ```
 
 ## ✨ Core Capabilities
@@ -42,7 +49,7 @@ htmlmd refer/articles/my-post/index.html --verbose
 analystchat "analyze stripe.com and calculate their potential market size"
 ```
 - Natural language interface with streaming responses
-- Access to 40+ community tools with security controls
+- Access to 44+ community tools with security controls
 - Multi-turn conversations with session persistence
 - Tool execution with user consent for sensitive operations
 
@@ -82,7 +89,7 @@ htmlmd saved-page.html --output research-notes.md
 - Multiple heading styles support
 - Batch conversion capabilities
 
-## 🛠️ 40+ Community Tools
+## 🛠️ 44+ Community Tools
 
 The chat assistant has access to a comprehensive suite of tools:
 
@@ -140,8 +147,8 @@ The chat assistant has access to a comprehensive suite of tools:
 
 **🎨 Multi-modal**
 - Image generation and reading
-- Diagram creation
-- Text-to-speech
+- Diagram creation (network, cloud, UML)
+- Text-to-speech (macOS say & Amazon Polly)
 - Video generation capabilities
 
 </td>
@@ -167,6 +174,7 @@ This tool can modify your system. Allow? (y/n): _
 - Python 3.8 or higher
 - AWS account with Bedrock access
 - AWS credentials configured ([setup guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html))
+- Graphviz (for diagram generation): `brew install graphviz` (macOS) or system package manager
 
 ### Setup
 
@@ -201,6 +209,8 @@ Try these example prompts:
 • "analyze google.com and describe their business model"
 • "calculate compound interest on $10000 at 5% for 10 years"  
 • "read config.yml and explain the bedrock settings"
+• "draw a diagram of a 3-tier web architecture"
+• "convert this text to speech: Welcome to Strands Analyst"
 
 Type 'help' for commands or 'quit' to exit
 ==================================================
@@ -220,6 +230,12 @@ analystchat "what does openai.com do?"
 
 # Use community tools
 analystchat "calculate the factorial of 12"
+
+# Create visualizations
+analystchat "draw a simple network diagram with 4 connected nodes"
+
+# Text-to-speech
+analystchat "speak this text: Hello from Strands Analyst"
 
 # File operations (requires consent)
 analystchat "read the package.json file"
@@ -307,6 +323,42 @@ strands-analyst/
 - **CLI**: User-friendly command-line interfaces
 - **Configuration**: YAML-based settings management
 - **Security**: Consent system for sensitive operations
+
+## 🆕 Latest Features & Updates
+
+### ✨ Recently Added (v0.1.0-alpha)
+
+**🎨 Diagram Creation Tool**
+```bash
+analystchat "create a network diagram showing client-server architecture"
+analystchat "draw a UML class diagram for a user management system"
+```
+- Create network, cloud architecture, and UML diagrams
+- Automatic PNG generation in `diagrams/` directory
+- Supports complex multi-node visualizations
+- Requires Graphviz installation
+
+**🗣️ Text-to-Speech Integration**
+```bash
+analystchat "convert this to speech: Welcome to our presentation"
+analystchat "speak this with Amazon Polly voice: Important announcement"
+```
+- Dual mode: Fast (macOS `say`) and high-quality (Amazon Polly)
+- Multiple voice options and output formats
+- Save audio files or play directly
+- Cross-platform compatibility
+
+**🔧 Enhanced Tool Management**
+- Expanded from 40+ to 44+ community tools
+- Dynamic tool loading based on configuration
+- Improved error handling and dependency management
+- Better integration with Strands Agents framework
+
+**🔒 Security Improvements**
+- Refined consent system with clear permission prompts
+- User-friendly explanations for tool capabilities
+- Safe defaults for read-only operations
+- Configurable consent requirements per tool category
 
 ## ⚙️ Configuration
 
@@ -467,7 +519,7 @@ Comprehensive guides in the [`docs/`](docs/) directory:
 | [Installation](docs/installation.md) | Setup and dependencies |
 | [CLI Guide](docs/cli-guide.md) | Command reference |
 | [Configuration](docs/configuration-guide.md) | YAML settings |
-| [Community Tools](docs/community-tools-guide.md) | 40+ tools documentation |
+| [Community Tools](docs/community-tools-guide.md) | 44+ tools documentation |
 | [Automation](docs/automation-guide.md) | Browser and system automation |
 | [Developer Guide](docs/developer-guide.md) | API and extension development |
 
@@ -480,27 +532,29 @@ Comprehensive guides in the [`docs/`](docs/) directory:
 
 ## 🗺️ Roadmap
 
-### ✅ Current Release (v1.0)
+### ✅ Current Release (v0.1.0-alpha)
 - Core agents for analysis and research
-- 40+ community tools integration
+- 44+ community tools integration
+- Diagram creation and text-to-speech
 - Security-first consent system
 - AWS Bedrock optimization
 - Session management
 - Streaming responses
 
-### 🎯 Next Release (v1.1)
+### 🎯 Next Release (v0.2.0-alpha)
 - Batch processing improvements
 - Export to JSON/CSV formats
 - Enhanced caching system
 - SEO analysis tools
 - Competitor comparison features
 
-### 🚀 Future Vision
+### 🚀 Future Vision (v1.0 Stable)
 - REST API endpoints
-- Docker containerization
+- Docker containerization  
 - Social media monitoring
 - Custom agent creation framework
 - Plugin ecosystem
+- Enterprise deployment options
 
 ## 🤝 Contributing
 
