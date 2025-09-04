@@ -6,11 +6,11 @@
 [![Strands](https://img.shields.io/badge/powered%20by-Strands%20Agents-orange.svg)](https://strandsagents.com)
 [![AWS Bedrock](https://img.shields.io/badge/AI-Claude%203.7%20Sonnet-purple.svg)](https://aws.amazon.com/bedrock/)
 [![Security](https://img.shields.io/badge/Security-First%20Design-red.svg)]()
-[![Tools](https://img.shields.io/badge/Community%20Tools-44+-brightgreen.svg)]()
+[![Tools](https://img.shields.io/badge/Community%20Tools-42+-brightgreen.svg)]()
 
-**Professional AI agents for intelligent analysis and automation** — A comprehensive framework for website intelligence, content analysis, and research automation with enterprise-grade security controls.
+**GenAI and Agentic AI toolkit for AWS Solutions Architects and Account Managers** — Accelerate Bedrock implementations, Amazon Q deployments, and autonomous agent development with intelligent workflows and 42+ specialized tools.
 
-Built on [Strands Agents](https://strandsagents.com) with AWS Bedrock integration, featuring 44+ community tools, security-first architecture, and production-ready analysis workflows.
+Built on [Strands Agents](https://strandsagents.com) with native AWS Bedrock integration, featuring 60 GenAI/Agentic AI example workflows, security-first design, and specialized automation for generative AI customers.
 
 ---
 
@@ -20,136 +20,135 @@ Built on [Strands Agents](https://strandsagents.com) with AWS Bedrock integratio
 # Install the package
 pip install -e .
 
-# Interactive AI assistant with 44+ tools
+# Interactive AI assistant with 42+ tools
 analystchat
 
-# Analyze any website
+# Example GenAI and Agentic AI workflows
+analystchat "Design enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
+analystchat "Create Bedrock Agent that automates customer support workflows"
+analystchat "Compare Bedrock Claude vs Titan costs for enterprise chatbot with 1M users"
+
+# Website analysis and research
 sitemeta stripe.com --verbose
 
-# Monitor RSS feeds  
-news https://feeds.npr.org/1001/rss.xml --save-markdown
-
-# Download and archive articles
-article https://anthropic.com/news/building-effective-agents
-
-# Convert HTML to Markdown
-htmlmd refer/articles/my-post/index.html --verbose
-
-# Create diagrams and visualizations
-analystchat "draw a network diagram with 5 nodes"
-
-# Text-to-speech conversion
-analystchat "convert this text to speech: Hello world"
+# GenAI research and competitive intelligence
+news https://aws.amazon.com/about-aws/whats-new/recent/feed/ --count 10
+article https://aws.amazon.com/blogs/machine-learning/some-genai-post --verbose
+sitemeta openai.com --verbose  # Competitive analysis
 ```
 
 ## ✨ Core Capabilities
 
-### 🤖 **Intelligent Chat Assistant**
+### 🤖 **GenAI & Agentic AI Assistant**
 ```bash
-analystchat "analyze stripe.com and calculate their potential market size"
+analystchat "Design Bedrock Agent that automates customer support workflows"
+# ⚠️  Tool requires permission: diagram
+# This tool can create files on your system. Allow? (y/n): y
+# [Creates GenAI agent architecture diagram in diagrams/ directory]
 ```
-- Natural language interface with streaming responses
-- Access to 44+ community tools with security controls
-- Multi-turn conversations with session persistence
-- Tool execution with user consent for sensitive operations
+- **42+ community tools** with security-first consent prompts
+- **GenAI-specialized workflows** for Bedrock, Amazon Q, agent development
+- **60 example prompts** across 20 GenAI/Agentic AI categories
+- **Native streaming** via Strands Agents with Claude 3.7 Sonnet
 
-### 🌐 **Website Intelligence**
+### 🧠 **GenAI & Agent Architecture**
 ```bash
-sitemeta google.com --save-markdown
+analystchat "Create multi-agent system for automated content generation and review"
+analystchat "Design enterprise RAG architecture using Bedrock Knowledge Bases"
 ```
-- Instant company analysis from URLs
-- Smart metadata extraction with OpenGraph support
-- Auto-generated markdown reports with YAML frontmatter
-- Performance optimized with head-only downloads
+- **GenAI architecture diagrams** (RAG, agent workflows, multimodal) using Graphviz
+- **Agentic AI patterns** and autonomous workflow recommendations
+- **Visual GenAI architectures** saved as PNG files in diagrams/
 
-### 📰 **News & RSS Monitoring**
+### 💰 **GenAI Cost Analysis & ROI**
 ```bash
-news https://techcrunch.com/feed/ --count 10 --verbose
+analystchat "Compare Bedrock Claude vs Titan costs for enterprise chatbot with 1M users"
+analystchat "Calculate Amazon Q Business deployment costs for 5000-person enterprise"
 ```
-- Multi-source RSS aggregation
-- Intelligent content extraction with fallbacks
-- Automated markdown reports with metrics
-- Batch processing for efficiency
+- **GenAI cost modeling** and foundation model comparisons
+- **Amazon Q ROI analysis** and enterprise deployment planning
+- **Built-in calculator** for GenAI infrastructure scaling costs
 
-### 📄 **Content Archival**
+### 🌐 **GenAI Research & Intelligence**
 ```bash
-article https://example.com/blog-post --output-dir ./research
+sitemeta anthropic.com --verbose  # AI company competitive analysis
+news https://aws.amazon.com/about-aws/whats-new/recent/feed/ --count 10
 ```
-- Complete article downloads with images
-- Professional HTML generation with styling
-- Smart folder organization
-- Readability-powered extraction
+- **AI company analysis** for competitive intelligence
+- **GenAI service monitoring** and AWS AI announcements
+- **Research archival** for GenAI trends and documentation
+- **Content processing** for GenAI market intelligence
 
-### 📝 **HTML to Markdown Conversion**
+### 🔒 **GenAI Security & Governance**
 ```bash
-htmlmd saved-page.html --output research-notes.md
+analystchat "Design GenAI governance framework with Bedrock Guardrails for healthcare"
+# Safe operations run immediately, system operations require consent
 ```
-- Clean markdown generation
-- Metadata preservation in frontmatter
-- Multiple heading styles support
-- Batch conversion capabilities
+- **Responsible AI** implementation and Bedrock Guardrails design
+- **GenAI security hardening** and prompt injection protection
+- **Compliance frameworks** for regulated industries using GenAI
 
-## 🛠️ 44+ Community Tools
+## 🛠️ 42+ Community Tools
 
-The chat assistant has access to a comprehensive suite of tools:
+The GenAI assistant provides AWS professionals with specialized tools for GenAI and Agentic AI workflows:
 
 <table>
 <tr>
 <td width="50%">
 
-**🔧 Core Utilities**
-- Calculator for mathematical operations
-- Current time and date information
-- HTTP requests for web interactions
-- Environment variable access
+**🔧 GenAI Utilities**
+- Calculator for GenAI cost modeling
+- Current time and date for GenAI trends
+- HTTP requests for AI service APIs
+- Environment management for GenAI projects
 
 </td>
 <td width="50%">
 
-**📁 File Operations** 
-- File reading and writing (with consent)
-- Editor for code modifications
-- Directory traversal and search
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-**💻 Code & System**
-- Python REPL execution (with consent)
-- Shell command execution (with consent)
-- Code interpretation and analysis
-- Cron job scheduling
-
-</td>
-<td width="50%">
-
-**🤖 Agent Orchestration**
-- Multi-agent workflows
-- Swarm coordination
-- Agent handoffs
-- Batch processing
+**📁 GenAI Content Operations** 
+- File reading for GenAI research (safe)
+- Document processing for RAG systems
+- Content generation and editing workflows
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-**💾 Memory & RAG**
-- Semantic retrieval from knowledge bases
-- Agent memory persistence
-- Context management
-- Vector storage integration
+**💻 GenAI Development**
+- Shell commands for GenAI deployment (requires consent)
+- Python REPL for GenAI prototyping (requires consent)
+- Computer automation for GenAI demos (requires consent)
+- Automated GenAI workflow scheduling (requires consent)
 
 </td>
 <td width="50%">
 
-**🎨 Multi-modal**
-- Image generation and reading
-- Diagram creation (network, cloud, UML)
-- Text-to-speech (macOS say & Amazon Polly)
-- Video generation capabilities
+**🤖 Agentic AI Workflows**
+- Multi-agent system orchestration
+- Bedrock Agent coordination and swarms
+- Autonomous workflow automation (requires consent)
+- Agent handoffs and specialized GenAI tasks
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**💾 GenAI Knowledge Systems**
+- Semantic retrieval for RAG architectures
+- Agent memory and context persistence
+- Knowledge base management for GenAI
+- Native Bedrock Knowledge Base integration
+
+</td>
+<td width="50%">
+
+**🎨 GenAI Visualization**
+- **GenAI architecture diagrams** (RAG, agents, multimodal)
+- AI-generated images and multimodal content
+- **Text-to-speech** for GenAI presentations
+- Browser automation for GenAI research (requires consent)
 
 </td>
 </tr>
@@ -157,24 +156,28 @@ The chat assistant has access to a comprehensive suite of tools:
 
 ### 🔒 Security-First Design
 
-All potentially dangerous operations require explicit user consent:
+System-modifying operations require explicit user consent with clear explanations:
 
 ```
-You: use shell to list files in my home directory
+You: design Bedrock Agent that automates customer support workflows
 
-🤖 Assistant: I'll help you list files in your home directory using the shell tool.
+🤖 Assistant: I'll design an autonomous customer support agent architecture for you.
 
-⚠️  Tool requires permission: shell
-This tool can modify your system. Allow? (y/n): _
+⚠️  Tool requires permission: diagram
+This tool can create files on your system. Allow? (y/n): y
+
+[Creates GenAI agent workflow diagram in diagrams/ directory]
 ```
+
+**Safe operations** (GenAI research, cost calculations, file reading) run immediately without consent prompts.
 
 ## 📦 Installation
 
 ### Prerequisites
-- Python 3.8 or higher
-- AWS account with Bedrock access
-- AWS credentials configured ([setup guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html))
-- Graphviz (for diagram generation): `brew install graphviz` (macOS) or system package manager
+- **Python 3.8+** (supports up to Python 3.13)
+- **AWS account** with Amazon Bedrock access
+- **AWS credentials** configured ([setup guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html))
+- **Graphviz** for diagram generation: `brew install graphviz` (macOS)
 
 ### Setup
 
@@ -183,378 +186,354 @@ This tool can modify your system. Allow? (y/n): _
 git clone https://github.com/yourusername/strands-analyst.git
 cd strands-analyst
 
-# Create virtual environment
+# Create and activate virtual environment
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install package with dependencies
 pip install -e .
 
-# (Optional) Install Playwright for browser automation
-playwright install
+# Install required system dependencies
+brew install graphviz  # macOS (required for diagram tool)
+# sudo apt-get install graphviz  # Ubuntu/Debian
 ```
 
 ## 🎯 Usage Examples
 
-### Interactive Chat Sessions
+### GenAI & Agentic AI Professional Workflows
 
 ```bash
-# Start interactive chat
+# Start interactive chat with GenAI-focused examples
 analystchat
 
-🤖 Analyst Chat - Interactive Analysis Assistant
-==================================================
+🤖 GenAI & Agentic AI Assistant - Interactive Analysis
+=====================================================
 
-Try these example prompts:
-• "analyze google.com and describe their business model"
-• "calculate compound interest on $10000 at 5% for 10 years"  
-• "read config.yml and explain the bedrock settings"
-• "draw a diagram of a 3-tier web architecture"
-• "convert this text to speech: Welcome to Strands Analyst"
+Try these GenAI professional prompts:
+• "Design enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
+• "Create Bedrock Agent that automates customer support workflows"
+• "Compare Bedrock Claude vs Titan costs for enterprise chatbot with 1M users"
+• "Deploy Amazon Q Business with enterprise SSO and custom data sources"
+• "Design GenAI governance framework with Bedrock Guardrails for healthcare"
 
 Type 'help' for commands or 'quit' to exit
-==================================================
+=====================================================
 
-You: analyze stripe.com
+You: Create multi-agent system for automated content generation and review
 
-🤖 Assistant: I'll analyze stripe.com for you...
-
-[Streaming response appears in real-time]
+🤖 Assistant: I'll design a coordinated GenAI agent system for you...
+[Streaming response with agentic AI architecture recommendations]
 ```
 
-### Single Commands
+### Command-Line GenAI Usage
 
 ```bash
-# Quick website analysis
-analystchat "what does openai.com do?"
+# GenAI and Agent architecture
+analystchat "Design multi-modal GenAI application combining text, image, and audio"
+analystchat "Build intelligent document processing agent with function calling"
 
-# Use community tools
-analystchat "calculate the factorial of 12"
+# GenAI cost analysis and ROI
+analystchat "Analyze cost-effective GenAI architecture scaling from startup to enterprise"
+analystchat "Create GenAI-first startup pitch deck with AWS cost projections"
 
-# Create visualizations
-analystchat "draw a simple network diagram with 4 connected nodes"
-
-# Text-to-speech
-analystchat "speak this text: Hello from Strands Analyst"
-
-# File operations (requires consent)
-analystchat "read the package.json file"
+# GenAI research and competitive intelligence
+analystchat "Research latest Bedrock model updates: Claude 3.5 Sonnet vs Llama 3.1"
+analystchat "Compare Amazon Q vs Microsoft Copilot for enterprise productivity"
 ```
 
-### Website Analysis
+### Specialized GenAI CLI Tools
 
 ```bash
-# Basic analysis
-sitemeta google.com
+# GenAI company and competitive intelligence
+sitemeta anthropic.com --verbose  # Analyze AI companies
+sitemeta openai.com --save-markdown  # Research GenAI platforms
+sitemeta huggingface.co --output-dir ./genai-competitive-analysis
 
-# Detailed with metrics
-sitemeta stripe.com --verbose
+# GenAI news and announcement monitoring
+news https://aws.amazon.com/about-aws/whats-new/recent/feed/ --count 10 --verbose
+news https://aws.amazon.com/blogs/machine-learning/feed/ --save-markdown
 
-# Save to custom directory
-sitemeta openai.com --output-dir ./reports --save-markdown
-```
+# GenAI research and documentation archival
+article https://aws.amazon.com/blogs/machine-learning/some-genai-post --verbose
+article https://docs.aws.amazon.com/bedrock/latest/userguide/ --output-dir ./genai-research
 
-### News Processing
-
-```bash
-# Fetch latest news
-news https://feeds.npr.org/1001/rss.xml
-
-# Custom item count with verbose output
-news https://techcrunch.com/feed/ --count 5 --verbose
-
-# Save to markdown
-news https://feeds.bbci.co.uk/news/rss.xml --save-markdown
-```
-
-### Article Downloads
-
-```bash
-# Download with images
-article https://example.com/blog-post --verbose
-
-# Skip images for faster download
-article https://example.com/text-article --no-images
-
-# Custom output directory
-article https://example.com/research --output-dir ./archive
+# GenAI documentation processing
+htmlmd bedrock-service-page.html --output bedrock-notes.md --verbose
 ```
 
 ## 🏗️ Architecture
 
 ```
 strands-analyst/
-├── config.yml                    # Comprehensive configuration
+├── config.yml                    # AWS Bedrock & tool configuration
+├── try-prompts.yml               # 48 AWS professional example prompts
 ├── analyst/
-│   ├── agents/                   # AI agent implementations
-│   │   ├── sitemeta.py          # Website analysis agent
-│   │   ├── news.py              # RSS/news processing agent
-│   │   ├── get_article.py       # Article download agent
-│   │   ├── html_to_markdown.py  # HTML conversion agent
-│   │   └── chat.py              # Interactive chat agent
-│   ├── tools/                    # Reusable tool functions
+│   ├── agents/                   # Specialized AI agents
+│   │   ├── chat.py              # Main chat agent (42+ tools)
+│   │   ├── sitemeta.py          # Website intelligence agent
+│   │   ├── news.py              # RSS monitoring agent
+│   │   ├── get_article.py       # Content archival agent
+│   │   └── html_to_markdown.py  # Document conversion agent
+│   ├── tools/                    # Custom tools
 │   │   ├── fetch_url_metadata.py
-│   │   ├── fetch_rss_content.py
-│   │   ├── download_article_content.py
-│   │   └── convert_html_to_markdown.py
+│   │   ├── speak_tool.py        # Text-to-speech implementation
+│   │   └── ...                  # Additional specialized tools
 │   ├── cli/                      # Command-line interfaces
-│   │   ├── sitemeta.py          # 'sitemeta' command
-│   │   ├── news.py              # 'news' command
-│   │   ├── get_article.py       # 'article' command
-│   │   ├── html_to_markdown.py  # 'htmlmd' command
-│   │   └── chat.py              # 'analystchat' command
-│   └── utils/                    # Shared utilities
-│       ├── logging_utils.py     # Logging configuration
-│       ├── metrics_utils.py     # Performance metrics
-│       ├── prompt_utils.py      # Prompt management
-│       └── config.py            # Configuration loader
-├── refer/                        # Output directory
-│   ├── sitemeta/                # Website analysis reports
-│   ├── news/                    # News summaries
-│   ├── articles/                # Downloaded articles
-│   └── chat-sessions/           # Chat history
-└── docs/                         # Documentation
+│   │   ├── chat.py              # analystchat command
+│   │   ├── sitemeta.py          # sitemeta command
+│   │   └── ...                  # Other CLI commands
+│   └── utils/                    # Core utilities
+│       ├── prompt_utils.py      # AWS prompt rotation system
+│       ├── config.py            # Configuration management
+│       └── ...                  # Logging, metrics utilities
+├── refer/                        # Generated content
+│   ├── chat-sessions/           # Conversation history
+│   ├── diagrams/                # Generated architecture diagrams
+│   └── ...                      # Analysis reports
+└── docs/                         # Professional documentation
 ```
 
 ### Key Components
 
-- **Agents**: AI-powered task coordinators using AWS Bedrock
-- **Tools**: Reusable functions for specific operations
-- **CLI**: User-friendly command-line interfaces
-- **Configuration**: YAML-based settings management
-- **Security**: Consent system for sensitive operations
+- **AWS Bedrock Integration**: Optimized Claude 3.7 Sonnet with streaming
+- **Security-First Design**: Consent-based tool execution for system operations
+- **Community Tools**: 42+ tools dynamically loaded from Strands framework
+- **AWS-Focused Prompts**: 48 example prompts across 16 professional categories
+- **Professional CLI**: Five specialized command-line interfaces
 
 ## 🆕 Latest Features & Updates
 
-### ✨ Recently Added (v0.1.0-alpha)
+### ✨ Current Release (v0.1.0-alpha)
 
-**🎨 Diagram Creation Tool**
+**🧠 GenAI & Agentic AI Architecture Diagrams**
 ```bash
-analystchat "create a network diagram showing client-server architecture"
-analystchat "draw a UML class diagram for a user management system"
+analystchat "Design enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
+analystchat "Create Bedrock Agent that automates customer support workflows"
+analystchat "Design multi-agent system for automated content generation and review"
 ```
-- Create network, cloud architecture, and UML diagrams
-- Automatic PNG generation in `diagrams/` directory
-- Supports complex multi-node visualizations
-- Requires Graphviz installation
+- **Graphviz-powered GenAI diagrams** for RAG architectures, agent workflows, multimodal systems
+- **Automatic PNG generation** saved to `diagrams/` directory for GenAI presentations
+- **Professional GenAI visualizations** for customer presentations and technical documentation
+- **GenAI architecture patterns**: Bedrock Agents, RAG systems, multi-agent coordination
 
-**🗣️ Text-to-Speech Integration**
+**🗣️ GenAI Professional Presentations**
 ```bash
-analystchat "convert this to speech: Welcome to our presentation"
-analystchat "speak this with Amazon Polly voice: Important announcement"
+analystchat "convert this text to speech: Welcome to our GenAI architecture review"
+analystchat "speak this with Amazon Polly: Key findings from our Bedrock implementation"
 ```
-- Dual mode: Fast (macOS `say`) and high-quality (Amazon Polly)
-- Multiple voice options and output formats
-- Save audio files or play directly
-- Cross-platform compatibility
+- **Dual TTS modes**: Fast (macOS `say`) and high-quality (Amazon Polly)
+- **Custom voice selection** for GenAI presentations and demos
+- **GenAI presentation support** for customer meetings and executive briefings
+- **Custom implementation** optimized for GenAI content delivery
 
-**🔧 Enhanced Tool Management**
-- Expanded from 40+ to 44+ community tools
-- Dynamic tool loading based on configuration
-- Improved error handling and dependency management
-- Better integration with Strands Agents framework
+**🛠️ Complete GenAI Tool Integration**
+- **42+ community tools** dynamically loaded for GenAI and Agentic AI workflows
+- **GenAI-first security**: Proper consent prompts for system-modifying GenAI operations
+- **Native Strands streaming**: Reliable output optimized for GenAI conversations
+- **GenAI-focused workflows**: Tools optimized for Bedrock, Amazon Q, and agent development
 
-**🔒 Security Improvements**
-- Refined consent system with clear permission prompts
-- User-friendly explanations for tool capabilities
-- Safe defaults for read-only operations
-- Configurable consent requirements per tool category
+**🔒 GenAI Production-Ready Security**
+- **Responsible AI consent system** with clear permission prompts for GenAI operations
+- **Safe GenAI defaults**: Research, calculations, GenAI cost analysis run without consent
+- **GenAI system protection**: Agent deployment, GenAI automation require explicit approval
+- **Professional GenAI trust**: Users maintain control over GenAI implementations and agent workflows
 
 ## ⚙️ Configuration
 
-All behavior is customizable via `config.yml`:
+Comprehensive customization via `config.yml` optimized for GenAI professionals:
 
-### AWS Bedrock Settings
+### AWS Bedrock GenAI Optimization
 ```yaml
 bedrock:
   model:
-    # High-performance inference profile
+    # Production Claude 3.7 Sonnet optimized for GenAI workflows
     default_model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
     
-  # Agent-specific optimizations
+  # GenAI agent-specific performance tuning
   agents:
-    sitemeta:
-      temperature: 0.2      # Focused analysis
-      max_tokens: 2048      # Concise responses
-      
-    news:
-      temperature: 0.4      # Varied summaries
-      batch_processing: true # Efficient multi-item processing
-      
     chat:
-      temperature: 0.5      # Natural conversation
-      streaming: true       # Real-time responses
-      max_tokens: 8192      # Extended conversations
+      temperature: 0.5      # Conversational for GenAI consultations
+      streaming: true       # Real-time responses during GenAI demos
+      max_tokens: 4096      # Extended GenAI technical discussions
+      
+    sitemeta:
+      temperature: 0.2      # Precise for GenAI competitive intelligence
+      max_tokens: 2048      # Focused GenAI company analysis reports
 ```
 
-### Community Tools Configuration
+### GenAI Security-First Tool Configuration
 ```yaml
 community_tools:
   enabled: true
   
-  # Security settings
+  # GenAI professional security controls
   consent:
-    require_consent: true
+    require_consent: true  # Responsible AI governance
     always_require_consent: 
-      - shell
-      - python_repl
-      - file_write
-      - editor
-      - use_computer
+      - shell            # GenAI deployment commands
+      - python_repl      # GenAI prototype execution
+      - file_write       # GenAI configuration modifications
+      - editor           # GenAI agent editing
+      - use_computer     # GenAI demo automation
+      - swarm           # Multi-agent GenAI coordination
+      - workflow        # Agentic AI workflow automation
   
-  # Tool categories
+  # GenAI professional tool categories
   categories:
-    rag_memory: true
-    file_operations: true
-    shell_system: true
-    code_interpretation: true
-    web_network: true
-    multimodal: true
-    utilities: true
-    agents_workflows: true
+    rag_memory: true         # Bedrock Knowledge Base integration
+    file_operations: true    # GenAI document processing
+    shell_system: true       # GenAI system automation (with consent)
+    code_interpretation: true # GenAI cost analysis and calculations
+    web_network: true        # GenAI research and API integration
+    multimodal: true         # GenAI diagrams, TTS, visualization
+    utilities: true          # GenAI calculator, time, basic tools
+    agents_workflows: true   # Agentic AI task orchestration
 ```
 
-### Output Settings
+### GenAI Professional Output Management
 ```yaml
+# Organized output for GenAI research and documentation
 sitemeta:
-  output_dir: "refer/sitemeta"
-  save_markdown: true
-  timeout: 30
-
+  output_dir: "refer/sitemeta"    # GenAI competitive intelligence reports
+  save_markdown: true             # Professional GenAI documentation format
+  
 news:
-  output_dir: "refer/news"
-  save_markdown: true
-  default_items: 10
+  output_dir: "refer/news"        # GenAI service updates and announcements
+  default_items: 10               # Manageable GenAI update summaries
+  
+chat:
+  session_dir: "refer/chat-sessions"  # GenAI client conversation history
+  save_on_exit: true                  # Preserve important GenAI discussions
 
-article:
-  output_dir: "refer/articles"
-  download_images: true
-  max_images: 20
+# Generated GenAI content directories:
+# diagrams/     - GenAI architecture and agent workflow diagrams
+# refer/        - All GenAI analysis and research outputs
 ```
 
 ## 📊 Performance Metrics
 
-| Operation | Typical Time | Memory | Notes |
-|-----------|--------------|--------|-------|
-| Chat Response | 1-3s | <15MB | With streaming |
-| Website Analysis | 2-5s | <10MB | Head-only fetch |
-| RSS Processing | 0.5-2s | <5MB | 10 items |
-| Article Download | 5-15s | <20MB | With images |
-| HTML Conversion | <1s | <5MB | Local files |
+Optimized for GenAI professional workflows:
 
-### Optimization Features
-- Native Strands streaming for real-time responses
-- AWS Bedrock caching for repeated operations
-- Regional optimization (us-west-2)
-- Session persistence for context
-- Batch processing for multiple items
+| Operation | Response Time | Memory | GenAI Integration |
+|-----------|---------------|--------|-------------------|
+| GenAI Architecture Diagrams | 3-8s | <20MB | Bedrock + Graphviz + RAG |
+| GenAI Agent Conversations | 1-3s | <15MB | Native Bedrock Claude streaming |
+| GenAI Cost Calculations | <1s | <5MB | Bedrock/Amazon Q pricing calculator |
+| AI Company Intelligence | 2-5s | <10MB | GenAI competitive analysis |
+| GenAI News Monitoring | 1-3s | <8MB | AI service announcement processing |
+
+### GenAI-Optimized Features
+- **Native Strands streaming** for real-time GenAI client demos
+- **AWS Bedrock caching** with us-east-1 optimization for GenAI workloads
+- **GenAI session persistence** for extended Bedrock and Amazon Q consultations
+- **Professional GenAI output** organized in structured directories for agent workflows
 
 ## 🔒 Security Features
 
-### User Consent System
-- Explicit permission required for system-modifying operations
-- Clear explanations of what each tool can do
-- Safe defaults (deny if uncertain)
-- Configurable per tool and per agent
+### Professional Trust Model
+- **Explicit consent** for operations that could modify systems or data
+- **Clear explanations** of tool capabilities and potential impact
+- **Professional defaults**: Safe for AWS consulting environments
+- **User control**: Professionals maintain authority over their systems
 
-### Protected Operations
-- Shell command execution
-- File system writes
-- Python code execution
-- System automation
-- Network requests to internal resources
+### GenAI Operations Requiring Consent
+- **GenAI system commands**: Bedrock deployment, GenAI agent automation
+- **GenAI file modifications**: Writing GenAI configurations, agent definitions
+- **GenAI code execution**: Bedrock prototyping, Amazon Q integration scripts
+- **Agentic AI workflows**: Multi-agent coordination, autonomous workflow automation
+- **GenAI external integrations**: API calls to customer GenAI systems
 
-### Safe Operations (No Consent Required)
-- Website analysis
-- RSS feed reading
-- Calculations
-- Time/date queries
-- Read-only file access (configurable)
+### Always-Safe GenAI Operations
+- **GenAI research**: AI company analysis, GenAI competitive intelligence
+- **GenAI content monitoring**: AI service feeds, GenAI announcements
+- **GenAI calculations**: Bedrock cost modeling, Amazon Q ROI analysis
+- **GenAI documentation**: Reading GenAI configs, generating GenAI reports
+- **GenAI planning**: Meeting scheduling, GenAI project timeline planning
 
 ## 🐍 Python API
 
-### Create Agents
+### GenAI Professional Agents
 ```python
 from analyst.agents import create_sitemeta_agent, sitemeta
 from analyst.agents.chat import create_chat_agent, chat_with_agent
 
-# Website analysis
+# GenAI competitive intelligence
 agent = create_sitemeta_agent()
-result = sitemeta("https://stripe.com", agent)
+result = sitemeta("https://anthropic.com", agent)
 
-# Interactive chat
+# GenAI consultation chat
 chat_agent = create_chat_agent()
-response = chat_with_agent(chat_agent, "analyze google.com")
+response = chat_with_agent(chat_agent, "Design enterprise RAG architecture using Bedrock")
 ```
 
-### Use Tools Directly
+### GenAI Professional Tools
 ```python
 from analyst.tools import fetch_url_metadata, fetch_rss_content
 
-# Get website metadata
-metadata = fetch_url_metadata("https://example.com")
+# GenAI company analysis for competitive intelligence
+metadata = fetch_url_metadata("https://openai.com")
 
-# Process RSS feed
-rss_items = fetch_rss_content("https://feeds.npr.org/1001/rss.xml", count=5)
+# GenAI service updates monitoring
+genai_updates = fetch_rss_content(
+    "https://aws.amazon.com/about-aws/whats-new/recent/feed/", 
+    count=10
+)
 ```
 
-### Session Management
+### GenAI Client Session Management
 ```python
 from analyst.agents.chat import create_chat_agent, get_session_info
 
-# Create agent with specific session
-agent = create_chat_agent(session_id="research-123")
+# Create dedicated session for GenAI client consultation
+agent = create_chat_agent(session_id="customer-genai-bedrock-implementation-2024")
 
-# Get session information
+# Track GenAI consultation progress
 info = get_session_info(agent)
-print(f"Session ID: {info['session_id']}")
+print(f"GenAI Client Session: {info['session_id']}")
 ```
 
-## 📚 Documentation
+## 📚 Professional Documentation
 
 Comprehensive guides in the [`docs/`](docs/) directory:
 
-| Guide | Description |
-|-------|-------------|
-| [Installation](docs/installation.md) | Setup and dependencies |
-| [CLI Guide](docs/cli-guide.md) | Command reference |
-| [Configuration](docs/configuration-guide.md) | YAML settings |
-| [Community Tools](docs/community-tools-guide.md) | 44+ tools documentation |
-| [Automation](docs/automation-guide.md) | Browser and system automation |
-| [Developer Guide](docs/developer-guide.md) | API and extension development |
+| Guide | AWS Professional Focus |
+|-------|------------------------|
+| [Installation](docs/installation.md) | AWS credentials, Graphviz setup |
+| [CLI Guide](docs/cli-guide.md) | Five specialized command interfaces |
+| [Configuration](docs/configuration-guide.md) | Bedrock GenAI optimization, responsible AI security |
+| [Community Tools](docs/community-tools-guide.md) | 42+ tools with GenAI consent model |
+| [Automation](docs/automation-guide.md) | GenAI system integration for professionals |
 
-### Agent-Specific Guides
-- [Chat Agent](docs/chat-agent-guide.md) - Interactive assistant
-- [Sitemeta Agent](docs/agents-guide.md) - Website analysis
-- [News Agent](docs/news-agent-guide.md) - RSS processing
-- [Article Agent](docs/article-agent-guide.md) - Content downloads
-- [HTMLmd Agent](docs/htmlmd-agent-guide.md) - Format conversion
+### GenAI Agent Specialization Guides
+- [Chat Agent](docs/chat-agent-guide.md) - GenAI & Agentic AI focused interactive assistant
+- [Architecture Tools](docs/agents-guide.md) - GenAI diagram generation, RAG visualization
+- [Research Tools](docs/news-agent-guide.md) - GenAI monitoring, AI competitive intelligence
+- [Content Tools](docs/article-agent-guide.md) - GenAI documentation, research archival workflows
 
-## 🗺️ Roadmap
+## 🗺️ GenAI & Agentic AI Professional Roadmap
 
 ### ✅ Current Release (v0.1.0-alpha)
-- Core agents for analysis and research
-- 44+ community tools integration
-- Diagram creation and text-to-speech
-- Security-first consent system
-- AWS Bedrock optimization
-- Session management
-- Streaming responses
+- **GenAI & Agentic AI focused chat agent** with 42+ community tools
+- **GenAI architecture diagrams** and RAG system visualizations
+- **Responsible AI security design** with consent-based tool execution
+- **Native Bedrock integration** with Claude 3.7 Sonnet optimization for GenAI
+- **GenAI professional CLI tools** for Bedrock and Amazon Q research
+- **Streaming responses** optimized for GenAI client demonstrations
 
 ### 🎯 Next Release (v0.2.0-alpha)
-- Batch processing improvements
-- Export to JSON/CSV formats
-- Enhanced caching system
-- SEO analysis tools
-- Competitor comparison features
+- **Amazon Q Business integration** for enterprise AI assistant deployment
+- **Bedrock Agents automation** framework for autonomous workflows
+- **Multi-agent coordination** analysis and orchestration tools
+- **Enhanced GenAI cost modeling** with Bedrock and Amazon Q pricing APIs
+- **Professional GenAI report generation** in multiple formats
 
 ### 🚀 Future Vision (v1.0 Stable)
-- REST API endpoints
-- Docker containerization  
-- Social media monitoring
-- Custom agent creation framework
-- Plugin ecosystem
-- Enterprise deployment options
+- **AWS GenAI partner integration** with Anthropic, Stability AI, and others
+- **GenAI presentation automation** with branded templates for executive demos
+- **Advanced GenAI compliance frameworks** (GDPR, HIPAA, SOX) for responsible AI
+- **Enterprise GenAI deployment** with SSO and governance for Bedrock
+- **Custom GenAI agent creation** framework for Bedrock Agents
+- **GenAI integration ecosystem** for AI/ML partner tools
 
 ## 🤝 Contributing
 
@@ -572,17 +551,21 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 
 ## 🙏 Acknowledgments
 
-- [Strands Agents](https://strandsagents.com) - Core AI agent framework
-- [AWS Bedrock](https://aws.amazon.com/bedrock/) - Managed AI service
-- [Claude 3.7 Sonnet](https://www.anthropic.com/claude) - Advanced language model
-- Open source community for excellent libraries
+- [Strands Agents](https://strandsagents.com) - Professional GenAI agent framework
+- [AWS Bedrock](https://aws.amazon.com/bedrock/) - Enterprise GenAI service platform
+- [Claude 3.7 Sonnet](https://www.anthropic.com/claude) - Advanced GenAI reasoning and analysis
+- [Amazon Q](https://aws.amazon.com/q/) - Enterprise AI assistant platform
+- [Graphviz](https://graphviz.org/) - Professional GenAI architecture diagram generation
+- AWS GenAI community for architectural patterns and responsible AI best practices
 
 ---
 
 <div align="center">
 
-**Built with Strands Agents | Powered by Claude 3.7 Sonnet | Security-First Design**
+**Built for GenAI & Agentic AI Professionals | Powered by Claude 3.7 Sonnet | Responsible AI Design**
 
-[📖 Documentation](docs/) • [🚀 Quick Start](#-quick-start) • [⚙️ Configuration](#️-configuration) • [🔒 Security](#-security-features)
+[📖 Documentation](docs/) • [🚀 Quick Start](#-quick-start) • [🏗️ Architecture](#️-architecture) • [🔒 Security](#-security-features)
+
+*Accelerate your GenAI implementations with intelligent agents and specialized tools*
 
 </div>

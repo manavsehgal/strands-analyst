@@ -164,6 +164,7 @@
   },
   "active": "9df6b2d10d08aeb0",
   "lastOpenFiles": [
+    "README.md.tmp.6456.1756959034972",
     "README.md.tmp.88953.1756958141714",
     "README.md.tmp.88953.1756958136675",
     "diagrams/3-Tier Scalable Web Application Architecture on AWS..png",
@@ -176,7 +177,6 @@
     "analyst/tools/speak_tool.py",
     "debug_speak_validation.py",
     "debug_agent_tool_registration.py",
-    "debug_all_tools.py",
     "refer/articles/news-nasa-science/images/STScI-01HZ08K1MGCQTY6M68RXNT61A8.png",
     "refer/articles/news-nasa-science/images/sidebyside.png",
     "refer/articles/news-nasa-science/images/webb-STScI-01K228R6EJC6QT6FDTDFMNRM5P-1K.jpg",

@@ -1,201 +1,267 @@
-# Try Prompts for Analyst Chat
-# Exemplary prompts showcasing various tool capabilities
-# These rotate in the welcome screen instead of static "Available Capabilities"
+# Try Prompts for AWS GenAI & Agentic AI Solutions Architects & Account Managers
+# GenAI and Agentic AI focused prompts for startup and enterprise customers
+# These rotate in the welcome screen and demonstrate GenAI/Agentic AI workflows
 
 prompts:
-  # Website Analysis & Business Intelligence
-  - category: "website_analysis"
-    prompt: "Analyze stripe.com"
-    description: "Website metadata extraction and analysis"
+  # GenAI Architecture & Design
+  - category: "genai_architecture"
+    prompt: "Design enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
+    description: "Retrieval-Augmented Generation system for enterprise knowledge"
     
-  - category: "business_intelligence" 
-    prompt: "Compare current ROCE of Meta and Nvidia"
-    description: "Financial analysis using web research and calculations"
+  - category: "genai_architecture"
+    prompt: "Create conversational AI platform architecture with Bedrock and API Gateway"
+    description: "Scalable GenAI chat platform with foundational models"
     
-  - category: "website_analysis"
-    prompt: "What's the business model of decagon.ai?"
-    description: "Website analysis for business model understanding"
+  - category: "genai_architecture"
+    prompt: "Design multi-modal GenAI application combining text, image, and audio"
+    description: "Comprehensive GenAI solution with multiple content types"
 
-  # News & RSS Analysis
-  - category: "news_analysis"
-    prompt: "What's new at AWS?"
-    description: "RSS feed analysis and news summarization"
+  # Agentic AI Architecture
+  - category: "agentic_architecture"
+    prompt: "Design Bedrock Agent that automates customer support workflows"
+    description: "Autonomous AI agent for enterprise customer service"
     
-  - category: "news_analysis"
-    prompt: "Summarize latest TechCrunch headlines"
-    description: "RSS feed processing and content summarization"
+  - category: "agentic_architecture"
+    prompt: "Create multi-agent system for automated content generation and review"
+    description: "Coordinated AI agents for content lifecycle management"
     
-  - category: "market_research"
-    prompt: "What are the trending topics in AI news today?"
-    description: "Multi-source RSS analysis and trend identification"
+  - category: "agentic_architecture"
+    prompt: "Build intelligent document processing agent with function calling"
+    description: "AI agent that processes documents and takes actions"
 
-  # Article & Content Processing  
-  - category: "content_processing"
-    prompt: "Download and summarize the latest OpenAI blog post"
-    description: "Article downloading with content extraction"
+  # GenAI Cost Optimization
+  - category: "genai_cost"
+    prompt: "Compare Bedrock Claude vs Titan costs for enterprise chatbot with 1M users"
+    description: "GenAI foundational model cost analysis and optimization"
     
-  - category: "content_processing"
-    prompt: "Convert this HTML page to clean Markdown"
-    description: "HTML to Markdown conversion"
+  - category: "genai_cost"
+    prompt: "Calculate Amazon Q Business deployment costs for 5000-person enterprise"
+    description: "Enterprise AI assistant cost modeling and ROI analysis"
     
-  - category: "research"
-    prompt: "Research and compare top 5 AI coding assistants"
-    description: "Multi-step research with web analysis"
+  - category: "genai_cost"
+    prompt: "Analyze cost-effective GenAI architecture scaling from startup to enterprise"
+    description: "GenAI infrastructure cost optimization across growth stages"
 
-  # Community Tools & Calculations
-  - category: "calculations"
-    prompt: "Calculate compound interest on $10000 at 7% for 20 years"
-    description: "Mathematical calculations using community tools"
+  # GenAI Security & Compliance
+  - category: "genai_security"
+    prompt: "Design GenAI governance framework with Bedrock Guardrails for healthcare"
+    description: "Responsible AI implementation with industry compliance"
     
-  - category: "data_analysis"
-    prompt: "Find the tallest buildings by country and create a summary"
-    description: "Web research with data organization"
+  - category: "genai_security"
+    prompt: "Create data privacy architecture for Bedrock Knowledge Bases with PII"
+    description: "Secure GenAI data processing with privacy protection"
     
-  - category: "automation"
-    prompt: "Check if my website is down and monitor its status"
-    description: "Network monitoring and web health checks"
+  - category: "genai_security"
+    prompt: "Implement prompt injection protection for enterprise GenAI applications"
+    description: "GenAI security hardening and attack prevention"
 
-  # Computer Automation (NEW)
-  - category: "computer_automation"
-    prompt: "Take a screenshot of my desktop using shell"
-    description: "Desktop screenshot capture via shell automation"
+  # GenAI Migration & Integration
+  - category: "genai_migration"
+    prompt: "Migrate existing chatbot from OpenAI GPT to Amazon Bedrock Claude"
+    description: "GenAI platform migration strategy and implementation"
     
-  - category: "computer_automation" 
-    prompt: "Get my current screen resolution and system information"
-    description: "System information gathering using shell commands"
+  - category: "genai_migration"
+    prompt: "Integrate Amazon Q Developer into enterprise development workflows"
+    description: "AI coding assistant adoption and developer productivity"
     
-  - category: "computer_automation"
-    prompt: "Open Safari and find all running applications"
-    description: "Application control and process management"
-    
-  - category: "system_operations"
-    prompt: "Find all Python files in the current directory using shell"
-    description: "File system operations and search via shell"
-    
-  - category: "system_operations"
-    prompt: "Check disk space and memory usage on my system"
-    description: "System resource monitoring via shell commands"
+  - category: "genai_migration"
+    prompt: "Replace rule-based automation with Bedrock Agents for workflow intelligence"
+    description: "Legacy system modernization with agentic AI"
 
-  # Browser Automation (NEW) 
-  - category: "browser_automation"
-    prompt: "Take a screenshot of google.com using shell and playwright"
-    description: "Web page screenshot capture via browser automation"
+  # GenAI Research & Innovation
+  - category: "genai_research"
+    prompt: "Evaluate latest Bedrock model updates: Claude 3.5 Sonnet vs Llama 3.1"
+    description: "Foundation model comparison and selection guidance"
     
-  - category: "browser_automation"
-    prompt: "Create a PDF of the anthropic.com homepage"
-    description: "Website PDF generation using playwright automation"
+  - category: "genai_research"
+    prompt: "Compare Amazon Q vs Microsoft Copilot for enterprise productivity"
+    description: "Enterprise AI assistant competitive analysis"
     
-  - category: "browser_automation"
-    prompt: "Screenshot both desktop and mobile views of stripe.com"
-    description: "Multi-viewport web page capture automation"
-    
-  - category: "browser_automation"
-    prompt: "Open Chrome and navigate to three different websites"
-    description: "Browser control and multi-tab automation"
+  - category: "genai_research"
+    prompt: "Research emerging GenAI patterns: function calling vs RAG vs fine-tuning"
+    description: "GenAI architecture pattern evaluation and recommendations"
 
-  # Advanced Automation (NEW)
-  - category: "advanced_automation"
-    prompt: "Take a desktop screenshot then screenshot google.com"
-    description: "Multi-step automation combining computer and browser tasks"
+  # GenAI Customer Presentations
+  - category: "genai_customer_engagement"
+    prompt: "Create GenAI transformation roadmap presentation for Fortune 500 CTO"
+    description: "Executive GenAI strategy and implementation planning"
     
-  - category: "advanced_automation"
-    prompt: "Monitor system resources and screenshot my current work"
-    description: "Combined system monitoring and documentation automation"
+  - category: "genai_customer_engagement"
+    prompt: "Develop responsible AI framework presentation for regulated industries"
+    description: "GenAI governance and ethics for compliance-focused customers"
     
-  - category: "advanced_automation" 
-    prompt: "Create website screenshots for my top 5 competitors"
-    description: "Batch browser automation for competitive analysis"
-    
-  - category: "file_automation"
-    prompt: "Find large files and organize them by type using shell"
-    description: "Advanced file system automation and organization"
+  - category: "genai_customer_engagement"
+    prompt: "Generate competitive analysis: AWS Bedrock vs Azure OpenAI Service"
+    description: "GenAI platform competitive positioning and differentiation"
 
-  # Complex Multi-Step Tasks
-  - category: "research"
-    prompt: "Analyze the competitive landscape for payment processors"
-    description: "Multi-step business intelligence research"
+  # Agentic AI Operations
+  - category: "agentic_operations"
+    prompt: "Design monitoring strategy for Bedrock Agents in production"
+    description: "Operational excellence for autonomous AI agent systems"
     
-  - category: "market_analysis" 
-    prompt: "What are the key trends in enterprise AI adoption?"
-    description: "Market research with multiple data sources"
+  - category: "agentic_operations"
+    prompt: "Create agent orchestration workflow for complex business processes"
+    description: "Multi-agent coordination and workflow automation"
     
-  - category: "productivity"
-    prompt: "Help me plan a comprehensive competitor analysis workflow"
-    description: "Task planning and workflow automation"
-    
-  # Workflow Automation (NEW)
-  - category: "workflow_automation"
-    prompt: "Automate my morning research routine: news, competitor sites, and reports"
-    description: "Multi-step workflow automation with various data sources"
-    
-  - category: "workflow_automation"
-    prompt: "Create a testing workflow: screenshot my app, then competitor apps"
-    description: "Automated testing and comparison workflow"
-    
-  - category: "workflow_automation"
-    prompt: "Help me document my system setup with screenshots and configs"
-    description: "Documentation automation combining system info and visual capture"
-    
-  # Developer Automation (NEW)
-  - category: "developer_automation"
-    prompt: "Find all TypeScript files and check my Node.js version"
-    description: "Development environment analysis via shell"
-    
-  - category: "developer_automation"
-    prompt: "Screenshot my localhost app and compare it to production"
-    description: "Development workflow automation with visual comparison"
-    
-  - category: "developer_automation"
-    prompt: "Monitor my development server and capture error screenshots"
-    description: "Automated development monitoring and debugging"
+  - category: "agentic_operations"
+    prompt: "Implement A/B testing framework for different agent conversation flows"
+    description: "Agent performance optimization and continuous improvement"
 
-  # Content Creation Automation (NEW)
-  - category: "content_automation"
-    prompt: "Create a visual report: screenshot websites and generate summaries"
-    description: "Automated content creation combining visual and text analysis"
+  # GenAI Well-Architected
+  - category: "genai_well_architected"
+    prompt: "Perform GenAI Well-Architected review for conversational AI startup"
+    description: "GenAI architecture assessment using AWS best practices"
     
-  - category: "content_automation"
-    prompt: "Document the top 3 design trends by screenshotting examples"
-    description: "Research automation with visual documentation"
+  - category: "genai_well_architected"
+    prompt: "Optimize Bedrock Knowledge Base performance for enterprise scale"
+    description: "RAG system performance tuning and efficiency optimization"
+    
+  - category: "genai_well_architected"
+    prompt: "Design fault-tolerant GenAI architecture with multi-model fallbacks"
+    description: "Resilient GenAI systems with reliability safeguards"
 
-  # Integration & Advanced Use Cases (NEW)
-  - category: "integration_automation" 
-    prompt: "Analyze stripe.com then screenshot their pricing page"
-    description: "Combined website analysis and browser automation"
+  # Enterprise GenAI Solutions
+  - category: "genai_enterprise"
+    prompt: "Design enterprise GenAI platform with Amazon Q Business and Bedrock"
+    description: "Comprehensive enterprise AI assistant ecosystem"
     
-  - category: "integration_automation"
-    prompt: "Check the latest AI news, then screenshot the top stories"
-    description: "News analysis integrated with visual documentation"
+  - category: "genai_enterprise"
+    prompt: "Create multi-tenant GenAI SaaS architecture with usage-based billing"
+    description: "Scalable GenAI platform for enterprise customers"
     
-  - category: "integration_automation"
-    prompt: "Find Python files, take a desktop screenshot, then analyze my workflow"
-    description: "Multi-modal automation combining file, visual, and analytical tasks"
+  - category: "genai_enterprise"
+    prompt: "Implement GenAI Center of Excellence using AWS native services"
+    description: "Enterprise GenAI capability development and governance"
 
-  # Creative Automation (NEW)
-  - category: "creative_automation"
-    prompt: "Create a visual competitor dashboard with screenshots and analysis"
-    description: "Creative automation combining research, screenshots, and organization"
+  # GenAI Partner Ecosystem
+  - category: "genai_partners"
+    prompt: "Evaluate Anthropic Claude integration patterns with Bedrock"
+    description: "Foundation model partner integration and optimization"
     
-  - category: "creative_automation"
-    prompt: "Build a system health report with screenshots and metrics"
-    description: "Comprehensive system documentation automation"
+  - category: "genai_partners"
+    prompt: "Compare third-party GenAI tools: LangChain vs native Bedrock features"
+    description: "GenAI framework evaluation and architectural decisions"
     
-  - category: "creative_automation"
-    prompt: "Document my development environment: code, configs, and screenshots"
-    description: "Complete development environment documentation automation"
+  - category: "genai_partners"
+    prompt: "Research vector database options for Bedrock Knowledge Base integration"
+    description: "RAG infrastructure partner selection and integration"
 
-  # Real-world Scenarios (NEW)
-  - category: "real_world_automation"
-    prompt: "Help me prepare for a client demo: screenshots, analysis, and talking points"
-    description: "Complete demo preparation automation workflow"
+  # Industry GenAI Solutions
+  - category: "genai_industry"
+    prompt: "Design HIPAA-compliant GenAI medical documentation system with Bedrock"
+    description: "Healthcare GenAI solution with regulatory compliance"
     
-  - category: "real_world_automation" 
-    prompt: "Monitor my competitor's website changes and document them visually"
-    description: "Competitive intelligence automation with visual tracking"
+  - category: "genai_industry"
+    prompt: "Create financial document analysis agent for investment banking"
+    description: "Financial services agentic AI for document intelligence"
     
-  - category: "real_world_automation"
-    prompt: "Create an onboarding guide with system screenshots and instructions"
-    description: "Documentation automation for team onboarding"
+  - category: "genai_industry"
+    prompt: "Build legal contract review agent with clause extraction and analysis"
+    description: "Legal tech GenAI solution for contract automation"
+
+  # GenAI Training & Enablement
+  - category: "genai_enablement"
+    prompt: "Create hands-on Bedrock Agents workshop for developer teams"
+    description: "Agentic AI education and hands-on learning program"
+    
+  - category: "genai_enablement"
+    prompt: "Design prompt engineering certification curriculum for enterprises"
+    description: "GenAI skills development and professional certification"
+    
+  - category: "genai_enablement"
+    prompt: "Generate responsible GenAI usage guidelines for development teams"
+    description: "GenAI governance and best practices documentation"
+
+  # Advanced GenAI Scenarios
+  - category: "advanced_genai"
+    prompt: "Implement chain-of-thought reasoning with Bedrock Claude for complex analysis"
+    description: "Advanced GenAI reasoning patterns and cognitive architectures"
+    
+  - category: "advanced_genai"
+    prompt: "Design GenAI agent swarm for distributed content generation workflow"
+    description: "Multi-agent collaboration for enterprise content operations"
+    
+  - category: "advanced_genai"
+    prompt: "Create adaptive GenAI system that learns from user interactions"
+    description: "Self-improving GenAI applications with feedback loops"
+
+  # GenAI Business Development
+  - category: "genai_business"
+    prompt: "Analyze GenAI market opportunity sizing for vertical SaaS startup"
+    description: "GenAI business case development and market analysis"
+    
+  - category: "genai_business"
+    prompt: "Create GenAI-first startup pitch deck with AWS cost projections"
+    description: "GenAI startup business planning and investor materials"
+    
+  - category: "genai_business"
+    prompt: "Develop go-to-market strategy for enterprise GenAI consulting services"
+    description: "Professional services business model for GenAI implementations"
+
+  # GenAI Innovation & Emerging Tech
+  - category: "genai_innovation"
+    prompt: "Explore multimodal GenAI applications combining Bedrock with computer vision"
+    description: "Next-generation GenAI with integrated modalities"
+    
+  - category: "genai_innovation"
+    prompt: "Design GenAI-powered IoT edge applications with real-time processing"
+    description: "Edge GenAI deployment for real-time decision making"
+    
+  - category: "genai_innovation"
+    prompt: "Implement federated learning for privacy-preserving GenAI model customization"
+    description: "Advanced GenAI training techniques for sensitive data"
+
+  # GenAI Startup Accelerators
+  - category: "genai_startups"
+    prompt: "Create GenAI MVP using Bedrock for seed-stage fintech startup"
+    description: "Rapid GenAI prototype development and validation"
+    
+  - category: "genai_startups"
+    prompt: "Design cost-effective GenAI architecture that scales with venture funding"
+    description: "Startup-optimized GenAI infrastructure and scaling strategy"
+    
+  - category: "genai_startups"
+    prompt: "Build investor demo showcasing GenAI agent capabilities for Series A"
+    description: "GenAI proof-of-concept for startup fundraising"
+
+  # Agentic AI Data & Knowledge
+  - category: "agentic_data"
+    prompt: "Design knowledge graph integration with Bedrock Agents for enterprise data"
+    description: "Intelligent data access and reasoning with AI agents"
+    
+  - category: "agentic_data"
+    prompt: "Create real-time data ingestion pipeline for Bedrock Knowledge Bases"
+    description: "Dynamic knowledge base management for RAG applications"
+    
+  - category: "agentic_data"
+    prompt: "Implement agent-driven data quality monitoring and correction workflows"
+    description: "Autonomous data governance with intelligent agents"
+
+  # Amazon Q Specialization
+  - category: "amazon_q"
+    prompt: "Deploy Amazon Q Business with enterprise SSO and custom data sources"
+    description: "Enterprise AI assistant implementation and integration"
+    
+  - category: "amazon_q"
+    prompt: "Integrate Amazon Q Developer into CI/CD pipeline for code quality"
+    description: "AI-assisted development workflow optimization"
+    
+  - category: "amazon_q"
+    prompt: "Create custom Amazon Q application for industry-specific workflows"
+    description: "Specialized AI assistant development for vertical markets"
+
+  # GenAI Content Operations
+  - category: "genai_content"
+    prompt: "Design automated content generation pipeline with brand consistency"
+    description: "Enterprise content operations with GenAI automation"
+    
+  - category: "genai_content"
+    prompt: "Create multi-language content localization agent with cultural adaptation"
+    description: "Global GenAI content strategy and localization automation"
+    
+  - category: "genai_content"
+    prompt: "Build content moderation system using Bedrock Guardrails and custom rules"
+    description: "Automated content safety and compliance for GenAI applications"
 
 # Rotation settings
 rotation:
@@ -203,27 +269,30 @@ rotation:
   separator: " | "  # Separator between prompts
   format: "\"{prompt}\""  # Format template for each prompt (no "Try:" prefix)
   
-# Categories for smart rotation (ensure variety)
+# Categories for smart rotation (ensure variety across GenAI/Agentic AI domains)
 categories:
-  - "website_analysis"
-  - "business_intelligence" 
-  - "news_analysis"
-  - "content_processing"
-  - "calculations"
-  - "research"
-  - "market_analysis"
-  - "automation"
-  - "productivity"
-  - "data_analysis"
-  # New automation categories
-  - "computer_automation"
-  - "browser_automation"
-  - "system_operations"
-  - "advanced_automation"
-  - "file_automation"
-  - "workflow_automation"
-  - "developer_automation"
-  - "content_automation"
-  - "integration_automation"
-  - "creative_automation"
-  - "real_world_automation"
+  # Core GenAI & Agentic Architecture
+  - "genai_architecture"
+  - "agentic_architecture"
+  - "genai_cost"
+  - "genai_security"
+  # GenAI Research & Customer Engagement
+  - "genai_migration"
+  - "genai_research"
+  - "genai_customer_engagement"
+  - "agentic_operations"
+  # Enterprise & Advanced GenAI
+  - "genai_well_architected"
+  - "genai_enterprise"
+  - "genai_partners"
+  - "genai_industry"
+  # Innovation & Business
+  - "genai_enablement"
+  - "advanced_genai"
+  - "genai_business"
+  - "genai_innovation"
+  # Specialized GenAI Focus Areas
+  - "genai_startups"
+  - "agentic_data"
+  - "amazon_q"
+  - "genai_content"

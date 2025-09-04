@@ -1,1 +1,1 @@
-Think harder to write or update the README.md in the style of professional, popular GitHub repos with factual content based on this project. Refer docs/ and backlog/ for content of features released and what this project is about.
+Think harder to write or update the README.md in the style of professional, popular GitHub repos with factual content based on this project. Refer docs/, backlog/, try-prompts.yml, and analyst/ code for content of features released and what this project is about.
