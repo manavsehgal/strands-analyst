@@ -159,9 +159,9 @@ def interactive_chat(agent, args):
                 print("🤖 Assistant: ", end="", flush=True)
                 response = chat_with_agent(agent, user_input, verbose=args.verbose)
                 
-                if response:
-                    print(str(response))
-                else:
+                # When streaming is enabled, the response is already printed by Strands SDK
+                # We only need to handle error cases here
+                if not response:
                     print("I encountered an error processing your request. Please try again.")
                 
                 print()  # Add spacing between exchanges
@@ -185,9 +185,9 @@ def interactive_chat(agent, args):
 def single_message_mode(agent, message: str, args):
     """Handle single message mode."""
     response = chat_with_agent(agent, message, verbose=args.verbose)
-    if response:
-        print(str(response))
-    else:
+    # When streaming is enabled, the response is already printed by Strands SDK
+    # We only need to handle error cases
+    if not response:
         print("Error processing your request.", file=sys.stderr)
         sys.exit(1)
 

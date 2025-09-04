@@ -140,3 +140,23 @@
     - Multi-Agent: graph, agent_graph, journal, swarm, workflow, batch, a2a_client, use_agent, handoff_to_user, stop
     
     The analystchat agent now has access to the complete suite of 40+ Strands community tools with proper consent handling, and the prompt rotation system fully utilizes all examples from try-prompts.yml with true randomization.
+
+    [x] The analystchat response is repeating twice. Note that Strands Agents SDK streams a response when agent is run. Use that response itself instead of printing or creating your own streaming solution.
+    
+    **Completion Summary (2025-09-04):**
+    - ✅ **Investigated the issue**: Analyzed both cli/chat.py and agents/chat.py to understand the response flow
+    - ✅ **Identified root cause**: Found that when streaming is enabled in config.yml (line 187: `streaming: true`), the Strands SDK already outputs the response during agent execution, but the CLI code was also printing the returned result, causing duplication
+    - ✅ **Fixed the duplication**: Updated analyst/cli/chat.py in two locations:
+      - **Interactive mode** (lines 158-165): Removed the `print(str(response))` statement, only handling error cases
+      - **Single message mode** (lines 185-192): Removed the `print(str(response))` statement, only handling error cases
+    - ✅ **Tested the fix**: Created and ran a comprehensive test script that verified both interactive and single message modes now output responses only once
+    - ✅ **Verified proper behavior**: Confirmed that the Strands SDK's native streaming handles all output correctly
+    
+    **Technical Details:**
+    - When `streaming: true` is set in the Bedrock configuration, the `agent(message)` call streams output directly to stdout
+    - The agent still returns a response object after streaming completes
+    - The CLI was incorrectly printing this returned object, causing the duplication
+    - Solution: Let Strands SDK handle all output via its native streaming, CLI only handles errors
+    
+    **Result**: Analystchat now correctly displays responses once using the Strands Agents SDK's native streaming capability. No custom streaming solution is used - the fix simply removes the redundant print statements and relies entirely on the SDK's built-in streaming functionality.
+    
