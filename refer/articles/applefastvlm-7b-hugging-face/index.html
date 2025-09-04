@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>apple/FastVLM-7B · Hugging Face</title>
+    
+    <!-- Primary metadata -->
+    <meta name="description" content="We’re on a journey to advance and democratize artificial intelligence through open source and open science.">
+    
+    <!-- Source metadata -->
+    <meta name="source-url" content="https://huggingface.co/apple/FastVLM-7B">
+    <meta name="source-domain" content="huggingface.co">
+    <meta name="date-scraped" content="2025-09-04 06:27:30">
+    <meta name="article-date" content="2025-09-02">
+    
+    <!-- OpenGraph metadata -->
+    <meta property="og:title" content="apple/FastVLM-7B · Hugging Face">
+    <meta property="og:description" content="We’re on a journey to advance and democratize artificial intelligence through open source and open science.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://huggingface.co/apple/FastVLM-7B">
+    
+    <!-- Styling -->
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: #fff;
+        }
+        
+        img { 
+            max-width: 100%; 
+            height: auto; 
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2, h3, h4, h5, h6 { 
+            color: #1a1a1a;
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+        }
+        
+        h1 { 
+            border-bottom: 3px solid #007acc;
+            padding-bottom: 0.3em;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.2em;
+        }
+        
+        a { 
+            color: #007acc; 
+            text-decoration: none; 
+        }
+        
+        a:hover { 
+            text-decoration: underline; 
+        }
+        
+        blockquote {
+            border-left: 4px solid #007acc;
+            margin: 0 0 1em 0;
+            padding: 0.5em 1em;
+            background: #f8f9fa;
+        }
+        
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 2em;
+            font-size: 0.9em;
+        }
+        
+        .metadata h3 {
+            margin-top: 0;
+            color: #586069;
+        }
+        
+        .metadata p {
+            margin: 0.5em 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="metadata">
+        <h3>📄 Document Information</h3>
+        <p><strong>Published:</strong> 2025-09-02</p>
+        <p><strong>Source:</strong> <a href="https://huggingface.co/apple/FastVLM-7B" target="_blank">huggingface.co</a></p>
+        <p><strong>Archived:</strong> 2025-09-04 06:27:30</p>
+    </div>
+    
+    <main>
+        <html><body><div><div class="model-card-content prose md:px-6 md:-mx-6 lg:-mr-20 lg:pr-20 xl:-mr-24 xl:pr-24 2xl:-mr-36 2xl:pr-36 hf-sanitized hf-sanitized-ed08H_XxzWHJoZEpzv8wz">
+<h1 class="relative group flex items-center">
+<a class="block pr-1.5 text-lg md:absolute md:p-1.5 md:opacity-0 md:group-hover:opacity-100 md:right-full" href="https://huggingface.co/apple/FastVLM-7B#fastvlm-efficient-vision-encoding-for-vision-language-models" id="fastvlm-efficient-vision-encoding-for-vision-language-models" rel="nofollow">
+</a>
+<span>
+		FastVLM: Efficient Vision Encoding for Vision Language Models
+	</span>
+</h1>
+<p>FastVLM was introduced in
+<strong><a href="https://www.arxiv.org/abs/2412.13303" rel="nofollow">FastVLM: Efficient Vision Encoding for Vision Language Models</a>. (CVPR 2025)</strong></p>
+<p align="center">
+<img alt="Accuracy vs latency figure." src="images/acc_vs_latency_qwen-2.png"/>
+</p>
+<h3 class="relative group flex items-center">
+<a class="block pr-1.5 text-lg md:absolute md:p-1.5 md:opacity-0 md:group-hover:opacity-100 md:right-full" href="https://huggingface.co/apple/FastVLM-7B#highlights" id="highlights" rel="nofollow">
+</a>
+<span>
+		Highlights
+	</span>
+</h3>
+<ul>
+<li>We introduce FastViTHD, a novel hybrid vision encoder designed to output fewer tokens and significantly reduce encoding time for high-resolution images.  </li>
+<li>Our smallest variant outperforms LLaVA-OneVision-0.5B with 85x faster Time-to-First-Token (TTFT) and 3.4x smaller vision encoder.</li>
+<li>Our larger variants using Qwen2-7B LLM outperform recent works like Cambrian-1-8B while using a single image encoder with a 7.9x faster TTFT.</li>
+</ul>
+<h3 class="relative group flex items-center">
+<a class="block pr-1.5 text-lg md:absolute md:p-1.5 md:opacity-0 md:group-hover:opacity-100 md:right-full" href="https://huggingface.co/apple/FastVLM-7B#evaluations" id="evaluations" rel="nofollow">
+</a>
+<span>
+		Evaluations
+	</span>
+</h3>
+<div class="max-w-full overflow-auto">
+<table>
+<thead><tr>
+<th align="left">Benchmark</th>
+<th align="center">FastVLM-0.5B</th>
+<th align="center">FastVLM-1.5B</th>
+<th align="center">FastVLM-7B</th>
+</tr>
+</thead><tbody><tr>
+<td align="left">Ai2D</td>
+<td align="center">68.0</td>
+<td align="center">77.4</td>
+<td align="center">83.6</td>
+</tr>
+<tr>
+<td align="left">ScienceQA</td>
+<td align="center">85.2</td>
+<td align="center">94.4</td>
+<td align="center">96.7</td>
+</tr>
+<tr>
+<td align="left">MMMU</td>
+<td align="center">33.9</td>
+<td align="center">37.8</td>
+<td align="center">45.4</td>
+</tr>
+<tr>
+<td align="left">VQAv2</td>
+<td align="center">76.3</td>
+<td align="center">79.1</td>
+<td align="center">80.8</td>
+</tr>
+<tr>
+<td align="left">ChartQA</td>
+<td align="center">76.0</td>
+<td align="center">80.1</td>
+<td align="center">85.0</td>
+</tr>
+<tr>
+<td align="left">TextVQA</td>
+<td align="center">64.5</td>
+<td align="center">70.4</td>
+<td align="center">74.9</td>
+</tr>
+<tr>
+<td align="left">InfoVQA</td>
+<td align="center">46.4</td>
+<td align="center">59.7</td>
+<td align="center">75.8</td>
+</tr>
+<tr>
+<td align="left">DocVQA</td>
+<td align="center">82.5</td>
+<td align="center">88.3</td>
+<td align="center">93.2</td>
+</tr>
+<tr>
+<td align="left">OCRBench</td>
+<td align="center">63.9</td>
+<td align="center">70.2</td>
+<td align="center">73.1</td>
+</tr>
+<tr>
+<td align="left">RealWorldQA</td>
+<td align="center">56.1</td>
+<td align="center">61.2</td>
+<td align="center">67.2</td>
+</tr>
+<tr>
+<td align="left">SeedBench-Img</td>
+<td align="center">71.0</td>
+<td align="center">74.2</td>
+<td align="center">75.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 class="relative group flex items-center">
+<a class="block pr-1.5 text-lg md:absolute md:p-1.5 md:opacity-0 md:group-hover:opacity-100 md:right-full" href="https://huggingface.co/apple/FastVLM-7B#usage-example" id="usage-example" rel="nofollow">
+</a>
+<span>
+		Usage Example
+	</span>
+</h3>
+<p>To run inference of PyTorch checkpoint, follow the instruction in the official repo:</p>
+<p>Download the model</p>
+<pre><code>huggingface-cli download apple/FastVLM-7B
+</code></pre>
+<p>Run inference using <code>predict.py</code> from the official repo.</p>
+<pre><code class="language-bash">python predict.py --model-path /path/to/checkpoint-dir \
+                  --image-file /path/to/image.png \
+                  --prompt <span class="hljs-string">"Describe the image."</span>
+</code></pre>
+<h3 class="relative group flex items-center">
+<a class="block pr-1.5 text-lg md:absolute md:p-1.5 md:opacity-0 md:group-hover:opacity-100 md:right-full" href="https://huggingface.co/apple/FastVLM-7B#run-inference-with-transformers-remote-code" id="run-inference-with-transformers-remote-code" rel="nofollow">
+</a>
+<span>
+		Run inference with Transformers (Remote Code)
+	</span>
+</h3>
+<p>To run inference with transformers we can leverage <code>trust_remote_code</code> along with the following snippet:</p>
+<pre><code class="language-python"><span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<span class="hljs-keyword">from</span> transformers <span class="hljs-keyword">import</span> AutoTokenizer, AutoModelForCausalLM
+MID = <span class="hljs-string">"apple/FastVLM-7B"</span>
+IMAGE_TOKEN_INDEX = -<span class="hljs-number">200</span>  
+
+
+tok = AutoTokenizer.from_pretrained(MID, trust_remote_code=<span class="hljs-literal">True</span>)
+model = AutoModelForCausalLM.from_pretrained(
+    MID,
+    torch_dtype=torch.float16 <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> torch.float32,
+    device_map=<span class="hljs-string">"auto"</span>,
+    trust_remote_code=<span class="hljs-literal">True</span>,
+)
+
+
+messages = [
+    {<span class="hljs-string">"role"</span>: <span class="hljs-string">"user"</span>, <span class="hljs-string">"content"</span>: <span class="hljs-string">"&lt;image&gt;\nDescribe this image in detail."</span>}
+]
+rendered = tok.apply_chat_template(
+    messages, add_generation_prompt=<span class="hljs-literal">True</span>, tokenize=<span class="hljs-literal">False</span>
+)
+pre, post = rendered.split(<span class="hljs-string">"&lt;image&gt;"</span>, <span class="hljs-number">1</span>)
+
+
+pre_ids  = tok(pre,  return_tensors=<span class="hljs-string">"pt"</span>, add_special_tokens=<span class="hljs-literal">False</span>).input_ids
+post_ids = tok(post, return_tensors=<span class="hljs-string">"pt"</span>, add_special_tokens=<span class="hljs-literal">False</span>).input_ids
+
+
+img_tok = torch.tensor([[IMAGE_TOKEN_INDEX]], dtype=pre_ids.dtype)
+input_ids = torch.cat([pre_ids, img_tok, post_ids], dim=<span class="hljs-number">1</span>).to(model.device)
+attention_mask = torch.ones_like(input_ids, device=model.device)
+
+
+img = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">"test-2.jpg"</span>).convert(<span class="hljs-string">"RGB"</span>)
+px = model.get_vision_tower().image_processor(images=img, return_tensors=<span class="hljs-string">"pt"</span>)[<span class="hljs-string">"pixel_values"</span>]
+px = px.to(model.device, dtype=model.dtype)
+
+
+<span class="hljs-keyword">with</span> torch.no_grad():
+    out = model.generate(
+        inputs=input_ids,
+        attention_mask=attention_mask,
+        images=px,
+        max_new_tokens=<span class="hljs-number">128</span>,
+    )
+<span class="hljs-built_in">print</span>(tok.decode(out[<span class="hljs-number">0</span>], skip_special_tokens=<span class="hljs-literal">True</span>))
+</code></pre>
+<h2 class="relative group flex items-center">
+<a class="block pr-1.5 text-lg md:absolute md:p-1.5 md:opacity-0 md:group-hover:opacity-100 md:right-full" href="https://huggingface.co/apple/FastVLM-7B#citation" id="citation" rel="nofollow">
+</a>
+<span>
+		Citation
+	</span>
+</h2>
+<p>If you found this model useful, please cite the following paper:</p>
+<pre><code>@InProceedings{fastvlm2025,
+  author = {Pavan Kumar Anasosalu Vasu, Fartash Faghri, Chun-Liang Li, Cem Koc, Nate True, Albert Antony, Gokul Santhanam, James Gabriel, Peter Grasch, Oncel Tuzel, Hadi Pouransari},
+  title = {FastVLM: Efficient Vision Encoding for Vision Language Models},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  month = {June},
+  year = {2025},
+}
+</code></pre>
+</div>
+</div></body></html>
+    </main>
+    
+    <footer style="margin-top: 3em; padding-top: 2em; border-top: 1px solid #e1e4e8; text-align: center; color: #586069; font-size: 0.9em;">
+        <p>This page was archived from <a href="https://huggingface.co/apple/FastVLM-7B" target="_blank">https://huggingface.co/apple/FastVLM-7B</a></p>
+        <p>Archived on 2025-09-04 06:27:30 using Analyst Article Downloader</p>
+    </footer>
+</body>
+</html>

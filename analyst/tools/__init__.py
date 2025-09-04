@@ -7,5 +7,7 @@ from .fetch_rss_content import fetch_rss_content
 from .download_article_content import download_article_content
 from .convert_html_to_markdown import convert_html_to_markdown
 from .speak_tool import speak_custom
+from .save_file import save_file
+from .http_request_tool import http_request_custom
 
-__all__ = ["fetch_url_metadata", "fetch_rss_content", "download_article_content", "convert_html_to_markdown", "speak_custom"]
+__all__ = ["fetch_url_metadata", "fetch_rss_content", "download_article_content", "convert_html_to_markdown", "speak_custom", "save_file", "http_request_custom"]

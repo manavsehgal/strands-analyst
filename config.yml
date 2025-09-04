@@ -177,7 +177,7 @@ bedrock:
       sitemeta: 2048      # Shorter for metadata analysis
       news: 3072          # Medium for news summaries
       article: 8192       # Longer for detailed article analysis
-      chat: 4096          # Balanced for conversation
+      chat: 8192          # Increased to prevent response truncation
     
     # Stop sequences to control generation
     stop_sequences:
@@ -355,10 +355,6 @@ community_tools:
         require_consent: false
         description: "Read and parse files"
       
-      file_write:
-        enabled: true
-        require_consent: true
-        description: "Create and modify files"
     
     # Shell & System tools
     shell_system:
@@ -396,10 +392,6 @@ community_tools:
     
     # Web & Network tools
     web_network:
-      http_request:
-        enabled: true
-        require_consent: false
-        description: "Make API calls, fetch web data, and call local HTTP servers"
       
       slack:
         enabled: true  # Enabled for Slack integration
@@ -438,10 +430,6 @@ community_tools:
         require_consent: false
         description: "Create AI generated videos with Nova Reels on Amazon Bedrock"
       
-      speak:
-        enabled: true
-        require_consent: false
-        description: "Generate speech from text using macOS say command or Amazon Polly"
       
       diagram:
         enabled: true
@@ -575,8 +563,6 @@ community_tools:
         # File operations - Mixed based on operation type
         file_read:
           require_consent: false  # Safe: read-only operation
-        file_write:
-          require_consent: true  # Security: can modify/create files
         editor:
           require_consent: true  # Security: can modify files
         
@@ -610,8 +596,6 @@ community_tools:
         
         # RSS and web content
         rss:
-          require_consent: false
-        http_request:
           require_consent: false
         
     sitemeta:

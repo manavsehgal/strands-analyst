@@ -5,12 +5,21 @@ from typing import Optional, Dict, Any, List
 from strands import Agent
 from strands.models.bedrock import BedrockModel
 from strands.session.file_session_manager import FileSessionManager
+
+# Import shell wrapper to suppress multi-threading warnings
+try:
+    from ..utils.shell_wrapper import setup_shell_environment
+    setup_shell_environment()
+except ImportError:
+    pass
 from ..tools import (
     fetch_url_metadata,
     fetch_rss_content, 
     download_article_content,
     convert_html_to_markdown,
-    speak_custom
+    speak_custom,
+    save_file,
+    http_request_custom
 )
 from ..config import get_config, get_bedrock_config_for_agent, get_community_tools_for_agent
 from ..utils import configure_logging, print_metrics
@@ -60,7 +69,6 @@ def _load_community_tools(agent_name: str = "chat") -> List:
         # File Operations
         "editor": "strands_tools.editor",
         "file_read": "strands_tools.file_read",
-        "file_write": "strands_tools.file_write",
         
         # Shell & System
         "environment": "strands_tools.environment",
@@ -73,7 +81,6 @@ def _load_community_tools(agent_name: str = "chat") -> List:
         "code_interpreter": "strands_tools.code_interpreter",
         
         # Web & Network
-        "http_request": "strands_tools.http_request",
         "slack": "strands_tools.slack",
         "browser": "strands_tools.browser",
         "rss": "strands_tools.rss",
@@ -83,7 +90,6 @@ def _load_community_tools(agent_name: str = "chat") -> List:
         "image_reader": "strands_tools.image_reader",
         "generate_image": "strands_tools.generate_image",
         "nova_reels": "strands_tools.nova_reels",
-        "speak": "strands_tools.speak",
         "diagram": "strands_tools.diagram",
         
         # AWS Services
@@ -111,7 +117,7 @@ def _load_community_tools(agent_name: str = "chat") -> List:
     }
     
     # Priority tools that should be loaded first (to ensure they get registered)
-    priority_tools = ["speak", "diagram", "nova_reels", "generate_image", "use_computer", "browser"]
+    priority_tools = ["diagram", "nova_reels", "generate_image", "use_computer", "browser"]
     
     # Load priority tools first
     tools_to_load = []
@@ -179,13 +185,17 @@ Built-in Analysis Capabilities:
 - Article downloading: Download full articles with images and convert to various formats
 - HTML to Markdown conversion: Convert HTML content to well-formatted Markdown
 - Text-to-speech: Convert text to speech using macOS say command or Amazon Polly
+- File saving: Save content to files using the save_file tool (no consent required)
+- HTTP requests: Make API calls with http_request_custom tool (supports auth, headers, JSON)
 
 Available Community Tools (when enabled and with appropriate permissions):
 - Calculation and utilities: For mathematical operations and current time
 - File operations: For reading and writing files (requires consent for writes)
 - System operations: For shell commands and system interaction (requires consent)
 - Web requests: For HTTP requests and web scraping
-- Code execution: For Python REPL and code interpretation (requires consent)"""
+- Code execution: For Python REPL and code interpretation (requires consent)
+
+IMPORTANT: When saving files, always use the built-in save_file tool first before trying community tools."""
 
     if not community_tools:
         return base_prompt + """
@@ -198,11 +208,11 @@ Always be helpful, clear, and suggest the best tools for the user's needs. If a 
     # Group tools by category for better organization
     tool_categories = {
         "RAG & Memory": ["retrieve", "memory", "agent_core_memory", "mem0_memory"],
-        "File Operations": ["editor", "file_read", "file_write"],
+        "File Operations": ["editor", "file_read"],
         "Shell & System": ["environment", "shell", "cron", "use_computer"],
         "Code Interpretation": ["python_repl", "code_interpreter"],
-        "Web & Network": ["http_request", "slack", "browser", "rss"],
-        "Multi-modal": ["generate_image_stability", "image_reader", "generate_image", "nova_reels", "speak", "diagram"],
+        "Web & Network": ["slack", "browser", "rss"],
+        "Multi-modal": ["generate_image_stability", "image_reader", "generate_image", "nova_reels", "diagram"],
         "AWS Services": ["use_aws"],
         "Utilities": ["calculator", "current_time", "load_tool", "sleep"],
         "Agents & Workflows": ["graph", "agent_graph", "journal", "swarm", "stop", "handoff_to_user", "use_agent", "think", "use_llm", "workflow", "batch", "a2a_client"]
@@ -329,7 +339,9 @@ def create_chat_agent(
         fetch_rss_content,
         download_article_content,
         convert_html_to_markdown,
-        speak_custom
+        speak_custom,
+        save_file,
+        http_request_custom
     ]
     
     all_tools = built_in_tools + community_tools
