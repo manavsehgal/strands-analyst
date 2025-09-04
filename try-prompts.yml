@@ -1,298 +1,290 @@
 # Try Prompts for AWS GenAI & Agentic AI Solutions Architects & Account Managers
-# GenAI and Agentic AI focused prompts for startup and enterprise customers
-# These rotate in the welcome screen and demonstrate GenAI/Agentic AI workflows
+# Natural GenAI prompts that users would actually ask
+# These rotate in the welcome screen and demonstrate real-world GenAI workflows
 
 prompts:
-  # GenAI Architecture & Design
+  # Simple Architecture Questions (single tool usage)
   - category: "genai_architecture"
-    prompt: "Design enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
-    description: "Retrieval-Augmented Generation system for enterprise knowledge"
-    
-  - category: "genai_architecture"
-    prompt: "Create conversational AI platform architecture with Bedrock and API Gateway"
-    description: "Scalable GenAI chat platform with foundational models"
+    prompt: "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
+    description: "Visual architecture design request for enterprise RAG systems"
     
   - category: "genai_architecture"
-    prompt: "Design multi-modal GenAI application combining text, image, and audio"
-    description: "Comprehensive GenAI solution with multiple content types"
+    prompt: "What would a conversational AI platform look like on AWS with Bedrock and API Gateway?"
+    description: "Architecture visualization for scalable GenAI chat platforms"
+    
+  - category: "genai_architecture"
+    prompt: "Show me how to design a multi-modal GenAI system that handles text, images, and video"
+    description: "Comprehensive multi-modal AI system architecture planning"
 
-  # Agentic AI Architecture
+  # Agent Coordination Questions (multi-tool usage)
+  - category: "agentic_architecture"  
+    prompt: "How can I automate our customer support workflows using Bedrock Agents?"
+    description: "Autonomous AI agent workflow automation for customer service"
+    
   - category: "agentic_architecture"
-    prompt: "Design Bedrock Agent that automates customer support workflows"
-    description: "Autonomous AI agent for enterprise customer service"
+    prompt: "I need multiple AI agents working together to generate and review content automatically"
+    description: "Coordinated multi-agent system for content lifecycle management"
     
   - category: "agentic_architecture"
-    prompt: "Create multi-agent system for automated content generation and review"
-    description: "Coordinated AI agents for content lifecycle management"
-    
-  - category: "agentic_architecture"
-    prompt: "Build intelligent document processing agent with function calling"
-    description: "AI agent that processes documents and takes actions"
+    prompt: "Design an intelligent document processing system that can take actions based on what it reads"
+    description: "AI agent architecture for automated document understanding and action"
 
-  # GenAI Cost Optimization
+  # Cost Analysis Questions (computational tools)
   - category: "genai_cost"
-    prompt: "Compare Bedrock Claude vs Titan costs for enterprise chatbot with 1M users"
-    description: "GenAI foundational model cost analysis and optimization"
+    prompt: "Compare Bedrock Claude vs Titan costs for an enterprise chatbot serving 1 million users monthly"
+    description: "Quantitative GenAI model cost comparison and analysis"
     
   - category: "genai_cost"
-    prompt: "Calculate Amazon Q Business deployment costs for 5000-person enterprise"
-    description: "Enterprise AI assistant cost modeling and ROI analysis"
+    prompt: "Calculate the total cost and ROI of deploying Amazon Q Business for our 5000-person company"
+    description: "Enterprise AI assistant financial modeling and business case development"
     
   - category: "genai_cost"
-    prompt: "Analyze cost-effective GenAI architecture scaling from startup to enterprise"
-    description: "GenAI infrastructure cost optimization across growth stages"
+    prompt: "Model how GenAI infrastructure costs scale as we grow from startup to enterprise scale"
+    description: "GenAI infrastructure cost optimization across business growth stages"
 
-  # GenAI Security & Compliance
+  # Security & Compliance Questions (document generation + analysis)
   - category: "genai_security"
-    prompt: "Design GenAI governance framework with Bedrock Guardrails for healthcare"
-    description: "Responsible AI implementation with industry compliance"
-    
-  - category: "genai_security"
-    prompt: "Create data privacy architecture for Bedrock Knowledge Bases with PII"
-    description: "Secure GenAI data processing with privacy protection"
+    prompt: "Create a GenAI governance framework for healthcare with Bedrock Guardrails and generate a compliance checklist"
+    description: "Responsible AI implementation with comprehensive documentation"
     
   - category: "genai_security"
-    prompt: "Implement prompt injection protection for enterprise GenAI applications"
-    description: "GenAI security hardening and attack prevention"
+    prompt: "How do I protect PII data when using Bedrock Knowledge Bases in my enterprise system?"
+    description: "Data privacy architecture and security controls for enterprise GenAI"
+    
+  - category: "genai_security"
+    prompt: "Build me algorithms to detect prompt injection attacks in our GenAI applications"
+    description: "GenAI security hardening with automated threat detection"
 
-  # GenAI Migration & Integration
+  # Migration & Integration Questions (workflow orchestration)
   - category: "genai_migration"
-    prompt: "Migrate existing chatbot from OpenAI GPT to Amazon Bedrock Claude"
-    description: "GenAI platform migration strategy and implementation"
+    prompt: "Help me plan and execute a migration from OpenAI GPT to Amazon Bedrock Claude for our production system"
+    description: "GenAI platform migration with step-by-step automated planning"
     
   - category: "genai_migration"
-    prompt: "Integrate Amazon Q Developer into enterprise development workflows"
-    description: "AI coding assistant adoption and developer productivity"
+    prompt: "How should we integrate Amazon Q Developer into our existing development workflows?"
+    description: "AI coding assistant adoption strategy and implementation planning"
     
   - category: "genai_migration"
-    prompt: "Replace rule-based automation with Bedrock Agents for workflow intelligence"
-    description: "Legacy system modernization with agentic AI"
+    prompt: "Replace our current rule-based automation with intelligent Bedrock Agents"
+    description: "Legacy system modernization using agentic AI workflows"
 
-  # GenAI Research & Innovation
+  # Research & Market Intelligence (web tools)
   - category: "genai_research"
-    prompt: "Evaluate latest Bedrock model updates: Claude 3.5 Sonnet vs Llama 3.1"
-    description: "Foundation model comparison and selection guidance"
-    
-  - category: "genai_research"
-    prompt: "Compare Amazon Q vs Microsoft Copilot for enterprise productivity"
-    description: "Enterprise AI assistant competitive analysis"
+    prompt: "Research the latest developments in Claude 3.7 Sonnet vs Llama 3.1 capabilities for our model selection"
+    description: "Real-time foundation model research and competitive analysis"
     
   - category: "genai_research"
-    prompt: "Research emerging GenAI patterns: function calling vs RAG vs fine-tuning"
-    description: "GenAI architecture pattern evaluation and recommendations"
+    prompt: "Find and analyze Amazon Q pricing compared to Microsoft Copilot for our enterprise decision"
+    description: "Enterprise AI assistant competitive analysis with live data"
+    
+  - category: "genai_research"
+    prompt: "What are the current industry trends in function calling vs RAG vs fine-tuning approaches?"
+    description: "Contemporary GenAI architecture pattern research and evaluation"
 
-  # GenAI Customer Presentations
-  - category: "genai_customer_engagement"
-    prompt: "Create GenAI transformation roadmap presentation for Fortune 500 CTO"
-    description: "Executive GenAI strategy and implementation planning"
-    
-  - category: "genai_customer_engagement"
-    prompt: "Develop responsible AI framework presentation for regulated industries"
-    description: "GenAI governance and ethics for compliance-focused customers"
-    
-  - category: "genai_customer_engagement"
-    prompt: "Generate competitive analysis: AWS Bedrock vs Azure OpenAI Service"
-    description: "GenAI platform competitive positioning and differentiation"
-
-  # Agentic AI Operations
-  - category: "agentic_operations"
-    prompt: "Design monitoring strategy for Bedrock Agents in production"
-    description: "Operational excellence for autonomous AI agent systems"
-    
-  - category: "agentic_operations"
-    prompt: "Create agent orchestration workflow for complex business processes"
-    description: "Multi-agent coordination and workflow automation"
-    
-  - category: "agentic_operations"
-    prompt: "Implement A/B testing framework for different agent conversation flows"
-    description: "Agent performance optimization and continuous improvement"
-
-  # GenAI Well-Architected
-  - category: "genai_well_architected"
-    prompt: "Perform GenAI Well-Architected review for conversational AI startup"
-    description: "GenAI architecture assessment using AWS best practices"
-    
-  - category: "genai_well_architected"
-    prompt: "Optimize Bedrock Knowledge Base performance for enterprise scale"
-    description: "RAG system performance tuning and efficiency optimization"
-    
-  - category: "genai_well_architected"
-    prompt: "Design fault-tolerant GenAI architecture with multi-model fallbacks"
-    description: "Resilient GenAI systems with reliability safeguards"
-
-  # Enterprise GenAI Solutions
-  - category: "genai_enterprise"
-    prompt: "Design enterprise GenAI platform with Amazon Q Business and Bedrock"
-    description: "Comprehensive enterprise AI assistant ecosystem"
-    
-  - category: "genai_enterprise"
-    prompt: "Create multi-tenant GenAI SaaS architecture with usage-based billing"
-    description: "Scalable GenAI platform for enterprise customers"
-    
-  - category: "genai_enterprise"
-    prompt: "Implement GenAI Center of Excellence using AWS native services"
-    description: "Enterprise GenAI capability development and governance"
-
-  # GenAI Partner Ecosystem
-  - category: "genai_partners"
-    prompt: "Evaluate Anthropic Claude integration patterns with Bedrock"
-    description: "Foundation model partner integration and optimization"
-    
-  - category: "genai_partners"
-    prompt: "Compare third-party GenAI tools: LangChain vs native Bedrock features"
-    description: "GenAI framework evaluation and architectural decisions"
-    
-  - category: "genai_partners"
-    prompt: "Research vector database options for Bedrock Knowledge Base integration"
-    description: "RAG infrastructure partner selection and integration"
-
-  # Industry GenAI Solutions
-  - category: "genai_industry"
-    prompt: "Design HIPAA-compliant GenAI medical documentation system with Bedrock"
-    description: "Healthcare GenAI solution with regulatory compliance"
-    
-  - category: "genai_industry"
-    prompt: "Create financial document analysis agent for investment banking"
-    description: "Financial services agentic AI for document intelligence"
-    
-  - category: "genai_industry"
-    prompt: "Build legal contract review agent with clause extraction and analysis"
-    description: "Legal tech GenAI solution for contract automation"
-
-  # GenAI Training & Enablement
-  - category: "genai_enablement"
-    prompt: "Create hands-on Bedrock Agents workshop for developer teams"
-    description: "Agentic AI education and hands-on learning program"
-    
-  - category: "genai_enablement"
-    prompt: "Design prompt engineering certification curriculum for enterprises"
-    description: "GenAI skills development and professional certification"
-    
-  - category: "genai_enablement"
-    prompt: "Generate responsible GenAI usage guidelines for development teams"
-    description: "GenAI governance and best practices documentation"
-
-  # Advanced GenAI Scenarios
-  - category: "advanced_genai"
-    prompt: "Implement chain-of-thought reasoning with Bedrock Claude for complex analysis"
-    description: "Advanced GenAI reasoning patterns and cognitive architectures"
-    
-  - category: "advanced_genai"
-    prompt: "Design GenAI agent swarm for distributed content generation workflow"
-    description: "Multi-agent collaboration for enterprise content operations"
-    
-  - category: "advanced_genai"
-    prompt: "Create adaptive GenAI system that learns from user interactions"
-    description: "Self-improving GenAI applications with feedback loops"
-
-  # GenAI Business Development
-  - category: "genai_business"
-    prompt: "Analyze GenAI market opportunity sizing for vertical SaaS startup"
-    description: "GenAI business case development and market analysis"
-    
-  - category: "genai_business"
-    prompt: "Create GenAI-first startup pitch deck with AWS cost projections"
-    description: "GenAI startup business planning and investor materials"
-    
-  - category: "genai_business"
-    prompt: "Develop go-to-market strategy for enterprise GenAI consulting services"
-    description: "Professional services business model for GenAI implementations"
-
-  # GenAI Innovation & Emerging Tech
-  - category: "genai_innovation"
-    prompt: "Explore multimodal GenAI applications combining Bedrock with computer vision"
-    description: "Next-generation GenAI with integrated modalities"
-    
-  - category: "genai_innovation"
-    prompt: "Design GenAI-powered IoT edge applications with real-time processing"
-    description: "Edge GenAI deployment for real-time decision making"
-    
-  - category: "genai_innovation"
-    prompt: "Implement federated learning for privacy-preserving GenAI model customization"
-    description: "Advanced GenAI training techniques for sensitive data"
-
-  # GenAI Startup Accelerators
-  - category: "genai_startups"
-    prompt: "Create GenAI MVP using Bedrock for seed-stage fintech startup"
-    description: "Rapid GenAI prototype development and validation"
-    
-  - category: "genai_startups"
-    prompt: "Design cost-effective GenAI architecture that scales with venture funding"
-    description: "Startup-optimized GenAI infrastructure and scaling strategy"
-    
-  - category: "genai_startups"
-    prompt: "Build investor demo showcasing GenAI agent capabilities for Series A"
-    description: "GenAI proof-of-concept for startup fundraising"
-
-  # Agentic AI Data & Knowledge
-  - category: "agentic_data"
-    prompt: "Design knowledge graph integration with Bedrock Agents for enterprise data"
-    description: "Intelligent data access and reasoning with AI agents"
-    
-  - category: "agentic_data"
-    prompt: "Create real-time data ingestion pipeline for Bedrock Knowledge Bases"
-    description: "Dynamic knowledge base management for RAG applications"
-    
-  - category: "agentic_data"
-    prompt: "Implement agent-driven data quality monitoring and correction workflows"
-    description: "Autonomous data governance with intelligent agents"
-
-  # Amazon Q Specialization
-  - category: "amazon_q"
-    prompt: "Deploy Amazon Q Business with enterprise SSO and custom data sources"
-    description: "Enterprise AI assistant implementation and integration"
-    
-  - category: "amazon_q"
-    prompt: "Integrate Amazon Q Developer into CI/CD pipeline for code quality"
-    description: "AI-assisted development workflow optimization"
-    
-  - category: "amazon_q"
-    prompt: "Create custom Amazon Q application for industry-specific workflows"
-    description: "Specialized AI assistant development for vertical markets"
-
-  # GenAI Content Operations
+  # Content & Media Creation (multi-modal tools)
   - category: "genai_content"
-    prompt: "Design automated content generation pipeline with brand consistency"
-    description: "Enterprise content operations with GenAI automation"
+    prompt: "Create presentation visuals showing our GenAI transformation roadmap for the board meeting"
+    description: "Executive presentation materials with AI-generated visuals"
     
   - category: "genai_content"
-    prompt: "Create multi-language content localization agent with cultural adaptation"
-    description: "Global GenAI content strategy and localization automation"
+    prompt: "Generate a demo video explaining our new Bedrock Agent capabilities to customers"
+    description: "Marketing video content creation for GenAI product demonstrations"
     
   - category: "genai_content"
-    prompt: "Build content moderation system using Bedrock Guardrails and custom rules"
-    description: "Automated content safety and compliance for GenAI applications"
+    prompt: "Turn this technical documentation into an audio presentation for our remote team"
+    description: "Accessibility-focused content transformation using text-to-speech"
+
+  # Training & Performance Optimization (latest AWS technologies)
+  - category: "llm_training"
+    prompt: "Set up SageMaker HyperPod for training our custom Llama 3.1 model on our enterprise data"
+    description: "Large-scale LLM training using AWS's purpose-built infrastructure"
+    
+  - category: "llm_training"
+    prompt: "Compare Trainium2 vs P5 instances for our foundation model training workload and costs"
+    description: "AWS compute optimization for large-scale model training"
+    
+  - category: "llm_training"
+    prompt: "Implement Mixture-of-Experts architecture for our domain-specific language model"
+    description: "Advanced neural architecture implementation for specialized LLMs"
+
+  # Memory & Knowledge Management (RAG tools)
+  - category: "genai_memory"
+    prompt: "Build a system that remembers customer preferences across conversations in our Bedrock application"
+    description: "Persistent memory integration for personalized AI interactions"
+    
+  - category: "genai_memory"
+    prompt: "Create a knowledge retrieval system that can find relevant information from our enterprise documents"
+    description: "Semantic search and retrieval for enterprise knowledge bases"
+    
+  - category: "genai_memory"
+    prompt: "Set up core memory for our AI agents so they maintain context across multiple sessions"
+    description: "Agent core memory implementation for consistent AI behavior"
+
+  # System Operations & Automation (system tools)
+  - category: "genai_operations"
+    prompt: "Automate our daily GenAI model performance monitoring and alerting"
+    description: "Operational automation for production GenAI system monitoring"
+    
+  - category: "genai_operations"
+    prompt: "Schedule automatic retraining of our custom models when new data arrives"
+    description: "Automated MLOps pipeline scheduling for continuous learning"
+    
+  - category: "genai_operations"
+    prompt: "Take screenshots of our GenAI dashboard performance metrics for the weekly report"
+    description: "Automated reporting and documentation for GenAI systems"
+
+  # Development & Code Management (development tools)
+  - category: "genai_development"
+    prompt: "Review and improve the code in our Bedrock Agent implementation files"
+    description: "Code review and optimization for GenAI agent development"
+    
+  - category: "genai_development"
+    prompt: "Run this new prompt injection detection algorithm in a secure sandbox environment"
+    description: "Safe code execution for GenAI security algorithm testing"
+    
+  - category: "genai_development"
+    prompt: "Read through our existing GenAI configuration files and suggest improvements"
+    description: "Configuration analysis and optimization for GenAI applications"
+
+  # Advanced Agent Orchestration (complex workflows)
+  - category: "advanced_agents"
+    prompt: "I need deep analysis of multiple GenAI architecture options - explore all the possibilities"
+    description: "Complex reasoning and analysis using advanced thinking capabilities"
+    
+  - category: "advanced_agents"
+    prompt: "Create a network of specialized AI agents for our content creation pipeline"
+    description: "Multi-agent graph creation for specialized workflow automation"
+    
+  - category: "advanced_agents"
+    prompt: "Set up a task management system where our AI agents can track and complete complex projects"
+    description: "Agent journal and task management for complex project orchestration"
+
+  # Business Operations & Communication (utility tools)
+  - category: "genai_business"
+    prompt: "What's our current timeline for the GenAI deployment and when do we need to make the next decision?"
+    description: "Project timeline management and decision scheduling"
+    
+  - category: "genai_business"
+    prompt: "I need to hand this GenAI architecture decision over to our technical team lead"
+    description: "Human-in-the-loop workflow for technical decision handoffs"
+    
+  - category: "genai_business"
+    prompt: "Send our latest GenAI cost analysis to the engineering Slack channel"
+    description: "Team communication and report distribution for GenAI projects"
+
+  # Simple Queries (beginner complexity)
+  - category: "genai_simple"
+    prompt: "What's 2+2 times the cost per token for Claude 3.7 Sonnet?"
+    description: "Basic mathematical operations for simple cost calculations"
+    
+  - category: "genai_simple"
+    prompt: "Read me the latest news about AWS Bedrock updates"
+    description: "Simple information retrieval and news monitoring"
+    
+  - category: "genai_simple"
+    prompt: "Show me what time it is and when our next GenAI review meeting should be scheduled"
+    description: "Basic time management and scheduling utilities"
+
+  # Complex Multi-Tool Scenarios (advanced complexity)
+  - category: "complex_scenarios"
+    prompt: "Build a complete GenAI Center of Excellence strategy: research current market trends, create architectural diagrams, calculate implementation costs, generate presentation materials, and set up automated monitoring workflows"
+    description: "Comprehensive GenAI strategy development using multiple integrated tools"
+    
+  - category: "complex_scenarios"
+    prompt: "Analyze our existing codebase, design a new Bedrock Agent system, create training materials, generate demo videos, and coordinate multiple AI agents to implement the solution"
+    description: "End-to-end GenAI solution development with multi-agent coordination"
+    
+  - category: "complex_scenarios"
+    prompt: "Research competitor GenAI offerings, take screenshots of their demos, create our differentiation analysis, generate visual comparisons, and prepare an executive briefing with both written and audio content"
+    description: "Competitive intelligence gathering with comprehensive content creation"
+
+  # Emerging Technologies (cutting-edge AWS services)
+  - category: "emerging_tech"
+    prompt: "Help me understand the cost-performance benefits of Trainium2 instances for our foundation model training"
+    description: "Latest AWS silicon analysis for advanced AI workloads"
+    
+  - category: "emerging_tech"
+    prompt: "Implement attention optimization techniques like Multi-Head Latent Attention for our custom transformer model"
+    description: "State-of-the-art neural architecture implementation and optimization"
+    
+  - category: "emerging_tech"
+    prompt: "Set up a heterogeneous compute cluster using spot instances for our distributed LLM training pipeline"
+    description: "Advanced cloud infrastructure optimization for large-scale AI training"
+
+  # AWS Services Integration (comprehensive service combinations)
+  - category: "aws_integration"
+    prompt: "Integrate Amazon Comprehend with Bedrock to enhance our document analysis pipeline for financial reports"
+    description: "Multi-service GenAI solution for intelligent document processing"
+    
+  - category: "aws_integration"
+    prompt: "Build a meeting summarization system using Amazon Transcribe and Bedrock Claude"
+    description: "End-to-end audio-to-insight workflow for business intelligence"
+    
+  - category: "aws_integration"
+    prompt: "Create an automated document processing system combining Textract and Claude for contract analysis"
+    description: "OCR and AI analysis pipeline for legal document automation"
+
+  # Industry-Specific Solutions (vertical applications)
+  - category: "industry_solutions"
+    prompt: "Design a HIPAA-compliant GenAI medical documentation system using Bedrock"
+    description: "Healthcare GenAI solution with regulatory compliance requirements"
+    
+  - category: "industry_solutions"
+    prompt: "Build financial document analysis for investment banking workflows"
+    description: "Financial services AI for document intelligence and automation"
+    
+  - category: "industry_solutions"
+    prompt: "Create legal contract review automation with clause extraction and risk analysis"
+    description: "Legal tech GenAI solution for automated contract processing"
+
+  # AWS Service Optimization (performance and cost)
+  - category: "aws_optimization"
+    prompt: "Optimize our Bedrock Claude inference costs using intelligent request routing and caching"
+    description: "LLM inference cost optimization with advanced routing strategies"
+    
+  - category: "aws_optimization"
+    prompt: "Design auto-scaling SageMaker endpoints for our variable LLM workloads"
+    description: "Dynamic LLM inference scaling for cost-effective production deployment"
+    
+  - category: "aws_optimization"
+    prompt: "Implement LLM quantization strategies to reduce memory footprint on our AWS infrastructure"
+    description: "Model compression techniques for efficient cloud deployment"
 
 # Rotation settings
 rotation:
   display_count: 3  # Show 3 prompts at a time
   separator: " | "  # Separator between prompts
-  format: "\"{prompt}\""  # Format template for each prompt (no "Try:" prefix)
+  format: "\"{prompt}\""  # Format template for each prompt (natural language)
   
-# Categories for smart rotation (ensure variety across GenAI/Agentic AI domains)
+# Categories for smart rotation (ensure variety across GenAI/AI complexity levels)
 categories:
-  # Core GenAI & Agentic Architecture
+  # Core Architecture & Design (simple to intermediate)
   - "genai_architecture"
-  - "agentic_architecture"
+  - "agentic_architecture" 
   - "genai_cost"
   - "genai_security"
-  # GenAI Research & Customer Engagement
+  
+  # Migration & Research (intermediate)
   - "genai_migration"
   - "genai_research"
-  - "genai_customer_engagement"
-  - "agentic_operations"
-  # Enterprise & Advanced GenAI
-  - "genai_well_architected"
-  - "genai_enterprise"
-  - "genai_partners"
-  - "genai_industry"
-  # Innovation & Business
-  - "genai_enablement"
-  - "advanced_genai"
-  - "genai_business"
-  - "genai_innovation"
-  # Specialized GenAI Focus Areas
-  - "genai_startups"
-  - "agentic_data"
-  - "amazon_q"
   - "genai_content"
+  - "genai_memory"
+  
+  # Training & Performance (intermediate to advanced)
+  - "llm_training"
+  - "genai_operations"
+  - "genai_development"
+  
+  # Advanced Agent & Business (advanced)
+  - "advanced_agents"
+  - "genai_business"
+  - "complex_scenarios"
+  
+  # Emerging Tech & AWS Integration (advanced)
+  - "emerging_tech"
+  - "aws_integration"
+  - "industry_solutions"
+  - "aws_optimization"
+  
+  # Simple Queries (beginner)
+  - "genai_simple"
