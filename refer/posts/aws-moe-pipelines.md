@@ -1,9 +1,14 @@
 ---
-title: "AWS Architecture for MoE LLM Training and Inference Pipelines"
-description: "A comprehensive guide to designing and implementing AWS-based training and inference pipelines for Mixture of Experts (MoE) Large Language Models"
-date: "2025-09-04"
-tags: ["AWS", "Machine Learning", "LLM", "MoE", "SageMaker", "Architecture"]
-cover_image: "/images/aws-moe-pipeline-cover.jpg"
+title: AWS Architecture for MoE LLM Training and Inference Pipelines
+description: A comprehensive guide to designing and implementing AWS-based training and inference pipelines for Mixture of Experts (MoE) Large Language Models
+date: 2025-09-04
+tags:
+  - AWS
+  - LLM
+  - MoE
+  - SageMaker
+  - Architecture
+cover_image: /images/aws-moe-pipeline-cover.jpg
 ---
 
 # AWS Architecture for MoE LLM Training and Inference Pipelines

@@ -1,0 +1,19 @@
+digraph {
+	rankdir=TB
+	node [fontname=Arial shape=record]
+	edge [fontname=Arial fontsize=10]
+	graph [ranksep=0.5]
+	"MoE Architecture" [label="{MoE Architecture|- Total Parameters: 100B-1T\n- Active Parameters: 17B-40B\n- Expert Count: 32-256\n- Active Experts: 2-9|+ routeExperts()\n+ loadExpertWeights()\n+ balanceExpertUtilization()}" shape=record]
+	"AWS MoE Accelerator" [label="{AWS MoE Accelerator|- Hardware Routing Circuits\n- Multi-tier Memory\n- Expert Caching|+ accelerateRouting()\n+ streamParameters()\n+ monitorUtilization()}" shape=record]
+	"Advanced Attention" [label="{Advanced Attention|- MLA Compression\n- Sliding Window Size\n- KV Cache Optimization|+ compressKeys()\n+ compressValues()\n+ optimizeWindowSize()}" shape=record]
+	"AWS Attention Optimizer" [label="{AWS Attention Optimizer|- Attention Variants\n- Compression Ratios\n- Window Configuration|+ configureAttention()\n+ optimizeMemoryUsage()\n+ accelerateComputation()}" shape=record]
+	"Memory Management" [label="{Memory Management|- Parameter Hierarchy\n- Quantization Levels\n- Streaming Protocols|+ streamParameters()\n+ predictParameterUsage()\n+ optimizeMemoryTiers()}" shape=record]
+	"AWS Tiered Parameter Store" [label="{AWS Tiered Parameter Store|- Ultra-low Latency\n- Intelligent Caching\n- Multi-tier Storage|+ streamModelWeights()\n+ predictParameterAccess()\n+ optimizeStorageTiers()}" shape=record]
+	"MoE Architecture" -> "AWS MoE Accelerator" [label=""]
+	"Advanced Attention" -> "AWS Attention Optimizer" [label=""]
+	"Memory Management" -> "AWS Tiered Parameter Store" [label=""]
+	"MoE Architecture" -> "Advanced Attention" [label=""]
+	"MoE Architecture" -> "Memory Management" [label=""]
+	"AWS MoE Accelerator" -> "AWS Attention Optimizer" [label=""]
+	"AWS MoE Accelerator" -> "AWS Tiered Parameter Store" [label=""]
+}

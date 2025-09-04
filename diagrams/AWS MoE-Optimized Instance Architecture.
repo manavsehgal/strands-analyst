@@ -1,0 +1,10 @@
+digraph {
+	rankdir=TB
+	node [fontname=Arial shape=record]
+	edge [fontname=Arial fontsize=10]
+	graph [ranksep=0.5]
+	EC2_MoE_Instance [label="{EC2_MoE_Instance|- Multi-tier Memory Hierarchy\n- Specialized Compute Units\n- Enhanced Networking}" shape=record]
+	Memory_Subsystem [label="{Memory_Subsystem|- 128-256GB HBM3\n- 1-2TB High-bandwidth RAM\n- 8-16TB Ultra-fast NVMe}" shape=record]
+	Compute_Units [label="{Compute_Units|- Router Accelerator Units\n- Tensor Cores for Sparse Ops\n- Attention Mechanism Accelerators}" shape=record]
+	Network_Architecture [label="{Network_Architecture|- 1600+ Gbps EFA\n- Expert Synchronization\n- Parameter Streaming Support}" shape=record]
+}

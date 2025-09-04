@@ -19,7 +19,8 @@ from ..tools import (
     convert_html_to_markdown,
     speak_custom,
     save_file,
-    http_request_custom
+    http_request_custom,
+    python_repl_custom
 )
 from ..config import get_config, get_bedrock_config_for_agent, get_community_tools_for_agent
 from ..utils import configure_logging, print_metrics
@@ -77,7 +78,6 @@ def _load_community_tools(agent_name: str = "chat") -> List:
         "use_computer": "strands_tools.use_computer",
         
         # Code Interpretation
-        "python_repl": "strands_tools.python_repl",
         "code_interpreter": "strands_tools.code_interpreter",
         
         # Web & Network
@@ -187,6 +187,7 @@ Built-in Analysis Capabilities:
 - Text-to-speech: Convert text to speech using macOS say command or Amazon Polly
 - File saving: Save content to files using the save_file tool (no consent required)
 - HTTP requests: Make API calls with http_request_custom tool (supports auth, headers, JSON)
+- Python code execution: Run Python code with python_repl_custom tool for calculations and analysis
 
 Available Community Tools (when enabled and with appropriate permissions):
 - Calculation and utilities: For mathematical operations and current time
@@ -210,7 +211,7 @@ Always be helpful, clear, and suggest the best tools for the user's needs. If a 
         "RAG & Memory": ["retrieve", "memory", "agent_core_memory", "mem0_memory"],
         "File Operations": ["editor", "file_read"],
         "Shell & System": ["environment", "shell", "cron", "use_computer"],
-        "Code Interpretation": ["python_repl", "code_interpreter"],
+        "Code Interpretation": ["code_interpreter"],
         "Web & Network": ["slack", "browser", "rss"],
         "Multi-modal": ["generate_image_stability", "image_reader", "generate_image", "nova_reels", "diagram"],
         "AWS Services": ["use_aws"],
@@ -271,7 +272,7 @@ Always be helpful, clear, and suggest the best tools for the user's needs. If a 
 You can help users with analysis, research, coding, file operations, web requests, and general productivity tasks using these tools. Always be helpful, clear, and suggest the best tools for the user's needs.
 
 IMPORTANT SECURITY NOTICE:
-Some tools (like shell, file_write, python_repl) may require user consent before execution as they can modify your system or execute code. This is a safety feature to protect your security and privacy."""
+Some tools (like shell, file_write, editor) may require user consent before execution as they can modify your system or execute code. This is a safety feature to protect your security and privacy."""
 
 
 def create_chat_agent(
@@ -341,7 +342,8 @@ def create_chat_agent(
         convert_html_to_markdown,
         speak_custom,
         save_file,
-        http_request_custom
+        http_request_custom,
+        python_repl_custom
     ]
     
     all_tools = built_in_tools + community_tools

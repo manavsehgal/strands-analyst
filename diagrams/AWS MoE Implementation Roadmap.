@@ -1,0 +1,9 @@
+digraph {
+	rankdir=TB
+	node [fontname=Arial shape=record]
+	edge [fontname=Arial fontsize=10]
+	graph [ranksep=0.5]
+	Near_Term_6_12_Months [label="{Near_Term_6_12_Months|- Enhance Existing EC2 Instances\n- Extend AWS Neuron SDK\n- Update SageMaker and Bedrock}" shape=record]
+	Medium_Term_12_24_Months [label="{Medium_Term_12_24_Months|- First-Gen MoE Instances\n- Parameter Streaming Service\n- MoE-Aware Auto Scaling}" shape=record]
+	Long_Term_24_36_Months [label="{Long_Term_24_36_Months|- Hardware-Software Co-Design\n- Comprehensive MoE Ecosystem\n- Specialized Silicon}" shape=record]
+}

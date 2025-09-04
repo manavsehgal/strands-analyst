@@ -1,0 +1,9 @@
+digraph {
+	rankdir=TB
+	node [fontname=Arial shape=record]
+	edge [fontname=Arial fontsize=10]
+	graph [ranksep=0.5]
+	SageMaker_MoE_Service [label="{SageMaker_MoE_Service|- Expert Partitioning\n- Dynamic Expert Scaling\n- Memory Hierarchy Management|+ deployMoEModel()\n+ optimizeExpertPlacement()\n+ monitorExpertUtilization()}" shape=record]
+	Bedrock_MoE_API [label="{Bedrock_MoE_API|- Expert Configuration\n- Memory Optimization\n- Attention Mechanism Selection|+ configureExperts()\n+ setMemoryOptimizations()\n+ selectAttentionMechanism()}" shape=record]
+	Parameter_Streaming_Service [label="{Parameter_Streaming_Service|- Intelligent Parameter Loading\n- Expert Lifecycle Management\n- Caching Strategies|+ streamExpertParameters()\n+ predictExpertUsage()\n+ optimizeParameterPlacement()}" shape=record]
+}

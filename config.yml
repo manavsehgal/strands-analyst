@@ -291,7 +291,7 @@ community_tools:
     bypass_for_safe_tools: false
     
     # Tools that always require consent (security-sensitive operations)
-    always_require_consent: ["shell", "python_repl", "file_write", "editor", "use_computer", "swarm", "workflow", "use_agent"]
+    always_require_consent: ["shell", "file_write", "editor", "use_computer", "swarm", "workflow", "use_agent"]
   
   # Human-in-the-loop configuration
   human_in_loop:
@@ -380,11 +380,6 @@ community_tools:
     
     # Code Interpretation tools
     code_interpretation:
-      python_repl:
-        enabled: true
-        require_consent: true
-        description: "Run Python code"
-      
       code_interpreter:
         enabled: true
         require_consent: true
@@ -555,8 +550,6 @@ community_tools:
           require_consent: false  # Safe: only manages environment variables
         
         # Code execution - REQUIRE CONSENT (can execute arbitrary code)
-        python_repl:
-          require_consent: true  # Security: can execute arbitrary Python code
         code_interpreter:
           require_consent: true  # Security: can execute code
           

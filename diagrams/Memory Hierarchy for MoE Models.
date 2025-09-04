@@ -1,0 +1,17 @@
+// Memory Hierarchy for MoE Models
+digraph {
+	rankdir=TB
+	l1 [label="L1: Active Experts
+(17-40B parameters)
+High-bandwidth, low-latency"]
+	l2 [label="L2: Frequently Used Experts
+Medium-latency"]
+	l3 [label="L3: All Experts
+(100B-1T parameters)
+Higher latency"]
+	l4 [label="L4: Extended Context
+Very high latency"]
+	l1 -> l2 [label="Parameter streaming"]
+	l2 -> l3 [label="Expert loading"]
+	l3 -> l4 [label="Context management"]
+}
