@@ -23,13 +23,17 @@ analyst/tools/fetch_url_metadata.py
 analyst/tools/http_request_tool.py
 analyst/tools/python_repl_tool.py
 analyst/tools/save_file.py
+analyst/tools/save_file_smart.py
 analyst/tools/speak_tool.py
 analyst/utils/__init__.py
 analyst/utils/consent_manager.py
+analyst/utils/dynamic_model_config.py
 analyst/utils/logging_utils.py
 analyst/utils/metrics_utils.py
 analyst/utils/prompt_utils.py
 analyst/utils/shell_wrapper.py
+analyst/utils/smart_file_saver.py
+analyst/utils/tool_output_display.py
 strands_analyst.egg-info/PKG-INFO
 strands_analyst.egg-info/SOURCES.txt
 strands_analyst.egg-info/dependency_links.txt

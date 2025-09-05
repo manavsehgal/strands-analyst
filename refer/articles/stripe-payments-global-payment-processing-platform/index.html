@@ -11,7 +11,7 @@
     <!-- Source metadata -->
     <meta name="source-url" content="https://stripe.com/payments">
     <meta name="source-domain" content="stripe.com">
-    <meta name="date-scraped" content="2025-09-03 19:54:05">
+    <meta name="date-scraped" content="2025-09-05 06:36:35">
     
     <!-- OpenGraph metadata -->
     <meta property="og:title" content="Stripe Payments | Global Payment Processing Platform">
@@ -122,13 +122,13 @@
     <div class="metadata">
         <h3>📄 Document Information</h3>
         <p><strong>Source:</strong> <a href="https://stripe.com/payments" target="_blank">stripe.com</a></p>
-        <p><strong>Archived:</strong> 2025-09-03 19:54:05</p>
+        <p><strong>Archived:</strong> 2025-09-05 06:36:35</p>
     </div>
     
     <main>
         <html><body><div><figure class="DeveloperCentricCodeEditor" data-js-controller="DeveloperCentricCodeEditor">
   <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
-const stripe = require('stripe')('sk_test_[REDACTED]');
+const stripe = require('stripe')('sk_test_YOUR_STRIPE_SECRET_KEY');
 
 // Create a payment intent to start a purchase flow.
 let paymentIntent = await stripe.paymentIntents.create({
@@ -145,7 +145,7 @@ await stripe.paymentIntents.confirm(paymentIntent.id, {
 
 
   <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
-Stripe.api_key = 'sk_test_[REDACTED]'
+Stripe.api_key = 'sk_test_YOUR_STRIPE_SECRET_KEY'
 
 # Create a payment intent to start a purchase flow.
 payment_intent = Stripe::PaymentIntent.create({
@@ -162,7 +162,7 @@ Stripe::PaymentIntent.confirm(payment_intent.id, {
 
 
   <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
-stripe.api_key = 'sk_test_[REDACTED]'
+stripe.api_key = 'sk_test_YOUR_STRIPE_SECRET_KEY'
 
 # Create a payment intent to start a purchase flow.
 payment_intent = stripe.PaymentIntent.create(
@@ -180,7 +180,7 @@ stripe.PaymentIntent.confirm(
 
 
   <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
-stripe.Key = "sk_test_[REDACTED]"
+stripe.Key = "sk_test_YOUR_STRIPE_SECRET_KEY"
 
 // Create a payment intent to start a purchase flow.
 params := &amp;stripe.PaymentIntentParams{
@@ -199,7 +199,7 @@ paymentintent.Confirm(pi.ID, confirmParams)
 
 
   <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
-$stripe = new \Stripe\StripeClient('sk_test_[REDACTED]');
+$stripe = new \Stripe\StripeClient('sk_test_YOUR_STRIPE_SECRET_KEY');
 
 // Create a payment intent to start a purchase flow.
 $payment_intent = $stripe-&gt;paymentIntents-&gt;create([
@@ -216,7 +216,7 @@ $payment_intent-&gt;confirm([
 
 
   <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
-Stripe.apiKey = "sk_test_[REDACTED]";
+Stripe.apiKey = "sk_test_YOUR_STRIPE_SECRET_KEY";
 
 // Create a payment intent to start a purchase flow.
 PaymentIntentCreateParams params =
@@ -239,7 +239,7 @@ paymentIntent.confirm(confirmParams);
 
 
   <p aria-hidden="true" data-js-target-list="DeveloperCentricCodeEditor.snippets">
-StripeConfiguration.ApiKey = "sk_test_[REDACTED]";
+StripeConfiguration.ApiKey = "sk_test_YOUR_STRIPE_SECRET_KEY";
 
 // Create a payment intent to start a purchase flow.
 var options = new PaymentIntentCreateOptions
@@ -330,7 +330,7 @@ service.Confirm(paymentIntent.Id, confirmOptions);
     
 
     
-      <p data-js-target="CodeEditor.finalCode">const stripe = require('stripe')('sk_test_[REDACTED]');
+      <p data-js-target="CodeEditor.finalCode">const stripe = require('stripe')('sk_test_YOUR_STRIPE_SECRET_KEY');
 
 // Create a payment intent to start a purchase flow.
 let paymentIntent = await stripe.paymentIntents.create({
@@ -369,7 +369,7 @@ await stripe.paymentIntents.confirm(paymentIntent.id, {
     
     <footer style="margin-top: 3em; padding-top: 2em; border-top: 1px solid #e1e4e8; text-align: center; color: #586069; font-size: 0.9em;">
         <p>This page was archived from <a href="https://stripe.com/payments" target="_blank">https://stripe.com/payments</a></p>
-        <p>Archived on 2025-09-03 19:54:05 using Analyst Article Downloader</p>
+        <p>Archived on 2025-09-05 06:36:35 using Analyst Article Downloader</p>
     </footer>
 </body>
 </html>

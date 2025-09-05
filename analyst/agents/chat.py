@@ -26,6 +26,8 @@ from ..tools import (
 from ..config import get_config, get_bedrock_config_for_agent, get_community_tools_for_agent
 from ..utils import configure_logging, print_metrics
 from ..utils.dynamic_model_config import get_dynamic_model_manager, create_optimized_model
+from ..utils.tool_output_display import wrap_tools_with_enhanced_output, get_tool_output_config
+from ..utils.enhanced_callback_handler import enhanced_callback_handler
 
 
 def _load_community_tools(agent_name: str = "chat") -> List:
@@ -358,6 +360,9 @@ def create_chat_agent(
     
     all_tools = built_in_tools + community_tools
     
+    # Wrap tools with enhanced output display if enabled
+    all_tools = wrap_tools_with_enhanced_output(all_tools)
+    
     # Generate system prompt based on available tools
     system_prompt = _generate_system_prompt_with_tools(built_in_tools, community_tools)
     
@@ -375,12 +380,19 @@ def create_chat_agent(
             region_name=bedrock_config['region_name']
         )
     
+    # Set up callback handler for enhanced tool output if enabled
+    callback_handler = None
+    tool_config = get_tool_output_config()
+    if tool_config.get('enabled', True):
+        callback_handler = enhanced_callback_handler
+    
     # Create agent with optimized model, all available tools and session management
     agent = Agent(
         model=bedrock_model,
         tools=all_tools,
         session_manager=session_manager,
-        system_prompt=system_prompt
+        system_prompt=system_prompt,
+        callback_handler=callback_handler
     )
     
     # Store dynamic model selection flag on agent for later use

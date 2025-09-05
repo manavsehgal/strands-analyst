@@ -125,6 +125,50 @@ analystai:
   # Whether to organize by date (creates YYYY-MM-DD subdirectories)
   organize_by_date: false
 
+# Enhanced tool output configuration
+tool_output:
+  # Whether to show enhanced tool output by default
+  enabled: true
+  
+  # Show tool names when executed
+  show_tool_names: true
+  
+  # Show input parameters (URLs, file paths, etc.)
+  show_inputs: true
+  
+  # Show errors with detailed explanations
+  show_errors: true
+  
+  # Show tool execution timing
+  show_timing: false
+  
+  # Color settings for different output types
+  colors:
+    enabled: true
+    tool_name: "cyan"
+    input: "blue"
+    success: "green"
+    error: "red"
+    warning: "yellow"
+    info: "white"
+  
+  # Error message formatting
+  error_display:
+    # Show HTTP status codes
+    show_status_codes: true
+    
+    # Show simplified error explanations
+    show_explanations: true
+    
+    # Common error explanations
+    explanations:
+      404: "Resource not found - The URL or file does not exist"
+      403: "Access forbidden - Permission denied or robots.txt disallow"
+      500: "Server error - The remote server encountered an error"
+      timeout: "Request timed out - The operation took too long"
+      dns: "DNS error - Could not resolve the domain name"
+      connection: "Connection error - Could not connect to the server"
+
 # General application settings
 app:
   # Application name

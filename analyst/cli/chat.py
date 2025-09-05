@@ -234,6 +234,16 @@ def main():
         action="store_true",
         help="Automatically save conversation summary when exiting"
     )
+    parser.add_argument(
+        "--no-tool-output",
+        action="store_true",
+        help="Disable enhanced tool output display"
+    )
+    parser.add_argument(
+        "--tool-timing",
+        action="store_true",
+        help="Show tool execution timing information"
+    )
     
     args = parser.parse_args()
     
@@ -242,6 +252,15 @@ def main():
         # Configure logging
         if not args.no_logging:
             configure_logging(verbose=args.verbose)
+        
+        # Override tool output config based on command line args
+        if args.no_tool_output or args.tool_timing:
+            import os
+            # Set environment variables to override config
+            if args.no_tool_output:
+                os.environ['ANALYST_TOOL_OUTPUT_ENABLED'] = 'false'
+            if args.tool_timing:
+                os.environ['ANALYST_TOOL_OUTPUT_TIMING'] = 'true'
         
         # Create session directory
         Path(args.session_dir).mkdir(parents=True, exist_ok=True)
