@@ -75,6 +75,56 @@ chat:
   # Session timeout in minutes (0 = no timeout)
   session_timeout: 0
 
+# File output configuration for analystai command
+analystai:
+  # Base directory for all generated files (when not explicitly specified)
+  output_base_dir: "analystai-responses"
+  
+  # Type-specific output directories
+  output_directories:
+    # Diagrams and visualizations
+    diagrams: "analystai-responses/diagrams"
+    
+    # Markdown documents
+    markdown: "analystai-responses/markdown"
+    
+    # Images (generated or downloaded)
+    images: "analystai-responses/images"
+    
+    # Videos (generated)
+    videos: "analystai-responses/videos"
+    
+    # JSON/YAML data files
+    data: "analystai-responses/data"
+    
+    # Text documents
+    text: "analystai-responses/text"
+    
+    # Code files
+    code: "analystai-responses/code"
+    
+    # HTML files
+    html: "analystai-responses/html"
+    
+    # PDF documents
+    pdf: "analystai-responses/pdf"
+    
+    # CSV files
+    csv: "analystai-responses/csv"
+    
+    # Default for unrecognized types
+    default: "analystai-responses/misc"
+  
+  # Whether to override user-specified paths
+  # If false, explicit paths from users are respected
+  override_explicit_paths: false
+  
+  # Whether to create directories automatically
+  auto_create_directories: true
+  
+  # Whether to organize by date (creates YYYY-MM-DD subdirectories)
+  organize_by_date: false
+
 # General application settings
 app:
   # Application name

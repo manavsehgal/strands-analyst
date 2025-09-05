@@ -65,6 +65,54 @@
     
     **Result**: The system now provides intelligent model selection that automatically optimizes performance by selecting faster models for simple tasks and more capable models for complex reasoning, while warm-up capabilities significantly reduce cold start latency. Users benefit from 40-60% faster response times for simple queries and optimal model selection without manual configuration.
 
+[x] When `analystai` command is used and Strands saves a file on its own, it does so at root of the project. Make sure that unless user prompts explicitly the files are saved in configurable `config.yml` folders by type.
+  - analystai-responses/diagrams/ for diagrams generated
+  - analystai-responses/markdown/ for markdown generated
+  - analystai-responses/images/ for images generated
+  and so on...
+
+    **Completion Summary (2025-09-05):**
+    - ✅ **Added Comprehensive File Output Configuration**: Created new `analystai` section in `config.yml` with:
+      - **Base output directory**: Configurable base path for all generated files (`analystai-responses/`)
+      - **Type-specific directories**: Separate folders for diagrams, markdown, images, videos, data, text, code, HTML, PDF, CSV files
+      - **Configuration options**: Settings for auto-create directories, organize by date, and respecting explicit user paths
+    - ✅ **Implemented Smart File Saving Logic**: Created `analyst/utils/smart_file_saver.py` module with:
+      - **File type detection**: Automatic detection of file types based on extensions (50+ extensions mapped)
+      - **Directory routing**: Intelligent routing to appropriate directories based on file type
+      - **User path handling**: Respects user-specified paths when `override_explicit_paths` is false
+      - **Date organization**: Optional YYYY-MM-DD subdirectory creation for better organization
+    - ✅ **Created Enhanced Save Tool**: Built `save_file_smart` tool in `analyst/tools/save_file_smart.py`:
+      - **Auto-organization**: Files automatically saved to type-appropriate directories
+      - **Type override**: Optional `force_type` parameter for manual type specification
+      - **Backward compatibility**: Works alongside existing `save_file` tool for explicit path saves
+    - ✅ **Integrated with Chat Agent**: Updated `analyst/agents/chat.py` to include:
+      - **Dual tool support**: Both `save_file` and `save_file_smart` available to agents
+      - **Smart defaults**: AI uses `save_file_smart` for auto-organized saves
+      - **Explicit path handling**: Regular `save_file` used when users provide specific paths
+      - **Updated system prompt**: Documents the smart file saving capability
+    - ✅ **Comprehensive Testing**: Validated functionality with multiple test cases:
+      - **Markdown files**: Saved correctly to `analystai-responses/markdown/`
+      - **JSON data files**: Routed properly to `analystai-responses/data/`
+      - **Explicit paths**: User-specified paths like `/tmp/` are respected
+      - **File type detection**: Correctly identifies 50+ file extensions and routes appropriately
+    
+    **Key Features Delivered**:
+    - **11 file type categories**: Diagrams, markdown, images, videos, data, text, code, HTML, PDF, CSV, default
+    - **50+ file extensions**: Comprehensive mapping for automatic file type detection
+    - **Configurable behavior**: All aspects configurable via `config.yml`
+    - **Zero user friction**: Works transparently without user intervention
+    - **Backward compatible**: Existing workflows continue to function normally
+    
+    **Technical Implementation**:
+    - **Modular design**: Clean separation between configuration, logic, and tools
+    - **Extensible architecture**: Easy to add new file types and categories
+    - **Error handling**: Graceful fallback to default directory for unknown types
+    - **Path safety**: Proper handling of absolute and relative paths
+    
+    **Result**: The `analystai` command now intelligently organizes all generated files into type-specific directories under `analystai-responses/`, making it easy for users to find and manage AI-generated content. Files are automatically categorized and stored in appropriate folders while still respecting explicit user-provided paths when needed. This provides a clean, organized file structure without requiring any changes to user workflows.
+
+[ ] When `analystai` command is used and a tool is called, it is shown with tool name. Also show any URLs or file paths that tool is working on or taking as input. Also show any errors the tool is encoutering like 404s or robots disallow, etc. with crisp explanation of error. Make this a configurable `configure.yml` setting to show more info or not. Default to show more info. Use appropriate colors to show various outputs like tool calls, errors, inputs.
+
 [ ] Create comprehensive message-level caching system for conversation continuity in chat agents, including cache invalidation strategies, hit/miss metrics monitoring, and request-level caching for repeated tool operations.
 
 [ ] Build multi-agent orchestration framework implementing the agents-as-tools pattern with workflow management, dependency tracking, concurrent tool execution, and agent specialization for domain-specific tasks.

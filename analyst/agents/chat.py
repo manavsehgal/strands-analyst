@@ -19,6 +19,7 @@ from ..tools import (
     convert_html_to_markdown,
     speak_custom,
     save_file,
+    save_file_smart,
     http_request_custom,
     python_repl_custom
 )
@@ -186,7 +187,7 @@ Built-in Analysis Capabilities:
 - Article downloading: Download full articles with images and convert to various formats
 - HTML to Markdown conversion: Convert HTML content to well-formatted Markdown
 - Text-to-speech: Convert text to speech using macOS say command or Amazon Polly
-- File saving: Save content to files using the save_file tool (no consent required)
+- File saving: Save content to files using save_file or save_file_smart tools (smart tool auto-organizes by type)
 - HTTP requests: Make API calls with http_request_custom tool (supports auth, headers, JSON)
 - Python code execution: Run Python code with python_repl_custom tool for calculations and analysis
 
@@ -350,6 +351,7 @@ def create_chat_agent(
         convert_html_to_markdown,
         speak_custom,
         save_file,
+        save_file_smart,  # Enhanced file saving with smart directory selection
         http_request_custom,
         python_repl_custom
     ]
