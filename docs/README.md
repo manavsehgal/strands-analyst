@@ -59,10 +59,10 @@ analystai "screenshot google.com using shell and playwright"
 - **[Developer Guide](developer-guide.md)** - Extending the package with new agents and tools
 
 ### Enhanced Features ✨
-- **[Enhanced Chat Guide](enhanced-chat-guide.md)** - Rich terminal UI with streaming support
-- **[Community Tools Guide](community-tools-guide.md)** - 44+ professional tools integration
-- **[Automation Guide](automation-guide.md)** - Computer & browser automation via shell
-- **[Streaming Features Guide](streaming-features-guide.md)** - Technical implementation details
+- **[Enhanced Chat Features Guide](enhanced-chat-guide.md)** - Rich terminal UI with streaming support and 40+ tools ✨
+- **[Community Tools Guide](community-tools-guide.md)** - Complete 40+ professional tools integration
+- **[Automation Guide](automation-guide.md)** - Computer & browser automation via shell with security controls
+- **[Chat Agent Guide](chat-agent-guide.md)** - Interactive conversational interface with advanced features
 
 ### Agent-Specific Guides
 - **[Article Agent Guide](article-agent-guide.md)** - Download and analyze web articles with metadata extraction and image preservation

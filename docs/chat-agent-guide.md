@@ -1,22 +1,26 @@
 # Chat Agent User Guide
 
-The Chat Agent provides an interactive conversational interface with persistent memory and access to all analysis tools. Perfect for exploratory research, multi-step analysis, and collaborative investigation workflows.
+The `analystai` command provides an enhanced interactive AI assistant with rich terminal UI, real-time streaming, and access to 40+ professional tools. Perfect for complex analysis, multi-step research, and intelligent automation workflows.
 
-## Overview
+## ✨ Overview
 
-The Chat Agent is designed for:
-- 💬 **Interactive conversations** with persistent memory across sessions
-- 🔧 **Multi-tool access** - Use all available analysis tools conversationally
-- 📂 **Session management** - Resume conversations and maintain context
-- 🤖 **AI assistance** - Get help with complex analysis workflows
+The enhanced Chat Agent features:
+- 🎨 **Rich Terminal UI** with beautiful panels and color-coded output
+- ⚡ **Real-time streaming** responses as they generate
+- 🔧 **Live tool indicators** showing active operations in progress
+- 🧠 **40+ Professional Tools** seamlessly integrated through natural conversation
+- 📝 **Markdown rendering** for beautifully formatted content
+- 🛡️ **Smart security** with consent management for system operations
 
-### Core Capabilities
+### 🚀 Core Capabilities
 
-- 🌐 **Website Analysis** - "Analyze google.com and tell me what they do"
-- 📰 **RSS Feed Processing** - "Read the latest from this RSS feed: <url>"  
-- 📄 **Article Downloading** - "Download this article and convert it to markdown"
-- 🔄 **HTML Conversion** - "Convert this HTML content to clean markdown"
-- 💡 **Research Assistance** - Ask questions and get intelligent responses
+- 🌐 **Website Intelligence** - "Analyze google.com and compare with stripe.com"
+- 📰 **Content Monitoring** - "Read this RSS feed and create a daily digest"
+- 📄 **Article Processing** - "Download this article and extract key insights"
+- 💻 **Computer Automation** - "Take a screenshot using shell commands"
+- 🧮 **Mathematical Operations** - "Calculate compound interest for my investment"
+- 🎨 **Multimodal Content** - "Generate a diagram of AWS architecture"
+- 🔄 **Multi-Agent Workflows** - Coordinate multiple AI agents for complex tasks
 
 ## Quick Start
 

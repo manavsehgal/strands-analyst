@@ -2,15 +2,24 @@
 
 Strands Analyst provides computer and browser automation capabilities through system tools with proper security controls. This guide covers available automation features and security practices.
 
-## Overview
+## ✨ Overview
 
-Strands Analyst provides automation capabilities through community tools including the **shell tool**. For security and user protection:
+Strands Analyst provides comprehensive computer and browser automation through the enhanced `analystai` command with **shell tool integration**. The system features:
 
-- ⚠️  **User consent required** for system-level operations that can modify your computer
-- 🔒 **Security-first approach** with explicit permission prompts for dangerous operations
-- 💻 **Cross-platform support** with system command integration  
-- 🛡️  **Safe defaults** - read-only operations don't require consent, write operations do
-- 📝 **Clear permissions** - you'll be asked before any system modifications
+- 🎨 **Rich Terminal UI** with live automation indicators
+- ⚡ **Real-time feedback** showing command execution progress
+- 🛡️ **Smart Security** - bypass consent for safe operations, prompt for system modifications
+- 💻 **Cross-platform support** with intelligent command adaptation
+- 🔧 **Browser Integration** via Playwright for web automation
+- 📊 **Execution Metrics** with performance tracking and logging
+
+### 🚀 Key Features
+
+- **🖥️ Desktop Automation** - Screenshots, system info, application control
+- **🌐 Browser Automation** - Web screenshots, PDF generation, page interaction  
+- **📁 File Operations** - Search, manipulation, and system integration
+- **⚙️ System Integration** - Process control, environment management
+- **🔒 Security First** - Consent management with bypass for safe operations
 
 ## Quick Start
 

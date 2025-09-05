@@ -171,6 +171,9 @@
   },
   "active": "9df6b2d10d08aeb0",
   "lastOpenFiles": [
+    "README.md.tmp.4234.1757086777140",
+    "README.md.tmp.4234.1757086762910",
+    "docs/enhanced-chat-guide.md",
     "analystai-responses/code/fractal_generator.py",
     "analystai-responses/images/burning_ship_electric.png",
     "analystai-responses/images/julia_fire.png",
@@ -190,7 +193,6 @@
     "refer/articles/explore-n8n-docs-your-resource-for-workflow-automation-and-i",
     "refer/articles/ai-workflow-automation-platform-tools-n8n/images",
     "refer/articles/ai-workflow-automation-platform-tools-n8n/index.html",
-    "refer/articles/ai-workflow-automation-platform-tools-n8n",
     "github-info.md",
     "formatting-test.md",
     "enhanced-final-test.md",
@@ -214,7 +216,6 @@
     "aws-architecture-agentic-ai-application.md",
     "refer/sitemeta/decagon-ai-meta-2025-09-05.md",
     "backlog/active-backlog.md",
-    "backlog/backlog-archive-002.md",
-    "refer/posts/aws-moe-pipelines.md"
+    "backlog/backlog-archive-002.md"
   ]
 }

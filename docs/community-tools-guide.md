@@ -1,21 +1,74 @@
 # Community Tools Integration Guide
 
-This guide covers the integration and usage of Strands community tools within the analyst package, including configuration, security, and best practices.
+This guide covers the integration and usage of Strands community tools within the analyst package, providing access to 40+ professional-grade tools through the enhanced `analystai` command.
 
 ## Overview
 
-The analyst package integrates with the Strands community tools ecosystem, providing access to 44+ professional-grade tools for enhanced analysis capabilities.
+The analyst package integrates with the Strands community tools ecosystem, providing seamless access to **40+ professional-grade tools** through natural conversation. These tools are automatically available in the `analystai` command with enhanced streaming UI and real-time tool indicators.
 
-### Available Tool Categories
+### ✨ Key Features
 
-- **🌐 Web & Network** - HTTP requests, RSS feeds, web search
-- **📁 File Operations** - File read/write, editing, directory operations  
-- **⚙️ Code & System** - Python execution, shell commands, calculations
-- **🤖 Automation** - Agent orchestration, batch processing, workflows
-- **💾 Memory & Storage** - Persistent memory, journaling
-- **💬 Communication** - User handoff, Slack integration
-- **🛠️ Utilities** - Time functions, LLM calls, flow control
-- **☁️ AWS Services** - AWS service integration
+- **🎨 Rich Terminal UI** - Beautiful panels with color-coded output
+- **⚡ Real-time Streaming** - Watch responses generate in real-time
+- **🔧 Live Tool Indicators** - See active operations in progress
+- **🛡️ Smart Security** - Consent management for system operations
+- **📝 Markdown Rendering** - Beautifully formatted content
+
+### 🧰 Tool Categories (40+ Tools Available)
+
+#### 🧠 RAG & Memory Systems
+- `retrieve` - Semantic search and retrieval from knowledge bases
+- `memory` - Session-based memory management and persistence
+- `agent_core_memory` - Persistent agent memory across sessions
+- `mem0_memory` - Advanced memory storage with contextual understanding
+
+#### 📁 File Operations
+- `file_read` - Secure file reading with permission controls
+- `file_write` - Safe file writing with consent management
+- `editor` - Interactive file editing capabilities
+
+#### ⚙️ System & Automation  
+- `shell` - Execute shell commands with security consent
+- `use_computer` - Computer automation and screen control
+- `cron` - Task scheduling and automation
+- `environment` - Environment variable management
+
+#### 🌐 Web & Network
+- `http_request` - HTTP/API requests and integrations
+- `browser` - Web browsing and page interaction
+- `rss` - RSS feed monitoring and analysis
+- `slack` - Slack integration and notifications
+
+#### 🎨 Multimodal Capabilities
+- `diagram` - Generate professional architecture diagrams
+- `generate_image` - AI-powered image generation
+- `speak` - Text-to-speech conversion
+- `image_reader` - Image analysis and OCR
+- `nova_reels` - Video content generation
+
+#### 💻 Development Tools
+- `python_repl` - Python code execution with safety controls
+- `code_interpreter` - Code analysis and debugging
+
+#### 🔄 Agent Workflows
+- `workflow` - Complex multi-step workflows
+- `swarm` - Multi-agent coordination and orchestration
+- `graph` - Agent graph creation and management
+
+#### 🏢 Business Intelligence
+- `batch_requests` - Batch processing capabilities
+- `task_tracker` - Project and task management
+- `handoff` - Human-in-the-loop workflows
+
+#### 🔧 Utilities & Math
+- `calculator` - Advanced mathematical computations
+- `time_utilities` - Date/time operations and scheduling
+- `text_utilities` - Text processing and manipulation
+
+#### 💾 Data & Storage
+- `search` - Advanced search capabilities
+- `database` - Database operations and queries
+- Various storage and persistence tools
 
 ## Quick Start
 

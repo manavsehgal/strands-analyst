@@ -1,35 +1,141 @@
 # CLI Guide
 
-The Strands Analyst package provides command-line interfaces for various analysis tasks.
+The Strands Analyst package provides command-line interfaces for various analysis tasks with enhanced terminal UI and 40+ professional tools.
 
 ## Available Commands
 
-- [About Command](#about-command) - Analyze websites to understand companies
+- [Analyst AI Command](#analyst-ai-command) - Interactive AI assistant with 40+ tools (NEW ✨)
+- [Site Meta Command](#site-meta-command) - Analyze websites to understand companies (UPDATED)
 - [News Command](#news-command) - Fetch and analyze RSS news feeds
 - [Article Command](#article-command) - Download and analyze web articles with images
 - [HTMLmd Command](#htmlmd-command) - Convert HTML files to markdown format
 
-## About Command
+## Analyst AI Command
 
-The `about` command analyzes websites to understand what companies do.
+**NEW ✨** The `analystai` command provides an interactive AI assistant with access to 40+ professional tools, enhanced streaming UI, and real-time tool indicators.
 
 ### Basic Usage
 
 ```bash
-about <url>
+analystai [message]
+```
+
+### Features
+
+#### Enhanced Terminal UI
+- 🎨 **Rich panels** with color-coded output and professional formatting
+- ⚡ **Real-time streaming** responses as they generate
+- 🔧 **Live tool indicators** showing active operations in progress
+- 📝 **Markdown rendering** for beautifully formatted content
+- 🔄 **Stable fallback modes** ensuring compatibility across environments
+
+#### 40+ Professional Tools
+Access to comprehensive tool categories:
+- 🧠 **RAG & Memory** - Semantic search, persistent memory, knowledge bases
+- 📁 **File Operations** - Secure reading, writing, and editing
+- ⚙️ **System & Automation** - Shell commands, computer control, task scheduling
+- 🌐 **Web & Network** - HTTP requests, browser automation, RSS feeds
+- 🎨 **Multimodal** - Image generation, diagrams, text-to-speech, video
+- 💻 **Development** - Python execution, code analysis, debugging
+- 🔄 **Agent Workflows** - Multi-agent coordination, complex workflows
+- 🏢 **Business Intelligence** - Batch processing, task management, handoffs
+- 🔧 **Utilities** - Mathematical calculations, text processing, time operations
+- 💾 **Data & Storage** - Search capabilities, database operations
+
+### Interactive Mode
+
+```bash
+# Start interactive session
+analystai
+
+# Welcome message with rotating example prompts
+🤖 Strands Analyst AI
+==================================================
+
+💡 Example prompts to get you started:
+• "Analyze google.com and compare its business model to stripe.com"
+• "Read this RSS feed and create a summary: https://feeds.example.com/news"
+• "Take a screenshot of google.com using the browser tool"
+
+Type 'help' for commands, 'try' for more examples, or 'quit' to exit
+==================================================
+
+> 
+```
+
+### Available Commands in Interactive Mode
+
+- `help` - Show available commands and tips
+- `try` - Display more example prompts and use cases
+- `session` - Show current session information and memory status
+- `clear` - Clear conversation history and reset context
+- `save` - Save current conversation to file
+- `quit` - Exit the interactive session
+
+### Direct Command Usage
+
+```bash
+# Single commands with immediate results
+analystai "analyze anthropic.com and explain their business model"
+analystai "calculate the square root of 144"
+analystai "read this RSS feed: https://aws.amazon.com/blogs/machine-learning/feed/"
+analystai "take a screenshot using shell: screencapture ~/Desktop/screenshot.png"
+```
+
+### Example Workflows
+
+#### Website Analysis & Comparison
+```bash
+analystai "analyze google.com and stripe.com, then compare their business models"
+```
+
+#### Content Intelligence
+```bash
+analystai "read this RSS feed, summarize the top 5 articles, and save to markdown: https://feeds.bbci.co.uk/news/rss.xml"
+```
+
+#### Computer & Browser Automation
+```bash
+analystai "take a screenshot of my desktop using shell"
+analystai "use shell to screenshot google.com with playwright"
+```
+
+#### Mathematical & Data Operations
+```bash
+analystai "calculate compound interest on $10000 at 5% for 10 years"
+analystai "read this CSV file and create a summary report"
+```
+
+### Security & Consent
+- **Consent management** for system-level operations
+- **Safe defaults** for read-only operations
+- **Clear messaging** with security warnings
+- **Audit trail** with comprehensive logging
+
+## Site Meta Command
+
+The `sitemeta` command analyzes websites to understand what companies do, extracting metadata and generating intelligent insights.
+
+### Basic Usage
+
+```bash
+sitemeta <url>
 ```
 
 ### Examples
 
 ```bash
 # Analyze a company website
-about google.com
+sitemeta google.com
 
 # Analyze with full URL
-about https://stripe.com
+sitemeta https://stripe.com
 
-# Get detailed statistics
-about openai.com --verbose
+# Get detailed statistics and metrics
+sitemeta openai.com --verbose
+
+# Save analysis to markdown file
+sitemeta anthropic.com --save-markdown
 ```
 
 ### Options
@@ -38,10 +144,16 @@ about openai.com --verbose
   - Can be a domain (e.g., `google.com`) or full URL (e.g., `https://google.com`)
   - Automatically adds `https://` if no protocol is specified
 
-- `--verbose`, `-v` - Show detailed analysis statistics
-  - Model information
-  - Token usage count
-  - Processing duration and latency
+- `--verbose`, `-v` - Show detailed analysis statistics including:
+  - Model information and configuration
+  - Token usage count and costs
+  - Processing duration and latency metrics
+  - Tool execution details
+
+- `--save-markdown` - Save the analysis results to a markdown file
+  - Creates organized file structure in `sitemeta-results/`
+  - Includes metadata extraction and analysis
+  - Preserves formatting for documentation
 
 ### Output Format
 

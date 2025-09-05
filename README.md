@@ -38,11 +38,13 @@
 # Install the package
 pip install -e .
 
-# Interactive AI Assistant (40+ tools)
+# Interactive AI Assistant (44+ tools)
 analystai
 > "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases"
 > "Compare Bedrock Claude vs Titan costs for 1 million users monthly"
 > "Create a GenAI transformation roadmap presentation"
+> "Take a screenshot of my desktop using shell"
+> "Research the latest developments in Claude 3.7 Sonnet vs Llama 3.1"
 
 # Website Intelligence & Analysis
 sitemeta anthropic.com --verbose
@@ -50,6 +52,7 @@ sitemeta stripe.com --save-markdown
 
 # Content Monitoring & RSS Analysis
 news https://aws.amazon.com/blogs/machine-learning/feed/ --count 5 --save-markdown
+news http://feeds.bbci.co.uk/news/rss.xml --verbose
 
 # Article Processing & Download
 article https://aws.amazon.com/blogs/machine-learning/latest-post --no-images
@@ -63,7 +66,36 @@ htmlmd saved-article/index.html --no-metadata
 
 ### 🤖 Interactive AI Assistant (`analystai`)
 
-The crown jewel of Strands Analyst - an advanced conversational AI assistant with **40+ specialized tools** across **10 categories**, designed for AWS professionals working with GenAI and agentic systems.
+The crown jewel of Strands Analyst - an advanced conversational AI assistant with **44+ specialized tools** across **10 categories**, designed for AWS professionals working with GenAI and agentic systems.
+
+#### 🎯 **Comprehensive Use Case Examples**
+
+Strands Analyst includes 200+ curated example prompts for real-world GenAI workflows:
+
+**GenAI Architecture & Design:**
+- "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
+- "What would a conversational AI platform look like on AWS with Bedrock and API Gateway?"
+- "Show me how to design a multi-modal GenAI system that handles text, images, and video"
+
+**Agentic Architecture & Automation:**
+- "How can I automate our customer support workflows using Bedrock Agents?"
+- "I need multiple AI agents working together to generate and review content automatically"
+- "Design an intelligent document processing system that can take actions based on what it reads"
+
+**Cost Analysis & Optimization:**
+- "Compare Bedrock Claude vs Titan costs for an enterprise chatbot serving 1 million users monthly"
+- "Calculate the total cost and ROI of deploying Amazon Q Business for our 5000-person company"
+- "Model how GenAI infrastructure costs scale as we grow from startup to enterprise scale"
+
+**Security & Compliance:**
+- "Create a GenAI governance framework for healthcare with Bedrock Guardrails and generate a compliance checklist"
+- "How do I protect PII data when using Bedrock Knowledge Bases in my enterprise system?"
+- "Build me algorithms to detect prompt injection attacks in our GenAI applications"
+
+**Advanced Training & Performance:**
+- "Set up SageMaker HyperPod for training our custom Llama 3.1 model on our enterprise data"
+- "Compare Trainium2 vs P5 instances for our foundation model training workload and costs"
+- "Implement Mixture-of-Experts architecture for our domain-specific language model"
 
 <details>
 <summary><b>📦 Complete Tool Categories (Click to expand)</b></summary>
@@ -167,10 +199,11 @@ htmlmd content.html --output custom-output.md --verbose       # Custom output wi
 ```
 *Convert HTML files to clean, well-formatted markdown with metadata preservation.*
 
-### 🏗️ Architecture Diagrams
+### 🏗️ Architecture Diagrams & Examples
 
-Strands Analyst includes a comprehensive collection of **professional AWS architecture diagrams** showcasing:
+Strands Analyst includes a comprehensive collection of **professional AWS architecture diagrams** and **real-world outputs** showcasing:
 
+#### 📐 **Professional Diagrams**
 - **Enterprise RAG architectures** using Bedrock Knowledge Bases
 - **Mixture-of-Experts (MoE) LLM implementations** on AWS
 - **3-Tier scalable GenAI applications** with Bedrock integration
@@ -178,6 +211,33 @@ Strands Analyst includes a comprehensive collection of **professional AWS archit
 - **Multi-modal AI systems** for text, image, and video processing
 
 *Examples available in `/diagrams` directory - perfect for presentations and architectural planning.*
+
+#### 📂 **Sample Outputs & Examples**
+
+The `refer/` directory contains real outputs demonstrating system capabilities:
+
+```
+refer/
+├── articles/           # Downloaded web articles with images and metadata
+│   ├── about-decagon-conversational-ai-for-cx/
+│   ├── about-hubspot-hubspots-story/
+│   ├── ai-business-informs-educates/
+│   └── 60+ more examples...
+├── sitemeta/           # Website analysis results
+├── news/               # RSS feed analyses  
+├── posts/              # Generated content and analyses
+│   ├── aws-moe-pipelines.md          # "AWS Architecture for MoE LLM Training"
+│   ├── performance-strands-analyst.md # Performance analysis
+│   └── future-stack.md               # Technology roadmaps
+├── transcripts/        # Audio/video transcriptions
+└── chat-sessions/      # Interactive conversation logs
+```
+
+**Example Generated Content:**
+- **Technical Deep-Dives**: Comprehensive guides on AWS MoE LLM architectures
+- **Company Analyses**: Business model breakdowns (Google, Stripe, Anthropic, etc.)
+- **News Summaries**: AI-powered RSS feed intelligence
+- **Performance Reports**: System optimization and benchmarking studies
 
 ## 📊 Architecture
 
@@ -242,9 +302,10 @@ This modular design enables:
 ### Prerequisites
 
 - **Python 3.8+** (recommended: 3.11 or 3.13)
-- **AWS Account** with Bedrock access
+- **AWS Account** with Bedrock access enabled
 - **Claude 3.7 Sonnet** model access in your AWS region
-- **Graphviz** (for diagram generation tool)
+- **AWS CLI** configured with appropriate credentials
+- **Graphviz** (for diagram generation tool - see installation below)
 
 ### Quick Installation
 
@@ -253,13 +314,41 @@ This modular design enables:
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install Strands Analyst
+# Install Strands Analyst with all community tools
 pip install -e .
 
 # Verify installation
 analystai --help
 sitemeta --help
+news --help
+article --help
+htmlmd --help
 ```
+
+### 🔧 **Community Tools Integration**
+
+Strands Analyst automatically installs the comprehensive `strands-agents-tools` package with specialized modules:
+
+- **`mem0_memory`** - Advanced memory systems with contextual understanding
+- **`local_chromium_browser`** - Local browser automation and web scraping
+- **`agent_core_browser`** - Advanced browser integration for agents
+- **`agent_core_code_interpreter`** - Secure code execution environments
+- **`a2a_client`** - Agent-to-agent communication protocols
+- **`diagram`** - Professional architecture diagram generation  
+- **`rss`** - RSS feed processing and analysis
+- **`use_computer`** - Computer automation and control capabilities
+
+### 📦 **Core Dependencies**
+
+The package includes optimized versions of essential libraries:
+
+- **`strands-agents`** ≥1.0.0 - Core AI agent framework
+- **`feedparser`** ≥6.0.10 - RSS/Atom feed parsing
+- **`requests`** ≥2.31.0 - HTTP request handling  
+- **`beautifulsoup4`** ≥4.12.0 - HTML parsing and extraction
+- **`readability-lxml`** ≥0.8 - Clean article content extraction
+- **`markdownify`** ≥0.11.6 - HTML to Markdown conversion
+- **`pyyaml`** ≥6.0 - Configuration file handling
 
 ### Prerequisites for Advanced Features
 
