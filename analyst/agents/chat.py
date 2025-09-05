@@ -24,6 +24,7 @@ from ..tools import (
 )
 from ..config import get_config, get_bedrock_config_for_agent, get_community_tools_for_agent
 from ..utils import configure_logging, print_metrics
+from ..utils.dynamic_model_config import get_dynamic_model_manager, create_optimized_model
 
 
 def _load_community_tools(agent_name: str = "chat") -> List:
@@ -279,7 +280,8 @@ def create_chat_agent(
     session_id: Optional[str] = None,
     session_dir: str = "refer/chat-sessions",
     window_size: int = 20,
-    enable_logging: bool = None
+    enable_logging: bool = None,
+    dynamic_model_selection: bool = True
 ) -> Agent:
     """
     Create and return a chat agent configured for multi-turn conversations.
@@ -289,9 +291,10 @@ def create_chat_agent(
         session_dir: Directory to store chat sessions (default: refer/chat-sessions)
         window_size: Size of the conversation window (default: 20 messages)
         enable_logging: Enable logging. Uses config default if None.
+        dynamic_model_selection: Enable dynamic model selection based on task complexity (default: True)
     
     Returns:
-        Configured Agent instance with session management
+        Configured Agent instance with session management and dynamic model capabilities
     """
     # Respect user security preferences - DO NOT automatically bypass consent
     
@@ -307,23 +310,28 @@ def create_chat_agent(
     if enable_logging:
         configure_logging(verbose=False)
     
-    # Get optimized Bedrock configuration for chat agent
-    bedrock_config = get_bedrock_config_for_agent('chat')
-    
-    # Create optimized Bedrock model
-    bedrock_model = BedrockModel(
-        model_id=bedrock_config['model_id'],
-        temperature=bedrock_config['temperature'],
-        top_p=bedrock_config['top_p'],
-        max_tokens=bedrock_config['max_tokens'],
-        stop_sequences=bedrock_config['stop_sequences'],
-        streaming=bedrock_config['streaming'],
-        region_name=bedrock_config['region_name']
-    )
-    
-    # Add optional features if configured
-    if bedrock_config['guardrail_id']:
-        bedrock_model.guardrail_id = bedrock_config['guardrail_id']
+    # Initialize dynamic model manager and warm up models
+    if dynamic_model_selection:
+        dynamic_manager = get_dynamic_model_manager()
+        bedrock_model = None  # Will be set dynamically per message
+    else:
+        # Use static model configuration (backward compatibility)
+        bedrock_config = get_bedrock_config_for_agent('chat')
+        
+        # Create optimized Bedrock model
+        bedrock_model = BedrockModel(
+            model_id=bedrock_config['model_id'],
+            temperature=bedrock_config['temperature'],
+            top_p=bedrock_config['top_p'],
+            max_tokens=bedrock_config['max_tokens'],
+            stop_sequences=bedrock_config['stop_sequences'],
+            streaming=bedrock_config['streaming'],
+            region_name=bedrock_config['region_name']
+        )
+        
+        # Add optional features if configured
+        if bedrock_config['guardrail_id']:
+            bedrock_model.guardrail_id = bedrock_config['guardrail_id']
     
     # Set up session management for conversation persistence
     session_manager = FileSessionManager(
@@ -351,6 +359,20 @@ def create_chat_agent(
     # Generate system prompt based on available tools
     system_prompt = _generate_system_prompt_with_tools(built_in_tools, community_tools)
     
+    # Create agent with dynamic model selection support
+    if dynamic_model_selection:
+        # Create a default model for initialization, will be replaced dynamically
+        bedrock_config = get_bedrock_config_for_agent('chat')
+        bedrock_model = BedrockModel(
+            model_id=bedrock_config['model_id'],
+            temperature=bedrock_config['temperature'],
+            top_p=bedrock_config['top_p'],
+            max_tokens=bedrock_config['max_tokens'],
+            stop_sequences=bedrock_config['stop_sequences'],
+            streaming=bedrock_config['streaming'],
+            region_name=bedrock_config['region_name']
+        )
+    
     # Create agent with optimized model, all available tools and session management
     agent = Agent(
         model=bedrock_model,
@@ -358,6 +380,9 @@ def create_chat_agent(
         session_manager=session_manager,
         system_prompt=system_prompt
     )
+    
+    # Store dynamic model selection flag on agent for later use
+    agent._dynamic_model_selection = dynamic_model_selection
     
     return agent
 
@@ -368,7 +393,7 @@ def chat_with_agent(
     verbose: bool = False
 ) -> Any:
     """
-    Send a message to the chat agent and return the response.
+    Send a message to the chat agent and return the response with dynamic model selection.
     
     Args:
         agent: The chat agent instance
@@ -379,7 +404,30 @@ def chat_with_agent(
         Agent response
     """
     try:
-        result = agent(message)
+        # Check if dynamic model selection is enabled
+        if hasattr(agent, '_dynamic_model_selection') and agent._dynamic_model_selection:
+            # Create optimized model based on message complexity
+            optimized_model = create_optimized_model(message, 'chat')
+            
+            # Temporarily replace the agent's model
+            original_model = agent.model
+            agent.model = optimized_model
+            
+            if verbose:
+                complexity_manager = get_dynamic_model_manager()
+                complexity = complexity_manager.analyze_task_complexity(message)
+                model_key, _ = complexity_manager.select_optimal_model(message, 'chat')
+                print(f"🧠 Task Complexity: {complexity.value}")
+                print(f"🤖 Selected Model: {model_key} ({optimized_model.model_id})")
+            
+            try:
+                result = agent(message)
+            finally:
+                # Restore original model
+                agent.model = original_model
+        else:
+            # Use static model selection
+            result = agent(message)
         
         # Print metrics if verbose
         if verbose:
@@ -411,6 +459,90 @@ def get_session_info(agent: Agent) -> Dict[str, Any]:
         "has_session": True,
         "session_dir": getattr(session_manager, 'session_dir', 'Unknown')
     }
+
+
+def get_model_warmup_status() -> Dict[str, Any]:
+    """
+    Get model warm-up status and statistics.
+    
+    Returns:
+        Dictionary with warm-up status for all models
+    """
+    try:
+        from ..utils.dynamic_model_config import get_model_warmup_stats
+        stats = get_model_warmup_stats()
+        
+        status_info = {
+            "warmup_enabled": True,
+            "total_models": len(stats),
+            "warmed_models": sum(1 for s in stats.values() if s.is_warmed),
+            "models": {}
+        }
+        
+        for model_key, stat in stats.items():
+            status_info["models"][model_key] = {
+                "model_id": stat.model_id,
+                "is_warmed": stat.is_warmed,
+                "warmup_time": f"{stat.warmup_time:.2f}s" if stat.warmup_time > 0 else "N/A",
+                "initialization_time": f"{stat.initialization_time:.2f}s" if stat.initialization_time > 0 else "N/A",
+                "first_response_time": f"{stat.first_response_time:.2f}s" if stat.first_response_time > 0 else "N/A"
+            }
+        
+        return status_info
+        
+    except ImportError:
+        return {"warmup_enabled": False, "error": "Dynamic model configuration not available"}
+
+
+def update_model_configuration(model_key: str, **updates) -> bool:
+    """
+    Dynamically update model configuration.
+    
+    Args:
+        model_key: Key of the model to update (fast, reasoning, chat, default)
+        **updates: Configuration parameters to update (temperature, top_p, max_tokens, etc.)
+        
+    Returns:
+        True if update successful, False otherwise
+        
+    Example:
+        update_model_configuration('fast', temperature=0.1, max_tokens=1024)
+    """
+    try:
+        manager = get_dynamic_model_manager()
+        return manager.update_model_config(model_key, **updates)
+    except Exception as e:
+        print(f"Error updating model configuration: {e}")
+        return False
+
+
+def analyze_message_complexity(message: str) -> Dict[str, Any]:
+    """
+    Analyze the complexity of a message for model selection.
+    
+    Args:
+        message: Message to analyze
+        
+    Returns:
+        Dictionary with complexity analysis results
+    """
+    try:
+        manager = get_dynamic_model_manager()
+        complexity = manager.analyze_task_complexity(message)
+        model_key, model_config = manager.select_optimal_model(message, 'chat')
+        
+        return {
+            "complexity": complexity.value,
+            "recommended_model": model_key,
+            "model_id": model_config.model_id,
+            "model_settings": {
+                "temperature": model_config.temperature,
+                "top_p": model_config.top_p,
+                "max_tokens": model_config.max_tokens
+            }
+        }
+    except Exception as e:
+        return {"error": f"Analysis failed: {e}"}
 
 
 # Example usage when run directly

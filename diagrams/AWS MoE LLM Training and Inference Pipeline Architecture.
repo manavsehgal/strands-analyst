@@ -1,0 +1,70 @@
+// AWS MoE LLM Training and Inference Pipeline Architecture
+digraph {
+	rankdir=LR
+	s3_data [label="Amazon S3
+Training Data"]
+	s3_metadata [label="S3 Metadata
+Intelligent Data Discovery"]
+	fsx_lustre [label="FSx for Lustre
+Sub-millisecond Storage"]
+	hyperpod [label="SageMaker HyperPod
+Resilient Training Infrastructure"]
+	p5e_instances [label="EC2 P5e Instances
+H200 GPUs (140GB Memory)"]
+	trainium2 [label="EC2 Trn2 Instances
+Trainium2 Chips"]
+	model_registry [label="SageMaker Model Registry
+Model Versioning"]
+	s3_model [label="S3 Storage
+Model Artifacts"]
+	bedrock [label="Amazon Bedrock
+Unified Model Access"]
+	inf2_instances [label="EC2 Inf2 Instances
+Inferentia2 for Inference"]
+	elasticache [label="ElastiCache for Redis
+KV Cache & Expert Storage"]
+	api_gateway [label="API Gateway
+Model Endpoint"]
+	lambda [label="AWS Lambda
+Preprocessing"]
+	cloudwatch [label="CloudWatch
+Monitoring"]
+	prometheus [label="Amazon Managed Prometheus
+Metrics Collection"]
+	grafana [label="Amazon Managed Grafana
+Visualization"]
+	efa [label="Elastic Fabric Adapter
+400 GBPS Network"]
+	s3_inactive [label="S3 Intelligent Tiering
+Inactive Expert Weights"]
+	eks [label="Amazon EKS
+Kubernetes Orchestration"]
+	alb [label="Application Load Balancer
+Expert Selection Routing"]
+	s3_data -> s3_metadata [label="Metadata Indexing"]
+	s3_data -> fsx_lustre [label="Data Transfer"]
+	fsx_lustre -> hyperpod [label="Sub-millisecond Access"]
+	hyperpod -> p5e_instances [label=Orchestrates]
+	hyperpod -> trainium2 [label=Orchestrates]
+	hyperpod -> eks [label="Kubernetes Integration"]
+	p5e_instances -> efa [label="High-speed Network"]
+	trainium2 -> efa [label="High-speed Network"]
+	efa -> p5e_instances [label="GPU Communication"]
+	hyperpod -> model_registry [label="Model Versioning"]
+	model_registry -> s3_model [label="Artifact Storage"]
+	s3_model -> bedrock [label="Model Deployment"]
+	s3_model -> inf2_instances [label="Model Deployment"]
+	bedrock -> api_gateway [label="Managed Endpoint"]
+	inf2_instances -> elasticache [label="KV Cache Storage"]
+	inf2_instances -> s3_inactive [label="Inactive Expert Storage"]
+	inf2_instances -> alb [label="Inference Endpoint"]
+	api_gateway -> lambda [label="Request Processing"]
+	lambda -> bedrock [label="Model Invocation"]
+	lambda -> inf2_instances [label="Custom Inference"]
+	hyperpod -> cloudwatch [label="Metrics & Logs"]
+	inf2_instances -> cloudwatch [label="Metrics & Logs"]
+	cloudwatch -> prometheus [label="Metrics Collection"]
+	prometheus -> grafana [label=Visualization]
+	eks -> inf2_instances [label=Orchestrates]
+	alb -> elasticache [label="Expert Routing"]
+}
