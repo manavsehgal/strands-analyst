@@ -15,7 +15,7 @@ from ..utils import configure_logging, get_rotating_prompts, get_more_examples
 
 def print_welcome_message():
     """Print the welcome message for the chat interface."""
-    print("🤖 Analyst Chat - Interactive Analysis Assistant")
+    print("🤖 Strands Analyst AI")
     print("=" * 50)
     print()
     
@@ -24,7 +24,7 @@ def print_welcome_message():
     print(rotating_prompts)
     print()
     
-    print("Type 'help' for commands or 'quit' to exit")
+    print("Type 'help' for commands, 'try' for more prompt examples, or 'quit' to exit")
     print("=" * 50)
     print()
 

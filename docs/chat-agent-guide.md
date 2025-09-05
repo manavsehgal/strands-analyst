@@ -90,7 +90,7 @@ Once in chat mode, you can use these special commands:
 
 ### Example Session
 ```
-🤖 Analyst Chat - Interactive Analysis Assistant
+🤖 Strands Analyst AI
 ==================================================
 
 Available capabilities:
@@ -100,7 +100,7 @@ Available capabilities:
 • HTML to Markdown conversion
 • General analysis and research assistance
 
-Type 'help' for commands or 'quit' to exit
+Type 'help' for commands, 'try' for more prompt examples, or 'quit' to exit
 ==================================================
 
 🗣️  You: help
