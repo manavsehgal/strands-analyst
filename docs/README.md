@@ -5,7 +5,7 @@ Welcome to the Strands Analyst package - a comprehensive AI agent framework for 
 ## ✨ Recent Updates
 
 ### Enhanced Chat Experience
-The analystchat command now features a **Rich Terminal UI** with:
+The analystai command now features a **Rich Terminal UI** with:
 - 🎨 **Beautiful panels** and color-coded output
 - ⚡ **Real-time streaming** responses as they generate
 - 🔧 **Live tool indicators** showing active operations
@@ -31,7 +31,7 @@ pip install -e .
 Use the enhanced CLI:
 ```bash
 # Enhanced chat with streaming UI
-analystchat "Analyze google.com and compare it to stripe.com"
+analystai "Analyze google.com and compare it to stripe.com"
 
 # Single commands with Rich output
 sitemeta stripe.com --verbose
@@ -40,12 +40,12 @@ article https://example.com/blog-post --no-images
 htmlmd saved-article/index.html --no-metadata
 
 # Community tools integration
-analystchat "calculate the square root of 144"
-analystchat "read this RSS feed and save summary to file"
+analystai "calculate the square root of 144"
+analystai "read this RSS feed and save summary to file"
 
 # Computer and browser automation  
-analystchat "take a screenshot of my desktop using shell"
-analystchat "screenshot google.com using shell and playwright"
+analystai "take a screenshot of my desktop using shell"
+analystai "screenshot google.com using shell and playwright"
 ```
 
 ## Documentation Structure

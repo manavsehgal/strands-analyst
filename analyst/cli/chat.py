@@ -193,11 +193,11 @@ def single_message_mode(agent, message: str, args):
 
 
 def main():
-    """Main CLI entry point for the analystchat command."""
+    """Main CLI entry point for the analystai command."""
     
     parser = argparse.ArgumentParser(
         description="Interactive chat interface for AI-powered analysis with multi-turn conversations.",
-        prog="analystchat"
+        prog="analystai"
     )
     parser.add_argument(
         "message",

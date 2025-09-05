@@ -218,19 +218,19 @@ The project provides automation capabilities through community tools including t
 
 **Screenshots (requires consent):**
 ```bash
-analystchat "use shell to take a screenshot: screencapture ~/Desktop/screenshot.png"
+analystai "use shell to take a screenshot: screencapture ~/Desktop/screenshot.png"
 # → User will be prompted: "Allow shell command execution? (y/n)"
 ```
 
 **System Information (requires consent):**
 ```bash
-analystchat "use shell to get screen resolution: system_profiler SPDisplaysDataType | grep Resolution"
+analystai "use shell to get screen resolution: system_profiler SPDisplaysDataType | grep Resolution"
 # → Permission prompt before accessing system information
 ```
 
 **Application Control (requires consent):**
 ```bash
-analystchat "use shell to open Safari: open -a Safari"
+analystai "use shell to open Safari: open -a Safari"
 # → User consent required before opening applications
 ```
 
@@ -238,29 +238,29 @@ analystchat "use shell to open Safari: open -a Safari"
 
 **Web Screenshots:**
 ```bash
-analystchat "use shell to screenshot website: playwright screenshot https://google.com ~/Desktop/page.png"
+analystai "use shell to screenshot website: playwright screenshot https://google.com ~/Desktop/page.png"
 ```
 
 **PDF Generation:**
 ```bash
-analystchat "use shell to create PDF: playwright pdf https://example.com ~/Desktop/page.pdf"
+analystai "use shell to create PDF: playwright pdf https://example.com ~/Desktop/page.pdf"
 ```
 
 **Browser Control:**
 ```bash
-analystchat "use shell to open site in Chrome: open -a 'Google Chrome' https://example.com"
+analystai "use shell to open site in Chrome: open -a 'Google Chrome' https://example.com"
 ```
 
 ### Advanced Automation
 
 **AppleScript Integration:**
 ```bash
-analystchat "use shell with AppleScript: osascript -e 'tell application \"Safari\" to make new document'"
+analystai "use shell with AppleScript: osascript -e 'tell application \"Safari\" to make new document'"
 ```
 
 **File System Operations:**
 ```bash
-analystchat "use shell to find files: find . -name '*.py' | head -5"
+analystai "use shell to find files: find . -name '*.py' | head -5"
 ```
 
 ### Configuration Details

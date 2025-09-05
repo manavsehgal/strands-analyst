@@ -36,7 +36,7 @@ Strands Analyst is a cutting-edge AI platform designed for AWS Solutions Archite
 pip install -e .
 
 # Interactive AI Assistant (40+ tools)
-analystchat
+analystai
 > "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases"
 > "Compare Bedrock Claude vs Titan costs for 1 million users monthly"
 > "Create a GenAI transformation roadmap presentation"
@@ -53,7 +53,7 @@ article https://aws.amazon.com/blogs/machine-learning/latest-post
 
 ## 🎯 Key Features
 
-### 🤖 Interactive AI Assistant (`analystchat`)
+### 🤖 Interactive AI Assistant (`analystai`)
 
 Advanced AI assistant with 40+ specialized tools across 10 categories:
 
@@ -138,7 +138,7 @@ Advanced AI assistant with 40+ specialized tools across 10 categories:
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
 │  │   CLI Layer  │  │  Agent Layer │  │  Tool Layer  │    │
 │  │              │  │              │  │              │    │
-│  │ • analystchat│→ │ • Chat Agent │→ │ • 40+ Tools  │    │
+│  │ • analystai│→ │ • Chat Agent │→ │ • 40+ Tools  │    │
 │  │ • sitemeta   │  │ • Site Agent │  │ • Custom     │    │
 │  │ • news       │  │ • News Agent │  │ • Community  │    │
 │  │ • article    │  │ • Article    │  │              │    │
@@ -213,7 +213,7 @@ playwright install        # For browser automation
 # brew install graphviz   # For diagram generation (macOS)
 
 # 5. Verify installation
-analystchat --help
+analystai --help
 sitemeta --help
 ```
 
@@ -223,41 +223,41 @@ sitemeta --help
 
 ```bash
 # Architecture diagrams
-analystchat "Draw an enterprise RAG architecture with Bedrock Knowledge Bases"
-analystchat "Design a multi-modal GenAI system for text, images, and video"
-analystchat "Show me a conversational AI platform using Bedrock and API Gateway"
+analystai "Draw an enterprise RAG architecture with Bedrock Knowledge Bases"
+analystai "Design a multi-modal GenAI system for text, images, and video"
+analystai "Show me a conversational AI platform using Bedrock and API Gateway"
 
 # Cost analysis
-analystchat "Compare Bedrock Claude vs Titan costs for 1M users monthly"
-analystchat "Calculate ROI of Amazon Q Business for 5000 employees"
-analystchat "Model GenAI costs from startup to enterprise scale"
+analystai "Compare Bedrock Claude vs Titan costs for 1M users monthly"
+analystai "Calculate ROI of Amazon Q Business for 5000 employees"
+analystai "Model GenAI costs from startup to enterprise scale"
 ```
 
 ### Agentic AI Workflows
 
 ```bash
 # Multi-agent systems
-analystchat "Create AI agents for automated content generation and review"
-analystchat "Design customer support automation with Bedrock Agents"
-analystchat "Build document processing with automated actions"
+analystai "Create AI agents for automated content generation and review"
+analystai "Design customer support automation with Bedrock Agents"
+analystai "Build document processing with automated actions"
 
 # Complex workflows
-analystchat "Research Claude 3.7 vs Llama 3.1 capabilities and create comparison"
-analystchat "Analyze competitor GenAI offerings with screenshots and reports"
+analystai "Research Claude 3.7 vs Llama 3.1 capabilities and create comparison"
+analystai "Analyze competitor GenAI offerings with screenshots and reports"
 ```
 
 ### AWS Integration Examples
 
 ```bash
 # Training & optimization
-analystchat "Setup SageMaker HyperPod for Llama 3.1 training"
-analystchat "Compare Trainium2 vs P5 instances for model training"
-analystchat "Implement MoE architecture for domain-specific LLM"
+analystai "Setup SageMaker HyperPod for Llama 3.1 training"
+analystai "Compare Trainium2 vs P5 instances for model training"
+analystai "Implement MoE architecture for domain-specific LLM"
 
 # Service integration
-analystchat "Integrate Comprehend with Bedrock for financial analysis"
-analystchat "Build meeting summarization with Transcribe and Claude"
-analystchat "Create contract analysis with Textract and Bedrock"
+analystai "Integrate Comprehend with Bedrock for financial analysis"
+analystai "Build meeting summarization with Transcribe and Claude"
+analystai "Create contract analysis with Textract and Bedrock"
 ```
 
 ### Competitive Intelligence
@@ -342,7 +342,7 @@ The project includes AWS architecture diagrams demonstrating:
 
 View in `diagrams/` directory or generate new ones:
 ```bash
-analystchat "Create a diagram of our RAG architecture with Bedrock"
+analystai "Create a diagram of our RAG architecture with Bedrock"
 ```
 
 ## 📖 Documentation

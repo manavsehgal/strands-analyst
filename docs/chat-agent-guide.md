@@ -24,23 +24,23 @@ The Chat Agent is designed for:
 
 ```bash
 # Start interactive chat session
-analystchat
+analystai
 
 # Start with specific session ID
-analystchat --session-id my-research-session
+analystai --session-id my-research-session
 
 # Start with custom settings
-analystchat --verbose --save-on-exit
+analystai --verbose --save-on-exit
 ```
 
 ### Single Message Mode
 
 ```bash
 # Send single message and get response
-analystchat "Analyze stripe.com and tell me what services they offer"
+analystai "Analyze stripe.com and tell me what services they offer"
 
 # Use tools via conversation
-analystchat "Download the article from https://example.com/blog-post and summarize it"
+analystai "Download the article from https://example.com/blog-post and summarize it"
 ```
 
 ## Command Options
@@ -48,33 +48,33 @@ analystchat "Download the article from https://example.com/blog-post and summari
 ### Session Management
 - **`--session-id, -s`** - Use specific session ID (auto-generates if not provided)
   ```bash
-  analystchat --session-id research-project-1
+  analystai --session-id research-project-1
   ```
 
 - **`--session-dir, -d`** - Directory for session storage
   ```bash
-  analystchat --session-dir ./my-chat-sessions
+  analystai --session-dir ./my-chat-sessions
   ```
 
 - **`--window-size, -w`** - Conversation context window size
   ```bash
-  analystchat --window-size 30
+  analystai --window-size 30
   ```
 
 ### Output Control
 - **`--verbose, -v`** - Show detailed metrics and session info
   ```bash
-  analystchat --verbose
+  analystai --verbose
   ```
 
 - **`--no-logging`** - Disable logging output
   ```bash
-  analystchat --no-logging
+  analystai --no-logging
   ```
 
 - **`--save-on-exit`** - Auto-save conversation summary when exiting
   ```bash
-  analystchat --save-on-exit
+  analystai --save-on-exit
   ```
 
 ## Interactive Commands
@@ -135,7 +135,7 @@ Type 'help' for commands or 'quit' to exit
 
 ```bash
 # Start a research session
-analystchat --session-id competitor-analysis --save-on-exit
+analystai --session-id competitor-analysis --save-on-exit
 
 # In chat:
 # 1. "Analyze stripe.com and square.com"
@@ -148,10 +148,10 @@ analystchat --session-id competitor-analysis --save-on-exit
 
 ```bash
 # Start a session with ID
-analystchat --session-id daily-news-review
+analystai --session-id daily-news-review
 
 # Resume the same session later
-analystchat --session-id daily-news-review
+analystai --session-id daily-news-review
 
 # All conversation history is preserved
 ```
@@ -160,7 +160,7 @@ analystchat --session-id daily-news-review
 
 ```bash
 # Use chat for complex multi-step analysis
-analystchat "I need to analyze these 5 news sites and create a summary report"
+analystai "I need to analyze these 5 news sites and create a summary report"
 
 # The agent will:
 # 1. Ask for the URLs
@@ -363,7 +363,7 @@ print(f"Session Directory: {info['session_dir']}")
 
 1. **Use Verbose Mode**
    ```bash
-   analystchat --verbose
+   analystai --verbose
    ```
 
 2. **Check Session Information**

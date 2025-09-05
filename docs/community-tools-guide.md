@@ -23,7 +23,7 @@ The analyst package integrates with the Strands community tools ecosystem, provi
 
 ```bash
 # Start chat with community tools enabled
-analystchat
+analystai
 
 # Use tools through natural conversation
 You: calculate 15 * 23 + 45
@@ -333,7 +333,7 @@ Do you want to proceed? (y/N): y
 For trusted environments, set environment variable:
 ```bash
 export BYPASS_TOOL_CONSENT=true
-analystchat
+analystai
 ```
 
 Or configure in `config.yml`:
@@ -575,7 +575,7 @@ Total: 30 tool calls across 5 sessions
 
 ```bash
 # Enable debug logging for community tools
-COMMUNITY_TOOLS_DEBUG=1 analystchat --verbose
+COMMUNITY_TOOLS_DEBUG=1 analystai --verbose
 
 # Shows detailed tool loading and execution info
 ```

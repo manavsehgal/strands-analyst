@@ -1,5 +1,5 @@
 [console_scripts]
-analystchat = analyst.cli.chat:main
+analystai = analyst.cli.chat:main
 article = analyst.cli.get_article:main
 htmlmd = analyst.cli.html_to_markdown:main
 news = analyst.cli.news:main
