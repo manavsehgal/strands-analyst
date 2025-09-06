@@ -6,10 +6,11 @@
 ![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![AWS Bedrock](https://img.shields.io/badge/AWS-Bedrock-orange)
+![Anthropic API](https://img.shields.io/badge/Anthropic-API-blue)
+![OpenAI API](https://img.shields.io/badge/OpenAI-API-green)
 ![Strands Agents](https://img.shields.io/badge/powered%20by-Strands%20Agents-purple)
-![Claude 3.7 Sonnet](https://img.shields.io/badge/Claude-3.7%20Sonnet-blue)
 
-**Enterprise-Grade GenAI & Agentic AI Toolkit for AWS Solutions Architects**
+**Next-Generation Multi-Provider GenAI & Agentic AI Toolkit**
 
 *Built with performance, security, and enterprise scalability in mind*
 
@@ -21,139 +22,213 @@
 
 ## 🎯 Overview
 
-**Strands Analyst** is a cutting-edge AI platform designed specifically for AWS Solutions Architects, GenAI professionals, and enterprise teams building scalable AI solutions. Built on the powerful **Strands Agents framework** with deep **AWS Bedrock integration**, it provides specialized CLI tools, an interactive AI assistant with 40+ professional-grade tools, and production-ready configurations optimized for enterprise GenAI workflows.
+**Strands Analyst** is a cutting-edge AI platform designed for AWS Solutions Architects, GenAI professionals, and enterprise teams building scalable AI solutions. Built on the powerful **Strands Agents framework** with **multi-provider model support**, it provides specialized CLI tools, an interactive AI assistant with 40+ professional-grade tools, and production-ready configurations optimized for enterprise GenAI workflows.
 
-### 🌟 Why Strands Analyst?
+### 🌟 What Makes Strands Analyst Unique?
 
-- **🏢 Enterprise-Ready**: Production configurations with AWS Bedrock Claude 3.7 Sonnet, agent-specific performance tuning
-- **🧰 40+ AI Tools**: Comprehensive toolkit spanning RAG & memory, multimodal AI, automation, and system integration
-- **🔒 Security-First**: Advanced consent management, secure tool execution, and enterprise guardrails
-- **⚡ Performance Optimized**: Dynamic model selection, advanced caching, streaming responses, hot configuration reloading
-- **☁️ AWS Native**: Deep integration with Bedrock, optimized inference profiles, cost-effective deployment patterns
-- **🎨 Rich Experience**: Beautiful terminal UI with real-time streaming, live tool indicators, and markdown rendering
+- **🌐 Multi-Provider AI Models**: Seamlessly switch between AWS Bedrock, Anthropic API, and OpenAI API
+- **🧰 44+ AI Tools**: Comprehensive toolkit spanning RAG & memory, multimodal AI, automation, and system integration
+- **🎨 Smart Organization**: AI-generated files automatically categorized into type-specific directories
+- **⚡ Dynamic Intelligence**: Automatic model selection based on task complexity analysis
+- **🔧 Enhanced Feedback**: Rich, colored tool execution display with error explanations
+- **☁️ Enterprise-Ready**: Production configurations with advanced caching, streaming, and cost optimization
+
+## ✨ Latest Features
+
+### 🌐 Multi-Provider Model Support
+**Choose the best AI model for your needs**:
+- 🚀 **AWS Bedrock** - Enterprise-grade with guardrails, caching, and Claude 3.7 Sonnet
+- 🤖 **Anthropic API** - Direct Claude access with Sonnet 4 and structured output
+- 🌟 **OpenAI API** - GPT-4o with function calling and o1-preview reasoning models
+- 🔄 **Dynamic switching** via environment variables or configuration
+- 📊 **Health monitoring** and cost optimization across providers
+
+```bash
+# Switch providers instantly
+STRANDS_PROVIDER=openai analystai "Generate a Python script"
+STRANDS_PROVIDER=anthropic analystai "Analyze this data"
+STRANDS_PROVIDER=bedrock analystai "Extract metadata"
+
+# Check provider health
+provider-info --health-check
+```
+
+### 📁 Smart File Organization
+**AI-generated files are automatically organized**:
+- 🎯 **50+ file types** recognized and categorized automatically
+- 📁 **Type-based directories** - Code, markdown, data, images, diagrams
+- 📅 **Optional date organization** for time-series data
+- 🔍 **Respects explicit paths** when user specifies them
+
+```
+analystai-responses/
+├── code/           # Python, JavaScript, etc.
+├── markdown/       # Documentation, notes
+├── data/           # JSON, YAML, XML files
+├── images/         # Generated visualizations
+└── diagrams/       # Architecture diagrams
+```
+
+### 🔧 Enhanced Tool Output Display
+**Rich feedback for every operation**:
+- 🎨 **Colored terminal output** with tool identification
+- 📝 **Input visualization** - URLs (🌐), files (📄), text (📝)
+- ❌ **Smart error messages** with explanations (404, timeout, DNS)
+- ⏱️ **Optional timing** for performance monitoring
+
+```bash
+🔧 Tool: fetch_url_metadata
+   🌐 Url: https://anthropic.com
+   ✅ Metadata extracted successfully
+
+🔧 Tool: save_file_smart
+   📄 File: analystai-responses/code/analysis.py
+   📝 Text: # Data analysis script...
+```
 
 ## 🚀 Quick Start
 
+### Installation & Setup
+
 ```bash
-# Install the package
+# Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install with all features
 pip install -e .
 
-# Interactive AI Assistant (44+ tools)
-analystai
-> "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases"
-> "Compare Bedrock Claude vs Titan costs for 1 million users monthly"
-> "Create a GenAI transformation roadmap presentation"
-> "Take a screenshot of my desktop using shell"
-> "Research the latest developments in Claude 3.7 Sonnet vs Llama 3.1"
+# Configure your preferred AI provider
+export OPENAI_API_KEY="sk-..."        # For OpenAI
+export ANTHROPIC_API_KEY="sk-ant-..."  # For Anthropic
+aws configure                          # For Bedrock
+```
 
+### Interactive AI Assistant
+
+```bash
+# Start the enhanced AI assistant
+analystai
+
+# Try these example prompts from 200+ curated examples:
+> "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases"
+> "Compare Claude vs GPT-4o costs for 1 million users monthly"  
+> "Generate fractals and save them as images"
+> "Create a GenAI transformation roadmap presentation"
+> "Analyze anthropic.com and stripe.com websites"
+> "Take a screenshot using shell automation"
+```
+
+### Specialized CLI Tools
+
+```bash
 # Website Intelligence & Analysis
 sitemeta anthropic.com --verbose
 sitemeta stripe.com --save-markdown
 
-# Content Monitoring & RSS Analysis
-news https://aws.amazon.com/blogs/machine-learning/feed/ --count 5 --save-markdown
-news http://feeds.bbci.co.uk/news/rss.xml --verbose
+# Multi-Provider Content Analysis  
+STRANDS_PROVIDER=openai news https://feeds.bbci.co.uk/news/rss.xml
+STRANDS_PROVIDER=anthropic article https://aws.amazon.com/blogs/machine-learning/
 
-# Article Processing & Download
-article https://aws.amazon.com/blogs/machine-learning/latest-post --no-images
-article https://example.com/blog-post --verbose
-
-# HTML to Markdown Conversion
+# HTML Processing & Conversion
 htmlmd saved-article/index.html --no-metadata
+
+# Check provider configuration
+provider-info --verbose --health-check
 ```
 
 ## 🎯 Features
 
 ### 🤖 Interactive AI Assistant (`analystai`)
 
-The crown jewel of Strands Analyst - an advanced conversational AI assistant with **44+ specialized tools** across **10 categories**, designed for AWS professionals working with GenAI and agentic systems.
+The crown jewel of Strands Analyst - an advanced conversational AI with **44+ specialized tools** across **10 categories**, featuring **multi-provider model support** and **intelligent tool execution feedback**.
 
 #### 🎯 **Comprehensive Use Case Examples**
 
-Strands Analyst includes 200+ curated example prompts for real-world GenAI workflows:
+Built-in **200+ curated prompts** for real-world GenAI workflows:
 
-**GenAI Architecture & Design:**
+<details>
+<summary><b>🏗️ GenAI Architecture & Design</b></summary>
+
 - "Draw me an enterprise RAG architecture using Bedrock Knowledge Bases and Claude"
 - "What would a conversational AI platform look like on AWS with Bedrock and API Gateway?"
 - "Show me how to design a multi-modal GenAI system that handles text, images, and video"
+- "Create a 3-tier scalable GenAI application architecture with auto-scaling"
+</details>
 
-**Agentic Architecture & Automation:**
+<details>
+<summary><b>🤖 Agentic Architecture & Automation</b></summary>
+
 - "How can I automate our customer support workflows using Bedrock Agents?"
-- "I need multiple AI agents working together to generate and review content automatically"
+- "I need multiple AI agents working together to generate and review content automatically"  
 - "Design an intelligent document processing system that can take actions based on what it reads"
+- "Create a network of specialized AI agents for our content creation pipeline"
+</details>
 
-**Cost Analysis & Optimization:**
+<details>
+<summary><b>💰 Cost Analysis & Optimization</b></summary>
+
 - "Compare Bedrock Claude vs Titan costs for an enterprise chatbot serving 1 million users monthly"
 - "Calculate the total cost and ROI of deploying Amazon Q Business for our 5000-person company"
 - "Model how GenAI infrastructure costs scale as we grow from startup to enterprise scale"
-
-**Security & Compliance:**
-- "Create a GenAI governance framework for healthcare with Bedrock Guardrails and generate a compliance checklist"
-- "How do I protect PII data when using Bedrock Knowledge Bases in my enterprise system?"
-- "Build me algorithms to detect prompt injection attacks in our GenAI applications"
-
-**Advanced Training & Performance:**
-- "Set up SageMaker HyperPod for training our custom Llama 3.1 model on our enterprise data"
-- "Compare Trainium2 vs P5 instances for our foundation model training workload and costs"
-- "Implement Mixture-of-Experts architecture for our domain-specific language model"
+- "Compare multi-provider costs: OpenAI vs Anthropic vs Bedrock for our workload"
+</details>
 
 <details>
-<summary><b>📦 Complete Tool Categories (Click to expand)</b></summary>
+<summary><b>🔒 Security & Compliance</b></summary>
 
-#### 🧠 RAG & Memory Systems
+- "Create a GenAI governance framework for healthcare with Bedrock Guardrails"
+- "How do I protect PII data when using Bedrock Knowledge Bases in my enterprise system?"
+- "Build algorithms to detect prompt injection attacks in our GenAI applications"
+- "Generate a compliance checklist for responsible AI implementation"
+</details>
+
+#### 📦 **Complete Tool Categories**
+
+<details>
+<summary><b>🧠 RAG & Memory Systems</b></summary>
+
 - `retrieve` - Semantic search and retrieval from knowledge bases
-- `memory` - Session-based memory management
+- `memory` - Session-based memory management  
 - `agent_core_memory` - Persistent agent memory across sessions
 - `mem0_memory` - Advanced memory storage with contextual understanding
+</details>
 
-#### 📁 File Operations
+<details>
+<summary><b>📁 File Operations</b></summary>
+
 - `file_read` - Secure file reading with permission controls
 - `file_write` - Safe file writing with consent management
+- `save_file_smart` - Automatic file organization by type
 - `editor` - Interactive file editing capabilities
+</details>
 
-#### ⚙️ System & Automation  
+<details>
+<summary><b>⚙️ System & Automation</b></summary>
+
 - `shell` - Execute shell commands with security consent
 - `use_computer` - Computer automation and control
 - `cron` - Task scheduling and automation
 - `environment` - Environment variable management
+</details>
 
-#### 🌐 Web & Network
+<details>
+<summary><b>🌐 Web & Network</b></summary>
+
 - `http_request` - HTTP/API requests and integrations
 - `browser` - Web browsing and page interaction
 - `rss` - RSS feed monitoring and analysis
 - `slack` - Slack integration and notifications
+</details>
 
-#### 🎨 Multimodal Capabilities
+<details>
+<summary><b>🎨 Multimodal Capabilities</b></summary>
+
 - `diagram` - Generate professional architecture diagrams
-- `generate_image` - AI-powered image generation
+- `generate_image` - AI-powered image generation (fractals, visualizations)
 - `speak` - Text-to-speech conversion
 - `image_reader` - Image analysis and OCR
 - `nova_reels` - Video content generation
-
-#### 💻 Development Tools
-- `python_repl` - Python code execution with safety controls
-- `code_interpreter` - Code analysis and debugging
-
-#### 🔄 Agent Workflows
-- `workflow` - Complex multi-step workflows
-- `swarm` - Multi-agent coordination and orchestration
-- `graph` - Agent graph creation and management
-
-#### 🏢 Business Intelligence
-- `batch_requests` - Batch processing capabilities
-- `task_tracker` - Project and task management
-- `handoff` - Human-in-the-loop workflows
-
-#### 🔧 Utilities & Math
-- `calculator` - Advanced mathematical computations
-- `time_utilities` - Date/time operations and scheduling
-- `text_utilities` - Text processing and manipulation
-
-#### 💾 Data & Storage
-- `search` - Advanced search capabilities
-- `database` - Database operations and queries
-- Various storage and persistence tools
-
 </details>
 
 #### ✨ Enhanced Chat Experience
@@ -161,7 +236,8 @@ Strands Analyst includes 200+ curated example prompts for real-world GenAI workf
 - ⚡ **Real-time streaming** responses as they generate
 - 🔧 **Live tool indicators** showing active operations in progress
 - 📝 **Markdown rendering** for beautifully formatted content
-- 🔄 **Stable fallback modes** ensuring compatibility across environments
+- 🌐 **Provider display** showing which AI model is active
+- 🔄 **Stable fallback modes** ensuring compatibility
 
 ### 🛠️ CLI Tools
 
@@ -175,7 +251,7 @@ sitemeta anthropic.com --save-markdown # Save results to markdown
 ```
 *Analyze websites to understand business models, extract metadata, and generate intelligence reports.*
 
-#### 📰 `news` - RSS & News Analysis
+#### 📰 `news` - RSS & News Analysis  
 ```bash
 news https://feeds.bbci.co.uk/news/rss.xml                    # Analyze RSS feed
 news https://aws.amazon.com/blogs/ml/feed/ --count 10         # Latest 10 articles
@@ -186,7 +262,7 @@ news https://example.com/feed --save-markdown --verbose       # Full analysis wi
 #### 📄 `article` - Web Article Processing
 ```bash
 article https://example.com/blog-post                         # Download and analyze
-article https://aws.amazon.com/blogs/ml/post --no-images     # Skip image downloads
+article https://aws.amazon.com/blogs/ml/post --no-images     # Skip image downloads  
 article https://medium.com/@author/post --verbose             # Detailed processing info
 ```
 *Download web articles with metadata extraction, image preservation, and content analysis.*
@@ -199,113 +275,160 @@ htmlmd content.html --output custom-output.md --verbose       # Custom output wi
 ```
 *Convert HTML files to clean, well-formatted markdown with metadata preservation.*
 
-### 🏗️ Architecture Diagrams & Examples
-
-Strands Analyst includes a comprehensive collection of **professional AWS architecture diagrams** and **real-world outputs** showcasing:
-
-#### 📐 **Professional Diagrams**
-- **Enterprise RAG architectures** using Bedrock Knowledge Bases
-- **Mixture-of-Experts (MoE) LLM implementations** on AWS
-- **3-Tier scalable GenAI applications** with Bedrock integration
-- **Advanced AI training pipelines** with SageMaker and custom infrastructure
-- **Multi-modal AI systems** for text, image, and video processing
-
-*Examples available in `/diagrams` directory - perfect for presentations and architectural planning.*
-
-#### 📂 **Sample Outputs & Examples**
-
-The `refer/` directory contains real outputs demonstrating system capabilities:
-
+#### 🔧 `provider-info` - Multi-Provider Management
+```bash
+provider-info                          # Show active provider
+provider-info --verbose                # Detailed model information  
+provider-info --health-check           # Test provider connectivity
+STRANDS_PROVIDER=openai provider-info  # Check specific provider
 ```
-refer/
-├── articles/           # Downloaded web articles with images and metadata
-│   ├── about-decagon-conversational-ai-for-cx/
-│   ├── about-hubspot-hubspots-story/
-│   ├── ai-business-informs-educates/
-│   └── 60+ more examples...
-├── sitemeta/           # Website analysis results
-├── news/               # RSS feed analyses  
-├── posts/              # Generated content and analyses
-│   ├── aws-moe-pipelines.md          # "AWS Architecture for MoE LLM Training"
-│   ├── performance-strands-analyst.md # Performance analysis
-│   └── future-stack.md               # Technology roadmaps
-├── transcripts/        # Audio/video transcriptions
-└── chat-sessions/      # Interactive conversation logs
+*Monitor and manage multi-provider AI model configurations.*
+
+## 🏗️ Architecture & Performance
+
+### 🌐 Multi-Provider Architecture
+
+```mermaid
+graph TD
+    A[Strands Analyst] --> B[Provider Factory]
+    B --> C[AWS Bedrock]
+    B --> D[Anthropic API]
+    B --> E[OpenAI API]
+    
+    C --> F[Claude 3.7 Sonnet]
+    C --> G[Claude 3.5 Haiku]
+    
+    D --> H[Claude Sonnet 4] 
+    D --> I[Claude Opus 4.1]
+    
+    E --> J[GPT-4o]
+    E --> K[GPT-4o-mini]
 ```
 
-**Example Generated Content:**
-- **Technical Deep-Dives**: Comprehensive guides on AWS MoE LLM architectures
-- **Company Analyses**: Business model breakdowns (Google, Stripe, Anthropic, etc.)
-- **News Summaries**: AI-powered RSS feed intelligence
-- **Performance Reports**: System optimization and benchmarking studies
+**Provider-Specific Features**:
 
-## 📊 Architecture
+| Feature | AWS Bedrock | Anthropic API | OpenAI API |
+|---------|-------------|---------------|-------------|
+| **Models** | Claude 3.7 Sonnet, 3.5 Haiku | Sonnet 4, Opus 4.1, Haiku | GPT-4o, GPT-4o-mini |
+| **Streaming** | ✅ | ✅ | ✅ |
+| **Function Calling** | ❌ | ❌ | ✅ |
+| **Structured Output** | ❌ | ✅ | ✅ |
+| **Guardrails** | ✅ | ❌ | ❌ |
+| **Caching** | ✅ | ❌ | ❌ |
+| **Cost** | Enterprise | Pay-per-use | Pay-per-use |
 
-### 🏢 Production-Ready Performance
+### ⚡ Performance Optimizations
 
-Strands Analyst is built with enterprise performance requirements in mind:
-
-#### ⚡ Dynamic Model Configuration
+#### Dynamic Model Selection
 - **Task complexity analysis** automatically selects optimal models
-- **Model warm-up capabilities** eliminate cold start latency
+- **Model warm-up capabilities** eliminate cold start latency  
 - **Runtime configuration updates** without application restart
 - **Agent-specific tuning**: Temperature, top_p, and token limits optimized per use case
 
-#### 🚀 Advanced Caching & Optimization
+#### Smart File Organization  
+- **Automatic categorization** of 50+ file types into appropriate directories
+- **Type-based routing**: Code → `code/`, Data → `data/`, Images → `images/`
+- **Date-based organization** optional for time-series data
+- **User path preservation** when explicit paths are specified
+
+#### Enhanced Tool Feedback
+- **Real-time tool identification** with colored terminal output
+- **Input categorization** with icons: URLs (🌐), files (📄), text (📝)
+- **Intelligent error explanations** for common failures (404, timeout, DNS)
+- **Performance timing** optional for bottleneck identification
+
+#### Advanced Caching & Optimization
 - **Multi-level caching**: System prompts, tool definitions, and message-level caching
 - **Streaming responses** for improved perceived performance
 - **Concurrent tool execution** for multi-tool workflows
 - **Intelligent context management** reducing token usage by up to 40%
 
-#### 📊 Enterprise Observability
+### 📊 Enterprise Observability
+
 - **Real-time metrics tracking** with token consumption and tool performance analytics
-- **Cost monitoring** and budget alerts for Bedrock usage
-- **Performance regression detection** with automated optimization recommendations
-- **OpenTelemetry integration** (roadmap) for standardized instrumentation
+- **Cost monitoring** and budget alerts across all providers
+- **Performance regression detection** with automated optimization recommendations  
+- **Multi-provider health checks** ensuring system reliability
 
 ### 🏗️ Modular Architecture
 
 ```
 strands-analyst/
 ├── analyst/
-│   ├── agents/          # AI agent implementations
-│   │   ├── chat.py      # Interactive AI assistant
-│   │   ├── sitemeta.py  # Website analysis agent  
-│   │   ├── news.py      # RSS/news analysis agent
-│   │   ├── get_article.py # Article processing agent
-│   │   └── html_to_markdown.py # HTML conversion agent
-│   ├── tools/           # Reusable tool implementations
-│   │   ├── fetch_url_metadata.py # Efficient metadata extraction
-│   │   ├── download_article_content.py # Content downloading
-│   │   ├── python_repl_tool.py # Secure Python execution
-│   │   └── http_request_tool.py # HTTP requests
-│   ├── cli/             # Command-line interfaces
-│   │   ├── chat.py      # analystai command
-│   │   ├── sitemeta.py  # sitemeta command
-│   │   ├── news.py      # news command
-│   │   └── get_article.py # article command
-│   └── utils/           # Shared utilities and configurations
-├── docs/                # Comprehensive documentation
-├── diagrams/            # AWS architecture diagrams
-├── refer/               # Sample outputs and reference materials
-└── config.yml           # Production-ready configurations
+│   ├── agents/              # AI agent implementations
+│   │   ├── chat.py         # Interactive AI assistant with multi-provider
+│   │   ├── sitemeta.py     # Website analysis agent
+│   │   ├── news.py         # RSS/news analysis agent
+│   │   └── get_article.py  # Article processing agent
+│   ├── tools/              # Reusable tool implementations  
+│   │   ├── fetch_url_metadata.py    # Efficient metadata extraction
+│   │   ├── save_file_smart.py       # Smart file organization
+│   │   └── download_article_content.py # Content downloading
+│   ├── utils/              # Core utilities
+│   │   ├── model_provider_factory.py  # Multi-provider management
+│   │   ├── smart_file_saver.py        # File organization logic
+│   │   └── tool_output_display.py     # Enhanced tool feedback
+│   └── cli/                # Command-line interfaces
+│       ├── chat.py         # analystai command with provider switching
+│       └── provider_info.py # provider-info command
+├── docs/                   # Comprehensive documentation
+├── analystai-responses/    # Auto-organized output files
+│   ├── code/              # Python, JavaScript, etc.
+│   ├── markdown/          # Documentation, analyses
+│   ├── data/              # JSON, YAML, XML files
+│   ├── images/            # Generated visualizations
+│   └── diagrams/          # Architecture diagrams
+└── refer/                 # Sample outputs and examples
+    ├── articles/          # Downloaded web articles (70+ examples)
+    ├── sitemeta/          # Website analyses
+    └── posts/             # Generated content and studies
 ```
 
-This modular design enables:
-- **🔧 Reusable components** across multiple agents and tools
-- **📈 Easy scaling** with new agents and specialized tools
-- **🔒 Consistent security** and consent management
-- **⚙️ Flexible configuration** with environment-specific settings
+## 🎨 Generated Content Examples
+
+### 📊 **Visualizations & Fractals**
+
+The system can generate beautiful mathematical visualizations and fractals:
+
+![Complex Julia Fractal](analystai-responses/images/complex_julia_fractal.png)
+*Complex Julia fractal generated with AI-powered mathematical visualization*
+
+![Mandelbrot Deep Sea](analystai-responses/images/mandelbrot_zoom_deep_sea.png)  
+*Deep zoom Mandelbrot set with custom color mapping*
+
+### 📈 **Business Analysis Charts**
+
+Professional charts and visualizations for business intelligence:
+
+![NVIDIA Meta RoCE Components](analystai-responses/images/nvidia_meta_roce_components.png)
+*Technology component analysis with automated chart generation*
+
+### 📄 **Generated Content Samples**
+
+Real examples from the `analystai-responses/markdown/` directory:
+
+- **[AWS MoE LLM Architecture](analystai-responses/markdown/aws_moe_llm_architecture.md)** - Comprehensive Mixture-of-Experts implementation guide
+- **[Character.AI Platform Overview](analystai-responses/markdown/character-ai-overview.md)** - AI platform competitive analysis  
+- **[NVIDIA Meta RoCE Analysis](analystai-responses/markdown/nvidia_meta_roce_analysis.md)** - Technical deep-dive with visualizations
+
+### 🏢 **Real-World Article Processing**
+
+The `refer/articles/` directory contains **70+ processed articles** demonstrating comprehensive content extraction:
+
+- **Enterprise case studies**: HubSpot, Decagon, Apple financial analysis
+- **Technical deep-dives**: LLM architectures, AI workflow automation
+- **Industry analyses**: AI business models, technology trends
 
 ## 🔧 Installation
 
 ### Prerequisites
 
-- **Python 3.8+** (recommended: 3.11 or 3.13)
-- **AWS Account** with Bedrock access enabled
-- **Claude 3.7 Sonnet** model access in your AWS region
-- **AWS CLI** configured with appropriate credentials
-- **Graphviz** (for diagram generation tool - see installation below)
+- **Python 3.8+** (recommended: Python 3.11 or 3.13)
+- **AI Provider Access**:
+  - AWS Account with Bedrock access (Claude 3.7 Sonnet enabled)
+  - Anthropic API key (optional)
+  - OpenAI API key (optional)
+- **System Dependencies**: See advanced features section
 
 ### Quick Installation
 
@@ -319,84 +442,66 @@ pip install -e .
 
 # Verify installation
 analystai --help
-sitemeta --help
-news --help
-article --help
-htmlmd --help
+provider-info --health-check
 ```
 
-### 🔧 **Community Tools Integration**
+### 🔑 API Key Configuration
 
-Strands Analyst automatically installs the comprehensive `strands-agents-tools` package with specialized modules:
+#### Multi-Provider Setup
+```bash
+# Option 1: Environment variables (recommended)
+export OPENAI_API_KEY="sk-proj-..."
+export ANTHROPIC_API_KEY="sk-ant-..."
+# AWS credentials via aws configure
 
-- **`mem0_memory`** - Advanced memory systems with contextual understanding
-- **`local_chromium_browser`** - Local browser automation and web scraping
-- **`agent_core_browser`** - Advanced browser integration for agents
-- **`agent_core_code_interpreter`** - Secure code execution environments
-- **`a2a_client`** - Agent-to-agent communication protocols
-- **`diagram`** - Professional architecture diagram generation  
-- **`rss`** - RSS feed processing and analysis
-- **`use_computer`** - Computer automation and control capabilities
+# Option 2: .env.local file
+echo 'OPENAI_API_KEY=sk-proj-...' >> .env.local
+echo 'ANTHROPIC_API_KEY=sk-ant-...' >> .env.local
 
-### 📦 **Core Dependencies**
+# Option 3: Configuration file (not recommended for security)
+# Edit config.yml with API keys
+```
 
-The package includes optimized versions of essential libraries:
+#### Provider Selection
+```bash
+# Set default provider in config.yml
+providers:
+  active: "openai"  # or "anthropic" or "bedrock"
 
-- **`strands-agents`** ≥1.0.0 - Core AI agent framework
-- **`feedparser`** ≥6.0.10 - RSS/Atom feed parsing
-- **`requests`** ≥2.31.0 - HTTP request handling  
-- **`beautifulsoup4`** ≥4.12.0 - HTML parsing and extraction
-- **`readability-lxml`** ≥0.8 - Clean article content extraction
-- **`markdownify`** ≥0.11.6 - HTML to Markdown conversion
-- **`pyyaml`** ≥6.0 - Configuration file handling
+# Or override with environment variable
+export STRANDS_PROVIDER=anthropic
+```
 
-### Prerequisites for Advanced Features
+### 📦 Advanced Dependencies
 
 #### For Diagram Generation
-```bash
+```bash  
 # macOS
 brew install graphviz
 
-# Ubuntu/Debian
+# Ubuntu/Debian  
 sudo apt-get install graphviz
 
 # Windows
-# Download and install from: https://graphviz.org/download/
+# Download from: https://graphviz.org/download/
 ```
 
 #### For Browser Automation
 ```bash
-# Install Playwright browsers
+# Install Playwright browsers for web automation
 playwright install
 ```
 
 #### AWS Configuration
 ```bash
-# Configure AWS credentials (if not already done)
+# Configure AWS credentials (for Bedrock)
 aws configure
 
 # Test Bedrock access
 aws bedrock list-foundation-models --region us-west-2
-```
 
-### Environment Configuration
-
-The project uses optimized configurations in `config.yml`:
-
-```yaml
-# AWS Bedrock Configuration
-bedrock:
-  model:
-    default_model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
-  
-  agents:
-    sitemeta:
-      temperature: 0.2      # Focused for structured data
-      max_tokens: 2048
-    article:
-      temperature: 0.3      # Balanced for analysis  
-      max_tokens: 8192
-      reasoning_mode: true  # Complex analysis
+# Verify Claude 3.7 Sonnet access
+aws bedrock get-foundation-model --model-identifier anthropic.claude-3-7-sonnet-20250219-v1:0
 ```
 
 ## 📖 Documentation
@@ -407,66 +512,80 @@ bedrock:
 - **[Configuration Guide](docs/configuration-guide.md)** - Advanced configuration options
 - **[Developer Guide](docs/developer-guide.md)** - Extending with new agents and tools
 
+### ✨ New Features
+- **[Multi-Provider Model Guide](docs/multi-provider-guide.md)** - Switch between AWS Bedrock, Anthropic, and OpenAI providers 🚀
+- **[Smart File Organization Guide](docs/file-organization-guide.md)** - Automatic file categorization and directory management 📁
+- **[Enhanced Tool Output Guide](docs/tool-output-guide.md)** - Rich, colored feedback for tool execution 🔧
+
 ### 🔧 Enhanced Features
-- **[Community Tools Guide](docs/community-tools-guide.md)** - 40+ tools integration
-- **[Automation Guide](docs/automation-guide.md)** - Computer & browser automation
-- **[Chat Agent Guide](docs/chat-agent-guide.md)** - Interactive AI assistant features
+- **[Enhanced Chat Features Guide](docs/enhanced-chat-guide.md)** - Rich terminal UI with streaming support and 40+ tools
+- **[Community Tools Guide](docs/community-tools-guide.md)** - Complete 44+ tools integration
+- **[Automation Guide](docs/automation-guide.md)** - Computer & browser automation via shell
 
 ### 🎯 Agent-Specific Guides
-- **[Article Agent Guide](docs/article-agent-guide.md)** - Web article processing
-- **[HTML to Markdown Guide](docs/htmlmd-agent-guide.md)** - HTML conversion features  
+- **[Chat Agent Guide](docs/chat-agent-guide.md)** - Interactive conversational interface
+- **[Article Agent Guide](docs/article-agent-guide.md)** - Web article processing  
+- **[HTML to Markdown Guide](docs/htmlmd-agent-guide.md)** - HTML conversion features
 - **[News Agent Guide](docs/news-agent-guide.md)** - RSS feed analysis
-- **[Agents Guide](docs/agents-guide.md)** - Working with AI agents
-
-### 📋 Additional Resources
-- **[Examples](docs/examples.md)** - Practical usage examples and workflows
-- **[Tools Guide](docs/tools-guide.md)** - Available tools and their usage
 
 ## 🚀 Use Cases
 
 ### For AWS Solutions Architects
-- **Architecture Planning**: Generate AWS GenAI architecture diagrams
-- **Cost Analysis**: Compare Bedrock model costs for enterprise deployments  
-- **Technology Research**: Stay updated with latest AWS AI/ML services
-- **Documentation**: Convert technical content to markdown for team sharing
+- **Multi-Provider Strategy**: Compare Bedrock vs Anthropic vs OpenAI for specific workloads
+- **Architecture Planning**: Generate AWS GenAI architecture diagrams with provider-specific components
+- **Cost Optimization**: Analyze costs across providers for enterprise deployments
+- **Technology Research**: Stay updated with latest AI/ML services across cloud providers
 
-### For GenAI Professionals
+### For GenAI Professionals  
+- **Model Experimentation**: Test the same prompt across multiple providers instantly
 - **Content Intelligence**: Analyze websites and articles for competitive research
-- **Model Selection**: Compare different foundation models for specific use cases
-- **Performance Optimization**: Leverage advanced caching and streaming capabilities
-- **Multi-modal Workflows**: Combine text, image, and diagram generation
+- **Performance Optimization**: Leverage dynamic model selection and advanced caching
+- **Multi-modal Workflows**: Combine text, image, and diagram generation seamlessly
 
 ### For Enterprise Teams
-- **News Monitoring**: Track industry developments through RSS feeds
-- **Knowledge Management**: Build intelligent content processing pipelines
-- **Automation**: Integrate AI capabilities into existing business workflows
-- **Security**: Secure AI operations with consent management and guardrails
+- **Unified AI Interface**: Single CLI for all major AI providers
+- **Organized Output**: Automatic file categorization keeps projects clean  
+- **Advanced Monitoring**: Provider health checks and performance tracking
+- **Security Compliance**: Secure tool execution with consent management
 
 ## 🛡️ Security & Compliance
 
-- **🔐 Consent Management**: User approval required for system-level operations
-- **🛡️ Secure Tool Execution**: Sandboxed environment for code execution
-- **🔒 AWS IAM Integration**: Fine-grained permissions for Bedrock access
-- **📊 Audit Logging**: Comprehensive logging for compliance requirements
-- **⚠️ Guardrails**: Built-in safety measures and content filtering
+- **🔐 Multi-Provider Security**: Separate credential management for each provider
+- **🔒 Secure Tool Execution**: Sandboxed environment for code execution
+- **🛡️ Consent Management**: User approval required for system-level operations  
+- **📊 Audit Logging**: Comprehensive logging across all providers
+- **⚠️ Provider Guardrails**: Bedrock guardrails integration when available
 
 ## 🗺️ Roadmap
 
-### 🚧 In Development
-- **Multi-agent orchestration** framework with specialized agent coordination
-- **OpenTelemetry integration** for standardized observability
-- **Real-time cost tracking** and budgeting mechanisms
-- **Enhanced security guardrails** with prompt injection defense
+### 🚧 Recently Completed ✅
+- **Multi-provider model support** with OpenAI, Anthropic, and Bedrock  
+- **Smart file organization** with automatic type-based categorization
+- **Enhanced tool output display** with rich terminal feedback
+- **Dynamic model configuration** with complexity-based selection
+- **Provider health monitoring** and switching capabilities
 
-### 🔮 Future Plans  
-- **Mixture-of-Experts** architecture support
-- **SageMaker HyperPod** integration for large-scale training
+### 🔄 In Development
+- **Message-level caching** for conversation continuity
+- **Multi-agent orchestration** framework with agents-as-tools pattern
+- **OpenTelemetry integration** for standardized instrumentation  
+- **Real-time cost tracking** across all providers
+
+### 🔮 Future Plans
+- **Mixture-of-Experts** architecture support across providers
 - **Edge computing patterns** for sub-100ms response times
 - **Advanced memory systems** with long-term context retention
+- **Custom model fine-tuning** workflows
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our contribution guidelines and feel free to submit issues and pull requests.
+We welcome contributions! Areas of interest:
+- New AI provider integrations
+- Additional tool categories  
+- Performance optimizations
+- Documentation improvements
+
+Please see our contribution guidelines and feel free to submit issues and pull requests.
 
 ## 📄 License
 
@@ -475,15 +594,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 - **Documentation**: Comprehensive guides available in `/docs`
-- **Issues**: Report bugs and request features via GitHub Issues
-- **Community**: Join our community discussions
+- **Provider Issues**: Use `provider-info --health-check` for diagnostics
+- **GitHub Issues**: Report bugs and request features
+- **Community**: Join our discussions for tips and best practices
 
 ---
 
 <div align="center">
 
-**Built with ❤️ for AWS professionals and GenAI enthusiasts**
+**Built with ❤️ for the future of enterprise AI**
 
-*Strands Analyst - Where Enterprise AI meets Performance Excellence*
+*Strands Analyst - Where Multi-Provider AI meets Performance Excellence*
 
 </div>

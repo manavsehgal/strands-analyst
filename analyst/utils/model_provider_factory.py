@@ -46,12 +46,12 @@ class ModelProviderFactory:
             self._last_config_provider = current_config_provider
         
         # Determine active provider
-        if current_env_provider in ['bedrock', 'anthropic']:
+        if current_env_provider in ['bedrock', 'anthropic', 'openai']:
             self.active_provider = current_env_provider
             if provider_changed:
                 self.logger.info(f"Provider switched to '{self.active_provider}' via environment variable")
         else:
-            self.active_provider = current_config_provider if current_config_provider in ['bedrock', 'anthropic'] else 'bedrock'
+            self.active_provider = current_config_provider if current_config_provider in ['bedrock', 'anthropic', 'openai'] else 'bedrock'
             if provider_changed:
                 self.logger.info(f"Provider switched to '{self.active_provider}' via configuration")
         
@@ -112,6 +112,18 @@ class ModelProviderFactory:
                 'model_display': display_model,
                 'display': f"Provider: Anthropic API | Model: {display_model}"
             }
+        elif provider == 'openai':
+            model_id = self.config.get('openai.model.default_model_id', 'unknown')
+            
+            # Optionally truncate long model IDs for display
+            display_model = model_id if show_full_ids else self._truncate_model_id(model_id)
+            
+            return {
+                'provider': 'OpenAI API',
+                'model': model_id,
+                'model_display': display_model,
+                'display': f"Provider: OpenAI API | Model: {display_model}"
+            }
         else:
             return {
                 'provider': provider,
@@ -159,6 +171,8 @@ class ModelProviderFactory:
             model = self._create_bedrock_model(agent_name, model_type, **kwargs)
         elif provider == 'anthropic':
             model = self._create_anthropic_model(agent_name, model_type, **kwargs)
+        elif provider == 'openai':
+            model = self._create_openai_model(agent_name, model_type, **kwargs)
         else:
             raise ValueError(f"Unknown provider: {provider}")
         
@@ -338,6 +352,108 @@ class ModelProviderFactory:
         # 3. Config file (lowest priority)
         return self.config.get('anthropic.api_key')
     
+    def _get_openai_api_key(self) -> Optional[str]:
+        """Get OpenAI API key from multiple sources in priority order."""
+        # 1. Environment variable (highest priority)
+        api_key = os.environ.get('OPENAI_API_KEY')
+        if api_key:
+            return api_key
+        
+        # 2. .env.local file
+        try:
+            from pathlib import Path
+            env_local_path = Path.cwd() / '.env.local'
+            if env_local_path.exists():
+                with open(env_local_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line.startswith('OPENAI_API_KEY='):
+                            api_key = line.split('=', 1)[1].strip('"\'')
+                            if api_key:
+                                return api_key
+        except Exception as e:
+            self.logger.debug(f"Could not read .env.local: {e}")
+        
+        # 3. Config file (lowest priority)
+        return self.config.get('openai.api_key')
+    
+    def _create_openai_model(
+        self, 
+        agent_name: str,
+        model_type: Optional[str] = None,
+        **kwargs
+    ):
+        """Create an OpenAIModel instance."""
+        from strands.models.openai import OpenAIModel
+        
+        # Get API key from multiple sources
+        api_key = self._get_openai_api_key()
+        if not api_key:
+            raise ValueError(
+                "OpenAI API key not found. Please set OPENAI_API_KEY environment variable, "
+                "add it to .env.local file, or configure it in config.yml"
+            )
+        
+        # Get configuration for the agent
+        config_path = f'openai'
+        
+        # Determine model ID
+        if model_type:
+            model_id = self.config.get(f'{config_path}.model.models.{model_type}')
+        else:
+            # Check agent-specific model first
+            model_id = self.config.get(f'{config_path}.agents.{agent_name}.model_id')
+            if not model_id:
+                model_id = self.config.get(f'{config_path}.model.default_model_id')
+        
+        # Get performance parameters
+        temperature = kwargs.get('temperature') or self.config.get(
+            f'{config_path}.performance.temperature.{agent_name}',
+            self.config.get(f'{config_path}.performance.temperature.default', 0.3)
+        )
+        
+        top_p = kwargs.get('top_p') or self.config.get(
+            f'{config_path}.performance.top_p.{agent_name}',
+            self.config.get(f'{config_path}.performance.top_p.default', 0.8)
+        )
+        
+        max_tokens = kwargs.get('max_tokens') or self.config.get(
+            f'{config_path}.performance.max_tokens.{agent_name}',
+            self.config.get(f'{config_path}.performance.max_tokens.default', 4096)
+        )
+        
+        stop_sequences = kwargs.get('stop_sequences') or self.config.get(
+            f'{config_path}.performance.stop_sequences.{agent_name}',
+            self.config.get(f'{config_path}.performance.stop_sequences.default', [])
+        )
+        
+        # Get advanced settings
+        streaming = kwargs.get('streaming', self.config.get(f'{config_path}.advanced.streaming', True))
+        base_url = self.config.get(f'{config_path}.api.base_url', 'https://api.openai.com/v1')
+        
+        # Create the model with OpenAI-specific configuration
+        client_args = {
+            "api_key": api_key
+        }
+        
+        # Add base_url if it's not the default
+        if base_url and base_url != 'https://api.openai.com/v1':
+            client_args["base_url"] = base_url
+        
+        model = OpenAIModel(
+            client_args=client_args,
+            model_id=model_id,
+            params={
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+                "top_p": top_p,
+                "stop": stop_sequences if stop_sequences else None
+            },
+            streaming=streaming
+        )
+        
+        return model
+    
     def supports_feature(self, feature: str) -> bool:
         """
         Check if the active provider supports a specific feature.
@@ -357,6 +473,10 @@ class ModelProviderFactory:
             'structured_output', 'direct_api'
         }
         
+        openai_features = {
+            'structured_output', 'function_calling', 'direct_api'
+        }
+        
         common_features = {
             'streaming', 'temperature', 'top_p', 'max_tokens', 'stop_sequences'
         }
@@ -368,6 +488,9 @@ class ModelProviderFactory:
             return True
         
         if self.active_provider == 'anthropic' and feature in anthropic_features:
+            return True
+        
+        if self.active_provider == 'openai' and feature in openai_features:
             return True
         
         return False
@@ -403,6 +526,20 @@ class ModelProviderFactory:
                     'status': 'healthy',
                     'provider': self.active_provider,
                     'message': 'Anthropic API key configured'
+                }
+            elif self.active_provider == 'openai':
+                # For OpenAI, check if API key is available
+                api_key = self._get_openai_api_key()
+                if not api_key:
+                    return {
+                        'status': 'unhealthy',
+                        'provider': self.active_provider,
+                        'message': 'OpenAI API key not found in environment, .env.local, or config'
+                    }
+                return {
+                    'status': 'healthy',
+                    'provider': self.active_provider,
+                    'message': 'OpenAI API key configured'
                 }
             else:
                 return {

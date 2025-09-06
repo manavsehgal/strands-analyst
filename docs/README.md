@@ -4,6 +4,28 @@ Welcome to the Strands Analyst package - a comprehensive AI agent framework for 
 
 ## ✨ Recent Updates
 
+### Multi-Provider Model Support
+**Seamlessly switch between AI providers**:
+- 🚀 **AWS Bedrock** - Enterprise-grade with guardrails and caching
+- 🤖 **Anthropic API** - Direct Claude access with structured output
+- 🌟 **OpenAI API** - GPT-4o with function calling support
+- 🔄 **Dynamic switching** via environment variables
+- 📊 **Provider health monitoring** and cost optimization
+
+### Smart File Organization
+**AI-generated files are automatically organized**:
+- 📁 **Type-based directories** - Markdown, code, data, images auto-sorted
+- 🎯 **50+ file types** recognized and categorized
+- 📅 **Optional date organization** for time-series data
+- 🔍 **Respects explicit paths** when specified
+
+### Enhanced Tool Output Display
+**Rich feedback for tool execution**:
+- 🔧 **Tool identification** with colored output
+- 📝 **Input visualization** - URLs, files, text with icons
+- ❌ **Smart error messages** with explanations
+- ⏱️ **Optional timing** for performance monitoring
+
 ### Enhanced Chat Experience
 The analystai command now features a **Rich Terminal UI** with:
 - 🎨 **Beautiful panels** and color-coded output
@@ -30,6 +52,10 @@ pip install -e .
 
 Use the enhanced CLI:
 ```bash
+# Switch between AI providers
+STRANDS_PROVIDER=openai analystai "Generate a Python script"
+STRANDS_PROVIDER=anthropic analystai "Analyze this data"
+
 # Enhanced chat with streaming UI
 analystai "Analyze google.com and compare it to stripe.com"
 
@@ -46,6 +72,9 @@ analystai "read this RSS feed and save summary to file"
 # Computer and browser automation  
 analystai "take a screenshot of my desktop using shell"
 analystai "screenshot google.com using shell and playwright"
+
+# Check provider info
+provider-info --health-check
 ```
 
 ## Documentation Structure
@@ -59,6 +88,9 @@ analystai "screenshot google.com using shell and playwright"
 - **[Developer Guide](developer-guide.md)** - Extending the package with new agents and tools
 
 ### Enhanced Features ✨
+- **[Multi-Provider Model Guide](multi-provider-guide.md)** - Switch between AWS Bedrock, Anthropic, and OpenAI providers 🚀
+- **[Smart File Organization Guide](file-organization-guide.md)** - Automatic file categorization and directory management 📁
+- **[Enhanced Tool Output Guide](tool-output-guide.md)** - Rich, colored feedback for tool execution 🔧
 - **[Enhanced Chat Features Guide](enhanced-chat-guide.md)** - Rich terminal UI with streaming support and 40+ tools ✨
 - **[Community Tools Guide](community-tools-guide.md)** - Complete 40+ professional tools integration
 - **[Automation Guide](automation-guide.md)** - Computer & browser automation via shell with security controls

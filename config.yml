@@ -228,7 +228,7 @@ metrics:
 # Active Provider Configuration
 # Controls which model provider is used by default
 providers:
-  # Active provider: 'bedrock' or 'anthropic'
+  # Active provider: 'bedrock', 'anthropic', or 'openai'
   # Can be overridden by STRANDS_PROVIDER environment variable
   active: "anthropic"
   
@@ -446,6 +446,101 @@ anthropic:
     
     # API-specific features
     structured_output: false
+    
+    # Request retries
+    max_retries: 3
+    retry_delay: 1.0
+  
+  # Agent-specific configurations
+  agents:
+    sitemeta:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+    
+    news:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+    
+    article:
+      model_id: null
+      reasoning_mode: true
+      optimize_system_prompt: true
+    
+    chat:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+      session_optimization: true
+      multimodal: true
+  
+  # Usage tracking
+  cost_optimization:
+    track_usage: true
+    cost_warnings: true
+    hourly_token_limit: 0
+    hourly_cost_limit: 0.0
+
+# OpenAI API Model Configuration
+# Direct API access to OpenAI's models
+openai:
+  # API configuration
+  api:
+    # API key is loaded from OPENAI_API_KEY environment variable
+    # Never store API keys in configuration files
+    api_key: null  # Use OPENAI_API_KEY env var
+    
+    # API base URL (for custom endpoints or compatible servers)
+    base_url: "https://api.openai.com/v1"
+    
+    # Request timeout settings
+    timeout: 120
+  
+  # Model configuration
+  model:
+    # Default model for OpenAI API
+    default_model_id: "gpt-4o"
+    
+    # Model IDs for specific use cases
+    models:
+      fast: "gpt-4o-mini"
+      reasoning: "gpt-4o"
+      chat: "gpt-4o"
+  
+  # Performance parameters (same structure as Bedrock/Anthropic)
+  performance:
+    temperature:
+      default: 0.3
+      sitemeta: 0.2
+      news: 0.4
+      article: 0.3
+      chat: 0.5
+    
+    top_p:
+      default: 0.8
+      sitemeta: 0.7
+      news: 0.8
+      article: 0.8
+      chat: 0.9
+    
+    max_tokens:
+      default: 4096
+      sitemeta: 2048
+      news: 3072
+      article: 8192
+      chat: 8192
+    
+    stop_sequences:
+      default: []
+  
+  # Advanced settings
+  advanced:
+    streaming: true
+    
+    # API-specific features
+    structured_output: true
+    function_calling: true
     
     # Request retries
     max_retries: 3

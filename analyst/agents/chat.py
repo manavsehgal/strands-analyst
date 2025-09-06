@@ -420,6 +420,10 @@ def create_chat_agent(
     agent._use_model_factory = use_model_factory
     agent._active_provider = active_provider
     
+    # Store session manager reference and directory for access in get_session_info
+    agent._session_manager = session_manager
+    agent._session_dir = session_dir
+    
     return agent
 
 
@@ -486,14 +490,38 @@ def get_session_info(agent: Agent) -> Dict[str, Any]:
     Returns:
         Dictionary with session information
     """
-    session_manager = agent.session_manager
+    # Access session manager via custom attribute
+    session_manager = getattr(agent, '_session_manager', None)
     if not session_manager:
         return {"session_id": None, "has_session": False}
+    
+    # Try multiple ways to get session directory
+    session_dir = "Unknown"
+    
+    # First try our stored session directory
+    if hasattr(agent, '_session_dir'):
+        session_dir = agent._session_dir
+    # Try direct attribute access on session manager
+    elif hasattr(session_manager, 'session_dir'):
+        session_dir = session_manager.session_dir
+    # Try accessing via storage attribute
+    elif hasattr(session_manager, 'storage') and hasattr(session_manager.storage, 'session_dir'):
+        session_dir = session_manager.storage.session_dir
+    # Try accessing via _session_dir private attribute
+    elif hasattr(session_manager, '_session_dir'):
+        session_dir = session_manager._session_dir
+    # If it's FileSessionManager, it should have been initialized with session_dir
+    elif hasattr(session_manager, '__dict__'):
+        # Look through all attributes for session_dir
+        for key, value in session_manager.__dict__.items():
+            if 'session_dir' in key.lower() and isinstance(value, str):
+                session_dir = value
+                break
     
     return {
         "session_id": session_manager.session_id,
         "has_session": True,
-        "session_dir": getattr(session_manager, 'session_dir', 'Unknown')
+        "session_dir": session_dir
     }
 
 

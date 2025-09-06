@@ -205,6 +205,44 @@
     
     **Status**: ✅ **COMPLETE & FULLY FUNCTIONAL** - All requested features implemented and working perfectly.
 
+[x] When running `analystai` command when I use the command `session` I get this error: Error in chat session: 'Agent' object has no attribute 'session_manager'
+
+    **Completion Summary (2025-09-06):**
+    - ✅ **Root Cause Analysis**: Identified that Strands Agent class doesn't expose session_manager as a directly accessible attribute via `agent.session_manager` in `analyst/agents/chat.py:489`
+    - ✅ **Session Manager Storage Fix**: Modified `create_chat_agent()` function to store session manager reference as custom attribute:
+      - **Added custom attribute**: `agent._session_manager = session_manager` for reliable access in `get_session_info()`
+      - **Preserved original functionality**: Session manager still passed to Agent constructor for framework integration
+      - **Clean architecture**: Custom attribute approach maintains compatibility without breaking existing code
+    - ✅ **Session Info Access Enhancement**: Updated `get_session_info()` function with robust session manager access:
+      - **Safe attribute access**: `getattr(agent, '_session_manager', None)` prevents AttributeError
+      - **Enhanced directory detection**: Multiple fallback methods to extract session directory from session manager
+      - **Graceful error handling**: Returns proper fallback values when session manager is not available
+    - ✅ **Session Directory Resolution**: Implemented comprehensive session directory detection logic:
+      - **Direct attribute access**: First tries `session_manager.session_dir`
+      - **Storage attribute access**: Fallback to `session_manager.storage.session_dir`
+      - **Private attribute access**: Checks `session_manager._session_dir` for internal attributes
+      - **Dictionary scan**: Searches all manager attributes for session_dir-related values
+    - ✅ **Comprehensive Testing**: Validated session command functionality across multiple scenarios:
+      - **Interactive mode**: `echo "session" | analystai` displays proper session information
+      - **Error elimination**: No more `'Agent' object has no attribute 'session_manager'` error
+      - **Session ID display**: Shows unique session IDs (e.g., `39ea429a-d469-48f2-9469-2ab532bf57fe`)
+      - **Session status**: Correctly displays "Has Session: True" for active sessions
+
+    **Key Features Fixed**:
+    - **Session command functionality**: `session` command in interactive chat mode works without errors
+    - **Session information display**: Shows session ID, status, and attempts to show directory
+    - **Error-free operation**: Eliminates AttributeError that was breaking session command
+    - **Backward compatibility**: No changes to existing agent creation or usage patterns
+
+    **Technical Implementation**:
+    - **Custom attribute pattern**: Uses `_session_manager` private attribute for reliable access
+    - **Defensive programming**: Safe attribute access with getattr() and proper fallback values
+    - **Multiple access paths**: Comprehensive session directory detection with fallback strategies
+    - **Minimal code changes**: Two targeted edits in `analyst/agents/chat.py` (lines 424 and 493)
+
+    **Result**: The `session` command in `analystai` interactive mode now works correctly without errors. Users can view their current session information including session ID and status. The fix preserves all existing functionality while resolving the AttributeError that was preventing session command usage.
+
+
 [x] **Implement Multi-Provider Model Support System** - Create robust provider abstraction layer supporting seamless switching between Bedrock and Anthropic APIs with proper credential handling and configuration management.
 
     **Completion Summary (2025-09-06):**
@@ -261,6 +299,59 @@
     
     **Result**: The system now provides comprehensive multi-provider model support with seamless switching between AWS Bedrock and Anthropic API. Users can switch providers via environment variables, manage credentials through multiple secure sources, and monitor provider health through CLI tools. The hybrid approach preserves AWS credential compatibility while enabling flexible provider management. Full model IDs are displayed correctly, and real-time configuration changes are handled gracefully with automatic cache invalidation.
 
+
+[x] Refer prior backlog item "Implement Multi-Provider Model Support System" and add support for OpenAI provider and models. Read docs here https://strandsagents.com/latest/documentation/docs/user-guide/concepts/model-providers/openai/
+
+    **Completion Summary (2025-09-06):**
+    - ✅ **Extended Multi-Provider Support**: Successfully added OpenAI as a third provider option alongside AWS Bedrock and Anthropic
+    - ✅ **Comprehensive OpenAI Configuration**: Added complete OpenAI section to `config.yml` with:
+      - **API configuration**: Base URL, timeout, and API key handling from environment/config
+      - **Model selection**: Default gpt-4o with fast (gpt-4o-mini), reasoning (gpt-4o), and chat (gpt-4o) variants
+      - **Performance parameters**: Temperature, top_p, max_tokens configured per agent (sitemeta, news, article, chat)
+      - **Advanced features**: Streaming, structured output, function calling, retry mechanisms
+      - **Agent-specific optimizations**: Tailored settings for each agent type
+    - ✅ **ModelProviderFactory Enhancement**: Updated factory pattern implementation with:
+      - **OpenAI provider detection**: Added 'openai' to valid providers list in _determine_active_provider()
+      - **API key management**: Created _get_openai_api_key() with priority chain (env → .env.local → config.yml)
+      - **Model creation method**: Implemented _create_openai_model() following same pattern as Bedrock/Anthropic
+      - **Provider info display**: Added OpenAI info to get_provider_info() for CLI display
+      - **Feature support detection**: Added OpenAI-specific features (structured_output, function_calling, direct_api)
+      - **Health check integration**: Added OpenAI API key validation to check_provider_health()
+    - ✅ **Strands OpenAI Model Integration**: Successfully integrated strands.models.openai.OpenAIModel with:
+      - **Client configuration**: API key and optional base_url for custom endpoints
+      - **Parameter mapping**: Proper translation of config parameters to OpenAI API format
+      - **Stop sequences handling**: Converted to "stop" parameter for OpenAI API compatibility
+      - **Streaming support**: Full streaming capability for responsive interactions
+    - ✅ **Comprehensive Testing**: Validated all functionality with test suite:
+      - **Provider switching**: STRANDS_PROVIDER=openai correctly activates OpenAI provider
+      - **Health monitoring**: API key detection and validation working correctly
+      - **Feature detection**: Properly reports structured_output and function_calling support
+      - **Model creation**: Successfully creates models for all agent types (chat, sitemeta, news, article)
+      - **Model type selection**: Fast/reasoning/chat model variants created correctly
+      - **Live integration**: analystai command works seamlessly with OpenAI provider
+    
+    **Key Features Delivered**:
+    - **3 provider types**: AWS Bedrock, Anthropic API, and OpenAI API with seamless switching
+    - **OpenAI models**: gpt-4o (default), gpt-4o-mini (fast), custom base URL support for compatible servers
+    - **Unified configuration**: Consistent structure across all three providers in config.yml
+    - **Dynamic provider switching**: Environment variable STRANDS_PROVIDER overrides config
+    - **API key flexibility**: Multiple sources for credentials with clear priority order
+    
+    **Technical Implementation**:
+    - **Factory pattern extension**: Clean integration maintaining existing Bedrock/Anthropic functionality
+    - **Configuration consistency**: OpenAI config follows same structure as other providers
+    - **Error handling**: Clear messages when API keys are missing or misconfigured
+    - **Provider abstraction**: Uniform interface across all three provider types
+    - **Backward compatibility**: No breaking changes to existing provider implementations
+    
+    **Testing Results**:
+    - **Provider info command**: `STRANDS_PROVIDER=openai provider-info` shows "OpenAI API | Model: gpt-4o"
+    - **Health check**: Successfully detects configured OpenAI API key from .env.local
+    - **Feature support**: Reports support for structured_output, function_calling, streaming, temperature
+    - **Model creation**: All agent types and model variants created without errors
+    - **Live chat test**: `STRANDS_PROVIDER=openai analystai` successfully uses OpenAI for responses
+    
+    **Result**: The system now provides complete multi-provider support with AWS Bedrock, Anthropic, and OpenAI. Users can seamlessly switch between providers using environment variables or configuration settings. The OpenAI integration supports all major features including structured output and function calling, with proper API key management from multiple sources. The implementation maintains consistency across all three providers while preserving their unique capabilities.
 
 [ ] Create comprehensive message-level caching system for conversation continuity in chat agents, including cache invalidation strategies, hit/miss metrics monitoring, and request-level caching for repeated tool operations.
 
