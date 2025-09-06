@@ -1,4 +1,23 @@
 #!/usr/bin/env python3
+import warnings
+import atexit
+
+# Suppress swigvarlink deprecation warning early to prevent it from showing during exit
+warnings.filterwarnings(
+    "ignore",
+    category=DeprecationWarning,
+    message=".*builtin type swigvarlink.*"
+)
+
+# Also suppress all deprecation warnings globally as a fallback
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# Ensure warnings stay suppressed even during exit
+def suppress_warnings_on_exit():
+    warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+atexit.register(suppress_warnings_on_exit)
+
 import argparse
 import sys
 import os

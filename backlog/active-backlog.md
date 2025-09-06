@@ -1,9 +1,19 @@
 # Active Backlog
 
-[ ] Fix the deprecation warning that occurs when I quit the `analystai` CLI.
+[x] Fix the deprecation warning that occurs when I quit the `analystai` CLI.
 🗣️  You: quit
 👋 Thank you for using Analyst Chat. Goodbye!
 <sys>:0: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+**Completion Summary:** Fixed the swigvarlink deprecation warning by implementing comprehensive warning suppression in the CLI. The solution involved:
+1. Enhanced `analyst/utils/shell_wrapper.py` with a new `suppress_swigvarlink_warning()` function to filter SWIG-wrapped C extension warnings
+2. Updated `analyst/cli/chat.py` with early warning suppression, global deprecation warning filtering, and an atexit handler to ensure warnings remain suppressed throughout the program lifecycle
+3. The fix addresses warnings from SWIG-based dependencies (likely PyMuPDF) that occur during Python's cleanup phase when exiting the CLI
+4. Verified that the warning no longer appears when quitting the `analystai` CLI
+
+[ ] When `analystai` quits the Thank You message should be: 
+"Thank you for using Strands Analyst AI. Hope you found it useful."
+"Noticed an issue? Please report here https://github.com/manavsehgal/strands-analyst/issues"
 
 [ ] Create comprehensive message-level caching system for conversation continuity in chat agents, including cache invalidation strategies, hit/miss metrics monitoring, and request-level caching for repeated tool operations.
 

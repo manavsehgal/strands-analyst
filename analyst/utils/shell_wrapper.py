@@ -21,6 +21,15 @@ def suppress_forkpty_warning():
     )
 
 
+def suppress_swigvarlink_warning():
+    """Suppress the swigvarlink deprecation warning from SWIG-wrapped C extensions."""
+    warnings.filterwarnings(
+        "ignore",
+        category=DeprecationWarning,
+        message=".*builtin type swigvarlink.*"
+    )
+
+
 def safe_shell_execute(
     command: str,
     timeout: Optional[int] = None,
@@ -40,6 +49,7 @@ def safe_shell_execute(
         Tuple of (return_code, stdout, stderr)
     """
     suppress_forkpty_warning()
+    suppress_swigvarlink_warning()
     
     # Use subprocess instead of pty-based execution when possible
     try:
@@ -78,6 +88,9 @@ def setup_shell_environment():
     """
     # Suppress forkpty warnings globally
     suppress_forkpty_warning()
+    
+    # Suppress swigvarlink warnings from C extensions
+    suppress_swigvarlink_warning()
     
     # Set environment variables to improve shell behavior
     os.environ.setdefault('PYTHONUNBUFFERED', '1')
