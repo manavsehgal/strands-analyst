@@ -284,6 +284,14 @@ STRANDS_PROVIDER=openai provider-info  # Check specific provider
 ```
 *Monitor and manage multi-provider AI model configurations.*
 
+#### 📄 `pdf-to-markdown` - PDF Document Processing
+```bash
+pdf-to-markdown document.pdf                     # Convert PDF to markdown
+pdf-to-markdown report.pdf --verbose             # Show processing details
+pdf-to-markdown paper.pdf --save-markdown        # Save to organized directory
+```
+*Convert PDF documents to clean, structured markdown with intelligent text extraction.*
+
 ## 🏗️ Architecture & Performance
 
 ### 🌐 Multi-Provider Architecture
@@ -309,12 +317,13 @@ graph TD
 
 | Feature | AWS Bedrock | Anthropic API | OpenAI API |
 |---------|-------------|---------------|-------------|
-| **Models** | Claude 3.7 Sonnet, 3.5 Haiku | Sonnet 4, Opus 4.1, Haiku | GPT-4o, GPT-4o-mini |
+| **Models** | Claude 3.7 Sonnet, 3.5 Haiku | Sonnet 4, Opus 4.1, Haiku | GPT-4o, GPT-4o-mini, o1-preview |
 | **Streaming** | ✅ | ✅ | ✅ |
-| **Function Calling** | ❌ | ❌ | ✅ |
-| **Structured Output** | ❌ | ✅ | ✅ |
+| **Function Calling** | ✅ | ❌ | ✅ |
+| **Structured Output** | ✅ | ✅ | ✅ |
 | **Guardrails** | ✅ | ❌ | ❌ |
 | **Caching** | ✅ | ❌ | ❌ |
+| **Tool Use** | ✅ | ❌ | ✅ |
 | **Cost** | Enterprise | Pay-per-use | Pay-per-use |
 
 ### ⚡ Performance Optimizations
@@ -410,14 +419,22 @@ Real examples from the `analystai-responses/markdown/` directory:
 - **[AWS MoE LLM Architecture](analystai-responses/markdown/aws_moe_llm_architecture.md)** - Comprehensive Mixture-of-Experts implementation guide
 - **[Character.AI Platform Overview](analystai-responses/markdown/character-ai-overview.md)** - AI platform competitive analysis  
 - **[NVIDIA Meta RoCE Analysis](analystai-responses/markdown/nvidia_meta_roce_analysis.md)** - Technical deep-dive with visualizations
+- **[Apple Models Analysis](analystai-responses/markdown/apple-models.md)** - Apple's AI model ecosystem analysis
+- **[AWS Architecture for Agentic AI](analystai-responses/markdown/aws-architecture-agentic-ai-application.md)** - Enterprise-grade agentic AI system design
 
 ### 🏢 **Real-World Article Processing**
 
 The `refer/articles/` directory contains **70+ processed articles** demonstrating comprehensive content extraction:
 
-- **Enterprise case studies**: HubSpot, Decagon, Apple financial analysis
-- **Technical deep-dives**: LLM architectures, AI workflow automation
-- **Industry analyses**: AI business models, technology trends
+- **Enterprise case studies**: [HubSpot's Story](refer/articles/about-hubspot-hubspots-story/), [Decagon Conversational AI](refer/articles/about-decagon-conversational-ai-for-cx/)
+- **Technical deep-dives**: [AI Workflow Automation](refer/articles/ai-workflow-automation-platform-tools-n8n/), LLM architectures
+- **Industry analyses**: [AI Business Models](refer/articles/ai-business-informs-educates-and-connects-the-global-ai-comm/), technology trends
+
+**Sample Processing Results**:
+- **Metadata extraction**: Title, description, author, publish date
+- **Content preservation**: Full article text with formatting
+- **Image downloads**: Local copies of all article images
+- **Structured output**: Clean markdown with organized file structure
 
 ## 🔧 Installation
 
@@ -474,7 +491,7 @@ export STRANDS_PROVIDER=anthropic
 
 ### 📦 Advanced Dependencies
 
-#### For Diagram Generation
+#### For Diagram Generation (Required for `diagram` tool)
 ```bash  
 # macOS
 brew install graphviz
@@ -484,12 +501,25 @@ sudo apt-get install graphviz
 
 # Windows
 # Download from: https://graphviz.org/download/
+
+# Verify installation
+dot -V
 ```
 
-#### For Browser Automation
+#### For Browser Automation (Required for `browser` and `use_computer` tools)
 ```bash
 # Install Playwright browsers for web automation
 playwright install
+
+# Verify browser installation
+playwright list
+```
+
+#### For PDF Processing (Required for `pdf_to_markdown` tool)
+```bash
+# Included with installation via pymupdf4llm
+# Verify with:
+python -c "import pymupdf4llm; print('PDF processing ready')"
 ```
 
 #### AWS Configuration
@@ -527,6 +557,7 @@ aws bedrock get-foundation-model --model-identifier anthropic.claude-3-7-sonnet-
 - **[Article Agent Guide](docs/article-agent-guide.md)** - Web article processing  
 - **[HTML to Markdown Guide](docs/htmlmd-agent-guide.md)** - HTML conversion features
 - **[News Agent Guide](docs/news-agent-guide.md)** - RSS feed analysis
+- **[PDF to Markdown Guide](docs/pdf-to-markdown-guide.md)** - PDF document processing and conversion
 
 ## 🚀 Use Cases
 

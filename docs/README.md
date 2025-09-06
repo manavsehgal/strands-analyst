@@ -88,6 +88,7 @@ provider-info --health-check
 - **[Developer Guide](developer-guide.md)** - Extending the package with new agents and tools
 
 ### Enhanced Features ✨
+- **[PDF to Markdown Guide](pdf-to-markdown-guide.md)** - Convert PDFs to markdown with image extraction and metadata preservation 📄
 - **[Multi-Provider Model Guide](multi-provider-guide.md)** - Switch between AWS Bedrock, Anthropic, and OpenAI providers 🚀
 - **[Smart File Organization Guide](file-organization-guide.md)** - Automatic file categorization and directory management 📁
 - **[Enhanced Tool Output Guide](tool-output-guide.md)** - Rich, colored feedback for tool execution 🔧
