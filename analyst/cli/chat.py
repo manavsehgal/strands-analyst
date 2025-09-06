@@ -146,7 +146,8 @@ def interactive_chat(agent, args):
                 
                 # Handle special commands
                 if user_input.lower() in ['quit', 'exit', 'bye', 'q']:
-                    print("👋 Thank you for using Analyst Chat. Goodbye!")
+                    print("👋 Thank you for using Strands Analyst AI. Hope you found it useful.")
+                    print("Noticed an issue? Please report here https://github.com/manavsehgal/strands-analyst/issues")
                     if args.save_on_exit:
                         save_conversation_summary(agent, args.session_dir)
                     break
@@ -186,12 +187,14 @@ def interactive_chat(agent, args):
                 print()  # Add spacing between exchanges
                 
             except KeyboardInterrupt:
-                print("\n👋 Goodbye!")
+                print("\n👋 Thank you for using Strands Analyst AI. Hope you found it useful.")
+                print("Noticed an issue? Please report here https://github.com/manavsehgal/strands-analyst/issues")
                 if args.save_on_exit:
                     save_conversation_summary(agent, args.session_dir) 
                 break
             except EOFError:
-                print("👋 Goodbye!")
+                print("👋 Thank you for using Strands Analyst AI. Hope you found it useful.")
+                print("Noticed an issue? Please report here https://github.com/manavsehgal/strands-analyst/issues")
                 if args.save_on_exit:
                     save_conversation_summary(agent, args.session_dir)
                 break
