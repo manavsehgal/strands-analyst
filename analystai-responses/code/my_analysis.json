@@ -1,0 +1,142 @@
+{
+  "scenario": {
+    "industry": "IndustryType.SOFTWARE",
+    "product_type": "ai-native",
+    "challenge": "Building a code generation tool",
+    "stage": "StageType.GROWTH",
+    "uncertainty_tolerance": 8,
+    "innovation_priority": 9,
+    "cost_sensitivity": 6,
+    "team_size": null,
+    "current_revenue": null,
+    "user_base_size": null
+  },
+  "deterministic_metrics": {
+    "fit_score": 1.2,
+    "cost_efficiency": 1.6,
+    "development_speed": 5.4,
+    "control_predictability": 9,
+    "scalability_potential": 5,
+    "risk_level": 2,
+    "learning_curve": 4,
+    "maintenance_overhead": 5
+  },
+  "probabilistic_metrics": {
+    "fit_score": 10,
+    "cost_efficiency": 10,
+    "development_speed": 10,
+    "control_predictability": 2,
+    "scalability_potential": 9,
+    "risk_level": 8,
+    "learning_curve": 8,
+    "maintenance_overhead": 7
+  },
+  "recommended_approach": "SystemType.PROBABILISTIC",
+  "confidence_score": 0.95,
+  "recommendations": [
+    {
+      "title": "Implement Minimum Viable Intelligence Framework",
+      "description": "Establish quality thresholds that preserve AI flexibility while meeting market acceptance levels.",
+      "priority": 5,
+      "effort_level": "Medium",
+      "timeline": "2-4 weeks",
+      "success_metrics": [
+        "User satisfaction > 80%",
+        "Task completion rate > 70%",
+        "Hallucination rate < 5%"
+      ],
+      "risks": [
+        "Over-constraining the model",
+        "Insufficient quality control"
+      ],
+      "next_steps": [
+        "Define quality metrics",
+        "Implement evaluation pipeline",
+        "Set up monitoring"
+      ]
+    },
+    {
+      "title": "Transition to Empirical Development",
+      "description": "Adopt scientific method for product development with hypothesis-driven experiments.",
+      "priority": 4,
+      "effort_level": "High",
+      "timeline": "1-3 months",
+      "success_metrics": [
+        "A/B test velocity increase",
+        "Data-driven decisions > 80%",
+        "Feature success rate improvement"
+      ],
+      "risks": [
+        "Team resistance to change",
+        "Longer initial development cycles"
+      ],
+      "next_steps": [
+        "Train team on empirical methods",
+        "Set up experimentation infrastructure",
+        "Define success metrics"
+      ]
+    },
+    {
+      "title": "Build Trajectory Analysis System",
+      "description": "Implement user journey tracking for probabilistic interactions instead of traditional funnels.",
+      "priority": 3,
+      "effort_level": "High",
+      "timeline": "2-4 months",
+      "success_metrics": [
+        "User journey visibility",
+        "Improved retention prediction",
+        "Better feature discovery"
+      ],
+      "risks": [
+        "Complex implementation",
+        "Privacy concerns",
+        "Data storage costs"
+      ],
+      "next_steps": [
+        "Design trajectory schema",
+        "Implement tracking",
+        "Build analysis dashboards"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Your high uncertainty tolerance positions you well for probabilistic systems that can handle ambiguous inputs and provide creative solutions.",
+    "Your innovation focus aligns with probabilistic approaches that can discover unexpected use cases and capabilities.",
+    "Your stage provides the user base and data volume needed to effectively implement probabilistic systems.",
+    "Software development tools can leverage AI for code generation while maintaining deterministic build processes."
+  ],
+  "trajectory_analysis": {
+    "approach": "probabilistic",
+    "timeline_phases": [
+      {
+        "phase": "Foundation",
+        "duration": "1-3 months",
+        "focus": "Data infrastructure and evaluation systems"
+      },
+      {
+        "phase": "Implementation",
+        "duration": "3-6 months",
+        "focus": "Core AI features and user feedback loops"
+      },
+      {
+        "phase": "Optimization",
+        "duration": "6-12 months",
+        "focus": "Trajectory analysis and empirical improvements"
+      },
+      {
+        "phase": "Scale",
+        "duration": "12+ months",
+        "focus": "Advanced AI capabilities and market expansion"
+      }
+    ],
+    "success_probability": 0.9,
+    "risk_factors": [],
+    "success_indicators": [
+      "User engagement metrics improvement",
+      "Feature adoption rates",
+      "System reliability maintenance",
+      "Cost efficiency achievement",
+      "Team productivity increase"
+    ]
+  }
+}

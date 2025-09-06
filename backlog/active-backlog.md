@@ -205,6 +205,63 @@
     
     **Status**: ✅ **COMPLETE & FULLY FUNCTIONAL** - All requested features implemented and working perfectly.
 
+[x] **Implement Multi-Provider Model Support System** - Create robust provider abstraction layer supporting seamless switching between Bedrock and Anthropic APIs with proper credential handling and configuration management.
+
+    **Completion Summary (2025-09-06):**
+    - ✅ **Provider Factory Pattern Implementation**: Created comprehensive `ModelProviderFactory` class in `analyst/utils/model_provider_factory.py` with:
+      - **Automatic provider detection** based on `STRANDS_PROVIDER` environment variable or `config.yml` settings
+      - **Dynamic configuration management** with real-time cache invalidation on provider/config changes
+      - **Feature support detection** for provider-specific capabilities (Bedrock: guardrails, caching; Anthropic: direct API, structured output)
+      - **Intelligent model caching** with cache keys based on provider, agent, model type, and parameters
+    - ✅ **Config Cache Management**: Implemented robust cache invalidation mechanisms:
+      - **Config change detection** monitoring environment variables and configuration file changes
+      - **Automatic cache clearing** when provider switches or configuration updates detected
+      - **Factory reload functionality** via `reload_factory_config()` and `invalidate_factory_cache()` global functions
+      - **Thread-safe configuration updates** with proper logging and state tracking
+    - ✅ **Comprehensive Anthropic Configuration**: Added complete Anthropic provider section to `config.yml`:
+      - **Multi-source API key handling**: Environment variables, `.env.local` file, and config.yml support in priority order
+      - **Performance parameters**: Temperature, top_p, max_tokens configured per agent (sitemeta, news, article, chat)
+      - **Advanced features**: Streaming, structured output, retry mechanisms, and API-specific settings
+      - **Agent-specific configurations**: Tailored model selection and optimization per use case
+    - ✅ **Hybrid Model Creation Approach**: Updated chat agent with dual model creation strategy:
+      - **Direct BedrockModel instantiation** preserved for AWS credential chain compatibility
+      - **Factory pattern integration** for non-Bedrock providers and multi-provider environments  
+      - **Backward compatibility** maintained for existing workflows and static model selection
+      - **Provider info display** showing active provider, model, and region in chat interface
+    - ✅ **Full Model ID Display & Health Checks**: Created `provider-info` CLI command with:
+      - **Complete model identification** showing full inference profile IDs vs truncated names
+      - **Provider health monitoring** testing model creation, API key validation, and service availability
+      - **Dynamic provider switching tests** validating environment variable overrides and config reloads
+      - **Feature compatibility matrix** displaying supported capabilities per provider
+    - ✅ **Advanced Credential Handling**: Enhanced credential management system:
+      - **Priority-based API key detection**: Environment → .env.local → config.yml fallback chain
+      - **AWS credential preservation**: Direct BedrockModel creation maintains specialized AWS auth handling
+      - **Secure credential handling**: No credentials stored in config files, environment-based security model
+      - **Error messaging improvement**: Clear guidance on credential configuration across multiple sources
+    
+    **Key Features Delivered**:
+    - **2 provider types**: AWS Bedrock and Anthropic API with seamless switching
+    - **4 agent configurations**: sitemeta, news, article, chat with provider-specific optimizations
+    - **3 credential sources**: Environment variables, .env.local, and config.yml with priority handling
+    - **Real-time provider switching**: Environment variable overrides with automatic cache invalidation
+    - **Comprehensive health checks**: Model creation validation, API key verification, and service connectivity tests
+    
+    **Technical Implementation**:
+    - **Factory design pattern**: Clean separation of concerns with provider-specific model creation logic
+    - **Configuration management**: Singleton pattern with proper cache invalidation and reload mechanisms
+    - **Error handling**: Graceful degradation with informative error messages and fallback mechanisms
+    - **CLI integration**: New `provider-info` command for monitoring, testing, and debugging provider configuration
+    - **Logging integration**: Comprehensive logging for provider switches, cache invalidation, and health check results
+    
+    **Testing Results**:
+    - **Provider switching**: Successfully tested environment variable overrides with proper cache invalidation
+    - **Health checks**: Validated both healthy (with API keys) and unhealthy (missing credentials) states  
+    - **Chat integration**: Confirmed provider information display in chat interface with correct model identification
+    - **Configuration management**: Verified config cache invalidation and factory reload functionality
+    
+    **Result**: The system now provides comprehensive multi-provider model support with seamless switching between AWS Bedrock and Anthropic API. Users can switch providers via environment variables, manage credentials through multiple secure sources, and monitor provider health through CLI tools. The hybrid approach preserves AWS credential compatibility while enabling flexible provider management. Full model IDs are displayed correctly, and real-time configuration changes are handled gracefully with automatic cache invalidation.
+
+
 [ ] Create comprehensive message-level caching system for conversation continuity in chat agents, including cache invalidation strategies, hit/miss metrics monitoring, and request-level caching for repeated tool operations.
 
 [ ] Build multi-agent orchestration framework implementing the agents-as-tools pattern with workflow management, dependency tracking, concurrent tool execution, and agent specialization for domain-specific tasks.

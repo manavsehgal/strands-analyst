@@ -28,6 +28,7 @@ from ..utils import configure_logging, print_metrics
 from ..utils.dynamic_model_config import get_dynamic_model_manager, create_optimized_model
 from ..utils.tool_output_display import wrap_tools_with_enhanced_output, get_tool_output_config
 from ..utils.enhanced_callback_handler import enhanced_callback_handler
+from ..utils.model_provider_factory import get_model_factory, get_active_provider, get_provider_display_info
 
 
 def _load_community_tools(agent_name: str = "chat") -> List:
@@ -284,7 +285,8 @@ def create_chat_agent(
     session_dir: str = "refer/chat-sessions",
     window_size: int = 20,
     enable_logging: bool = None,
-    dynamic_model_selection: bool = True
+    dynamic_model_selection: bool = True,
+    use_model_factory: bool = True
 ) -> Agent:
     """
     Create and return a chat agent configured for multi-turn conversations.
@@ -295,6 +297,7 @@ def create_chat_agent(
         window_size: Size of the conversation window (default: 20 messages)
         enable_logging: Enable logging. Uses config default if None.
         dynamic_model_selection: Enable dynamic model selection based on task complexity (default: True)
+        use_model_factory: Enable multi-provider model factory (default: True)
     
     Returns:
         Configured Agent instance with session management and dynamic model capabilities
@@ -313,28 +316,40 @@ def create_chat_agent(
     if enable_logging:
         configure_logging(verbose=False)
     
-    # Initialize dynamic model manager and warm up models
+    # Get active provider info for logging
+    active_provider = get_active_provider()
+    provider_info = get_provider_display_info()
+    
+    if enable_logging:
+        print(f"🔧 {provider_info}")
+    
+    # Initialize model based on provider and selection mode
     if dynamic_model_selection:
         dynamic_manager = get_dynamic_model_manager()
-        bedrock_model = None  # Will be set dynamically per message
+        model = None  # Will be set dynamically per message
     else:
-        # Use static model configuration (backward compatibility)
-        bedrock_config = get_bedrock_config_for_agent('chat')
-        
-        # Create optimized Bedrock model
-        bedrock_model = BedrockModel(
-            model_id=bedrock_config['model_id'],
-            temperature=bedrock_config['temperature'],
-            top_p=bedrock_config['top_p'],
-            max_tokens=bedrock_config['max_tokens'],
-            stop_sequences=bedrock_config['stop_sequences'],
-            streaming=bedrock_config['streaming'],
-            region_name=bedrock_config['region_name']
-        )
-        
-        # Add optional features if configured
-        if bedrock_config['guardrail_id']:
-            bedrock_model.guardrail_id = bedrock_config['guardrail_id']
+        # Create model using hybrid approach
+        if use_model_factory and active_provider != 'bedrock':
+            # Use factory for non-Bedrock providers
+            factory = get_model_factory()
+            model = factory.create_model('chat')
+        else:
+            # Use direct BedrockModel creation for AWS credential compatibility
+            bedrock_config = get_bedrock_config_for_agent('chat')
+            
+            model = BedrockModel(
+                model_id=bedrock_config['model_id'],
+                temperature=bedrock_config['temperature'],
+                top_p=bedrock_config['top_p'],
+                max_tokens=bedrock_config['max_tokens'],
+                stop_sequences=bedrock_config['stop_sequences'],
+                streaming=bedrock_config['streaming'],
+                region_name=bedrock_config['region_name']
+            )
+            
+            # Add optional features if configured
+            if bedrock_config['guardrail_id']:
+                model.guardrail_id = bedrock_config['guardrail_id']
     
     # Set up session management for conversation persistence
     session_manager = FileSessionManager(
@@ -366,19 +381,24 @@ def create_chat_agent(
     # Generate system prompt based on available tools
     system_prompt = _generate_system_prompt_with_tools(built_in_tools, community_tools)
     
-    # Create agent with dynamic model selection support
-    if dynamic_model_selection:
-        # Create a default model for initialization, will be replaced dynamically
-        bedrock_config = get_bedrock_config_for_agent('chat')
-        bedrock_model = BedrockModel(
-            model_id=bedrock_config['model_id'],
-            temperature=bedrock_config['temperature'],
-            top_p=bedrock_config['top_p'],
-            max_tokens=bedrock_config['max_tokens'],
-            stop_sequences=bedrock_config['stop_sequences'],
-            streaming=bedrock_config['streaming'],
-            region_name=bedrock_config['region_name']
-        )
+    # Create default model for dynamic selection initialization if needed
+    if dynamic_model_selection and model is None:
+        if use_model_factory and active_provider != 'bedrock':
+            # Use factory for non-Bedrock providers
+            factory = get_model_factory()
+            model = factory.create_model('chat')
+        else:
+            # Use direct BedrockModel for AWS credential compatibility
+            bedrock_config = get_bedrock_config_for_agent('chat')
+            model = BedrockModel(
+                model_id=bedrock_config['model_id'],
+                temperature=bedrock_config['temperature'],
+                top_p=bedrock_config['top_p'],
+                max_tokens=bedrock_config['max_tokens'],
+                stop_sequences=bedrock_config['stop_sequences'],
+                streaming=bedrock_config['streaming'],
+                region_name=bedrock_config['region_name']
+            )
     
     # Set up callback handler for enhanced tool output if enabled
     callback_handler = None
@@ -386,17 +406,19 @@ def create_chat_agent(
     if tool_config.get('enabled', True):
         callback_handler = enhanced_callback_handler
     
-    # Create agent with optimized model, all available tools and session management
+    # Create agent with model, all available tools and session management
     agent = Agent(
-        model=bedrock_model,
+        model=model,
         tools=all_tools,
         session_manager=session_manager,
         system_prompt=system_prompt,
         callback_handler=callback_handler
     )
     
-    # Store dynamic model selection flag on agent for later use
+    # Store configuration flags on agent for later use
     agent._dynamic_model_selection = dynamic_model_selection
+    agent._use_model_factory = use_model_factory
+    agent._active_provider = active_provider
     
     return agent
 

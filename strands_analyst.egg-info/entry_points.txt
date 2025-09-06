@@ -3,4 +3,5 @@ analystai = analyst.cli.chat:main
 article = analyst.cli.get_article:main
 htmlmd = analyst.cli.html_to_markdown:main
 news = analyst.cli.news:main
+provider-info = analyst.cli.provider_info:main
 sitemeta = analyst.cli.sitemeta:main

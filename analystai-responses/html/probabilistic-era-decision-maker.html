@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probabilistic Era Decision Maker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .scenario-builder {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .slider-container {
+            margin: 20px 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            width: 100%;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .results {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .system-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .system-card.deterministic {
+            border-color: #e74c3c;
+        }
+
+        .system-card.probabilistic {
+            border-color: #3498db;
+        }
+
+        .system-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .system-card.deterministic h3 {
+            color: #e74c3c;
+        }
+
+        .system-card.probabilistic h3 {
+            color: #3498db;
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .recommendations {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .recommendations h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .recommendation-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .recommendation-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-item p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .insight-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Probabilistic Era Decision Maker</h1>
+            <p>Navigate the shift from deterministic to probabilistic systems. Analyze your scenarios and get AI-powered recommendations for building products in the new era.</p>
+        </div>
+
+        <div class="main-content">
+            <div class="scenario-builder">
+                <h2 style="margin-bottom: 25px; color: #2c3e50;">📊 Build Your Scenario</h2>
+                
+                <div class="form-group">
+                    <label for="industry">Industry/Domain</label>
+                    <select id="industry">
+                        <option value="">Select your industry...</option>
+                        <option value="software">Software Development</option>
+                        <option value="fintech">Financial Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="ecommerce">E-commerce</option>
+                        <option value="education">Education</option>
+                        <option value="media">Media & Content</option>
+                        <option value="gaming">Gaming</option>
+                        <option value="enterprise">Enterprise Software</option>
+                        <option value="startup">Early-stage Startup</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="product-type">Product Type</label>
+                    <select id="product-type">
+                        <option value="">Select product type...</option>
+                        <option value="ai-native">AI-Native Product</option>
+                        <option value="ai-enhanced">AI-Enhanced Traditional Product</option>
+                        <option value="traditional">Traditional Software Product</option>
+                        <option value="platform">Platform/Marketplace</option>
+                        <option value="saas">SaaS Application</option>
+                        <option value="consumer">Consumer App</option>
+                        <option value="enterprise">Enterprise Tool</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="challenge">Primary Challenge/Decision</label>
+                    <textarea id="challenge" placeholder="Describe your main challenge or decision you need to make..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="stage">Company/Product Stage</label>
+                    <select id="stage">
+                        <option value="">Select stage...</option>
+                        <option value="ideation">Ideation</option>
+                        <option value="mvp">MVP Development</option>
+                        <option value="early">Early Stage (0-1M ARR)</option>
+                        <option value="growth">Growth Stage (1-10M ARR)</option>
+                        <option value="scale">Scale Stage (10M+ ARR)</option>
+                        <option value="enterprise">Enterprise/Mature</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Uncertainty Tolerance</label>
+                    <div class="slider-container">
+                        <input type="range" id="uncertainty" class="slider" min="1" max="10" value="5">
+                        <div class="slider-labels">
+                            <span>Low (Prefer Predictability)</span>
+                            <span>High (Embrace Uncertainty)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Innovation vs Reliability Priority</label>
+                    <div class="slider-container">
+                        <input type="range" id="innovation" class="slider" min="1" max="10" value="5">
+                        <div class="slider-labels">
+                            <span>Reliability First</span>
+                            <span>Innovation First</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Cost Sensitivity</label>
+                    <div class="slider-container">
+                        <input type="range" id="cost" class="slider" min="1" max="10" value="5">
+                        <div class="slider-labels">
+                            <span>Cost-Sensitive</span>
+                            <span>Performance Over Cost</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="analyze-btn" onclick="analyzeScenario()">
+                    🔍 Analyze Scenario & Get Recommendations
+                </button>
+            </div>
+
+            <div id="results" class="results">
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing your scenario...</p>
+                </div>
+
+                <div id="analysis-content" style="display: none;">
+                    <h2 style="margin-bottom: 25px; color: #2c3e50;">📈 System Analysis Results</h2>
+                    
+                    <div class="comparison-grid">
+                        <div class="system-card deterministic">
+                            <h3><span class="icon">⚙️</span>Deterministic Approach</h3>
+                            <div id="deterministic-metrics"></div>
+                        </div>
+                        
+                        <div class="system-card probabilistic">
+                            <h3><span class="icon">🎲</span>Probabilistic Approach</h3>
+                            <div id="probabilistic-metrics"></div>
+                        </div>
+                    </div>
+
+                    <div class="recommendations">
+                        <h3><span class="icon">💡</span>Tailored Recommendations</h3>
+                        <div id="recommendations-content"></div>
+                        <div id="insight-tags" class="insight-tags"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function analyzeScenario() {
+            const industry = document.getElementById('industry').value;
+            const productType = document.getElementById('product-type').value;
+            const challenge = document.getElementById('challenge').value;
+            const stage = document.getElementById('stage').value;
+            const uncertainty = document.getElementById('uncertainty').value;
+            const innovation = document.getElementById('innovation').value;
+            const cost = document.getElementById('cost').value;
+
+            if (!industry || !productType || !challenge || !stage) {
+                alert('Please fill in all required fields before analyzing.');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('analysis-content').style.display = 'none';
+
+            // Simulate analysis delay
+            setTimeout(() => {
+                performAnalysis(industry, productType, challenge, stage, uncertainty, innovation, cost);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('analysis-content').style.display = 'block';
+            }, 2000);
+        }
+
+        function performAnalysis(industry, productType, challenge, stage, uncertainty, innovation, cost) {
+            const analysis = generateAnalysis(industry, productType, challenge, stage, uncertainty, innovation, cost);
+            
+            // Update deterministic metrics
+            document.getElementById('deterministic-metrics').innerHTML = generateMetrics(analysis.deterministic);
+            
+            // Update probabilistic metrics
+            document.getElementById('probabilistic-metrics').innerHTML = generateMetrics(analysis.probabilistic);
+            
+            // Update recommendations
+            document.getElementById('recommendations-content').innerHTML = generateRecommendations(analysis.recommendations);
+            
+            // Update insight tags
+            document.getElementById('insight-tags').innerHTML = generateTags(analysis.tags);
+        }
+
+        function generateAnalysis(industry, productType, challenge, stage, uncertainty, innovation, cost) {
+            const uncertaintyScore = parseInt(uncertainty);
+            const innovationScore = parseInt(innovation);
+            const costScore = parseInt(cost);
+
+            // Calculate scores based on inputs
+            const deterministicFit = Math.max(1, 10 - uncertaintyScore - (innovationScore - 5));
+            const probabilisticFit = Math.max(1, uncertaintyScore + (innovationScore - 3));
+
+            const deterministicCost = Math.max(1, 8 - costScore);
+            const probabilisticCost = Math.max(3, costScore + 2);
+
+            const deterministicSpeed = stage === 'mvp' || stage === 'early' ? 8 : 6;
+            const probabilisticSpeed = stage === 'growth' || stage === 'scale' ? 8 : 5;
+
+            const deterministicControl = 9;
+            const probabilisticControl = Math.max(2, 7 - uncertaintyScore);
+
+            const deterministicScalability = productType === 'traditional' ? 7 : 5;
+            const probabilisticScalability = productType === 'ai-native' ? 9 : 7;
+
+            return {
+                deterministic: {
+                    fit: deterministicFit,
+                    cost: deterministicCost,
+                    speed: deterministicSpeed,
+                    control: deterministicControl,
+                    scalability: deterministicScalability
+                },
+                probabilistic: {
+                    fit: probabilisticFit,
+                    cost: probabilisticCost,
+                    speed: probabilisticSpeed,
+                    control: probabilisticControl,
+                    scalability: probabilisticScalability
+                },
+                recommendations: generateSmartRecommendations(industry, productType, stage, uncertaintyScore, innovationScore, costScore),
+                tags: generateInsightTags(industry, productType, stage, uncertaintyScore, innovationScore)
+            };
+        }
+
+        function generateMetrics(system) {
+            return `
+                <div class="metric">
+                    <span class="metric-label">Fit Score</span>
+                    <span class="metric-value">${system.fit}/10</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${system.fit * 10}%"></div>
+                </div>
+                
+                <div class="metric">
+                    <span class="metric-label">Cost Efficiency</span>
+                    <span class="metric-value">${system.cost}/10</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${system.cost * 10}%"></div>
+                </div>
+                
+                <div class="metric">
+                    <span class="metric-label">Development Speed</span>
+                    <span class="metric-value">${system.speed}/10</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${system.speed * 10}%"></div>
+                </div>
+                
+                <div class="metric">
+                    <span class="metric-label">Control & Predictability</span>
+                    <span class="metric-value">${system.control}/10</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${system.control * 10}%"></div>
+                </div>
+                
+                <div class="metric">
+                    <span class="metric-label">Scalability Potential</span>
+                    <span class="metric-value">${system.scalability}/10</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${system.scalability * 10}%"></div>
+                </div>
+            `;
+        }
+
+        function generateSmartRecommendations(industry, productType, stage, uncertainty, innovation, cost) {
+            const recommendations = [];
+
+            // Primary recommendation based on scores
+            if (uncertainty >= 7 && innovation >= 7) {
+                recommendations.push({
+                    title: "Embrace the Probabilistic Era",
+                    content: "Your high tolerance for uncertainty and innovation focus makes you ideal for probabilistic systems. Consider building AI-native features that can handle ambiguous inputs and provide intelligent, contextual outputs."
+                });
+            } else if (uncertainty <= 4 && innovation <= 4) {
+                recommendations.push({
+                    title: "Optimize Deterministic Systems",
+                    content: "Your preference for predictability suggests focusing on deterministic approaches. Invest in robust testing, clear SLOs, and traditional engineering practices while selectively adding AI enhancements."
+                });
+            } else {
+                recommendations.push({
+                    title: "Hybrid Approach Strategy",
+                    content: "Your balanced preferences suggest a hybrid approach. Use deterministic systems for core functionality while experimenting with probabilistic AI features in non-critical areas."
+                });
+            }
+
+            // Stage-specific recommendations
+            if (stage === 'mvp' || stage === 'early') {
+                recommendations.push({
+                    title: "MVP-Stage Focus",
+                    content: "At your stage, prioritize rapid validation over perfect systems. Use deterministic approaches for core features but experiment with AI to differentiate. Focus on Minimum Viable Intelligence rather than perfect accuracy."
+                });
+            } else if (stage === 'growth' || stage === 'scale') {
+                recommendations.push({
+                    title: "Scale-Stage Optimization",
+                    content: "You're at the perfect stage to implement sophisticated probabilistic systems. Invest in data infrastructure, trajectory analysis, and empirical testing methods. Your user base provides the data needed for effective AI implementation."
+                });
+            }
+
+            // Industry-specific recommendations
+            const industryAdvice = {
+                'software': "Consider AI-powered code generation, intelligent debugging, and adaptive user interfaces.",
+                'fintech': "Implement probabilistic fraud detection and personalized financial advice while maintaining deterministic transaction processing.",
+                'healthcare': "Use AI for diagnostic assistance and treatment recommendations while keeping critical systems deterministic.",
+                'ecommerce': "Leverage AI for personalized recommendations and dynamic pricing while maintaining reliable checkout processes.",
+                'education': "Implement adaptive learning systems and intelligent tutoring while keeping core administrative functions deterministic."
+            };
+
+            if (industryAdvice[industry]) {
+                recommendations.push({
+                    title: `${industry.charAt(0).toUpperCase() + industry.slice(1)} Strategy`,
+                    content: industryAdvice[industry]
+                });
+            }
+
+            // Cost-based recommendations
+            if (cost <= 4) {
+                recommendations.push({
+                    title: "Cost-Conscious Implementation",
+                    content: "Given your cost sensitivity, start with smaller, focused AI implementations. Use efficient models, implement caching strategies, and carefully monitor token usage. Consider open-source alternatives and gradual rollouts."
+                });
+            } else if (cost >= 8) {
+                recommendations.push({
+                    title: "Performance-First Approach",
+                    content: "Your willingness to invest in performance allows for cutting-edge AI implementations. Consider premium models, extensive data processing, and sophisticated evaluation systems to maximize user value."
+                });
+            }
+
+            return recommendations;
+        }
+
+        function generateRecommendations(recommendations) {
+            return recommendations.map(rec => `
+                <div class="recommendation-item">
+                    <h4>${rec.title}</h4>
+                    <p>${rec.content}</p>
+                </div>
+            `).join('');
+        }
+
+        function generateInsightTags(industry, productType, stage, uncertainty, innovation) {
+            const tags = [];
+            
+            if (uncertainty >= 7) tags.push("High Uncertainty Tolerance");
+            if (innovation >= 7) tags.push("Innovation-Focused");
+            if (uncertainty <= 4) tags.push("Predictability-Focused");
+            if (innovation <= 4) tags.push("Reliability-First");
+            
+            tags.push(`${stage.charAt(0).toUpperCase() + stage.slice(1)} Stage`);
+            tags.push(`${industry.charAt(0).toUpperCase() + industry.slice(1)} Industry`);
+            
+            if (productType === 'ai-native') tags.push("AI-Native Ready");
+            if (productType === 'traditional') tags.push("Traditional Architecture");
+            
+            return tags;
+        }
+
+        function generateTags(tags) {
+            return tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        }
+
+        // Add some interactivity to sliders
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliders = document.querySelectorAll('.slider');
+            sliders.forEach(slider => {
+                slider.addEventListener('input', function() {
+                    // Could add real-time preview updates here
+                });
+            });
+        });
+    </script>
+</body>
+</html>

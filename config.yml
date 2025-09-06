@@ -222,6 +222,24 @@ metrics:
     # Add spacing around metrics
     add_spacing: true
 
+# Multi-Provider Model Configuration
+# Supports AWS Bedrock and Anthropic API providers
+
+# Active Provider Configuration
+# Controls which model provider is used by default
+providers:
+  # Active provider: 'bedrock' or 'anthropic'
+  # Can be overridden by STRANDS_PROVIDER environment variable
+  active: "anthropic"
+  
+  # Provider display preferences
+  show_full_model_ids: true
+  
+  # Provider health checks
+  health_checks:
+    enabled: true
+    timeout: 10  # seconds
+
 # Amazon Bedrock Model Configuration
 # Optimizes agent performance using AWS Bedrock model provider
 bedrock:
@@ -368,6 +386,100 @@ bedrock:
     hourly_token_limit: 0
     
     # Maximum cost per hour in USD (0.0 = no limit)
+    hourly_cost_limit: 0.0
+
+# Anthropic API Model Configuration
+# Direct API access to Anthropic's models
+anthropic:
+  # API configuration
+  api:
+    # API key is loaded from ANTHROPIC_API_KEY environment variable
+    # Never store API keys in configuration files
+    api_key: null  # Use ANTHROPIC_API_KEY env var
+    
+    # API base URL (for custom endpoints)
+    base_url: "https://api.anthropic.com"
+    
+    # Request timeout settings
+    timeout: 120
+  
+  # Model configuration
+  model:
+    # Default model for Anthropic API
+    default_model_id: "claude-sonnet-4-20250514"
+    
+    # Model IDs for specific use cases
+    models:
+      fast: "claude-3-5-haiku-latest"
+      reasoning: "claude-opus-4-1-20250805"
+      chat: "claude-sonnet-4-20250514"
+  
+  # Performance parameters (same structure as Bedrock)
+  performance:
+    temperature:
+      default: 0.3
+      sitemeta: 0.2
+      news: 0.4
+      article: 0.3
+      chat: 0.5
+    
+    top_p:
+      default: 0.8
+      sitemeta: 0.7
+      news: 0.8
+      article: 0.8
+      chat: 0.9
+    
+    max_tokens:
+      default: 4096
+      sitemeta: 2048
+      news: 3072
+      article: 8192
+      chat: 8192
+    
+    stop_sequences:
+      default: []
+  
+  # Advanced settings
+  advanced:
+    streaming: true
+    
+    # API-specific features
+    structured_output: false
+    
+    # Request retries
+    max_retries: 3
+    retry_delay: 1.0
+  
+  # Agent-specific configurations
+  agents:
+    sitemeta:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+    
+    news:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+    
+    article:
+      model_id: null
+      reasoning_mode: true
+      optimize_system_prompt: true
+    
+    chat:
+      model_id: null
+      reasoning_mode: false
+      optimize_system_prompt: true
+      session_optimization: true
+      multimodal: true
+  
+  # Usage tracking
+  cost_optimization:
+    track_usage: true
+    cost_warnings: true
+    hourly_token_limit: 0
     hourly_cost_limit: 0.0
 
 # Community Tools Configuration

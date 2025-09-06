@@ -1,0 +1,254 @@
+{
+  "example_scenarios": [
+    {
+      "name": "AI-Native Code Assistant Startup",
+      "description": "Building an AI-powered coding assistant from scratch",
+      "scenario": {
+        "industry": "software",
+        "product_type": "ai-native",
+        "challenge": "Creating an intelligent code generation and debugging tool that can handle ambiguous developer requests and provide contextual solutions",
+        "stage": "mvp",
+        "uncertainty_tolerance": 9,
+        "innovation_priority": 10,
+        "cost_sensitivity": 7,
+        "team_size": 8,
+        "current_revenue": 0,
+        "user_base_size": 100
+      },
+      "expected_outcome": "probabilistic"
+    },
+    {
+      "name": "Enterprise CRM AI Enhancement",
+      "description": "Adding AI features to an existing enterprise CRM system",
+      "scenario": {
+        "industry": "enterprise",
+        "product_type": "ai-enhanced",
+        "challenge": "Integrating AI-powered lead scoring, customer insights, and automated follow-up recommendations into our established CRM platform without disrupting core functionality",
+        "stage": "scale",
+        "uncertainty_tolerance": 4,
+        "innovation_priority": 6,
+        "cost_sensitivity": 3,
+        "team_size": 45,
+        "current_revenue": 50000000,
+        "user_base_size": 10000
+      },
+      "expected_outcome": "hybrid"
+    },
+    {
+      "name": "Healthcare Diagnostic Support Tool",
+      "description": "AI-assisted medical diagnosis for healthcare providers",
+      "scenario": {
+        "industry": "healthcare",
+        "product_type": "ai-native",
+        "challenge": "Developing an AI system that can assist doctors in diagnosing rare diseases by analyzing patient symptoms, medical history, and test results while maintaining high accuracy and explainability",
+        "stage": "early",
+        "uncertainty_tolerance": 3,
+        "innovation_priority": 8,
+        "cost_sensitivity": 2,
+        "team_size": 15,
+        "current_revenue": 500000,
+        "user_base_size": 50
+      },
+      "expected_outcome": "hybrid"
+    },
+    {
+      "name": "E-commerce Personalization Engine",
+      "description": "AI-driven product recommendations and personalization",
+      "scenario": {
+        "industry": "ecommerce",
+        "product_type": "ai-enhanced",
+        "challenge": "Implementing advanced personalization algorithms that can predict customer preferences, optimize product recommendations, and increase conversion rates while maintaining fast page load times",
+        "stage": "growth",
+        "uncertainty_tolerance": 7,
+        "innovation_priority": 8,
+        "cost_sensitivity": 5,
+        "team_size": 25,
+        "current_revenue": 5000000,
+        "user_base_size": 100000
+      },
+      "expected_outcome": "probabilistic"
+    },
+    {
+      "name": "Traditional Banking Core System",
+      "description": "Modernizing legacy banking infrastructure",
+      "scenario": {
+        "industry": "fintech",
+        "product_type": "traditional",
+        "challenge": "Upgrading our core banking system to handle modern transaction volumes while maintaining 99.99% uptime and regulatory compliance, with potential for future AI enhancements",
+        "stage": "enterprise",
+        "uncertainty_tolerance": 2,
+        "innovation_priority": 3,
+        "cost_sensitivity": 4,
+        "team_size": 100,
+        "current_revenue": 200000000,
+        "user_base_size": 1000000
+      },
+      "expected_outcome": "deterministic"
+    }
+  ],
+  "industry_profiles": {
+    "software": {
+      "typical_uncertainty_tolerance": 8,
+      "typical_innovation_priority": 9,
+      "common_challenges": [
+        "Code generation and automation",
+        "Developer productivity tools",
+        "Intelligent debugging and testing",
+        "Automated documentation",
+        "Performance optimization"
+      ],
+      "ai_opportunities": [
+        "Natural language to code translation",
+        "Intelligent code completion",
+        "Automated bug detection and fixing",
+        "Performance profiling and optimization",
+        "Intelligent testing and QA"
+      ]
+    },
+    "fintech": {
+      "typical_uncertainty_tolerance": 4,
+      "typical_innovation_priority": 6,
+      "common_challenges": [
+        "Fraud detection and prevention",
+        "Regulatory compliance automation",
+        "Risk assessment and management",
+        "Customer onboarding optimization",
+        "Transaction processing reliability"
+      ],
+      "ai_opportunities": [
+        "Advanced fraud detection algorithms",
+        "Personalized financial advice",
+        "Automated compliance monitoring",
+        "Credit risk assessment",
+        "Customer service chatbots"
+      ]
+    },
+    "healthcare": {
+      "typical_uncertainty_tolerance": 3,
+      "typical_innovation_priority": 7,
+      "common_challenges": [
+        "Diagnostic accuracy and speed",
+        "Patient data privacy and security",
+        "Regulatory compliance (FDA, HIPAA)",
+        "Integration with existing systems",
+        "Clinical workflow optimization"
+      ],
+      "ai_opportunities": [
+        "Medical image analysis",
+        "Drug discovery acceleration",
+        "Personalized treatment recommendations",
+        "Clinical decision support",
+        "Predictive health analytics"
+      ]
+    },
+    "ecommerce": {
+      "typical_uncertainty_tolerance": 7,
+      "typical_innovation_priority": 8,
+      "common_challenges": [
+        "Personalization at scale",
+        "Inventory management optimization",
+        "Customer acquisition cost reduction",
+        "Conversion rate optimization",
+        "Supply chain efficiency"
+      ],
+      "ai_opportunities": [
+        "Dynamic pricing optimization",
+        "Personalized product recommendations",
+        "Demand forecasting",
+        "Customer lifetime value prediction",
+        "Automated customer service"
+      ]
+    },
+    "education": {
+      "typical_uncertainty_tolerance": 5,
+      "typical_innovation_priority": 7,
+      "common_challenges": [
+        "Personalized learning paths",
+        "Student engagement and retention",
+        "Assessment and grading automation",
+        "Learning outcome measurement",
+        "Accessibility and inclusion"
+      ],
+      "ai_opportunities": [
+        "Adaptive learning systems",
+        "Intelligent tutoring systems",
+        "Automated essay grading",
+        "Learning analytics and insights",
+        "Accessibility tools and translation"
+      ]
+    }
+  },
+  "stage_characteristics": {
+    "ideation": {
+      "primary_focus": "Validation and speed",
+      "typical_team_size": "1-5",
+      "key_metrics": ["User feedback quality", "Time to first user", "Concept validation"],
+      "common_constraints": ["Limited resources", "High uncertainty", "Need for rapid iteration"]
+    },
+    "mvp": {
+      "primary_focus": "Core functionality and user feedback",
+      "typical_team_size": "3-10",
+      "key_metrics": ["Feature completion", "User engagement", "Technical feasibility"],
+      "common_constraints": ["Technical debt acceptable", "Limited feature set", "Focus on core value"]
+    },
+    "early": {
+      "primary_focus": "Product-market fit",
+      "typical_team_size": "5-20",
+      "key_metrics": ["User retention", "Revenue growth", "Market feedback"],
+      "common_constraints": ["Resource optimization", "Scaling challenges", "Team building"]
+    },
+    "growth": {
+      "primary_focus": "Scaling and optimization",
+      "typical_team_size": "15-50",
+      "key_metrics": ["Growth rate", "Unit economics", "Operational efficiency"],
+      "common_constraints": ["Scaling infrastructure", "Team coordination", "Process optimization"]
+    },
+    "scale": {
+      "primary_focus": "Efficiency and market expansion",
+      "typical_team_size": "30-200",
+      "key_metrics": ["Profitability", "Market share", "Operational excellence"],
+      "common_constraints": ["Complex systems", "Regulatory requirements", "Competition"]
+    },
+    "enterprise": {
+      "primary_focus": "Stability and incremental innovation",
+      "typical_team_size": "50-500+",
+      "key_metrics": ["System reliability", "Customer satisfaction", "Market leadership"],
+      "common_constraints": ["Legacy systems", "Risk aversion", "Regulatory compliance"]
+    }
+  },
+  "recommendation_templates": {
+    "probabilistic_high_confidence": {
+      "title": "Full Probabilistic Transformation",
+      "description": "Your scenario strongly favors probabilistic systems. Embrace AI-native development with empirical methods and trajectory analysis.",
+      "key_actions": [
+        "Implement Minimum Viable Intelligence framework",
+        "Build comprehensive data infrastructure",
+        "Adopt empirical development practices",
+        "Create trajectory analysis systems",
+        "Invest in AI talent and capabilities"
+      ]
+    },
+    "deterministic_high_confidence": {
+      "title": "Optimize Classical Systems",
+      "description": "Your scenario strongly favors deterministic approaches. Focus on reliability, performance, and selective AI enhancement.",
+      "key_actions": [
+        "Strengthen SLO monitoring and alerting",
+        "Optimize traditional conversion funnels",
+        "Implement selective AI enhancements",
+        "Maintain engineering excellence practices",
+        "Focus on predictable user experiences"
+      ]
+    },
+    "hybrid_balanced": {
+      "title": "Strategic Hybrid Approach",
+      "description": "Your scenario benefits from a balanced hybrid approach combining the best of both paradigms.",
+      "key_actions": [
+        "Design layered architecture with deterministic core",
+        "Add probabilistic enhancements incrementally",
+        "Implement dual metric systems",
+        "Build capabilities in both paradigms",
+        "Manage transition risks carefully"
+      ]
+    }
+  }
+}
