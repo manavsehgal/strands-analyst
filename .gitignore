@@ -192,9 +192,9 @@ credentials/
 *.cert
 
 # Generated content directories
-analystai-responses/
-refer/
-diagrams/
+# analystai-responses/
+# refer/
+# diagrams/
 repl_state/
 repl-content/
 

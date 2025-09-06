@@ -7,10 +7,11 @@ from .fetch_rss_content import fetch_rss_content
 from .download_article_content import download_article_content
 from .convert_html_to_markdown import convert_html_to_markdown
 from .pdf_to_markdown import pdf_to_markdown
+from .download_pdf_to_markdown import download_pdf_to_markdown
 from .speak_tool import speak_custom
 from .save_file import save_file
 from .save_file_smart import save_file_smart
 from .http_request_tool import http_request_custom
 from .python_repl_tool import python_repl_custom
 
-__all__ = ["fetch_url_metadata", "fetch_rss_content", "download_article_content", "convert_html_to_markdown", "pdf_to_markdown", "speak_custom", "save_file", "save_file_smart", "http_request_custom", "python_repl_custom"]
+__all__ = ["fetch_url_metadata", "fetch_rss_content", "download_article_content", "convert_html_to_markdown", "pdf_to_markdown", "download_pdf_to_markdown", "speak_custom", "save_file", "save_file_smart", "http_request_custom", "python_repl_custom"]

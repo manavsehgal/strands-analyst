@@ -33,6 +33,7 @@ COLORS = {
 }
 
 
+
 def get_tool_output_config() -> Dict[str, Any]:
     """Get the tool output configuration from config.yml with environment variable overrides."""
     import os
@@ -97,7 +98,7 @@ def format_tool_name(tool_name: str) -> str:
     """Format tool name for display."""
     config = get_tool_output_config()
     color = config.get('colors', {}).get('tool_name', 'cyan')
-    return colorize(f"🔧 Tool: {tool_name}", color, bold=True)
+    return colorize(f"⚙️ Tool: {tool_name}", color, bold=True)
 
 
 def format_input(input_type: str, input_value: str) -> str:
@@ -120,7 +121,7 @@ def format_input(input_type: str, input_value: str) -> str:
     if len(input_value) > 100:
         input_value = input_value[:97] + "..."
     
-    return colorize(f"  {icon} {input_type.capitalize()}: {input_value}", color)
+    return colorize(f"  ∟{icon} {input_type.capitalize()}: {input_value}", color)
 
 
 def format_error(error: Exception, context: Optional[Dict[str, Any]] = None) -> str:

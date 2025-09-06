@@ -1,10 +1,3 @@
-# Active Backlog
-
-[ ] Fix the deprecation warning that occurs when I quit the `analystai` CLI.
-🗣️  You: quit
-👋 Thank you for using Analyst Chat. Goodbye!
-<sys>:0: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
-
 [ ] Create comprehensive message-level caching system for conversation continuity in chat agents, including cache invalidation strategies, hit/miss metrics monitoring, and request-level caching for repeated tool operations.
 
 [ ] Build multi-agent orchestration framework implementing the agents-as-tools pattern with workflow management, dependency tracking, concurrent tool execution, and agent specialization for domain-specific tasks.
@@ -18,4 +11,3 @@
 [ ] Enhance security guardrails with advanced prompt injection defense patterns, structured input validation with clear section delimiters, adversarial example detection, Bedrock guardrails integration, and security audit trails for sensitive operations.
 
 [ ] Create automated quality assurance system with agent behavior consistency testing, performance regression testing, output quality scoring, A/B testing framework for agent improvements, and continuous evaluation pipelines.
-

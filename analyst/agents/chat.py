@@ -17,6 +17,8 @@ from ..tools import (
     fetch_rss_content, 
     download_article_content,
     convert_html_to_markdown,
+    pdf_to_markdown,
+    download_pdf_to_markdown,
     speak_custom,
     save_file,
     save_file_smart,
@@ -366,6 +368,8 @@ def create_chat_agent(
         fetch_rss_content,
         download_article_content,
         convert_html_to_markdown,
+        pdf_to_markdown,  # Convert local PDF files to markdown
+        download_pdf_to_markdown,  # Download and convert PDF URLs to markdown
         speak_custom,
         save_file,
         save_file_smart,  # Enhanced file saving with smart directory selection
