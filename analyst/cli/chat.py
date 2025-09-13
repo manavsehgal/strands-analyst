@@ -41,7 +41,7 @@ from ..utils import configure_logging, get_rotating_prompts, get_more_examples
 
 
 def setup_readline(history_file: Optional[Path] = None):
-    """Set up readline for better input handling with history and line editing."""
+    """Set up readline for basic input handling with history and simple cursor navigation."""
     if not HAS_READLINE:
         return
     
@@ -56,27 +56,11 @@ def setup_readline(history_file: Optional[Path] = None):
             except Exception:
                 pass  # Ignore errors reading history
         
-        # Minimal readline configuration - let the terminal handle most bindings
-        # This allows the terminal's default inputrc to work properly
-        
-        # Only set essential bindings that might not be default
-        if sys.platform == 'darwin':
-            # macOS-specific configuration
-            # Enable meta key as escape for Option key combinations
-            readline.parse_and_bind('set input-meta on')
-            readline.parse_and_bind('set output-meta on')
-            readline.parse_and_bind('set convert-meta off')
-            
-            # Word navigation with Option+Left/Right (using escape sequences)
-            # These are the standard sequences that Terminal.app sends
-            readline.parse_and_bind(r'"\e\e[D": backward-word')  # Option+Left
-            readline.parse_and_bind(r'"\e\e[C": forward-word')   # Option+Right
-            readline.parse_and_bind(r'"\eb": backward-word')     # Option+B (fallback)
-            readline.parse_and_bind(r'"\ef": forward-word')      # Option+F (fallback)
-        else:
-            # Linux configuration
-            readline.parse_and_bind(r'"\e[1;5D": backward-word')  # Ctrl+Left
-            readline.parse_and_bind(r'"\e[1;5C": forward-word')   # Ctrl+Right
+        # Basic readline configuration - no word navigation to avoid character insertion issues
+        # Supports only:
+        # - Up/Down arrows: Command history navigation
+        # - Left/Right arrows: Basic cursor movement
+        # - Standard editing keys (Ctrl+A/E, Ctrl+K/U, etc.) via terminal defaults
         
     except Exception:
         pass  # Silently ignore readline setup errors
@@ -125,14 +109,7 @@ def print_help():
     print("⌨️  Keyboard Shortcuts:")
     print("  ↑/↓              - Navigate command history")
     print("  ←/→              - Move cursor left/right")
-    if sys.platform == 'darwin':
-        print("  Option+←/→       - Jump word backward/forward")
-        print("  Option+B/F       - Jump word backward/forward (alternate)")
-        print("  Command+A/E      - Jump to beginning/end of line")
-    else:
-        print("  Ctrl+←/→         - Jump word backward/forward")
-        print("  Alt+B/F          - Jump word backward/forward (alternate)")
-        print("  Ctrl+A/E         - Jump to beginning/end of line")
+    print("  Ctrl+A/E         - Jump to beginning/end of line")
     print("  Ctrl+K/U         - Delete from cursor to end/beginning of line")
     print("  Ctrl+W           - Delete word backward")
     print("  Backspace/Delete - Delete characters")
