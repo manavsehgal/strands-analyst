@@ -63,13 +63,18 @@ def setup_readline(history_file: Optional[Path] = None):
             except Exception:
                 pass  # Ignore errors reading history
         
-        # Configure key bindings for macOS
+        # Configure key bindings for word navigation
+        # Use ESC+b and ESC+f which work consistently across platforms
+        # These are accessed via Option+B/F on macOS or Alt+B/F on Linux
+        readline.parse_and_bind(r'"\eb": backward-word')      # Alt/Option+B
+        readline.parse_and_bind(r'"\ef": forward-word')       # Alt/Option+F
+        
+        # Additional platform-specific bindings
         if sys.platform == 'darwin':
-            # Option+Left/Right for word navigation (macOS)
-            readline.parse_and_bind(r'"\e[1;3D": backward-word')  # Option+Left
-            readline.parse_and_bind(r'"\e[1;3C": forward-word')   # Option+Right
-            readline.parse_and_bind(r'"\eb": backward-word')      # Alt+B
-            readline.parse_and_bind(r'"\ef": forward-word')       # Alt+F
+            # macOS Terminal.app specific sequences
+            # Note: Option+Left/Right may not work consistently in all terminals
+            # Users can use Option+B/F or configure their terminal preferences
+            pass
         else:
             # Ctrl+Left/Right for word navigation (Linux)
             readline.parse_and_bind(r'"\e[1;5D": backward-word')  # Ctrl+Left
@@ -83,6 +88,7 @@ def setup_readline(history_file: Optional[Path] = None):
         readline.parse_and_bind(r'"\C-k": kill-line')                # Ctrl+K
         readline.parse_and_bind(r'"\C-u": unix-line-discard')        # Ctrl+U
         readline.parse_and_bind(r'"\C-w": unix-word-rubout')         # Ctrl+W
+        readline.parse_and_bind(r'"\C-d": delete-char')             # Ctrl+D (delete forward)
         
     except Exception:
         pass  # Silently ignore readline setup errors
@@ -127,6 +133,16 @@ def print_help():
     print("  clear    - Clear conversation history") 
     print("  save     - Save current conversation")
     print("  quit     - Exit the chat")
+    print()
+    print("⌨️  Keyboard Shortcuts:")
+    print("  ↑/↓          - Navigate command history")
+    print("  ←/→          - Move cursor left/right")
+    print("  Option+B/F   - Jump word backward/forward (macOS)")
+    print("  Alt+B/F      - Jump word backward/forward (Linux)")
+    print("  Ctrl+A/E     - Jump to beginning/end of line")
+    print("  Ctrl+K/U     - Delete from cursor to end/beginning of line")
+    print("  Ctrl+W       - Delete word backward")
+    print("  Ctrl+D       - Delete character forward")
     print()
     print("💡 Tips:")
     print("  - Ask me to analyze websites: 'analyze google.com'")
