@@ -26,10 +26,80 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+# Import readline for command history and line editing
+try:
+    import readline
+    import rlcompleter
+    HAS_READLINE = True
+except ImportError:
+    HAS_READLINE = False
+
 # Import standard chat dependencies
 from ..agents.chat import create_chat_agent, chat_with_agent, get_session_info
 from ..config import get_config
 from ..utils import configure_logging, get_rotating_prompts, get_more_examples
+
+
+def setup_readline(history_file: Optional[Path] = None):
+    """Set up readline for better input handling with history and line editing."""
+    if not HAS_READLINE:
+        return
+    
+    try:
+        # Configure readline for better editing experience
+        # Enable tab completion (though we're not setting up completers here)
+        readline.parse_and_bind("tab: complete")
+        
+        # Enable vi or emacs style editing based on user's inputrc
+        # This is automatically handled by readline
+        
+        # Set history length
+        readline.set_history_length(1000)
+        
+        # Load history file if it exists
+        if history_file and history_file.exists():
+            try:
+                readline.read_history_file(str(history_file))
+            except Exception:
+                pass  # Ignore errors reading history
+        
+        # Configure key bindings for macOS
+        if sys.platform == 'darwin':
+            # Option+Left/Right for word navigation (macOS)
+            readline.parse_and_bind(r'"\e[1;3D": backward-word')  # Option+Left
+            readline.parse_and_bind(r'"\e[1;3C": forward-word')   # Option+Right
+            readline.parse_and_bind(r'"\eb": backward-word')      # Alt+B
+            readline.parse_and_bind(r'"\ef": forward-word')       # Alt+F
+        else:
+            # Ctrl+Left/Right for word navigation (Linux)
+            readline.parse_and_bind(r'"\e[1;5D": backward-word')  # Ctrl+Left
+            readline.parse_and_bind(r'"\e[1;5C": forward-word')   # Ctrl+Right
+        
+        # Common bindings for all platforms
+        readline.parse_and_bind(r'"\e[A": history-search-backward')  # Up arrow
+        readline.parse_and_bind(r'"\e[B": history-search-forward')   # Down arrow
+        readline.parse_and_bind(r'"\C-a": beginning-of-line')        # Ctrl+A
+        readline.parse_and_bind(r'"\C-e": end-of-line')              # Ctrl+E
+        readline.parse_and_bind(r'"\C-k": kill-line')                # Ctrl+K
+        readline.parse_and_bind(r'"\C-u": unix-line-discard')        # Ctrl+U
+        readline.parse_and_bind(r'"\C-w": unix-word-rubout')         # Ctrl+W
+        
+    except Exception:
+        pass  # Silently ignore readline setup errors
+
+
+def save_readline_history(history_file: Optional[Path] = None):
+    """Save readline history to a file."""
+    if not HAS_READLINE or not history_file:
+        return
+    
+    try:
+        # Create directory if it doesn't exist
+        history_file.parent.mkdir(parents=True, exist_ok=True)
+        # Save history
+        readline.write_history_file(str(history_file))
+    except Exception:
+        pass  # Silently ignore history save errors
 
 
 def print_welcome_message():
@@ -129,6 +199,15 @@ This chat session used the Analyst Chat agent with access to:
 def interactive_chat(agent, args):
     """Run the interactive chat interface."""
     try:
+        # Set up readline for better input handling
+        history_file = None
+        if HAS_READLINE:
+            # Store history in the session directory
+            history_dir = Path(args.session_dir) / ".history"
+            history_dir.mkdir(parents=True, exist_ok=True)
+            history_file = history_dir / "chat_history"
+            setup_readline(history_file)
+        
         print_welcome_message()
         
         # Show session info
@@ -137,7 +216,7 @@ def interactive_chat(agent, args):
         
         while True:
             try:
-                # Get user input
+                # Get user input with readline support
                 user_input = input("🗣️  You: ").strip()
                 
                 # Handle empty input
@@ -150,6 +229,7 @@ def interactive_chat(agent, args):
                     print("Noticed an issue? Please report here https://github.com/manavsehgal/strands-analyst/issues")
                     if args.save_on_exit:
                         save_conversation_summary(agent, args.session_dir)
+                    save_readline_history(history_file)
                     break
                 
                 elif user_input.lower() == 'help':
@@ -190,13 +270,15 @@ def interactive_chat(agent, args):
                 print("\n👋 Thank you for using Strands Analyst AI. Hope you found it useful.")
                 print("Noticed an issue? Please report here https://github.com/manavsehgal/strands-analyst/issues")
                 if args.save_on_exit:
-                    save_conversation_summary(agent, args.session_dir) 
+                    save_conversation_summary(agent, args.session_dir)
+                save_readline_history(history_file)
                 break
             except EOFError:
                 print("👋 Thank you for using Strands Analyst AI. Hope you found it useful.")
                 print("Noticed an issue? Please report here https://github.com/manavsehgal/strands-analyst/issues")
                 if args.save_on_exit:
                     save_conversation_summary(agent, args.session_dir)
+                save_readline_history(history_file)
                 break
                 
     except Exception as e:

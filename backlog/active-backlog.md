@@ -22,17 +22,21 @@
 4. Added GitHub issues link to encourage user feedback and bug reporting
 5. Verified the new messages display correctly when exiting the CLI with the "quit" command
 
-[ ] Review existing caching capabilities within the project. Create comprehensive message-level caching system for conversation continuity in chat agents, including cache invalidation strategies, hit/miss metrics monitoring, and request-level caching for repeated tool operations. Read https://strandsagents.com/latest/documentation/docs/user-guide/concepts/model-providers/amazon-bedrock/#caching and other Strands Agents docs to understand if this is model provider specific feature or generalized across providers.
+[x] When running `analystai` add a feature to cycle through prior/next user prompts when user presses arrow up/down keys. Also add capability to use left/right and option/cmd combinations with left/right arrow keys to allow user to navigate the prompt text for fast editing. Also enable backspace. The editing experience should behave like a typical text editor.
 
-[ ] Integrate OpenTelemetry for standardized instrumentation with trace collection for model and tool invocations, comprehensive performance dashboards, automated alerts for performance degradation, and user interaction feedback metrics.
-
-[ ] Optimize tool execution performance with intelligent context-based tool selection, concurrent execution for independent operations via ToolExecutor, lazy initialization for tool loading, and tool result caching for expensive operations.
-
-[ ] Implement real-time cost optimization framework with per-agent cost tracking, budgeting and alerting mechanisms, cost-aware model selection, token usage optimization recommendations, and cost analysis reporting dashboards.
-
-[ ] Enhance security guardrails with advanced prompt injection defense patterns, structured input validation with clear section delimiters, adversarial example detection, Bedrock guardrails integration, and security audit trails for sensitive operations.
-
-[ ] Create automated quality assurance system with agent behavior consistency testing, performance regression testing, output quality scoring, A/B testing framework for agent improvements, and continuous evaluation pipelines.
-
-[ ] Build multi-agent orchestration framework implementing the agents-as-tools pattern with workflow management, dependency tracking, concurrent tool execution, and agent specialization for domain-specific tasks.
-
+**Completion Summary:** Enhanced the `analystai` CLI with comprehensive readline support for improved text editing experience. The implementation involved:
+1. Added readline module import with graceful fallback for systems without readline support
+2. Created `setup_readline()` function with platform-specific key bindings for macOS and Linux
+3. Implemented command history persistence in `.history/chat_history` within the session directory
+4. Configured key bindings for:
+   - Up/Down arrows: Navigate command history (history-search-backward/forward)
+   - Left/Right arrows: Move cursor within the text
+   - Option+Left/Right (macOS) or Ctrl+Left/Right (Linux): Jump between words
+   - Ctrl+A/E: Jump to beginning/end of line
+   - Ctrl+K/U: Kill line operations for quick text deletion
+   - Ctrl+W: Delete word backwards
+   - Backspace: Already supported by default readline
+5. Added `save_readline_history()` function to persist command history between sessions
+6. Integrated readline setup into `interactive_chat()` with history loading/saving at session start/end
+7. Fixed Python 3.13 escape sequence warnings by using raw strings for readline key bindings
+8. Verified functionality with proper virtual environment activation and package reinstallation
