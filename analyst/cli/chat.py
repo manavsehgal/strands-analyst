@@ -47,9 +47,7 @@ def setup_readline(history_file: Optional[Path] = None):
     
     try:
         # Configure readline for better editing experience
-        # Enable tab completion (though we're not setting up completers here)
-        readline.parse_and_bind("tab: complete")
-        
+        # Note: Tab completion disabled as we don't have completers set up
         # Enable vi or emacs style editing based on user's inputrc
         # This is automatically handled by readline
         
@@ -81,8 +79,8 @@ def setup_readline(history_file: Optional[Path] = None):
             readline.parse_and_bind(r'"\e[1;5C": forward-word')   # Ctrl+Right
         
         # Common bindings for all platforms
-        readline.parse_and_bind(r'"\e[A": history-search-backward')  # Up arrow
-        readline.parse_and_bind(r'"\e[B": history-search-forward')   # Down arrow
+        readline.parse_and_bind(r'"\e[A": previous-history')  # Up arrow
+        readline.parse_and_bind(r'"\e[B": next-history')       # Down arrow
         readline.parse_and_bind(r'"\C-a": beginning-of-line')        # Ctrl+A
         readline.parse_and_bind(r'"\C-e": end-of-line')              # Ctrl+E
         readline.parse_and_bind(r'"\C-k": kill-line')                # Ctrl+K

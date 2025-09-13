@@ -51,3 +51,12 @@
 5. Enhanced the help documentation to clearly list all available keyboard shortcuts, including the platform-specific word navigation keys
 6. Added comments explaining the terminal compatibility considerations for macOS users
 7. The fix resolves cursor positioning issues by using more universally compatible escape sequences that don't conflict with terminal emulator interpretations
+
+[x] Refer prior two backlog items. There is still an issue left where an uneditable character gets prefixed to the prompt.
+
+**Completion Summary:** Fixed the uneditable character prefix issue in the readline implementation. The problem was caused by using `history-search-backward/forward` instead of standard history navigation. The solution involved:
+1. Changed arrow key bindings from `history-search-backward/forward` to `previous-history/next-history` to prevent typed characters from becoming part of a search pattern
+2. Removed the tab completion binding since no completion functions were configured, preventing potential issues when tab is pressed
+3. The fix ensures that all typed characters remain fully editable when navigating history with arrow keys
+4. Tested the fix to verify that prompt input behaves correctly without any uneditable prefix characters
+5. The standard history navigation now works as expected: pressing up/down shows the full command history without affecting the current input
