@@ -60,3 +60,15 @@
 3. The fix ensures that all typed characters remain fully editable when navigating history with arrow keys
 4. Tested the fix to verify that prompt input behaves correctly without any uneditable prefix characters
 5. The standard history navigation now works as expected: pressing up/down shows the full command history without affecting the current input
+
+[x] Refer prior three backlog items. When using option/command left to move to start of the prompt then moving right arrow shifts characters right by one place. The first uneditable character problem is back. Review the whole solution and think of solving it in a different way. I want to use command/option and right/left arrow keys combination, not alphabet keys.
+
+**Completion Summary:** Completely redesigned the readline implementation using a minimal configuration approach that properly supports Option/Command + arrow keys. The solution involved:
+1. Simplified readline setup to minimal configuration, removing problematic custom bindings that interfered with terminal defaults
+2. Added proper meta key configuration for macOS: `input-meta on`, `output-meta on`, `convert-meta off` to enable Option key combinations
+3. Implemented correct escape sequences for Option+Left/Right: `\e\e[D` and `\e\e[C` which are the standard sequences Terminal.app sends
+4. Retained Option+B/F bindings as fallback alternatives for word navigation
+5. Let the terminal handle most default bindings (history navigation, basic editing) to avoid conflicts
+6. Updated help documentation to show platform-specific shortcuts (Option+←/→ on macOS, Ctrl+←/→ on Linux)
+7. The new approach avoids binding conflicts by trusting the terminal's inputrc defaults while only setting essential word navigation bindings
+8. Tested the implementation to ensure no uneditable character issues and proper Option+arrow functionality

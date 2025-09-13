@@ -46,11 +46,6 @@ def setup_readline(history_file: Optional[Path] = None):
         return
     
     try:
-        # Configure readline for better editing experience
-        # Note: Tab completion disabled as we don't have completers set up
-        # Enable vi or emacs style editing based on user's inputrc
-        # This is automatically handled by readline
-        
         # Set history length
         readline.set_history_length(1000)
         
@@ -61,32 +56,27 @@ def setup_readline(history_file: Optional[Path] = None):
             except Exception:
                 pass  # Ignore errors reading history
         
-        # Configure key bindings for word navigation
-        # Use ESC+b and ESC+f which work consistently across platforms
-        # These are accessed via Option+B/F on macOS or Alt+B/F on Linux
-        readline.parse_and_bind(r'"\eb": backward-word')      # Alt/Option+B
-        readline.parse_and_bind(r'"\ef": forward-word')       # Alt/Option+F
+        # Minimal readline configuration - let the terminal handle most bindings
+        # This allows the terminal's default inputrc to work properly
         
-        # Additional platform-specific bindings
+        # Only set essential bindings that might not be default
         if sys.platform == 'darwin':
-            # macOS Terminal.app specific sequences
-            # Note: Option+Left/Right may not work consistently in all terminals
-            # Users can use Option+B/F or configure their terminal preferences
-            pass
+            # macOS-specific configuration
+            # Enable meta key as escape for Option key combinations
+            readline.parse_and_bind('set input-meta on')
+            readline.parse_and_bind('set output-meta on')
+            readline.parse_and_bind('set convert-meta off')
+            
+            # Word navigation with Option+Left/Right (using escape sequences)
+            # These are the standard sequences that Terminal.app sends
+            readline.parse_and_bind(r'"\e\e[D": backward-word')  # Option+Left
+            readline.parse_and_bind(r'"\e\e[C": forward-word')   # Option+Right
+            readline.parse_and_bind(r'"\eb": backward-word')     # Option+B (fallback)
+            readline.parse_and_bind(r'"\ef": forward-word')      # Option+F (fallback)
         else:
-            # Ctrl+Left/Right for word navigation (Linux)
+            # Linux configuration
             readline.parse_and_bind(r'"\e[1;5D": backward-word')  # Ctrl+Left
             readline.parse_and_bind(r'"\e[1;5C": forward-word')   # Ctrl+Right
-        
-        # Common bindings for all platforms
-        readline.parse_and_bind(r'"\e[A": previous-history')  # Up arrow
-        readline.parse_and_bind(r'"\e[B": next-history')       # Down arrow
-        readline.parse_and_bind(r'"\C-a": beginning-of-line')        # Ctrl+A
-        readline.parse_and_bind(r'"\C-e": end-of-line')              # Ctrl+E
-        readline.parse_and_bind(r'"\C-k": kill-line')                # Ctrl+K
-        readline.parse_and_bind(r'"\C-u": unix-line-discard')        # Ctrl+U
-        readline.parse_and_bind(r'"\C-w": unix-word-rubout')         # Ctrl+W
-        readline.parse_and_bind(r'"\C-d": delete-char')             # Ctrl+D (delete forward)
         
     except Exception:
         pass  # Silently ignore readline setup errors
@@ -133,14 +123,19 @@ def print_help():
     print("  quit     - Exit the chat")
     print()
     print("⌨️  Keyboard Shortcuts:")
-    print("  ↑/↓          - Navigate command history")
-    print("  ←/→          - Move cursor left/right")
-    print("  Option+B/F   - Jump word backward/forward (macOS)")
-    print("  Alt+B/F      - Jump word backward/forward (Linux)")
-    print("  Ctrl+A/E     - Jump to beginning/end of line")
-    print("  Ctrl+K/U     - Delete from cursor to end/beginning of line")
-    print("  Ctrl+W       - Delete word backward")
-    print("  Ctrl+D       - Delete character forward")
+    print("  ↑/↓              - Navigate command history")
+    print("  ←/→              - Move cursor left/right")
+    if sys.platform == 'darwin':
+        print("  Option+←/→       - Jump word backward/forward")
+        print("  Option+B/F       - Jump word backward/forward (alternate)")
+        print("  Command+A/E      - Jump to beginning/end of line")
+    else:
+        print("  Ctrl+←/→         - Jump word backward/forward")
+        print("  Alt+B/F          - Jump word backward/forward (alternate)")
+        print("  Ctrl+A/E         - Jump to beginning/end of line")
+    print("  Ctrl+K/U         - Delete from cursor to end/beginning of line")
+    print("  Ctrl+W           - Delete word backward")
+    print("  Backspace/Delete - Delete characters")
     print()
     print("💡 Tips:")
     print("  - Ask me to analyze websites: 'analyze google.com'")
